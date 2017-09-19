@@ -26922,7 +26922,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     buttonText: buttonText
   };
 };
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   var _action = ownProps.match.path === "/login" ? _session_actions.postSessionThunk : _user_actions.postUserThunk;
   return {

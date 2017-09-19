@@ -21,7 +21,6 @@ const mapStateToProps = (state, ownProps) =>{
     buttonText
   }
 };
-
 const mapDispatchToProps = (dispatch, ownProps) =>{
   const action = ownProps.match.path === "/login" ?
     postSessionThunk : postUserThunk;
