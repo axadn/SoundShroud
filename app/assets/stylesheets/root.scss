@@ -46,14 +46,17 @@ $mine-shaft: #212121;
   text-decoration: none;
   color: $woodsmoke;
 }
-
 .top_nav_link:hover{
-  background-color: $athens-grey;
+  background-color: white;
+
   cursor: pointer;
 }
-.active{
-  background-color: white;
+.top_nav_link.active{
+  background-color: $athens-grey;
+  cursor: default;
 }
+
+
 .main_content{
   display: flex;
   flex-direction: column;
