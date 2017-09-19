@@ -1,0 +1,115 @@
+// Place all the styles related to the root controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$iron : #d5d7d9;
+$outer_space : #333638;
+$alabaster: #F9F9F9;
+$athens-grey: #F0F0F1;
+$woodsmoke: #0B0B0C;
+$azure_radiance: #0087FE;
+$science_blue: #006CCB;
+$cod-grey: #191919;
+$mine-shaft: #212121;
+.app {
+  font-family: 'Quicksand', sans-serif;
+
+  margin: auto;
+  background-color: $cod-grey;
+  color: white;
+  max-width: 1250px;
+  min-width: 700px;
+  background: -webkit-linear-gradient($cod-grey, #444); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient($cod-grey, #444); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient($cod-grey, #444); /* For Firefox 3.6 to 15 */
+    background: linear-gradient($cod-grey, #444); /* Standard syntax */
+}
+
+.nav_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $iron;
+  height: 50px;
+}
+.nav_link_set{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.top_nav_link{
+  line-height:100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  height: 100%;
+  text-align: center;
+  width: 80px;
+  text-decoration: none;
+  color: $woodsmoke;
+}
+
+.top_nav_link:hover{
+  background-color: $athens-grey;
+  cursor: pointer;
+}
+.active{
+  background-color: white;
+}
+.main_content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.session_form {
+  width: 300px;
+}
+.session_form h3{
+  text-align: center;
+  margin-bottom: 100px;
+  margin-top: 20px;
+}
+
+.session_form span{
+  display: block;
+  margin-bottom: 5px;
+}
+.session_form form{
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.blue_button, .logout_button{
+  color: black;
+  border-radius: 3px;
+  background-color: $science_blue;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.blue_button{
+  border: 1px solid $iron;
+}
+.logout_button{
+  border: 1px solid $cod-grey;
+}
+.blue_button:hover, .logout_button:hover{
+  background-color: $azure_radiance;
+  cursor: pointer;
+}
+
+input{
+  border-radius: 2px;
+  background-color: $outer_space;
+  border: 1px solid $iron;
+  padding: 2px;
+  color: $iron;
+}
+input[type="text"]:focus,
+input[type="password"]:focus{
+  background-color: $mine-shaft;
+}
+.form_button{
+  align-self: flex-end;
+}
