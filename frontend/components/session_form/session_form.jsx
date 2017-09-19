@@ -6,11 +6,15 @@ export default class SessionFrom extends React.Component{
     this.state = {username: "", password: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleExample = this.handleExample.bind(this);
   }
   handleChange(key){
     return e => this.setState({[key]: e.target.value});
   }
-
+  handleExample(e){
+    e.preventDefault();
+    this.props.example();
+  }
   handleSubmit(e){
     e.preventDefault();
     this.props.action(this.state);
@@ -48,8 +52,12 @@ export default class SessionFrom extends React.Component{
            this.handleChange("password")}></input>
          <div className="errors">{passwordErrors}</div>
         </div>
-        <input type="submit" className="form_button blue_button" value={
-            this.props.buttonText}></input>
+        <div className ="session_submit_buttons">
+          <input type="submit" onClick={this.handleExample}
+            className="form_button blue_button" value="example"></input>
+          <input type="submit" className="form_button blue_button" value={
+              this.props.buttonText}></input>
+        </div>
       </form>
     </div>
     );

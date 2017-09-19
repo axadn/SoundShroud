@@ -26944,6 +26944,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     action: function action(data) {
       return dispatch(_action({ user: data }));
     },
+    example: function example() {
+      return dispatch((0, _session_actions.postSessionThunk)({ user: { username: "example",
+          password: "password" } }));
+    },
     clearErrors: function clearErrors() {
       return dispatch((0, _session_actions.clearSessionErrors)());
     }
@@ -26990,6 +26994,7 @@ var SessionFrom = function (_React$Component) {
     _this.state = { username: "", password: "" };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleExample = _this.handleExample.bind(_this);
     return _this;
   }
 
@@ -27001,6 +27006,12 @@ var SessionFrom = function (_React$Component) {
       return function (e) {
         return _this2.setState(_defineProperty({}, key, e.target.value));
       };
+    }
+  }, {
+    key: "handleExample",
+    value: function handleExample(e) {
+      e.preventDefault();
+      this.props.example();
     }
   }, {
     key: "handleSubmit",
@@ -27074,7 +27085,13 @@ var SessionFrom = function (_React$Component) {
               passwordErrors
             )
           ),
-          _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
+          _react2.default.createElement(
+            "div",
+            { className: "session_submit_buttons" },
+            _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
+              className: "form_button blue_button", value: "example" }),
+            _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
+          )
         )
       );
     }

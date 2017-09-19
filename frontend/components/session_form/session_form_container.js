@@ -28,6 +28,8 @@ const mapDispatchToProps = (dispatch, ownProps) =>{
     postSessionThunk : postUserThunk;
   return {
     action: data => dispatch(action({user: data})),
+    example: () => dispatch(postSessionThunk({user:{username: "example",
+            password: "password"}})),
     clearErrors: () => dispatch(clearSessionErrors())
   };
 };

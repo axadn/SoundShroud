@@ -84,12 +84,16 @@ $coral-red: #FD4041;
 }
 .blue_button, .logout_button{
   color: black;
-  border-radius: 3px;
+  border-radius: 6px;
   background-color: $science_blue;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.blue_button:hover, .logout_button:hover{
+  background-color: $azure_radiance;
+  cursor: pointer;
 }
 
 .blue_button{
@@ -98,13 +102,10 @@ $coral-red: #FD4041;
 .logout_button{
   border: 1px solid $cod-grey;
 }
-.blue_button:hover, .logout_button:hover{
-  background-color: $azure_radiance;
-  cursor: pointer;
-}
 
 input{
   border-radius: 2px;
+  width: 100%;
   background-color: $outer_space;
   border: 1px solid $iron;
   padding: 2px;
@@ -113,11 +114,17 @@ input{
 input[type="text"]:focus,
 input[type="password"]:focus{
   background-color: $mine-shaft;
+
 }
 .form_button{
   align-self: flex-end;
+  width: 100px;
 }
 .errors{
   height: 20px;
   color: $coral-red;
+}
+.session_submit_buttons{
+  display: flex;
+  justify-content: space-between;
 }
