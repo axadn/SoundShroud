@@ -1,4 +1,4 @@
-import * as SessionsAPI from "../util/api_session_utils";
+import * as SessionsAPI from "../utils/api_session_utils";
 export const RECEIVE_SESSION = "RECEIVE_SESSION";
 export const DELETE_SESSION = "DELETE_SESSION";
 
