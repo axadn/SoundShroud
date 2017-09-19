@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+SoundShroud is a work-in-progress SoundCloud Clone. It is one of my final projects at App Academy.
 
-Things you may want to cover:
+It is currently hosted at Heroku, and you can view it here: https://ancient-cliffs-74767.herokuapp.com/#/
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### W8D1
+* Created frontend and backend for user authentication, basic styling, uploaded to Heroku
