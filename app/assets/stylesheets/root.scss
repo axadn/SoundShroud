@@ -10,6 +10,7 @@ $azure_radiance: #0087FE;
 $science_blue: #006CCB;
 $cod-grey: #191919;
 $mine-shaft: #212121;
+$coral-red: #FD4041;
 .app {
   font-family: 'Quicksand', sans-serif;
 
@@ -115,4 +116,7 @@ input[type="password"]:focus{
 }
 .form_button{
   align-self: flex-end;
+}
+.errors{
+  color: $coral-red;
 }
