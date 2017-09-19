@@ -27089,7 +27089,7 @@ var SessionFrom = function (_React$Component) {
             "div",
             { className: "session_submit_buttons" },
             _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
-              className: "form_button blue_button", value: "example" }),
+              className: "form_button blue_button", value: "demo" }),
             _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
           )
         )

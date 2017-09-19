@@ -86,10 +86,11 @@ $coral-red: #FD4041;
   color: black;
   border-radius: 6px;
   background-color: $science_blue;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
 }
 .blue_button:hover, .logout_button:hover{
   background-color: $azure_radiance;
@@ -118,7 +119,7 @@ input[type="password"]:focus{
 }
 .form_button{
   align-self: flex-end;
-  width: 100px;
+  width: 80px;
 }
 .errors{
   height: 20px;
