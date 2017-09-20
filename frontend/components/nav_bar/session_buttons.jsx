@@ -14,13 +14,13 @@ export default ({delete_session, logged_in, current_user_id}) =>{
   }
   return(
   <div className="nav_link_set">
-    {logoutPlaceHolder}
     <NavLink className="top_nav_link" to={logged_in ? "/upload" : "/login"}>
       {logged_in ? "Upload" : "Log In"}
     </NavLink>
     <NavLink className="top_nav_link" to={logged_in ? `/users/${current_user_id}` : "/signup"}>
       {logged_in ? "Profile" : "Sign Up"}
     </NavLink>
+    {logoutPlaceHolder}
   </div>
   );
 };
