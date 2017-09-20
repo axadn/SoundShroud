@@ -8,7 +8,7 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = User.find_by(id: params[:user_id]).tracks  
+    @tracks = User.find_by(id: params[:user_id]).tracks
     render :index
   end
 
@@ -27,6 +27,7 @@ class Api::TracksController < ApplicationController
       if @track.artist_id == current_user.id
         s3_bucket.object("tracks/#{@track.id}").delete
         @track.delete
+        render json: "success"
       else
         render json: {general: ["wrong user"]}, status: 403
       end
@@ -38,23 +39,23 @@ class Api::TracksController < ApplicationController
   def create
     @track = Track.new(track_params)
     if @track.save
-      handle_file
+
     else
       render json: @track.errors.messages
     end
   end
 
   def handle_file
-    extension = Api::TracksController.valid_extension? params[:file].first
+    extension = Api::TracksController.valid_extension? params[:file].tempfile.path
     if extension
-      input_filename = "#{@track.id}#{extension}"
-      output_filename = "#{@track.id}.mp3"
-      File.write(input_filename, params[:file].last)
+      input_filename = params[:file].tempfile.path
+      output_filename = "/tmp/#{@track.id}.mp3"
       begin
         Sox::Cmd.new.add_input(input_filename)
           .set_output(output_filename).run
         Api::TracksController.upload_to_s3 output_filename
         render json: "success"
+        FileUtils.rm(output_filename)
       rescue Sox::errors => e
         render json: {genral: e.message}
       end

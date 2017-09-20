@@ -7,7 +7,7 @@ export default ({delete_session, logged_in, current_user_id}) =>{
     logoutPlaceHolder = <button className="logout_button" onClick={e=>{
       e.preventDefault();
       delete_session();
-    }} >Log out</button>
+    }} >Log Out</button>
   }
   else{
     logoutPlaceHolder = null;

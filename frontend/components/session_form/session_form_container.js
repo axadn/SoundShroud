@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) =>{
   let buttonText;
   if(ownProps.match.path === "/login"){
     message = "Welcome back to SoundShroud";
-    buttonText = "Log in";
+    buttonText = "Log In";
   }
   else{
     message = "Sign up for SoundShroud";

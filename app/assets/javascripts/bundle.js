@@ -26946,7 +26946,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var buttonText = void 0;
   if (ownProps.match.path === "/login") {
     message = "Welcome back to SoundShroud";
-    buttonText = "Log in";
+    buttonText = "Log In";
   } else {
     message = "Sign up for SoundShroud";
     buttonText = "Sign Up";
@@ -29719,7 +29719,7 @@ exports.default = function (_ref) {
           e.preventDefault();
           delete_session();
         } },
-      "Log out"
+      "Log Out"
     );
   } else {
     logoutPlaceHolder = null;
