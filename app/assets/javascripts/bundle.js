@@ -13444,6 +13444,25 @@ document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById("root");
   var store = (0, _store2.default)();
   window.store = store;
+  var ajax2 = function ajax2(url) {
+    return $.ajax({
+      method: "get",
+      url: "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/1"
+    });
+  };
+  var setHeaders = function setHeaders(headers) {
+    return function (xhr) {
+      Object.keys(headers).forEach(function (key) {
+        xhr.setRequestHeader(key, headers[key]);
+      });
+    };
+  };
+  var setResultToWindow = function setResultToWindow(res) {
+
+    window.res = res;
+  };
+  $.ajax({
+    method: "get", url: "api/tracks/s3/1" }).then(setResultToWindow);
   if (window.currentUser) {
     store.dispatch((0, _session_actions.receiveSession)(currentUser));
   }

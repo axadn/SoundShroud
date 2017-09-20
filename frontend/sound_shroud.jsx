@@ -9,6 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   const store = configureStore();
   window.store = store;
+  const ajax2 = url => (
+    $.ajax({
+      method: "get",
+      url: "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/1",
+    })
+  );
+  const setHeaders =headers=> xhr => {
+    Object.keys(headers).forEach(key => {
+      xhr.setRequestHeader(key, headers[key]);
+    });
+
+  }
+  const setResultToWindow = res => {
+
+    window.res = res;
+  }
+  $.ajax({
+    method: "get", url: "api/tracks/s3/1"}).then(setResultToWindow);
   if(window.currentUser){
     store.dispatch(receiveSession(currentUser));
   }

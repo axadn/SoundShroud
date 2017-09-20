@@ -26,12 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def s3_signer
-    Aws::Sigv4::Signer.new(
-      service: 's3',
-      region: 'us-west-1',
-      access_key_id: ENV[:S3_ID],
-      secret_access_key: ENV[:S3_KEY]
-    )
+    
   end
 
 end

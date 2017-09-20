@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
   get '/', to: 'root#show'
+  get '/api/tracks/s3/:id', to: 'api/tracks#getS3Url'
 end
