@@ -1,0 +1,173 @@
+/* line 14, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.app {
+  font-family: 'Quicksand', sans-serif;
+  margin: auto;
+  background-color: #191919;
+  color: white;
+  max-width: 1250px;
+  min-width: 700px;
+  background: -webkit-linear-gradient(#191919, #444);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#191919, #444);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#191919, #444);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#191919, #444);
+  /* Standard syntax */
+}
+
+/* line 28, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d5d7d9;
+  height: 50px;
+}
+
+/* line 35, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_link_set {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* line 41, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_link_set * {
+  margin-right: 10px;
+}
+
+/* line 45, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link {
+  line-height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  height: 100%;
+  text-align: center;
+  width: 80px;
+  text-decoration: none;
+  color: #0B0B0C;
+}
+
+/* line 55, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+/* line 60, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link.active {
+  background-color: #F0F0F1;
+  cursor: default;
+}
+
+/* line 66, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.main_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* line 71, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_form {
+  width: 300px;
+}
+
+/* line 74, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_form h3 {
+  text-align: center;
+  margin-bottom: 100px;
+  margin-top: 20px;
+}
+
+/* line 80, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_form span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* line 84, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_form form {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* line 90, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button, .logout_button {
+  color: black;
+  border-radius: 6px;
+  background-color: #006CCB;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+}
+
+/* line 100, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button:hover, .logout_button:hover {
+  background-color: #0087FE;
+  cursor: pointer;
+}
+
+/* line 105, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button {
+  border: 1px solid #d5d7d9;
+}
+
+/* line 108, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.logout_button {
+  border: 1px solid #191919;
+}
+
+/* line 112, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+input {
+  border-radius: 2px;
+  width: 100%;
+  background-color: #333638;
+  border: 1px solid #d5d7d9;
+  padding: 2px;
+  color: #d5d7d9;
+}
+
+/* line 120, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+input[type="text"]:focus,
+input[type="password"]:focus {
+  background-color: #212121;
+}
+
+/* line 125, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.form_button {
+  align-self: flex-end;
+  width: 80px;
+}
+
+/* line 129, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.errors {
+  height: 20px;
+  color: #FD4041;
+}
+
+/* line 133, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_submit_buttons {
+  display: flex;
+  justify-content: space-between;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
