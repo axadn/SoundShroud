@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/bear-metal/memfd.git
+  revision: d0f9537f69573cb3efce45ea74a6705ecda56861
+  specs:
+    memfd (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -141,6 +147,7 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    ruby-sox (0.0.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.1)
@@ -199,9 +206,11 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  memfd!
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)
+  ruby-sox
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
