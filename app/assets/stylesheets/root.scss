@@ -37,6 +37,11 @@ $coral-red: #FD4041;
   align-items: center;
   height: 100%;
 }
+
+.nav_link_set *{
+  margin-right: 10px;
+}
+
 .top_nav_link{
   line-height:100%;
   box-sizing: border-box;
