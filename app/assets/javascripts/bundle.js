@@ -27059,19 +27059,27 @@ var SessionFrom = function (_React$Component) {
       var usernameErrors = void 0;
       var passwordEmpty = this.state.password.length === 0;
       var usernameEmpty = this.state.username.length === 0;
-      if (this.props.errors.general) {
-        generalErrors = this.props.errors.general.join(", ");
-      }
-      if (this.props.errors.password) {
-        passwordErrors = this.props.errors.password.join(", ");
-      }
-      if (this.props.errors.username) {
-        usernameErrors = this.props.errors.username.join(", ");
-      }
+      var errorElements = {};
+      Object.keys(this.props.errors).forEach(function (key) {
+        errorElements[key] = _react2.default.createElement(
+          "div",
+          { className: "errors" },
+          _react2.default.createElement(
+            "svg",
+            { height: "15", width: "15" },
+            _react2.default.createElement("polygon", { points: "0,8 15,0 15,15" })
+          ),
+          _react2.default.createElement(
+            "div",
+            null,
+            _this3.props.errors[key].join(", ")
+          )
+        );
+      });
       return _react2.default.createElement(
         "div",
         { className: "session_form_window" },
-        _react2.default.createElement("img", { src: "/assets/guit blue.jpeg" }),
+        _react2.default.createElement("img", { src: window.banner_url }),
         _react2.default.createElement(
           "div",
           { className: "session_form" },
@@ -27079,11 +27087,6 @@ var SessionFrom = function (_React$Component) {
             "h3",
             null,
             this.props.message
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "errors" },
-            generalErrors
           ),
           _react2.default.createElement(
             "form",
@@ -27106,11 +27109,7 @@ var SessionFrom = function (_React$Component) {
                 onChange: this.handleChange("username"),
                 value: this.state.label_username ? "Username" : this.state.username
               }),
-              _react2.default.createElement(
-                "div",
-                { className: "errors" },
-                usernameErrors
-              )
+              errorElements.username
             ),
             _react2.default.createElement(
               "div",
@@ -27128,18 +27127,15 @@ var SessionFrom = function (_React$Component) {
                 className: this.state.label_password ? "empty" : "",
                 value: this.state.label_password ? "Password" : this.state.password
               }),
-              _react2.default.createElement(
-                "div",
-                { className: "errors" },
-                passwordErrors
-              )
+              errorElements.password
             ),
             _react2.default.createElement(
               "div",
               { className: "session_submit_buttons" },
               _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
                 className: "form_button blue_button", value: "demo" }),
-              _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
+              _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText }),
+              errorElements.general
             )
           )
         ),
@@ -27151,7 +27147,7 @@ var SessionFrom = function (_React$Component) {
             null,
             _react2.default.createElement(
               "filter",
-              { id: "guit_filter", "color-interpolation-filters": "linearRGB" },
+              { id: "guit_filter", colorInterpolationFilters: "linearRGB" },
               _react2.default.createElement(
                 "feColorMatrix",
                 { type: "matrix" },

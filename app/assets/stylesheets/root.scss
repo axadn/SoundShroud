@@ -135,6 +135,9 @@ $invisible-black: rgba(0,0,0,0);
   flex-direction: column;
   justify-content: space-around;
 }
+.session_form > form > div{
+  position: relative;
+}
 
 .blue_button, .logout_button{
     color: white;
@@ -159,9 +162,9 @@ $invisible-black: rgba(0,0,0,0);
 
 .session_form input[type="text"],
 .session_form input[type="password"]{
+  outline: none;
   animation-name: fadeFromTransparent;
   animation-duration: 3s;
-  outline: none;
   box-sizing: border-box;
   width: 234px;
   margin-right: 8px;
@@ -182,29 +185,38 @@ $invisible-black: rgba(0,0,0,0);
 
 .session_form input[type="text"]:focus,
 .session_form input[type="password"]:focus{
-  position: relative;
   background-color: $mine-shaft;
+  outline: none;
 }
 .form_button{
+  outline: none;
   animation-name: fadeFromTransparent;
   animation-duration: 1.5s;
   align-self: flex-end;
   width: 102px;
 }
-svg {
-  width: 0px;
-  height: 0px;
-}
+
 .errors {
-  background-color: #ff3d3d;
-  color: white;
+  display: flex;
+  align-items: center;
   position: absolute;
   margin-left: 20px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+  top: 0px;
+  left: 240px;
+}
+.errors > div{
+  background-color: rgb(155, 0, 14);
+  color: white;
   padding: 10px;
   font-size: 12px;
-  width: 200px;
-  left: 100%;
+  box-shadow: 8px 8px 8px rgba(0,0,0,0.5);
+  white-space: pre;
+}
+
+.errors > svg {
+  display: inline-block;
+  fill: rgb(155, 0, 14);
+  filter: drop-shadow(8px 8px 8px rgba(0,0,0,0.5));
 }
 .session_submit_buttons{
   margin-left: 8px;

@@ -32,21 +32,23 @@ export default class SessionFrom extends React.Component{
     let usernameErrors;
     const passwordEmpty = this.state.password.length === 0;
     const usernameEmpty = this.state.username.length === 0;
-    if(this.props.errors.general){
-      generalErrors = this.props.errors.general.join(", ");
-    }
-    if(this.props.errors.password){
-      passwordErrors = this.props.errors.password.join(", ");
-    }
-    if(this.props.errors.username){
-      usernameErrors = this.props.errors.username.join(", ");
-    }
+    let errorElements = {};
+    Object.keys(this.props.errors).forEach(key => {
+      errorElements[key] =
+      <div className="errors">
+        <svg height = "15" width = "15">
+          <polygon points ="0,8 15,0 15,15" />
+        </svg>
+        <div>
+          {this.props.errors[key].join(", ")}
+          </div>
+      </div>
+    });
     return(
     <div className = "session_form_window">
-      <img src="/assets/guit blue.jpeg" ></img>
+      <img src={window.banner_url} ></img>
       <div className = "session_form">
         <h3>{this.props.message}</h3>
-        <div className="errors">{generalErrors}</div>
         <form onSubmit={this.handleSubmit}>
           <div>
             <input type="text"
@@ -64,7 +66,8 @@ export default class SessionFrom extends React.Component{
               onChange={this.handleChange("username")}
               value = {this.state.label_username? "Username" : this.state.username }
             ></input>
-          <div className="errors">{usernameErrors}</div>
+
+          {errorElements.username}
           </div>
           <div>
              <input type={this.state.label_password ? "text" : "password"}
@@ -81,13 +84,14 @@ export default class SessionFrom extends React.Component{
               className={this.state.label_password ? "empty" : ""}
               value = {this.state.label_password? "Password" : this.state.password}
             ></input>
-           <div className="errors">{passwordErrors}</div>
+          {errorElements.password}
           </div>
           <div className ="session_submit_buttons">
             <input type="submit" onClick={this.handleExample}
               className="form_button blue_button" value="demo"></input>
             <input type="submit" className="form_button blue_button" value={
                 this.props.buttonText}></input>
+              {errorElements.general}
           </div>
         </form>
       </div>
@@ -96,7 +100,7 @@ export default class SessionFrom extends React.Component{
 
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
-          <filter id="guit_filter" color-interpolation-filters="linearRGB">
+          <filter id="guit_filter" colorInterpolationFilters="linearRGB">
             <feColorMatrix  type="matrix">
               <animate id="guit_filter_in" attributeName="values"
                 attributeType="XML" begin="indefinite" dur="3"

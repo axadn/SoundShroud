@@ -7,14 +7,14 @@
     <%= javascript_include_tag 'application' %>
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   </head>
-
   <body>
-    <% if logged_in? %>
       <script type="text/javascript">
-        window.currentUser =
-        <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+        <% if logged_in? %>
+          window.currentUser =
+            <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+        <% end %>
+        window.banner_url ="<%= asset_path("guit blue.jpeg")%>"
       </script>
-    <% end %>
     <%= yield %>
   </body>
 </html>
