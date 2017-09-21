@@ -7,10 +7,15 @@ $alabaster: #F9F9F9;
 $athens-grey: #F0F0F1;
 $woodsmoke: #0B0B0C;
 $azure_radiance: #0087FE;
-$science_blue: #006CCB;
+$east-bae: #3a4f73;
 $cod-grey: #191919;
 $mine-shaft: #212121;
 $coral-red: #FD4041;
+$ship-grey: #434347;
+$ming: #35617b;
+$bahama-blue: #096caa;
+$calypso: #2d7387;
+$invisible-black: rgba(0,0,0,0);
 .app {
   font-family: 'Quicksand', sans-serif;
 
@@ -64,16 +69,58 @@ $coral-red: #FD4041;
 
 
 .main_content{
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+@keyframes fadeBackgroundFromTransparent {
+    from {background-color: $invisible-black;
+      color: rbga(0,0,0,0);
+    }
+    to: {background-color: default;
+        color: default;}
+}
+@keyframes guitarColors {
+    from{filter: url("guitar_filter.svg#identity")}
+    to{filter: none;}
+}
+@keyframes fadeFromTransparent {
+  0%  {box-shadow:  none;}
+  50% {box-shadow: default;}
+    from {color: $invisible-black;
+    border-left-color: $invisible-black;
+    border-right-color: $invisible-black;
+    border-top-color: $invisible-black;
+    border-bottom-color: $invisible-black;
+    background-color: $invisible-black;}
+    to {color: default;
+      border-left-color: default;
+      border-right-color: default;
+      border-top-color: default;
+      border-bottom-color: default;
+    background-color: default;}
+}
 .session_form {
-  width: 300px;
+  animation-name: fadeFromTransparent;
+  animation-duration: 1.2s;
+  position: absolute;
+  left: calc(50% - 100px);
+  top: 100px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+  padding: 20px;
+  background-color: rgba(0,0,0,0.7);
+  width: 250px;
+}
+.session_form_window img{
+  filter: url(#guit_filter);
+  width: 100%;
 }
 .session_form h3{
+  font-size: 26px;
+  animation: fadeColorFromTransparent;
+  animation-duration: 1s;
   text-align: center;
-  margin-bottom: 100px;
   margin-top: 20px;
 }
 
@@ -81,16 +128,24 @@ $coral-red: #FD4041;
   display: block;
   margin-bottom: 5px;
 }
+
 .session_form form{
   height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
 .blue_button, .logout_button{
-  color: black;
-  border-radius: 6px;
-  background-color: $science_blue;
+    color: white;
+  border-radius: 2px;
+  background-color: $ming;
+  // border-right: 3px solid rgb(0,90,180);
+  // border-bottom: 3px solid rgb(0,45,90);
+  // border-left: 3px solid rgb(0,90,180);
+  // border-top: 3px solid rgb(0,160,240);
+  border: none;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 12px;
@@ -98,39 +153,63 @@ $coral-red: #FD4041;
   font-size: 14px;
 }
 .blue_button:hover, .logout_button:hover{
-  background-color: $azure_radiance;
+  background-color: $calypso;
   cursor: pointer;
 }
 
-.blue_button{
-  border: 1px solid $iron;
-}
-.logout_button{
-  border: 1px solid $cod-grey;
-}
-
-input{
-  border-radius: 2px;
-  width: 100%;
-  background-color: $outer_space;
-  border: 1px solid $iron;
-  padding: 2px;
+.session_form input[type="text"],
+.session_form input[type="password"]{
+  animation-name: fadeFromTransparent;
+  animation-duration: 3s;
+  outline: none;
+  box-sizing: border-box;
+  width: 234px;
+  margin-right: 8px;
+  margin-left: 8px;
+  border-radius: 3px;
+  background-color: rgba(40,40,40,0.7);
+  border-top: 2px solid rgb(10,10,10);
+  border-left: 3px solid rgb(30,40,40);
+  border-right: 3px solid rgb(30,40,40);
+  border-bottom: 3px solid rgb(45,45,45);
+  padding: 5px;
   color: $iron;
+  height: 40px;
 }
-input[type="text"]:focus,
-input[type="password"]:focus{
-  background-color: $mine-shaft;
+.session_form input.empty[type="text"]{
+  color: rgb(140,140,140);
+}
 
+.session_form input[type="text"]:focus,
+.session_form input[type="password"]:focus{
+  position: relative;
+  background-color: $mine-shaft;
 }
 .form_button{
+  animation-name: fadeFromTransparent;
+  animation-duration: 1.5s;
   align-self: flex-end;
-  width: 80px;
+  width: 102px;
 }
-.errors{
-  height: 20px;
-  color: $coral-red;
+svg {
+  width: 0px;
+  height: 0px;
+}
+.errors {
+  color: #ff3d3d;
+  position: absolute;
+  margin-left: 20px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+  padding: 10px;
+  font-size: 12px;
+  width: 200px;
+  background-color: rgba(0,0,0,0.7);
+  left: 100%;
 }
 .session_submit_buttons{
+  margin-left: 8px;
+  margin-right: 8px;
   display: flex;
+  box-sizing: border-box;
   justify-content: space-between;
 }

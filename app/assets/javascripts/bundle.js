@@ -27010,7 +27010,8 @@ var SessionFrom = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SessionFrom.__proto__ || Object.getPrototypeOf(SessionFrom)).call(this, props));
 
-    _this.state = { username: "", password: "" };
+    _this.state = { username: "", password: "", label_username: true,
+      label_password: true };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleExample = _this.handleExample.bind(_this);
@@ -27039,6 +27040,11 @@ var SessionFrom = function (_React$Component) {
       this.props.action(this.state);
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.getElementById('guit_filter_in').beginElement();
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clearErrors();
@@ -27046,9 +27052,13 @@ var SessionFrom = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var generalErrors = void 0;
       var passwordErrors = void 0;
       var usernameErrors = void 0;
+      var passwordEmpty = this.state.password.length === 0;
+      var usernameEmpty = this.state.username.length === 0;
       if (this.props.errors.general) {
         generalErrors = this.props.errors.general.join(", ");
       }
@@ -27060,56 +27070,99 @@ var SessionFrom = function (_React$Component) {
       }
       return _react2.default.createElement(
         "div",
-        { className: "session_form" },
-        _react2.default.createElement(
-          "h3",
-          null,
-          this.props.message
-        ),
+        { className: "session_form_window" },
+        _react2.default.createElement("img", { src: "/assets/guit blue.jpeg" }),
         _react2.default.createElement(
           "div",
-          { className: "errors" },
-          generalErrors
+          { className: "session_form" },
+          _react2.default.createElement(
+            "h3",
+            null,
+            this.props.message
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "errors" },
+            generalErrors
+          ),
+          _react2.default.createElement(
+            "form",
+            { onSubmit: this.handleSubmit },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement("input", { type: "text",
+                onFocus: function onFocus(e) {
+                  if (usernameEmpty) {
+                    _this3.setState({ label_username: false });
+                  }
+                },
+                onBlur: function onBlur(e) {
+                  if (_this3.state.username.length === 0) {
+                    _this3.setState({ label_username: true });
+                  }
+                },
+                className: this.state.label_username ? "empty" : "",
+                onChange: this.handleChange("username"),
+                value: this.state.label_username ? "Username" : this.state.username
+              }),
+              _react2.default.createElement(
+                "div",
+                { className: "errors" },
+                usernameErrors
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement("input", { type: this.state.label_password ? "text" : "password",
+                onFocus: function onFocus(e) {
+                  _this3.setState({ label_password: false });
+                },
+                onBlur: function onBlur(e) {
+                  if (_this3.state.password.length === 0) {
+                    _this3.setState({ label_password: true });
+                  }
+                },
+                onChange: this.handleChange("password"),
+                className: this.state.label_password ? "empty" : "",
+                value: this.state.label_password ? "Password" : this.state.password
+              }),
+              _react2.default.createElement(
+                "div",
+                { className: "errors" },
+                passwordErrors
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "session_submit_buttons" },
+              _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
+                className: "form_button blue_button", value: "demo" }),
+              _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
+            )
+          )
         ),
         _react2.default.createElement(
-          "form",
-          { onSubmit: this.handleSubmit },
+          "svg",
+          { xmlns: "http://www.w3.org/2000/svg", version: "1.1" },
           _react2.default.createElement(
-            "div",
+            "defs",
             null,
             _react2.default.createElement(
-              "span",
-              null,
-              "username"
-            ),
-            _react2.default.createElement("input", { type: "text", onChange: this.handleChange("username") }),
-            _react2.default.createElement(
-              "div",
-              { className: "errors" },
-              usernameErrors
+              "filter",
+              { id: "guit_filter", "color-interpolation-filters": "linearRGB" },
+              _react2.default.createElement(
+                "feColorMatrix",
+                { type: "matrix" },
+                _react2.default.createElement("animate", { id: "guit_filter_in", attributeName: "values",
+                  attributeType: "XML", begin: "indefinite", dur: "3",
+                  end: "indefinite",
+                  from: "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0",
+                  to: "0.5 0.5 0.5 0 0 0.6 0.6 0.6 0 0 0.7 0.4 0.4 0 0 0 0 0 1 0 ",
+                  fill: "freeze" })
+              )
             )
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            _react2.default.createElement(
-              "span",
-              null,
-              "password"
-            ),
-            _react2.default.createElement("input", { type: "password", onChange: this.handleChange("password") }),
-            _react2.default.createElement(
-              "div",
-              { className: "errors" },
-              passwordErrors
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "session_submit_buttons" },
-            _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
-              className: "form_button blue_button", value: "demo" }),
-            _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText })
           )
         )
       );
