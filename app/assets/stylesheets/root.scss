@@ -196,14 +196,14 @@ svg {
   height: 0px;
 }
 .errors {
-  color: #ff3d3d;
+  background-color: #ff3d3d;
+  color: white;
   position: absolute;
   margin-left: 20px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
   padding: 10px;
   font-size: 12px;
   width: 200px;
-  background-color: rgba(0,0,0,0.7);
   left: 100%;
 }
 .session_submit_buttons{
