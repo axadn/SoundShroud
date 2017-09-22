@@ -29,5 +29,8 @@ export const postSessionThunk = sessionData => dispatch => (
 );
 
 export const deleteSessionThunk = () => dispatch => (
-  SessionsAPI.deleteSession().then(dispatch(deleteSession()))
+  SessionsAPI.deleteSession().then(()=>{
+    dispatch(deleteSession());
+    location.hash ="";
+  })
 );
