@@ -26906,7 +26906,11 @@ exports.default = function () {
       "div",
       { className: "app" },
       _react2.default.createElement(_nav_bar2.default, null),
-      _react2.default.createElement(_main_content2.default, null)
+      _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(_main_content2.default, null)
+      )
     )
   );
 };
@@ -27118,7 +27122,7 @@ var SessionFrom = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "session_form_window" },
-        _react2.default.createElement("img", { src: window.banner_url }),
+        _react2.default.createElement("img", { src: "/assets/guit blue.jpeg" }),
         _react2.default.createElement(
           "div",
           { className: "floater1 session_form" },
@@ -29729,6 +29733,7 @@ var LandingPage = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "landing_page_window" },
+        _react2.default.createElement("img", { src: "/assets/sax blue.jpeg" }),
         _react2.default.createElement(
           "div",
           { className: "landing_info" },

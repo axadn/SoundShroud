@@ -32,14 +32,19 @@ body > svg{
   font-size: 65px;
   text-align: center;
 }
-h1{
+h2{
  font-size: 45px;
  text-align: center;
 }
 .landing_page_window{
   width: 100%;
   height: 800px;
-  background-image: url("/assets/sax blue.jpeg");
+
+
+}
+.session_form_window > img{
+  overflow-x: hidden;
+  min-width: 100%;
 }
 .landing_image{
 
@@ -109,6 +114,8 @@ h1{
 
 
 .main_content{
+  overflow: scroll;
+  overflow-x: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -136,9 +143,12 @@ h1{
   left: calc(50% - 100px);
   top: 100px;
   width: 250px;
+  border-radius: 8px;
 }
-.session_form_window img{
+.session_form_window {
   width: 100%;
+  height: 800px;
+  background-image: url("/assets/guit blue.jpeg");
 }
 .session_form h2{
   font-size: 26px;
@@ -203,7 +213,7 @@ h1{
   width: 234px;
   margin-right: 8px;
   margin-left: 8px;
-  border-radius: 3px;
+  border-radius: 4px;
   background-color: rgba(40,40,40,0.7);
   border-top: 2px solid rgb(10,10,10);
   border-left: 3px solid rgb(30,40,40);
@@ -228,6 +238,8 @@ h1{
   animation-duration: 1.5s;
   align-self: flex-end;
   width: 102px;
+  height: 40px;
+  border-radius: 8px;
 }
 
 .errors {
