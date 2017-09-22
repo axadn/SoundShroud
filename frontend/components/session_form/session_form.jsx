@@ -21,7 +21,7 @@ export default class SessionFrom extends React.Component{
     this.props.action(this.state);
   }
   componentDidMount(){
-    document.getElementById('guit_filter_in').beginElement();
+    document.getElementById('blue_filter_in').beginElement();
   }
   componentWillUnmount(){
     this.props.clearErrors();
@@ -47,8 +47,8 @@ export default class SessionFrom extends React.Component{
     return(
     <div className = "session_form_window">
       <img src={window.banner_url} ></img>
-      <div className = "session_form">
-        <h3>{this.props.message}</h3>
+      <div className = "floater1 session_form">
+        <h2>{this.props.message}</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
             <input type="text"
@@ -95,26 +95,6 @@ export default class SessionFrom extends React.Component{
           </div>
         </form>
       </div>
-
-
-
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <defs>
-          <filter id="guit_filter" colorInterpolationFilters="linearRGB">
-            <feColorMatrix  type="matrix">
-              <animate id="guit_filter_in" attributeName="values"
-                attributeType="XML" begin="indefinite" dur="3"
-                 end="indefinite"
-                 from="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
-                 to="0.5 0.5 0.5 0 0
-              0.6 0.6 0.6 0 0
-              0.7 0.4 0.4 0 0
-              0 0 0 1 0 "
-                fill="freeze" />
-            </feColorMatrix>
-          </filter>
-        </defs>
-      </svg>
     </div>
     );
   }

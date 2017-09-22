@@ -14,7 +14,22 @@
             <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
         <% end %>
         window.banner_url ="<%= asset_path("guit blue.jpeg")%>"
+        window.landing_img_url ="<%= asset_path("sax blue.jpeg")%>"
       </script>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="guit_filter" colorInterpolationFilters="linearRGB">
+            <feColorMatrix  type="matrix">
+              <animate id="blue_filter_in" attributeName="values"
+                attributeType="XML" begin="indefinite" dur="3"
+                 end="indefinite"
+                 from="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                 to="0.5 0.5 0.5 0 0 0.6 0.6 0.6 0 0 0.7 0.4 0.4 0 0 0 0 0 1 0 "
+                fill="freeze" />
+            </feColorMatrix>
+          </filter>
+        </defs>
+      </svg>
     <%= yield %>
   </body>
 </html>

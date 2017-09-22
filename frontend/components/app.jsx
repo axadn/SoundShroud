@@ -4,9 +4,9 @@ import NavBar from "./nav_bar/nav_bar";
 import {HashRouter} from "react-router-dom";
 export default () =>(
   <HashRouter>
-  <div className="app">
-      <NavBar/>
-      <MainContent/>
-  </div>
+    <div className="app">
+        <NavBar/>
+        <MainContent/>
+    </div>
   </HashRouter>
 );
