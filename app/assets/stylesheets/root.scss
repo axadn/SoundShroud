@@ -16,6 +16,8 @@ $ming: #35617b;
 $bahama-blue: #096caa;
 $calypso: #2d7387;
 $invisible-black: rgba(0,0,0,0);
+$false-ming: #4b8aaf;
+$false-calypso: #47a4b4;
 #root{
   position: absolute;
   left: 0;
@@ -177,7 +179,9 @@ h2{
 
 .blue_button, .logout_button{
     color: white;
-  border-radius: 2px;
+  outline: none;
+  animation-name: fadeFromTransparent;
+  border-radius: 8px;
   background-color: $ming;
   // border-right: 3px solid rgb(0,90,180);
   // border-bottom: 3px solid rgb(0,45,90);
@@ -192,11 +196,17 @@ h2{
   font-size: 14px;
   text-decoration: none;
 }
-.blue_button:hover, .logout_button:hover{
+.blue_button:hover{
   background-color: $calypso;
   cursor: pointer;
 }
+
+.logout_button:hover{
+  cursor: pointer;
+  background-color: $false-calypso;
+}
 .logout_button{
+  background-color: $false-ming;
   font-size: 20px;
 }
 .landing_button{
@@ -236,13 +246,11 @@ h2{
   outline: none;
 }
 .form_button{
-  outline: none;
-  animation-name: fadeFromTransparent;
   animation-duration: 1.5s;
   align-self: flex-end;
   width: 102px;
   height: 40px;
-  border-radius: 8px;
+
 }
 
 .errors {
