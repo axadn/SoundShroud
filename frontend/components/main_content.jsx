@@ -5,7 +5,7 @@ import {AuthRoute} from "../utils/route_utils";
 import LandingPage from "./landing_page";
 
 export default props => (
-  <div className="main_content">
+  <div className="main_content" >
     <Route exact path="/" component={LandingPage}></Route>
     <AuthRoute exact path="/login" component={SessionFormContainer}>
     </AuthRoute>
