@@ -16,6 +16,17 @@ $ming: #35617b;
 $bahama-blue: #096caa;
 $calypso: #2d7387;
 $invisible-black: rgba(0,0,0,0);
+#root{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.app{
+  width: 100%;
+  height: 100%;
+}
 body > svg{
   width: 0px;
   height: 0px;
@@ -36,20 +47,14 @@ h2{
  font-size: 45px;
  text-align: center;
 }
-.landing_page_window{
+.static_img_page{
   width: 100%;
-  height: 800px;
-
-
+  overflow: hidden;
 }
-.session_form_window > img{
+.static_img_page > img{
   overflow-x: hidden;
   min-width: 100%;
 }
-.landing_image{
-
-}
-
 .landing_info{
   display: flex;
   flex-direction: column;
@@ -57,25 +62,26 @@ h2{
   animation-name: fadeFromTransparent;
   animation-duration: 3s;
   position: absolute;
-  left: 336px;
-  top: 275px;
+  left: 335px;
+  top: 324px;
   width: 380px;
 }
+.play_bar{
+  height: 100px;
+}
 .app {
+  display: flex;
+  flex-direction: column;
   font-family: 'Quicksand', sans-serif;
-
   margin: auto;
   background-color: $cod-grey;
   color: white;
   max-width: 1250px;
   min-width: 700px;
-  background: -webkit-linear-gradient($cod-grey, #444); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient($cod-grey, #444); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient($cod-grey, #444); /* For Firefox 3.6 to 15 */
-    background: linear-gradient($cod-grey, #444); /* Standard syntax */
 }
 
 .nav_bar {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,7 +120,8 @@ h2{
 
 
 .main_content{
-  overflow: scroll;
+  flex-grow: 1;
+  overflow-y: auto;
   overflow-x: hidden;
   position: relative;
   display: flex;
@@ -144,11 +151,6 @@ h2{
   top: 100px;
   width: 250px;
   border-radius: 8px;
-}
-.session_form_window {
-  width: 100%;
-  height: 800px;
-  background-image: url("/assets/guit blue.jpeg");
 }
 .session_form h2{
   font-size: 26px;

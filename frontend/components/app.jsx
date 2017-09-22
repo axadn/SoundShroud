@@ -6,9 +6,8 @@ export default () =>(
   <HashRouter>
     <div className="app">
         <NavBar/>
-        <div>
           <MainContent/>
-        </div>
+          <div className = "play_bar"></div>
     </div>
   </HashRouter>
 );

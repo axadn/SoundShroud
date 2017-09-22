@@ -45,7 +45,7 @@ export default class SessionFrom extends React.Component{
       </div>
     });
     return(
-    <div className = "session_form_window">
+    <div className = "session_page_content static_img_page">
       <img src="/assets/guit blue.jpeg"></img>
       <div className = "floater1 session_form">
         <h2>{this.props.message}</h2>

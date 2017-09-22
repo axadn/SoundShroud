@@ -26906,11 +26906,8 @@ exports.default = function () {
       "div",
       { className: "app" },
       _react2.default.createElement(_nav_bar2.default, null),
-      _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(_main_content2.default, null)
-      )
+      _react2.default.createElement(_main_content2.default, null),
+      _react2.default.createElement("div", { className: "play_bar" })
     )
   );
 };
@@ -27121,7 +27118,7 @@ var SessionFrom = function (_React$Component) {
       });
       return _react2.default.createElement(
         "div",
-        { className: "session_form_window" },
+        { className: "session_page_content static_img_page" },
         _react2.default.createElement("img", { src: "/assets/guit blue.jpeg" }),
         _react2.default.createElement(
           "div",
@@ -29732,7 +29729,7 @@ var LandingPage = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "landing_page_window" },
+        { className: "landing_page_content static_img_page" },
         _react2.default.createElement("img", { src: "/assets/sax blue.jpeg" }),
         _react2.default.createElement(
           "div",
