@@ -4,29 +4,12 @@ import Root from "./components/root";
 import configureStore from "./store/store";
 import {postSessionThunk, receiveSession,
    deleteSessionThunk} from "./actions/session_actions";
-
+import {postTrack} from "./utils/api_track_utils";
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   const store = configureStore();
   window.store = store;
-  const ajax2 = url => (
-    $.ajax({
-      method: "get",
-      url: "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/1",
-    })
-  );
-  const setHeaders =headers=> xhr => {
-    Object.keys(headers).forEach(key => {
-      xhr.setRequestHeader(key, headers[key]);
-    });
-
-  }
-  const setResultToWindow = res => {
-
-    window.res = res;
-  }
-  $.ajax({
-    method: "get", url: "api/tracks/s3/1"}).then(setResultToWindow);
+  window.postTrack = postTrack;
   if(window.currentUser){
     store.dispatch(receiveSession(currentUser));
   }

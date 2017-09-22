@@ -10,5 +10,8 @@ export default props => (
     <AuthRoute exact path="/login" component={SessionFormContainer}>
     </AuthRoute>
     <AuthRoute exact path="/signup" component={SessionFormContainer}></AuthRoute>
+    <form>
+      <input type = "file"></input>
+    </form>
   </div>
 );

@@ -2,7 +2,7 @@ class Api::TracksController < ApplicationController
   SUPPORTED_EXTENSIONS = ['.mp3', '.ogg', '.wav',
   '.flac']
   PRESIGNED_URL_TIMEOUT = 30
-  before_action :verify_logged_in, only: [:create, :destroy]
+
   def track_params
     params.require(:track).permit(:title, :description, :genre)
   end
@@ -20,7 +20,14 @@ class Api::TracksController < ApplicationController
       render json: {general:["track not found"]}, status: 404
     end
   end
-
+  def verify
+    @track = Track.new(track_params)
+    if @track.valid?
+      render json: "success"
+    else
+      render json: @track.errors.messages, status: 422
+    end
+  end
   def destroy
     @track = Track.find_by(id: params[:id])
     if @track
@@ -38,10 +45,9 @@ class Api::TracksController < ApplicationController
 
   def create
     @track = Track.new(track_params)
-    if @track.save
-
-    else
-      render json: @track.errors.messages
+    if @track.valid?
+      handle_file
+      @track.save!
     end
   end
 
