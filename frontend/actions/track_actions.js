@@ -48,7 +48,7 @@ export const receiveTracks = data => ({
 
 export const receiveUploadProgress = progress => ({
   type: RECEIVE_UPLOAD_PROGRESS,
-  progress
+  payload: progress
 });
 
 export const receiveUploadCompleted = () => ({
@@ -89,9 +89,11 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
 export const postTrackThunk = formData => dispatch => {
 
   const postRequest = TrackAPI.postTrack(formData);
-  debugger;
-  postRequest.upload.onprogress = event =>(
-    dispatch(receiveUploadProgress(event.loaded/event.total)));
+  postRequest.upload.addEventListener("progress",function (e) {
+    if (e.lengthComputable) {
+        dispatch(receiveUploadProgress(e.loaded/ e.total));
+    }
+  });
   postRequest.addEventListener("load", event => (
     dispatch(receiveUploadCompleted())));
   postRequest.addEventListener("error", event => (
