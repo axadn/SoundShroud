@@ -31,11 +31,7 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
-
-  def s3_signer
-
-  end
-
+  
   def s3_bucket
     @s3_bucket ||=(
     aws_client = Aws::S3::Client.new region: 'us-west-1',
@@ -47,13 +43,9 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  def self.valid_extension?(filename)
-    extension = /(\.\w+)$/.match(filename)[0].downcase
-    (SUPPORTED_EXTENSIONS.includes? extension) ? extension : nil
-  end
 
-  def self.upload_to_s3(filename)
-    obj = Api::TracksController.s3_bucket.object(filename)
+  def upload_to_s3(filename , s3_filename)
+    obj = s3_bucket.object(s3_filename)
     obj.upload_file(filename)
   end
 

@@ -11,8 +11,8 @@ export const postTrack = formData => {
   return request;
 };
 
-export const verifyValidParams = formData => {
-  $.ajx({method: "post", url: `api/tracks/verify`})
-}
+export const verifyValidParams = verifyData => (
+  $.ajax({method: "post", url: `api/tracks/verify`, data: verifyData })
+);
 export const deleteTrack = id => (
   $.ajax({method: "delete", url: `api/tracks/${id}`}));
