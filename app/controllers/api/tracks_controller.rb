@@ -88,7 +88,7 @@ class Api::TracksController < ApplicationController
     extension = Api::TracksController.valid_extension? params[:file].tempfile.path
     if extension
       input_filename = params[:file].tempfile.path
-      output_filename = "tempTracks/#{@track.id}.mp3"
+      output_filename = "tmp/#{@track.id}.mp3"
       begin
         Sox::Cmd.new.add_input(input_filename)
           .set_output(output_filename).run
@@ -97,9 +97,7 @@ class Api::TracksController < ApplicationController
         render json: {success: true}
       rescue Sox::Error => e
         @track.delete
-        render json: {general: e.message}
-      ensure
-        FileUtils.rm(output_filename)
+        render json: {general: e.message}, status: 422
       end
     else
       render json: {general: ["Not a supported file type"]}
