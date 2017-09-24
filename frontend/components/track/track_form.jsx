@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class UploadForm extends React.Component {
+export default class TrackForm extends React.Component {
   componentWillUnmount(){
     this.props.clearParamsErrors();
   }
@@ -26,16 +26,20 @@ export default class UploadForm extends React.Component {
   }
   handleSubmit (e){
     e.preventDefault();
-    this.props.verifyThenPost(this.state);
+    this.props.formAction(this.state);
   }
   render(){
+  const fileUploadElement = this.props.editing? undefined:
+    <input type="file" onChange={this.handleFileChange}></input>;
+  let imgSrc;
 
     return(
       <form onSubmit={this.handleSubmit}>
         <input type="text" onChange={this.handleChange("title")}></input>
         <textArea onChange={this.handleChange("description")}></textArea>
-        <input type="file" onChange={this.handleFileChange}></input>
-        <input type="submit" className = "blue_button" value="Upload"></input>
+        {fileUploadElement}
+        <input type="submit" className = "blue_button"
+          value={this.props.editing ? "Update" : "Upload"}></input>
       </form>
     );
   }

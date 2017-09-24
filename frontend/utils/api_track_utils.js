@@ -11,6 +11,10 @@ export const postTrack = formData => {
   return request;
 };
 
+export const updateTrack = data => {
+  $.ajax({method: "PATCH", url: `api/tracks/${track.id}`, data: track})
+};
+
 export const verifyValidParams = verifyData => (
   $.ajax({method: "post", url: `api/tracks/verify`, data: verifyData })
 );

@@ -54,8 +54,14 @@ export const receiveUploadProgress = progress => ({
 export const receiveUploadCompleted = () => ({
   type: RECEIVE_UPLOAD_COMPLETED
 });
-export const fetchTrackThunk = id => dispatch => (
+
+export const fetchTrackThunk = (id, callback) => dispatch => (
   TrackAPI.fetchTrack(id).then(data=> dispatch(receiveTrack(data)))
+    .then(()=> {
+      if(callback){
+        callback(id);
+      }
+    })
 );
 
 export const verifyThenPostThunk = unprocessedData => dispatch => {
@@ -70,7 +76,7 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
     trackParams.filename = unprocessedData.file.name;
   }
   else{
-    trackParams.filename = ""
+    trackParams.filename = "";
   }
 
   TrackAPI.verifyValidParams(trackParams)
@@ -86,8 +92,8 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
     dispatch(receiveUploadParamsErrors(errors));
   });
 };
-export const postTrackThunk = formData => dispatch => {
 
+export const postTrackThunk = formData => dispatch => {
   const postRequest = TrackAPI.postTrack(formData);
   postRequest.upload.addEventListener("progress",function (e) {
     if (e.lengthComputable) {
@@ -95,7 +101,7 @@ export const postTrackThunk = formData => dispatch => {
     }
   });
   postRequest.addEventListener("load", event => (
-    dispatch(receiveUploadCompleted())));
+    dispatch(receiveUploadComppleted())));
   postRequest.addEventListener("error", event => (
     dispatch(receiveUploadErrors({
       general: ["An error ocurred while transferring the file."]}))));
@@ -104,3 +110,6 @@ export const postTrackThunk = formData => dispatch => {
       general: ["An error ocurred while transferring the file."]}))));
   location.hash = "/";
 };
+
+export const editTrackThunk = data => dispatch => (
+  TrackAPI.updateTrack({track:data}));
