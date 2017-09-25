@@ -1,8 +1,8 @@
-class AudioProcessJob < ApplicationJob
-  queue_as :default
+class AudioProcessJob
+  @queue = :audio_process
 
-  def perform(temp_name, trackId)
-    track = track.find(trackId)
+  def self.perform(temp_name, trackId)
+    track = Track.find(trackId)
     aws_client = Aws::S3::Client.new(region: 'us-west-1',
     access_key_id: ENV["S3_ID"],
     secret_access_key: ENV["S3_KEY"])
