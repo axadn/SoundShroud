@@ -52,7 +52,7 @@ class Api::TracksController < ApplicationController
     track = Track.new(track_params)
     track.artist_id = current_user.id
     track.save!
-    AudioProcessJob.perform_later(params[:temp_filename], track)
+    Resque.enqueue(AudioProcessJob, params[:temp_filename], track.id)
     render json: {id: track.id}
   end
 
