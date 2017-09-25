@@ -30174,19 +30174,11 @@ var fetchTrack = exports.fetchTrack = function fetchTrack(id) {
   return $.ajax({ method: "get", url: "api/tracks/" + id });
 };
 
-// export const postTrack = formData => {
-//   const request = new XMLHttpRequest();
-//   request.open("POST", "api/tracks");
-//   request.send(formData);
-//   request.onload = () => {
-//     window.response = JSON.parse(request.responseText)
-//   }
-//   return request;
-// };
-var postTrack = exports.postTrack = function postTrack(_ref) {
+var uploadTrack = exports.uploadTrack = function uploadTrack(_ref) {
   var file = _ref.file,
       s3Info = _ref.s3Info,
-      trackParams = _ref.trackParams;
+      progressCallback = _ref.progressCallback,
+      doneCallback = _ref.doneCallback;
 
   var formData = new FormData();
   Object.keys(s3Info.fields).forEach(function (key) {
@@ -30194,53 +30186,31 @@ var postTrack = exports.postTrack = function postTrack(_ref) {
   });
   s3Info.fields.file = file;
   formData.append("file", file);
-  $.ajax({
+  return $.ajax({
     xhr: function xhr() {
       var xhr = new window.XMLHttpRequest();
       // Handle progress
       //Upload progress
-      xhr.upload.addEventListener("progress", function (evt) {
-        if (evt.lengthComputable) {
-          var percentComplete = evt.loaded / evt.total;
-          //Do something with upload progress
-          console.log(percentComplete);
-        }
-      }, false);
+      xhr.upload.addEventListener("progress", progressCallback, false);
       return xhr;
     },
     type: 'POST',
     url: s3Info.url,
     data: formData,
     processData: false,
-    beforeSend: logProgress,
     // tell jQuery not to convert to form data
-    contentType: false,
-    success: function success(json) {
-      console.log('Upload complete!');
-    },
-    error: function error(XMLHttpRequest, textStatus, errorThrown) {
-      console.log('Upload error: ' + XMLHttpRequest.responseText);
-    }
+    contentType: false
   });
 };
-var logProgress = function logProgress(xhr) {
-  debugger;
-  xhr.progress = function (e) {
-    console.log(e.progress + "/" + e.total);
-  };
+var process_track = exports.process_track = function process_track(data) {
+  return $.ajax({
+    method: "post",
+    data: data,
+    url: "api/tracks/process"
+  });
 };
-//   const oReq = new XMLHttpRequest();
-//
-//
-//
-//   oReq.open("POST", s3Info.url, true);
-//   oReq.setRequestHeader('Access-Control-Allow-Origin', '*');
-//   oReq.setRequestHeader("content-type", "multipart/form-data");
-//   oReq.send(formData);
-// };
-
 var updateTrack = exports.updateTrack = function updateTrack(data) {
-  $.ajax({ method: "PATCH", url: "api/tracks/" + track.id, data: track });
+  return $.ajax({ method: "PATCH", url: "api/tracks/" + data.track.id, data: data });
 };
 
 var verifyValidParams = exports.verifyValidParams = function verifyValidParams(verifyData) {
@@ -30252,19 +30222,6 @@ var deleteTrack = exports.deleteTrack = function deleteTrack(id) {
 
 var postToS3 = exports.postToS3 = function postToS3(file, id) {
   req = new XMLHttpRequest();
-
-  //(x-amz-algorithm), the credential scope (x-amz-credential) that you
-  //used to generate the signing key,
-  // and the date (x-amz-date)
-
-
-  //acl
-  //key
-  //policy
-  //x-amz-algorithm AWS4-HMAC-SHA256.
-  //x-amz-credential <your-access-key-id>/<date>/<aws-region>/<aws-service>/aws4_request
-  //x-amz-date example: 20130728)
-  //x-amz-signature
 };
 
 /***/ }),
@@ -30278,7 +30235,7 @@ var postToS3 = exports.postToS3 = function postToS3(file, id) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.editTrackThunk = exports.postTrackThunk = exports.verifyThenPostThunk = exports.fetchTrackThunk = exports.receiveUploadCompleted = exports.receiveUploadProgress = exports.receiveTracks = exports.clearUploadErrors = exports.receiveUploadErrors = exports.clearUploadParamsErrors = exports.receiveUploadInactive = exports.receiveUploadActive = exports.receiveUploadParamsErrors = exports.receiveTrack = exports.RECEIVE_UPLOAD_INACTIVE = exports.RECEIVE_UPLOAD_ACTIVE = exports.RECEIVE_UPLOAD_COMPLETED = exports.RECEIVE_UPLOAD_PROGRESS = exports.CLEAR_UPLOAD_PARAMS_ERRORS = exports.RECEIVE_UPLOAD_PARAMS_ERRORS = exports.CLEAR_UPLOAD_ERRORS = exports.RECEIVE_UPLOAD_ERRORS = exports.DELETE_TRACK = exports.RECEIVE_TRACKS = exports.RECEIVE_TRACK = undefined;
+exports.editTrackThunk = exports.verifyThenPostThunk = exports.fetchTrackThunk = exports.receiveUploadCompleted = exports.receiveUploadProcessed = exports.receiveUploadProgress = exports.receiveTracks = exports.clearUploadErrors = exports.receiveUploadErrors = exports.clearUploadParamsErrors = exports.receiveUploadInactive = exports.receiveUploadActive = exports.receiveUploadParamsErrors = exports.receiveTrack = exports.RECEIVE_UPLOAD_PROCESSED = exports.RECEIVE_UPLOAD_INACTIVE = exports.RECEIVE_UPLOAD_ACTIVE = exports.RECEIVE_UPLOAD_COMPLETED = exports.RECEIVE_UPLOAD_PROGRESS = exports.CLEAR_UPLOAD_PARAMS_ERRORS = exports.RECEIVE_UPLOAD_PARAMS_ERRORS = exports.CLEAR_UPLOAD_ERRORS = exports.RECEIVE_UPLOAD_ERRORS = exports.DELETE_TRACK = exports.RECEIVE_TRACKS = exports.RECEIVE_TRACK = undefined;
 
 var _api_track_utils = __webpack_require__(294);
 
@@ -30297,6 +30254,7 @@ var RECEIVE_UPLOAD_PROGRESS = exports.RECEIVE_UPLOAD_PROGRESS = "RECEIVE_UPLOAD_
 var RECEIVE_UPLOAD_COMPLETED = exports.RECEIVE_UPLOAD_COMPLETED = "RECEIVE_UPLOAD_COMPLETED";
 var RECEIVE_UPLOAD_ACTIVE = exports.RECEIVE_UPLOAD_ACTIVE = "RECEIVE_UPLOAD_ACTIVE";
 var RECEIVE_UPLOAD_INACTIVE = exports.RECEIVE_UPLOAD_INACTIVE = "RECEIVE_UPLOAD_INACTIVE";
+var RECEIVE_UPLOAD_PROCESSED = exports.RECEIVE_UPLOAD_PROCESSED = "RECEIVE_UPLOAD_PROCESSED";
 var receiveTrack = exports.receiveTrack = function receiveTrack(data) {
   return {
     type: RECEIVE_TRACK,
@@ -30307,7 +30265,7 @@ var receiveTrack = exports.receiveTrack = function receiveTrack(data) {
 var receiveUploadParamsErrors = exports.receiveUploadParamsErrors = function receiveUploadParamsErrors(errors) {
   return {
     type: RECEIVE_UPLOAD_PARAMS_ERRORS,
-    payload: errors
+    payload: errors.statusText ? { general: [errors.statusText] } : errors
   };
 };
 
@@ -30331,8 +30289,8 @@ var clearUploadParamsErrors = exports.clearUploadParamsErrors = function clearUp
 
 var receiveUploadErrors = exports.receiveUploadErrors = function receiveUploadErrors(errors) {
   return {
-    type: RECEIEVE_UPLOAD_ERRORS,
-    payload: errors
+    type: RECEIVE_UPLOAD_ERRORS,
+    payload: errors.statusText ? { general: [errors.statusText] } : errors
   };
 };
 
@@ -30353,6 +30311,12 @@ var receiveUploadProgress = exports.receiveUploadProgress = function receiveUplo
   return {
     type: RECEIVE_UPLOAD_PROGRESS,
     payload: progress
+  };
+};
+
+var receiveUploadProcessed = exports.receiveUploadProcessed = function receiveUploadProcessed() {
+  return {
+    type: RECEIVE_UPLOAD_PROCESSED
   };
 };
 
@@ -30389,45 +30353,53 @@ var verifyThenPostThunk = exports.verifyThenPostThunk = function verifyThenPostT
       trackParams.filename = "";
     }
 
-    TrackAPI.verifyValidParams(trackParams).then(function (res) {
-      window.res = res;
+    TrackAPI.verifyValidParams(trackParams).catch(function (errors) {
+      dispatch(receiveUploadParamsErrors(errors));
+    }).then(function (s3Info) {
+      trackParams.temp_filename = s3Info.temp_filename;
+      dispatch(receiveUploadActive());
+      return TrackAPI.uploadTrack({ file: unprocessedData.file,
+        s3Info: s3Info,
+        progressCallback: function progressCallback(e) {
+          return dispatch(receiveUploadProgress(e.loaded / e.total));
+        }
+      });
+    }).then(function (temp_filename) {
+      return TrackAPI.process_track(trackParams);
+    }).then(function (idObject) {
+      return setTimeout(function () {
+        return dispatch(checkAudioProcessStatus(idObject.id));
+      }, 1000);
+    }).catch(function (errors) {
+      dispatch(receiveUploadErrors(errors));
     });
-    //     formData.append("file", unprocessedData.file);
-    //     formData.append("track", JSON.stringify(trackParams.track));
-    //     formData.append("filename", trackParams.filename)
-    //     dispatch(postTrackThunk(formData));
-    //     dispatch(receiveUploadActive());
-    //   })
-    // .catch(
-    //   errors =>{
-    //   dispatch(receiveUploadParamsErrors(errors));
-    // });
   };
 };
 
-var postTrackThunk = exports.postTrackThunk = function postTrackThunk(formData) {
+var checkAudioProcessStatus = function checkAudioProcessStatus(id) {
   return function (dispatch) {
-    var postRequest = TrackAPI.postTrack(formData);
-    // postRequest.upload.addEventListener("progress",function (e) {
-    //   if (e.lengthComputable) {
-    //       dispatch(receiveUploadProgress(e.loaded/ e.total));
-    //   }
-    // });
-    // postRequest.addEventListener("load", event => (
-    //   dispatch(receiveUploadCompleted())));
-    // postRequest.addEventListener("error", event => (
-    //   dispatch(receiveUploadErrors({
-    //     general: ["An error ocurred while transferring the file."]}))));
-    // postRequest.addEventListener("error", event => (
-    //   dispatch(receiveUploadErrors({
-    //     general: ["An error ocurred while transferring the file."]}))));
-    // location.hash = "/";
+    $.ajax({
+      method: "get",
+      url: "api/tracks/" + id + "/status"
+    }).then(function (res) {
+      if (res.id) {
+        dispatch(receiveUploadProcessed());
+      } else if (res.status === "failed") {
+        dispatch(receiveUploadErrors({ "general": ["couldn't process audio"] }));
+      } else {
+        setTimeout(function () {
+          return dispatch(checkAudioProcessStatus(id));
+        }, 1000);
+      }
+    });
   };
 };
 
 var editTrackThunk = exports.editTrackThunk = function editTrackThunk(data) {
   return function (dispatch) {
-    return TrackAPI.updateTrack({ track: data });
+    TrackAPI.updateTrack({ track: data }).then(function () {
+      return location.hash = "tracks/" + data.id;
+    });
   };
 };
 
@@ -30442,24 +30414,30 @@ var editTrackThunk = exports.editTrackThunk = function editTrackThunk(data) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var RECEIVE_UPLOAD_PROGRESS = exports.RECEIVE_UPLOAD_PROGRESS = "RECEIVE_UPLOAD_PROGRESS";
-var RECEIVE_UPLOAD_COMPLETED = exports.RECEIVE_UPLOAD_COMPLETED = "RECEIVE_UPLOAD_COMPLETED";
-var RECEIVE_UPLOAD_ACTIVE = exports.RECEIVE_UPLOAD_ACTIVE = "RECEIVE_UPLOAD_ACTIVE";
-var RECEIVE_UPLOAD_INACTIVE = exports.RECEIVE_UPLOAD_INACTIVE = "RECEIVE_UPLOAD_INACTIVE";
+
+var _track_actions = __webpack_require__(296);
+
+var INITIAL_STATE = {
+  active: false,
+  progress: 0,
+  processed: false
+};
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { active: false, progress: 0 };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
   var action = arguments[1];
 
   switch (action.type) {
-    case RECEIVE_UPLOAD_PROGRESS:
+    case _track_actions.RECEIVE_UPLOAD_PROGRESS:
       return Object.assign({}, state, { progress: action.payload });
-    case RECEIVE_UPLOAD_ACTIVE:
+    case _track_actions.RECEIVE_UPLOAD_ACTIVE:
       return Object.assign({}, state, { active: true });
-    case RECEIVE_UPLOAD_INACTIVE:
-      return Object.assign({}, state, { active: false, progress: 0 });
-    case RECEIVE_UPLOAD_COMPLETED:
+    case _track_actions.RECEIVE_UPLOAD_INACTIVE:
+      return INITIAL_STATE;
+    case _track_actions.RECEIVE_UPLOAD_COMPLETED:
       return Object.assign({}, state, { progress: 1 });
+    case _track_actions.RECEIVE_UPLOAD_PROCESSED:
+      return Object.assign({}, state, { processed: true });
     default:
       return state;
   }
@@ -30494,7 +30472,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     progress: state.upload.progress,
     active: state.upload.active,
-    errors: state.errors.upload
+    errors: state.errors.upload,
+    processed: state.upload.processed
   };
 };
 
@@ -30548,7 +30527,7 @@ var UploadProgress = function (_React$Component) {
       var canvas = document.getElementById("progress_bar");
       var ctx = canvas.getContext("2d");
       var xAmount1 = canvas.width * this.props.progress;
-      ctx.fillStyle = "green";
+      ctx.fillStyle = "#2d7387";
       ctx.fillRect(0, 0, xAmount1, canvas.height);
       if (this.props.progress < 1) {
         ctx.fillStyle = "white";
@@ -30565,8 +30544,12 @@ var UploadProgress = function (_React$Component) {
         if (this.props.errors.general.length > 0) {
           message = _react2.default.createElement(
             "div",
-            { className: "uploadError" },
-            "this.props.errors.general.join(\", \");",
+            { className: "upload_error" },
+            _react2.default.createElement(
+              "a",
+              null,
+              this.props.errors.general.join(", ")
+            ),
             _react2.default.createElement(
               "button",
               { className: "red_button",
@@ -30577,25 +30560,44 @@ var UploadProgress = function (_React$Component) {
             )
           );
         } else if (this.props.progress === 1) {
+          if (this.props.processed) {
+            message = _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                "a",
+                null,
+                "Upload Complete"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "blue_button",
+                  onClick: function onClick() {
+                    return _this2.props.setInactive();
+                  } },
+                "OK"
+              )
+            );
+          } else {
+            message = _react2.default.createElement(
+              "a",
+              null,
+              "Processing..."
+            );
+          }
+        } else {
           message = _react2.default.createElement(
-            "div",
+            "a",
             null,
-            "Upload Complete",
-            _react2.default.createElement(
-              "button",
-              { className: "blue_button",
-                onClick: function onClick() {
-                  return _this2.props.setInactive();
-                } },
-              "OK"
-            )
+            "Uploading..."
           );
         }
         return _react2.default.createElement(
           "div",
           { id: "upload_progress" },
+          message,
           _react2.default.createElement("canvas", { id: "progress_bar" }),
-          message
+          _react2.default.createElement("div", null)
         );
       }
       return null;
@@ -30628,7 +30630,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _track_actions.RECEIVE_UPLOAD_ERRORS:
-      return Object.assign(action.payload, state);
+      return Object.assign({}, state, action.payload);
     case _track_actions.RECEIVE_UPLOAD_INACTIVE:
       return NO_ERRORS;
     default:
@@ -30657,10 +30659,6 @@ var _reactRedux = __webpack_require__(41);
 
 var _reactRouterDom = __webpack_require__(21);
 
-var _selectors = __webpack_require__(125);
-
-var _selectors2 = _interopRequireDefault(_selectors);
-
 var _loading_actions = __webpack_require__(303);
 
 var _track_show = __webpack_require__(306);
@@ -30668,6 +30666,8 @@ var _track_show = __webpack_require__(306);
 var _track_show2 = _interopRequireDefault(_track_show);
 
 var _track_actions = __webpack_require__(296);
+
+var _selectors = __webpack_require__(125);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30680,7 +30680,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
   return {
     loading: state.loading.mainContent,
-    track: state.entities.tracks[ownProps.trackId]
+    track: state.entities.tracks[ownProps.trackId],
+    current_user_id: (0, _selectors.current_user_id)(state)
   };
 };
 
@@ -30716,7 +30717,6 @@ var TrackShowContainer = function (_React$Component) {
   _createClass(TrackShowContainer, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      debugger;
       this.props.fetchTrack();
     }
   }, {
@@ -30832,6 +30832,8 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(21);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30852,29 +30854,68 @@ var TrackShow = function (_React$Component) {
   _createClass(TrackShow, [{
     key: "render",
     value: function render() {
-      debugger;
       if (this.props.loading) {
         return null;
       } else {
+        var editButton = void 0;
+        if (this.props.current_user_id === this.props.track.artist_id) {
+          editButton = _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "blue_button", to: "/tracks/" + this.props.track.id + "/edit" },
+            "Edit"
+          );
+        }
         return _react2.default.createElement(
           "div",
           { className: "track_show_content" },
           _react2.default.createElement(
             "div",
-            { className: "artist_and_play_button" },
+            { className: "track_banner" },
             _react2.default.createElement(
               "div",
               null,
-              this.props.track.artist_display_name,
-              " "
+              _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                  "div",
+                  { className: "artist_and_play_button" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "track_info_text" },
+                    _react2.default.createElement(
+                      "a",
+                      null,
+                      this.props.track.artist_display_name,
+                      " "
+                    )
+                  ),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "track_info_text" },
+                    _react2.default.createElement(
+                      "a",
+                      null,
+                      this.props.track.title
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  "div",
+                  null,
+                  this.props.track.created_at.slice(0, 10)
+                )
+              ),
+              _react2.default.createElement("div", { className: "waveform" })
             ),
-            _react2.default.createElement(
-              "div",
-              null,
-              this.props.track.title,
-              " "
-            )
-          )
+            _react2.default.createElement("img", { id: "track_show_img", src: this.props.track.img_url })
+          ),
+          _react2.default.createElement(
+            "div",
+            { id: "track description" },
+            this.props.track.description
+          ),
+          editButton
         );
       }
     }
@@ -30896,32 +30937,47 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _reactRedux = __webpack_require__(41);
 
 var _reactRouterDom = __webpack_require__(21);
 
 var _track_actions = __webpack_require__(296);
 
+var _loading_actions = __webpack_require__(303);
+
 var _track_form = __webpack_require__(308);
 
 var _track_form2 = _interopRequireDefault(_track_form);
 
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
   return {
-    editing: Boolean(ownProps.match.params.trackId)
+    track: state.entities.tracks[ownProps.trackId],
+    loading: ownProps.editing && state.loading.mainContent,
+    initial_state: { title: "", labelTitle: true, labelDescription: true,
+      description: "", file: undefined }
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+var mapDisplayDispatchToProps = function mapDisplayDispatchToProps(dispatch, ownProps) {
   var formAction = void 0;
-  if (ownProps.match.params.matchId) {
+  if (ownProps.editing) {
     formAction = function formAction(data) {
-      return function (dispatch) {
-        data.id = ownProps.match.params.id;
-        (0, _track_actions.updateTrackThunk)(data);
-      };
+      data.id = ownProps.trackId;
+      dispatch((0, _track_actions.editTrackThunk)(data));
     };
   } else {
     formAction = function formAction(unprocessedData) {
@@ -30936,7 +30992,63 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   };
 };
 
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_track_form2.default));
+var mapContainerStateToProps = function mapContainerStateToProps(state, ownProps) {
+  return {
+    editing: Boolean(ownProps.match.params.trackId),
+    trackId: ownProps.match.params.trackId
+  };
+};
+
+var mapContainerDispatchToProps = function mapContainerDispatchToProps(dispatch, ownProps) {
+  if (ownProps.match.params.trackId) {
+    return {
+      fetchTrack: function fetchTrack(id) {
+        dispatch((0, _loading_actions.receiveMainContentLoading)());
+        dispatch((0, _track_actions.fetchTrackThunk)(id, function () {
+          return dispatch((0, _loading_actions.receiveMainContentLoaded)());
+        }));
+      }
+    };
+  }
+  return {};
+};
+var ConnectedDisplayComponent = (0, _reactRedux.connect)(mapDisplayStateToProps, mapDisplayDispatchToProps)(_track_form2.default);
+
+var TrackFormContainer = function (_React$Component) {
+  _inherits(TrackFormContainer, _React$Component);
+
+  function TrackFormContainer() {
+    _classCallCheck(this, TrackFormContainer);
+
+    return _possibleConstructorReturn(this, (TrackFormContainer.__proto__ || Object.getPrototypeOf(TrackFormContainer)).apply(this, arguments));
+  }
+
+  _createClass(TrackFormContainer, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.editing) {
+        this.props.fetchTrack(this.props.trackId);
+      }
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(newProps) {
+      if (newProps.trackId !== this.props.trackId) {
+        this.props.fetchTrack(newProps.trackId);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(ConnectedDisplayComponent, { trackId: this.props.trackId,
+        editing: this.props.editing });
+    }
+  }]);
+
+  return TrackFormContainer;
+}(_react2.default.Component);
+
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapContainerStateToProps, mapContainerDispatchToProps)(TrackFormContainer));
 
 /***/ }),
 /* 308 */
@@ -30973,6 +31085,14 @@ var TrackForm = function (_React$Component) {
     value: function componentWillUnmount() {
       this.props.clearParamsErrors();
     }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(newProps) {
+      if (this.props.loading && !newProps.loading) {
+        this.setState(Object.assign({ labelTitle: false,
+          labelDescription: newProps.track.description.length === 0 }, newProps.track));
+      }
+    }
   }]);
 
   function TrackForm(props) {
@@ -30980,11 +31100,7 @@ var TrackForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (TrackForm.__proto__ || Object.getPrototypeOf(TrackForm)).call(this, props));
 
-    _this.state = {
-      title: "",
-      description: "",
-      file: undefined
-    };
+    _this.state = _this.props.initial_state;
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleFileChange = _this.handleFileChange.bind(_this);
@@ -31015,17 +31131,58 @@ var TrackForm = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      if (this.props.loading) return null;
       var fileUploadElement = this.props.editing ? undefined : _react2.default.createElement("input", { type: "file", onChange: this.handleFileChange });
       var imgSrc = void 0;
-
       return _react2.default.createElement(
-        "form",
-        { onSubmit: this.handleSubmit },
-        _react2.default.createElement("input", { type: "text", onChange: this.handleChange("title") }),
-        _react2.default.createElement("textArea", { onChange: this.handleChange("description") }),
-        fileUploadElement,
-        _react2.default.createElement("input", { type: "submit", className: "blue_button",
-          value: this.props.editing ? "Update" : "Upload" })
+        "div",
+        { className: "track_form_content" },
+        _react2.default.createElement(
+          "div",
+          { className: "floater2" },
+          _react2.default.createElement(
+            "h2",
+            null,
+            "Upload a Track"
+          ),
+          _react2.default.createElement(
+            "form",
+            { className: "track_form", onSubmit: this.handleSubmit },
+            fileUploadElement,
+            _react2.default.createElement(
+              "label",
+              null,
+              "Title"
+            ),
+            _react2.default.createElement("input", { type: "text",
+              value: this.state.labelTitle ? "Name your track" : this.state.title,
+              onChange: this.handleChange("title"),
+              onFocus: function onFocus() {
+                return _this3.setState({ labelTitle: false });
+              },
+              onBlur: function onBlur() {
+                return _this3.setState({ labelTitle: _this3.state.title.length === 0 });
+              } }),
+            _react2.default.createElement(
+              "label",
+              null,
+              "Description"
+            ),
+            _react2.default.createElement("textArea", {
+              value: this.state.labelDescription ? "Describe your track" : this.state.description,
+              onFocus: function onFocus() {
+                return _this3.setState({ labelDescription: false });
+              },
+              onBlur: function onBlur() {
+                return _this3.setState({ labelDescription: _this3.state.description.length === 0 });
+              },
+              onChange: this.handleChange("description") }),
+            _react2.default.createElement("input", { type: "submit", className: "blue_button",
+              value: this.props.editing ? "Update" : "Upload" })
+          )
+        )
       );
     }
   }]);

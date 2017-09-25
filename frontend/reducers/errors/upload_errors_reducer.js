@@ -4,7 +4,7 @@ const NO_ERRORS = {general: []}
 export default (state=NO_ERRORS, action)=>{
   switch(action.type){
     case RECEIVE_UPLOAD_ERRORS:
-      return Object.assign(action.payload, state)
+      return Object.assign({}, state, action.payload)
     case RECEIVE_UPLOAD_INACTIVE:
       return NO_ERRORS;
     default:

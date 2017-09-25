@@ -32,6 +32,7 @@ gem 'aws-sdk-s3'
 gem 'jquery-rails'
 gem 'ruby-sox'
 gem "mini_magick"
+gem "resque"
 gem 'memfd', github: 'bear-metal/memfd'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -6,7 +6,8 @@ import {receiveUploadInactive} from "../../actions/track_actions";
 const mapStateToProps = (state, ownProps) => ({
   progress: state.upload.progress,
   active: state.upload.active,
-  errors: state.errors.upload
+  errors: state.errors.upload,
+  processed: state.upload.processed
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

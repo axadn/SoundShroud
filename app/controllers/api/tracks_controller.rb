@@ -31,13 +31,42 @@ class Api::TracksController < ApplicationController
     end
   end
 
-  def verify
+  def verify #verify form parms are valid and audio is valid extension before actual upload
     @params_errors = params_errors
     if @params_errors.empty?
-      get_track_temp_presigned_post
+      render json: track_temp_presigned_post
     else
       render json: @params_errors, status: 422
     end
+  end
+
+  def track_temp_presigned_post #returns the form fields necessary to upload to temp S3 storage
+    random_id = SecureRandom.urlsafe_base64
+    temp_filename = "#{random_id}#{@extension}"
+    obj = s3_bucket.object("tracks/temp/#{temp_filename}")
+    post = obj.presigned_post(key: "tracks/temp/#{temp_filename}", acl: "private")
+    { fields: post.fields, url: post.url, temp_filename: temp_filename}
+  end
+
+  def process_track #convert audio from temp S3 storage
+    track = Track.new(track_params)
+    track.artist_id = current_user.id
+    track.save!
+    AudioProcessJob.perform_later(params[:temp_filename], track)
+    render json: {id: track.id}
+  end
+
+  def audio_process_status
+      @track = Track.find_by(id: params[:id])
+      if @track
+        if @track.processed
+          render :show
+        else
+          render json: {status: "processing"}
+        end
+      else
+        render json: {status: "failed"}
+      end
   end
 
   def params_errors
@@ -46,8 +75,8 @@ class Api::TracksController < ApplicationController
     errors = {}
     file_errors = []
     if params[:filename]
-      extension = Api::TracksController.valid_extension? params[:filename]
-      file_errors << "not a supported file type" unless extension
+      @extension = Api::TracksController.valid_extension? params[:filename]
+      file_errors << "not a supported file type" unless @extension
     else
       file_errors << "must select a file"
     end
@@ -69,12 +98,23 @@ class Api::TracksController < ApplicationController
     end
   end
 
+  def update
+    @track = Track.find_by(id: params[:id])
+    @track.attributes = track_params
+    if @track.save
+      render :show
+    else
+      render json: @track.errors.messages
+    end
+  end
+
   def destroy
     @track = Track.find_by(id: params[:id])
     if @track
       if @track.artist_id == current_user.id
         s3_bucket.object("tracks/#{@track.id}").delete
         @track.delete
+        DeleteAudioJob.perform_later params[:id]
         render json: { success: true }
       else
         render json: { general: ["wrong user"] }, status: 403
@@ -82,33 +122,6 @@ class Api::TracksController < ApplicationController
     else
       render json: { general: ["nothing to delete"] }, status: 404
     end
-  end
-
-  def handle_file
-    extension = Api::TracksController.valid_extension? params[:file].tempfile.path
-    if extension
-      input_filename = params[:file].tempfile.path
-      output_filename = "tmp/#{@track.id}.mp3"
-      begin
-        Sox::Cmd.new.add_input(input_filename)
-          .set_output(output_filename).run
-        s3_filename = "tracks/#{@track.id}.mp3"
-        upload_to_s3(output_filename, s3_filename)
-        render json: { success: true }
-      rescue Sox::Error => e
-        @track.delete
-        render json: { general: e.message }, status: 422
-      end
-    else
-      render json: { general: ["Not a supported file type"] }
-    end
-  end
-
-  def get_track_temp_presigned_post
-    random_id = SecureRandom.urlsafe_base64
-    obj = s3_bucket.object("tracks/temp/#{random_id}")
-    post = obj.presigned_post(key: "tracks/temp/#{random_id}", acl: "private")
-    render json: {fields: post.fields, url: post.url}
   end
 
   def get_img_temp_presigned_post

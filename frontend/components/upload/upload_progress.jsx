@@ -5,7 +5,7 @@ export default class UploadProgress extends React.Component{
     const canvas = document.getElementById("progress_bar");
     const ctx = canvas.getContext("2d");
     const xAmount1 = canvas.width * this.props.progress;
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#2d7387";
     ctx.fillRect(0,0, xAmount1, canvas.height);
     if( this.props.progress < 1){
       ctx.fillStyle = "white";
@@ -16,8 +16,10 @@ export default class UploadProgress extends React.Component{
     if(this.props.active){
       let message;
       if(this.props.errors.general.length > 0){
-        message = <div className="uploadError">
-          this.props.errors.general.join(", ");
+        message = <div className="upload_error">
+          <a>
+            {this.props.errors.general.join(", ")}
+          </a>
           <button className="red_button"
             onClick={()=>(
                 this.props.setInactive())
@@ -25,20 +27,32 @@ export default class UploadProgress extends React.Component{
         </div>
       }
       else if(this.props.progress === 1){
-        message =
-        <div>
-          Upload Complete
-          <button className="blue_button"
-            onClick={()=>(
-                this.props.setInactive())
-              }>OK</button>
-        </div>
-
+        if(this.props.processed){
+          message = <div>
+            <a>Upload Complete</a>
+            <button className="blue_button"
+              onClick={()=>(
+                  this.props.setInactive())
+                }>OK</button>
+          </div>
+        }
+        else{
+          message =
+          <a>
+            Processing...
+          </a>
+        }
+      }
+      else{
+        message = <a>
+          Uploading...
+        </a>
       }
       return(
         <div id="upload_progress">
-          <canvas id="progress_bar"></canvas>
           {message}
+          <canvas id="progress_bar"></canvas>
+          <div></div>
         </div>
       );
     }

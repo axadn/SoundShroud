@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import songIsLoading from "../../reducers/selectors";
 import {receiveMainContentLoaded,
   receiveMainContentLoading} from "../../actions/loading_actions";
 import TrackShow from "./track_show";
 import {fetchTrackThunk} from "../../actions/track_actions";
+import {current_user_id} from "../../reducers/selectors";
+
 
 const mapDisplayStateToProps = (state, ownProps) => ({
   loading: state.loading.mainContent,
-  track: state.entities.tracks[ownProps.trackId]
+  track: state.entities.tracks[ownProps.trackId],
+  current_user_id: current_user_id(state)
 });
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
@@ -30,7 +32,6 @@ const mapContainerDispatchToProps = (dispatch, ownProps) => ({
 
 class TrackShowContainer extends React.Component{
   componentWillMount(){
-    debugger
     this.props.fetchTrack();
   }
   componentWillReceiveNewProps(newProps){

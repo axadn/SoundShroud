@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924021114) do
+ActiveRecord::Schema.define(version: 20170925132355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170924021114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "custom_img"
+    t.boolean "processed", default: false, null: false
     t.index ["title", "artist_id"], name: "index_tracks_on_title_and_artist_id", unique: true
   end
 
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170924021114) do
     t.string "display_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "custom_img", default: false, null: false
     t.index ["display_name"], name: "index_users_on_display_name"
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

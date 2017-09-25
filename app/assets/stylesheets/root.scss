@@ -39,7 +39,7 @@ body > svg{
   position: absolute;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
   padding: 20px;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.85);
 }
  h1{
   font-size: 65px;
@@ -70,6 +70,7 @@ h2{
   width: 380px;
 }
 .play_bar{
+  background-color: #737577;
   height: 100px;
 }
 .app {
@@ -79,7 +80,7 @@ h2{
   margin: auto;
   background-color: $cod-grey;
   color: white;
-  max-width: 1250px;
+  max-width: 1500px;
   min-width: 700px;
 }
 
@@ -167,29 +168,29 @@ h2{
   display: block;
   margin-bottom: 5px;
 }
-
-.session_form form{
-  height: 200px;
+form{
   display: flex;
   flex-direction: column;
+  height: 200px;
   justify-content: space-around;
 }
-.session_form > form > div{
+
+form > div{
   position: relative;
 }
 
 .blue_button, .logout_button{
     color: white;
+  box-sizing: border-box;
   outline: none;
   animation-name: fadeFromTransparent;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: $ming;
   // border-right: 3px solid rgb(0,90,180);
   // border-bottom: 3px solid rgb(0,45,90);
   // border-left: 3px solid rgb(0,90,180);
   // border-top: 3px solid rgb(0,160,240);
   border: none;
-  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 12px;
@@ -200,6 +201,32 @@ h2{
 .blue_button:hover{
   background-color: $calypso;
   cursor: pointer;
+}
+
+.red_button{
+  background-color: red;
+  box-sizing: border-box;
+  outline: none;
+  animation-name: fadeFromTransparent;
+  border-radius: 6px;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+
+
+.blue_button:active
+.logout_button:active{
+    background-color: $ming;
+    border-top: 1px solid rgb(10,10,10);
+    border-left: 1px solid rgb(30,40,40);
+    border-right: 1px solid rgb(30,40,40);
+    border-bottom: 1px solid rgb(45,45,45);
 }
 
 .logout_button:hover{
@@ -217,32 +244,36 @@ h2{
   border-radius: 8px;
   text-align: center;
 }
-
-.session_form input[type="text"],
-.session_form input[type="password"]{
+form input[type="text"],
+form input[type="password"],
+form textarea{
   outline: none;
   animation-name: fadeFromTransparent;
   animation-duration: 3s;
-  box-sizing: border-box;
-  width: 234px;
-  margin-right: 8px;
-  margin-left: 8px;
   border-radius: 4px;
   background-color: rgba(40,40,40,0.7);
   border-top: 2px solid rgb(10,10,10);
   border-left: 3px solid rgb(30,40,40);
   border-right: 3px solid rgb(30,40,40);
   border-bottom: 3px solid rgb(45,45,45);
-  padding: 5px;
   color: $iron;
+}
+form input[type="text"],
+form input[type="password"]{
+  box-sizing: border-box;
+  width: 234px;
+  margin-right: 8px;
+  margin-left: 8px;
+  padding: 5px;
   height: 40px;
 }
-.session_form input.empty[type="text"]{
+input.empty{
   color: rgb(140,140,140);
 }
 
-.session_form input[type="text"]:focus,
-.session_form input[type="password"]:focus{
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form textarea:focus{
   background-color: $mine-shaft;
   outline: none;
 }
@@ -282,4 +313,118 @@ h2{
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
+}
+
+#track_show_img{
+  width: 400px;
+  height: 400px;
+}
+.track_show_content{
+  width: 100%;
+}
+.track_banner{
+  padding: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+.track_banner > div{
+  margin-right: 35px;
+  flex-grow: 1;
+}
+.track_banner > div >div:first-of-type{
+  display: flex;
+  justify-content: space-between;
+}
+.track_info_text{
+  margin: 20px;
+}
+.track_info_text > a{
+  padding: 5px;
+  color: black;
+  background-color: rgba(255,255,255,0.85);
+}
+
+.track_info_text:last-of-type{
+  font-size: 24px;
+}
+.upload_error{
+  color: red;
+}
+
+#upload_progress{
+  align-items: center;
+  background-color: #3f3f3f;
+  padding: 5px;
+  display: flex;
+  height: 35px;
+  justify-content: space-around;
+}
+#upload_progress > div:first-child{
+  width: 200px;
+  font-size: 12px;
+}
+
+#upload_progress > div:first-child > a{
+  margin-right: 15px;
+}
+
+#upload_progress button {
+  padding: 2px;
+  width: 28px;
+  height: 20px;
+  font-size: 10px;
+}
+
+#progress_bar{
+  width: 300px;
+  height: 4px;
+}
+
+#upload_progress > div:last-child{
+  width: 200px;
+}
+.track_form{
+  display: block;
+  flex-grow: 1;
+  width: 500px;
+  height: auto;
+}
+
+.track_form > *{
+  display: block;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.track_form input[type="text"],
+.track_form textarea{
+  width: 100%;
+}
+.track_form input[type="text"]{
+  font-size: 20px;
+}
+.track_form textarea{
+  font-size: 16px;
+}
+.track_form label{
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.track_form textarea{
+  height: 145px;
+}
+.track_form input[type="submit"]{
+  margin-top: 15px;
+}
+.floater2{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  left: 35%;
+  top: 50px;
+}
+textarea{
+  resize: none;
 }

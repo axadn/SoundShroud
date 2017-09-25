@@ -1,9 +1,17 @@
 class ApplicationController < ActionController::Base
-  helper_method :logged_in?, :current_user, :verify_logged_in
+  helper_method :logged_in?, :current_user, :verify_logged_in, :user_img_url,
+  :track_img_url
   #protect_from_forgery with: :exception
   SUPPORTED_EXTENSIONS = ['jpg', '.gif', '.png',
   '.jpeg']
 
+  def user_img_url(id)
+    "https://s3-us-west-1.amazonaws.com/soundshroud/users/images/#{id}.jpeg"
+  end
+
+  def track_img_url(id)
+    "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/images/#{id}.jpeg"
+  end
 
   def self.valid_image_extension?(filename)
     match = /(\.\w+)$/.match(filename)
@@ -44,20 +52,12 @@ class ApplicationController < ActionController::Base
 
   def s3_bucket
     @s3_bucket ||=(
-    aws_client = Aws::S3::Client.new region: 'us-west-1',
-    access_key_id: ENV["S3_ID"],
-    secret_access_key: ENV["S3_KEY"]
+    aws_client = Aws::S3::Client.new(region: 'us-west-1',
+  access_key_id: ENV["S3_ID"],
+    secret_access_key: ENV["S3_KEY"])
 
     s3 = Aws::S3::Resource.new(client: aws_client)
     s3.bucket('soundshroud')
     )
   end
-
-
-  def upload_to_s3(filename , s3_filename)
-    obj = s3_bucket.object(s3_filename)
-    obj.upload_file(filename)
-  end
-
-
 end
