@@ -1,12 +1,13 @@
 class Api::TracksController < ApplicationController
   SUPPORTED_EXTENSIONS = ['.mp3', '.ogg', '.wav',
-  '.flac']
+                          '.flac'].freeze
+  #SUPPORTED_IMG_EXTENSTIONS
   PRESIGNED_URL_TIMEOUT = 30
 
   def self.valid_extension?(filename)
     match = /(\.\w+)$/.match(filename)
     extension = match[0].downcase if match
-    (extension && SUPPORTED_EXTENSIONS.include?(extension)) ? extension : nil
+    extension && SUPPORTED_EXTENSIONS.include?(extension) ? extension : nil
   end
 
   def track_params
@@ -26,14 +27,14 @@ class Api::TracksController < ApplicationController
     if @track
       render :show
     else
-      render json: {general:["track not found"]}, status: 404
+      render json: { general: ["track not found"] }, status: 404
     end
   end
 
   def verify
     @params_errors = params_errors
     if @params_errors.empty?
-      render json: {success: true}
+      get_track_temp_presigned_post
     else
       render json: @params_errors, status: 422
     end
@@ -43,14 +44,15 @@ class Api::TracksController < ApplicationController
     @track = Track.new(track_params)
     @track.artist_id = current_user.id
     errors = {}
-    fileErrors = []
+    file_errors = []
     if params[:filename]
       extension = Api::TracksController.valid_extension? params[:filename]
-      fileErrors << "not a supported file type" unless extension
+      file_errors << "not a supported file type" unless extension
     else
-      fileErrors << "must select a file"
+      file_errors << "must select a file"
     end
-    errors[:file] = fileErrors unless fileErrors.empty?
+  #  if parames[:image]
+    errors[:file] = file_errors unless file_errors.empty?
     errors.merge!(@track.errors.messages) unless @track.valid?
     errors
   end
@@ -73,16 +75,14 @@ class Api::TracksController < ApplicationController
       if @track.artist_id == current_user.id
         s3_bucket.object("tracks/#{@track.id}").delete
         @track.delete
-        render json: {success: true}
+        render json: { success: true }
       else
-        render json: {general: ["wrong user"]}, status: 403
+        render json: { general: ["wrong user"] }, status: 403
       end
     else
-      render json: {general: ["nothing to delete"]}, status: 404
+      render json: { general: ["nothing to delete"] }, status: 404
     end
   end
-
-
 
   def handle_file
     extension = Api::TracksController.valid_extension? params[:file].tempfile.path
@@ -92,19 +92,33 @@ class Api::TracksController < ApplicationController
       begin
         Sox::Cmd.new.add_input(input_filename)
           .set_output(output_filename).run
-        s3_filename ="tracks/#{@track.id}.mp3"
+        s3_filename = "tracks/#{@track.id}.mp3"
         upload_to_s3(output_filename, s3_filename)
-        render json: {success: true}
+        render json: { success: true }
       rescue Sox::Error => e
         @track.delete
-        render json: {general: e.message}, status: 422
+        render json: { general: e.message }, status: 422
       end
     else
-      render json: {general: ["Not a supported file type"]}
+      render json: { general: ["Not a supported file type"] }
     end
   end
 
-  def getS3Url
+  def get_track_temp_presigned_post
+    random_id = SecureRandom.urlsafe_base64
+    obj = s3_bucket.object("tracks/temp/#{random_id}")
+    post = obj.presigned_post(key: "tracks/temp/#{random_id}", acl: "private")
+    render json: {fields: post.fields, url: post.url}
+  end
+
+  def get_img_temp_presigned_post
+    random_id = SecureRandom.urlsafe_base64
+    obj = s3_bucket.object("img/tracks/temp/#{random_id}")
+    post = obj.presigned_post(key: "img/tracks/temp/#{random_id}")
+    render json: post.fields
+  end
+
+  def get_s3_url
     obj = s3_bucket.object("tracks/#{params[:id]}")
     url = obj.presigned_url(:get, expires_in: PRESIGNED_URL_TIMEOUT)
     render plain: url

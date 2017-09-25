@@ -80,35 +80,37 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
   }
 
   TrackAPI.verifyValidParams(trackParams)
-  .then(()=>{
-      formData.append("file", unprocessedData.file);
-      formData.append("track", JSON.stringify(trackParams.track));
-      formData.append("filename", trackParams.filename)
-      dispatch(postTrackThunk(formData));
-      dispatch(receiveUploadActive());
-    })
-  .catch(
-    errors =>{
-    dispatch(receiveUploadParamsErrors(errors));
+  .then(res=>{
+    window.res = res;
   });
+  //     formData.append("file", unprocessedData.file);
+  //     formData.append("track", JSON.stringify(trackParams.track));
+  //     formData.append("filename", trackParams.filename)
+  //     dispatch(postTrackThunk(formData));
+  //     dispatch(receiveUploadActive());
+  //   })
+  // .catch(
+  //   errors =>{
+  //   dispatch(receiveUploadParamsErrors(errors));
+  // });
 };
 
 export const postTrackThunk = formData => dispatch => {
   const postRequest = TrackAPI.postTrack(formData);
-  postRequest.upload.addEventListener("progress",function (e) {
-    if (e.lengthComputable) {
-        dispatch(receiveUploadProgress(e.loaded/ e.total));
-    }
-  });
-  postRequest.addEventListener("load", event => (
-    dispatch(receiveUploadComppleted())));
-  postRequest.addEventListener("error", event => (
-    dispatch(receiveUploadErrors({
-      general: ["An error ocurred while transferring the file."]}))));
-  postRequest.addEventListener("error", event => (
-    dispatch(receiveUploadErrors({
-      general: ["An error ocurred while transferring the file."]}))));
-  location.hash = "/";
+  // postRequest.upload.addEventListener("progress",function (e) {
+  //   if (e.lengthComputable) {
+  //       dispatch(receiveUploadProgress(e.loaded/ e.total));
+  //   }
+  // });
+  // postRequest.addEventListener("load", event => (
+  //   dispatch(receiveUploadCompleted())));
+  // postRequest.addEventListener("error", event => (
+  //   dispatch(receiveUploadErrors({
+  //     general: ["An error ocurred while transferring the file."]}))));
+  // postRequest.addEventListener("error", event => (
+  //   dispatch(receiveUploadErrors({
+  //     general: ["An error ocurred while transferring the file."]}))));
+  // location.hash = "/";
 };
 
 export const editTrackThunk = data => dispatch => (

@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user, :verify_logged_in
   #protect_from_forgery with: :exception
+  SUPPORTED_EXTENSIONS = ['jpg', '.gif', '.png',
+  '.jpeg']
+
+
+  def self.valid_image_extension?(filename)
+    match = /(\.\w+)$/.match(filename)
+    extension = match[0].downcase if match
+    (extension && SUPPORTED_EXTENSIONS.include?(extension)) ? extension : nil
+  end
+
   def current_user
     return nil if session[:session_token].nil?
     @current_user ||= User.find_by(session_token: session[:session_token])
@@ -31,7 +41,7 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
-  
+
   def s3_bucket
     @s3_bucket ||=(
     aws_client = Aws::S3::Client.new region: 'us-west-1',

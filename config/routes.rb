@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   end
   get '/', to: 'root#show'
   post '/api/tracks/verify', to: 'api/tracks#verify'
-  get '/api/tracks/s3/:id', to: 'api/tracks#getS3Url'
+  get '/api/tracks/s3/:id', to: 'api/tracks#get_s3_url'
 end

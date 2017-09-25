@@ -13477,6 +13477,10 @@ var _session_actions = __webpack_require__(20);
 
 var _api_track_utils = __webpack_require__(294);
 
+var TrackAPI = _interopRequireWildcard(_api_track_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -13488,6 +13492,7 @@ document.addEventListener("DOMContentLoaded", function () {
     store.dispatch((0, _session_actions.receiveSession)(currentUser));
   }
   window.postSessionThunk = _session_actions.postSessionThunk;
+  window.postTrack = TrackAPI.postTrack;
   window.deleteSessionThunk = _session_actions.deleteSessionThunk;
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -30169,12 +30174,70 @@ var fetchTrack = exports.fetchTrack = function fetchTrack(id) {
   return $.ajax({ method: "get", url: "api/tracks/" + id });
 };
 
-var postTrack = exports.postTrack = function postTrack(formData) {
-  var request = new XMLHttpRequest();
-  request.open("POST", "api/tracks");
-  request.send(formData);
-  return request;
+// export const postTrack = formData => {
+//   const request = new XMLHttpRequest();
+//   request.open("POST", "api/tracks");
+//   request.send(formData);
+//   request.onload = () => {
+//     window.response = JSON.parse(request.responseText)
+//   }
+//   return request;
+// };
+var postTrack = exports.postTrack = function postTrack(_ref) {
+  var file = _ref.file,
+      s3Info = _ref.s3Info,
+      trackParams = _ref.trackParams;
+
+  var formData = new FormData();
+  Object.keys(s3Info.fields).forEach(function (key) {
+    formData.append(key, s3Info.fields[key]);
+  });
+  s3Info.fields.file = file;
+  formData.append("file", file);
+  $.ajax({
+    xhr: function xhr() {
+      var xhr = new window.XMLHttpRequest();
+      // Handle progress
+      //Upload progress
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = evt.loaded / evt.total;
+          //Do something with upload progress
+          console.log(percentComplete);
+        }
+      }, false);
+      return xhr;
+    },
+    type: 'POST',
+    url: s3Info.url,
+    data: formData,
+    processData: false,
+    beforeSend: logProgress,
+    // tell jQuery not to convert to form data
+    contentType: false,
+    success: function success(json) {
+      console.log('Upload complete!');
+    },
+    error: function error(XMLHttpRequest, textStatus, errorThrown) {
+      console.log('Upload error: ' + XMLHttpRequest.responseText);
+    }
+  });
 };
+var logProgress = function logProgress(xhr) {
+  debugger;
+  xhr.progress = function (e) {
+    console.log(e.progress + "/" + e.total);
+  };
+};
+//   const oReq = new XMLHttpRequest();
+//
+//
+//
+//   oReq.open("POST", s3Info.url, true);
+//   oReq.setRequestHeader('Access-Control-Allow-Origin', '*');
+//   oReq.setRequestHeader("content-type", "multipart/form-data");
+//   oReq.send(formData);
+// };
 
 var updateTrack = exports.updateTrack = function updateTrack(data) {
   $.ajax({ method: "PATCH", url: "api/tracks/" + track.id, data: track });
@@ -30185,6 +30248,23 @@ var verifyValidParams = exports.verifyValidParams = function verifyValidParams(v
 };
 var deleteTrack = exports.deleteTrack = function deleteTrack(id) {
   return $.ajax({ method: "delete", url: "api/tracks/" + id });
+};
+
+var postToS3 = exports.postToS3 = function postToS3(file, id) {
+  req = new XMLHttpRequest();
+
+  //(x-amz-algorithm), the credential scope (x-amz-credential) that you
+  //used to generate the signing key,
+  // and the date (x-amz-date)
+
+
+  //acl
+  //key
+  //policy
+  //x-amz-algorithm AWS4-HMAC-SHA256.
+  //x-amz-credential <your-access-key-id>/<date>/<aws-region>/<aws-service>/aws4_request
+  //x-amz-date example: 20130728)
+  //x-amz-signature
 };
 
 /***/ }),
@@ -30309,38 +30389,39 @@ var verifyThenPostThunk = exports.verifyThenPostThunk = function verifyThenPostT
       trackParams.filename = "";
     }
 
-    TrackAPI.verifyValidParams(trackParams).then(function () {
-      formData.append("file", unprocessedData.file);
-      formData.append("track", JSON.stringify(trackParams.track));
-      formData.append("filename", trackParams.filename);
-      dispatch(postTrackThunk(formData));
-      dispatch(receiveUploadActive());
-    }).catch(function (errors) {
-      dispatch(receiveUploadParamsErrors(errors));
+    TrackAPI.verifyValidParams(trackParams).then(function (res) {
+      window.res = res;
     });
+    //     formData.append("file", unprocessedData.file);
+    //     formData.append("track", JSON.stringify(trackParams.track));
+    //     formData.append("filename", trackParams.filename)
+    //     dispatch(postTrackThunk(formData));
+    //     dispatch(receiveUploadActive());
+    //   })
+    // .catch(
+    //   errors =>{
+    //   dispatch(receiveUploadParamsErrors(errors));
+    // });
   };
 };
 
 var postTrackThunk = exports.postTrackThunk = function postTrackThunk(formData) {
   return function (dispatch) {
     var postRequest = TrackAPI.postTrack(formData);
-    postRequest.upload.addEventListener("progress", function (e) {
-      if (e.lengthComputable) {
-        dispatch(receiveUploadProgress(e.loaded / e.total));
-      }
-    });
-    postRequest.addEventListener("load", function (event) {
-      return dispatch(receiveUploadComppleted());
-    });
-    postRequest.addEventListener("error", function (event) {
-      return dispatch(receiveUploadErrors({
-        general: ["An error ocurred while transferring the file."] }));
-    });
-    postRequest.addEventListener("error", function (event) {
-      return dispatch(receiveUploadErrors({
-        general: ["An error ocurred while transferring the file."] }));
-    });
-    location.hash = "/";
+    // postRequest.upload.addEventListener("progress",function (e) {
+    //   if (e.lengthComputable) {
+    //       dispatch(receiveUploadProgress(e.loaded/ e.total));
+    //   }
+    // });
+    // postRequest.addEventListener("load", event => (
+    //   dispatch(receiveUploadCompleted())));
+    // postRequest.addEventListener("error", event => (
+    //   dispatch(receiveUploadErrors({
+    //     general: ["An error ocurred while transferring the file."]}))));
+    // postRequest.addEventListener("error", event => (
+    //   dispatch(receiveUploadErrors({
+    //     general: ["An error ocurred while transferring the file."]}))));
+    // location.hash = "/";
   };
 };
 
