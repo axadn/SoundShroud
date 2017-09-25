@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates  :session_token,uniqueness: true, allow_nil: true
   after_initialize :ensure_session_token
   has_many :tracks
+  has_many :comments
   attr_accessor :password
 
   def self.find_by_credentials(opts)

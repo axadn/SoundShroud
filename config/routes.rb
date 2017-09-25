@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: {format: :json} do
-    resources :tracks, only: [:create, :destroy, :show,:update]
+    resources :tracks, only: [:create, :destroy, :show,:update]  do
+      resources :comments, only: [:index, :create]
+      resources :users, only: [:index]
+    end
     resources :users, only: [:create] do
       resources :tracks, only: [:index]
     end
-    resource :session, only: [:create, :destroy, :get]
+    resource :session, only: [:create, :destroy]
 
   end
   get '/', to: 'root#show'
