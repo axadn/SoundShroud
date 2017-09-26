@@ -10,10 +10,10 @@ class Api::UsersController < ApplicationController
   end
 
   def index
-    @track = Track.find_by(params[:track_id])
+    @track = Track.find_by(id: params[:track_id])
     if @track
-      @users = track.comments.includes(:users).map{|comment| comment.user}
-      render :show
+      @users = @track.comments.includes(:user).map{|comment| comment.user}
+      render :index
     end
   end
 end

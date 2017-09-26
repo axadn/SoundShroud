@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import CommentsIndexContainer from "./comments/comments_index_container";
 
 export default class TrackShow extends React.Component{
   render(){
@@ -31,8 +32,8 @@ export default class TrackShow extends React.Component{
             <img id="track_show_img" src={this.props.track.img_url}></img>
           </div>
           <div id="track description">{this.props.track.description}</div>
-
           {editButton}
+          <CommentsIndexContainer trackId={this.props.track.id}/>
         </div>
       );
     }
