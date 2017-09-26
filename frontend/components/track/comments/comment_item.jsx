@@ -1,10 +1,11 @@
 import React from "react";
 export default (props) => {
   return <div className ="comment_item">
-    <img src={props.user.img_url}></img>
+    <img className="profile_thumbnail" src={props.user.image_url}></img>
     <div className ="comment_body_and_info">
       <div className = "comment_info">
-        {`${props.user.display_name} at ${props.comment.created_at}`}
+        {`${props.user.display_name ? props.user.display_name :
+          props.user.username}`}
       </div>
       <div className = "comment_body">
         {props.comment.body}

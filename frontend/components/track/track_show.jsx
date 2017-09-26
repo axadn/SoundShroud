@@ -15,7 +15,7 @@ export default class TrackShow extends React.Component{
       return(
         <div className ="track_show_content" >
           <div className ="track_banner">
-            <div>
+            <div id="track_banner_left_side">
               <div>
                 <div className= "artist_and_play_button">
                   <div className = "track_info_text">
@@ -27,14 +27,32 @@ export default class TrackShow extends React.Component{
                 </div>
                 <div>{this.props.track.created_at.slice(0,10)}</div>
               </div>
-              <div className="waveform"></div>
+              <div id="show_page_waveform_container">
+                <div className="waveform"></div>
+              </div>
             </div>
             <img id="track_show_img" src={this.props.track.img_url}></img>
           </div>
-          <div id="track description">{this.props.track.description}</div>
-          {editButton}
-          <CommentsIndexContainer trackId={this.props.track.id}/>
-        </div>
+
+
+
+          <div id="track_show_lower_half">
+              <div id="track_show_options">
+                {editButton}
+              </div>
+
+              <div className="song_show_artist_info">
+                <img src={this.props.track.artist_img}>
+                </img>
+                {this.props.track.artist_display_name}
+              </div>
+              <div id="description_and_comments">
+                <div id="track_description">{this.props.track.description}</div>
+                <CommentsIndexContainer trackId={this.props.track.id}/>
+              </div>
+            </div>
+          </div>
+
       );
     }
   }

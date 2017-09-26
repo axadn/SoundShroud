@@ -15,7 +15,7 @@ const mapDisplayStateToProps = (state, ownProps) => ({
 });
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
-
+  
 });
 
 const mapContainerStateToProps = (state, ownProps) => ({

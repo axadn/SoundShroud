@@ -58,6 +58,28 @@ h2{
   min-width: 100%;
   filter: url(#blue_filter);
 }
+#show_page_waveform_container{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: auto;
+}
+#track_banner_left_side{
+  display:flex;
+  flex-direction: column;
+}
+.waveform{
+  max-width: 950px;
+  min-width: 200px;
+  height: 200px;
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: rgba(255,255,255,0.3);
+}
+.track_info_text{
+  white-space: nowrap;
+}
 .landing_info{
   display: flex;
   flex-direction: column;
@@ -70,8 +92,85 @@ h2{
   width: 380px;
 }
 .play_bar{
+  flex-shrink: 0;
   background-color: #737577;
   height: 100px;
+}
+.comment_item .profile_thumbnail{
+  display: inline-block;
+}
+.comment_body_and_info {
+  margin-left: 20px;
+  display: inline-block;
+}
+.comment_item {
+  margin-top: 10px;
+}
+.comment_info {
+  color: #858585;
+  font-size: 14px;
+}
+.comment_body{
+
+}
+#track_show_options{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  height: 30px;
+  margin-left: 20px;
+}
+#track_show_options a {
+  padding-top: 5px;
+}
+#track_show_lower_half {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.song_show_artist_info{
+  text-align: center;
+  font-size: 14px;
+  width: 150px;
+  height: 200px;
+  margin: 20px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  display: inline-block;
+  float:left;
+}
+.song_show_artist_info img {
+  width: 150px;
+}
+#commentForm{
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: auto;
+}
+#commentForm input{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+#description_and_comments{
+  margin-left: 8%;
+  margin-right: 40px;
+  display: inline-block;
+}
+#track_description{
+  display: inline-block;
+}
+.profile_thumbnail{
+  width: 50px;
+  height: 50px;
+}
+ul{
+  list-style: none;
+  padding: 0;
 }
 .app {
   display: flex;

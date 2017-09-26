@@ -8176,7 +8176,7 @@ var receiveMainContentLoading = exports.receiveMainContentLoading = function rec
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.receiveCommentsLoading = exports.receiveCommentsLoaded = exports.fetchCommentsThunk = exports.receiveComments = exports.RECEIVE_COMMENTS_LOADING = exports.RECEIVE_COMMENTS_LOADED = exports.RECEIVE_COMMENTS = undefined;
+exports.receiveCommentsLoading = exports.receiveCommentsLoaded = exports.postCommentThunk = exports.fetchCommentsThunk = exports.receiveComments = exports.RECEIVE_COMMENTS_LOADING = exports.RECEIVE_COMMENTS_LOADED = exports.RECEIVE_COMMENTS = undefined;
 
 var _api_comment_utils = __webpack_require__(130);
 
@@ -8187,10 +8187,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var RECEIVE_COMMENTS = exports.RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 var RECEIVE_COMMENTS_LOADED = exports.RECEIVE_COMMENTS_LOADED = "RECEIVE_COMMENTS_LOADED";
 var RECEIVE_COMMENTS_LOADING = exports.RECEIVE_COMMENTS_LOADING = "RECEIVE_COMMENTS_LOADING";
-var receiveComments = exports.receiveComments = function receiveComments(tracks) {
+var receiveComments = exports.receiveComments = function receiveComments(comments) {
   return {
     type: RECEIVE_COMMENTS,
-    payload: tracks
+    payload: comments
   };
 };
 
@@ -8199,6 +8199,14 @@ var fetchCommentsThunk = exports.fetchCommentsThunk = function fetchCommentsThun
     return CommentAPIUtil.fetchComments(trackId).then(function (res) {
       dispatch(receiveComments(res));
       dispatch(receiveCommentsLoaded());
+    });
+  };
+};
+
+var postCommentThunk = exports.postCommentThunk = function postCommentThunk(trackId, commentData, callBack) {
+  return function (dispatch) {
+    return CommentAPIUtil.postComment(trackId, { comment: commentData }).then(function (res) {
+      return callBack(res);
     });
   };
 };
@@ -30370,7 +30378,7 @@ var TrackForm = function (_React$Component) {
           _react2.default.createElement(
             "h2",
             null,
-            "Upload a Track"
+            this.props.editing ? "Edit your Track" : "Upload a Track"
           ),
           _react2.default.createElement(
             "form",
@@ -30581,7 +30589,7 @@ var TrackShow = function (_React$Component) {
             { className: "track_banner" },
             _react2.default.createElement(
               "div",
-              null,
+              { id: "track_banner_left_side" },
               _react2.default.createElement(
                 "div",
                 null,
@@ -30614,17 +30622,39 @@ var TrackShow = function (_React$Component) {
                   this.props.track.created_at.slice(0, 10)
                 )
               ),
-              _react2.default.createElement("div", { className: "waveform" })
+              _react2.default.createElement(
+                "div",
+                { id: "show_page_waveform_container" },
+                _react2.default.createElement("div", { className: "waveform" })
+              )
             ),
             _react2.default.createElement("img", { id: "track_show_img", src: this.props.track.img_url })
           ),
           _react2.default.createElement(
             "div",
-            { id: "track description" },
-            this.props.track.description
-          ),
-          editButton,
-          _react2.default.createElement(_comments_index_container2.default, { trackId: this.props.track.id })
+            { id: "track_show_lower_half" },
+            _react2.default.createElement(
+              "div",
+              { id: "track_show_options" },
+              editButton
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "song_show_artist_info" },
+              _react2.default.createElement("img", { src: this.props.track.artist_img }),
+              this.props.track.artist_display_name
+            ),
+            _react2.default.createElement(
+              "div",
+              { id: "description_and_comments" },
+              _react2.default.createElement(
+                "div",
+                { id: "track_description" },
+                this.props.track.description
+              ),
+              _react2.default.createElement(_comments_index_container2.default, { trackId: this.props.track.id })
+            )
+          )
         );
       }
     }
@@ -30697,7 +30727,11 @@ var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
 };
 
 var mapDisplayDispatchToProps = function mapDisplayDispatchToProps(dispatch, ownProps) {
-  return {};
+  return {
+    postComment: function postComment(commentData, callBack) {
+      dispatch((0, _comment_actions.postCommentThunk)(ownProps.trackId, commentData, callBack));
+    }
+  };
 };
 
 var ConnectedDisplayComponent = (0, _reactRedux.connect)(mapDisplayStateToProps, mapDisplayDispatchToProps)(_comments_index2.default);
@@ -30726,7 +30760,8 @@ var CommentsIndexContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement(ConnectedDisplayComponent, { trackId: this.props.trackId });
+      return _react2.default.createElement(ConnectedDisplayComponent, { trackId: this.props.trackId,
+        fetchComments: this.props.fetchComments });
     }
   }]);
 
@@ -30767,15 +30802,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var CommentsIndex = function (_React$Component) {
   _inherits(CommentsIndex, _React$Component);
 
-  function CommentsIndex() {
+  function CommentsIndex(props) {
     _classCallCheck(this, CommentsIndex);
 
-    return _possibleConstructorReturn(this, (CommentsIndex.__proto__ || Object.getPrototypeOf(CommentsIndex)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (CommentsIndex.__proto__ || Object.getPrototypeOf(CommentsIndex)).call(this, props));
+
+    _this.state = { labelInput: true,
+      commentBody: "" };
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
   }
 
   _createClass(CommentsIndex, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({ commentBody: e.target.value });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      debugger;
+      this.props.postComment(this.props.trackId, this.state, this.props.fetchComments);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.loading) return null;
       var commentsItems = this.props.comments.map(function (comment) {
         return _react2.default.createElement(
@@ -30787,6 +30842,19 @@ var CommentsIndex = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "commentsIndex" },
+        _react2.default.createElement(
+          "form",
+          { id: "commentForm", onSubmit: this.handleSubmit },
+          _react2.default.createElement("input", { type: "text",
+            onChange: this.handleChange,
+            onBlur: function onBlur() {
+              return _this2.setState({ labelInput: _this2.state.commentBody.length === 0 });
+            },
+            onFocus: function onFocus() {
+              return _this2.setState({ labelInput: false });
+            },
+            value: this.labelInput ? "Add a Comment" : this.state.commentBody })
+        ),
         _react2.default.createElement(
           "ul",
           null,
@@ -30823,14 +30891,14 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "comment_item" },
-    _react2.default.createElement("img", { src: props.user.img_url }),
+    _react2.default.createElement("img", { className: "profile_thumbnail", src: props.user.image_url }),
     _react2.default.createElement(
       "div",
       { className: "comment_body_and_info" },
       _react2.default.createElement(
         "div",
         { className: "comment_info" },
-        props.user.display_name + " at " + props.comment.created_at
+        "" + (props.user.display_name ? props.user.display_name : props.user.username)
       ),
       _react2.default.createElement(
         "div",
@@ -31306,7 +31374,6 @@ exports.default = function () {
     case _session_actions.RECEIVE_SESSION:
       return Object.assign({}, state, _defineProperty({}, action.payload.id, action.payload));
     case _user_actions.RECEIVE_USERS:
-      debugger;
       return action.payload;
     case _user_actions.RECEIVE_USER:
       return Object.assign({}, state, _defineProperty({}, action.payload.id, action.payload));

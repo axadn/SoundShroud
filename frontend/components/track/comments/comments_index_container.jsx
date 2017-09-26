@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {fetchCommentsThunk,
+import {fetchCommentsThunk, postCommentThunk,
   receiveCommentsLoaded, receiveCommentsLoading} from "../../../actions/comment_actions";
 import {receiveUsersLoading, receiveUsersLoaded, fetchTrackCommentsUsersThunk} from "../../../actions/user_actions";
 import CommentsIndex from "./comments_index";
@@ -27,7 +27,8 @@ const mapDisplayStateToProps = (state, ownProps) => {
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
-
+  postComment: (commentData, callBack) =>{
+    dispatch(postCommentThunk(ownProps.trackId, commentData, callBack))}
 });
 
 const ConnectedDisplayComponent = connect(mapDisplayStateToProps,
@@ -44,7 +45,8 @@ class CommentsIndexContainer extends React.Component{
     }
   }
   render(){
-    return <ConnectedDisplayComponent trackId = {this.props.trackId}></ConnectedDisplayComponent>;
+    return <ConnectedDisplayComponent trackId={this.props.trackId}
+      fetchComments={this.props.fetchComments}></ConnectedDisplayComponent>;
   }
 }
 

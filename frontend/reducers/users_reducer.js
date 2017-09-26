@@ -10,7 +10,6 @@ export default (state = NO_USERS, action) => {
         {[action.payload.id]: action.payload}
       );
     case RECEIVE_USERS:
-      debugger
       return action.payload;
     case RECEIVE_USER:
       return Object.assign({}, state, {[action.payload.id]: action.payload})

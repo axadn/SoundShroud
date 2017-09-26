@@ -13,7 +13,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def index
-    @track = Track.find_by(params[:trackId])
+    @track = Track.find_by(id: params[:track_id])
     if @track
       @comments = @track.comments.includes(:user)
       render :index
