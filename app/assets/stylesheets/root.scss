@@ -163,11 +163,13 @@ h2{
 #commentForm input{
   margin-left: 0px;
   margin-right: 0px;
+  width: 100%;
 }
 #description_and_comments{
   flex-grow: 1;
   margin-left: 8%;
   margin-right: 40px;
+  margin-top: 20px;
   display: inline-block;
 }
 #track_description{

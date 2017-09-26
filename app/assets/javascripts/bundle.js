@@ -30628,16 +30628,20 @@ var TrackShow = function (_React$Component) {
                 _react2.default.createElement("div", { className: "waveform" })
               )
             ),
-            _react2.default.createElement("img", { id: "track_show_img", src: this.props.track.img_url })
+            _react2.default.createElement("img", { id: "track_show_img", src: this.props.track.img_url }),
+            _react2.default.createElement(
+              "ul",
+              { id: "track_show_options" },
+              _react2.default.createElement(
+                "li",
+                null,
+                editButton
+              )
+            )
           ),
           _react2.default.createElement(
             "div",
             { id: "track_show_lower_half" },
-            _react2.default.createElement(
-              "div",
-              { id: "track_show_options" },
-              editButton
-            ),
             _react2.default.createElement(
               "div",
               { id: "artist_and_comments" },

@@ -32,14 +32,14 @@ export default class TrackShow extends React.Component{
               </div>
             </div>
             <img id="track_show_img" src={this.props.track.img_url}></img>
+              <ul id="track_show_options">
+                <li>{editButton}</li>
+              </ul>
           </div>
 
 
 
           <div id="track_show_lower_half">
-              <div id="track_show_options">
-                {editButton}
-              </div>
               <div id="artist_and_comments">
                 <div className="song_show_artist_info">
                   <img src={this.props.track.artist_img}>
