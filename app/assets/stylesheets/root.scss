@@ -165,12 +165,17 @@ h2{
   margin-right: 0px;
 }
 #description_and_comments{
+  flex-grow: 1;
   margin-left: 8%;
   margin-right: 40px;
   display: inline-block;
 }
 #track_description{
   display: inline-block;
+}
+.comment_body{
+  width: 100%;
+  word-break: break-all;
 }
 .profile_thumbnail{
   width: 50px;

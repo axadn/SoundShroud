@@ -5,8 +5,8 @@ export default class CommentsIndex extends React.Component{
   constructor(props){
     super(props);
     this.state ={labelInput: true,
-    body: ""};
-
+    body: "", savedWidth: 0,
+    savedHeight: 0};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -15,11 +15,20 @@ export default class CommentsIndex extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault();
+    const element = document.querySelector(".commentsIndex");
+    this.setState({body: "", labelInput: true, savedWidth: element.offsetWidth,
+      savedHeight: element.offsetHeight}
+    );
     this.props.postComment(this.state,
       this.props.fetchComments);
   }
   render(){
-    if(this.props.loading) return null;
+    if(this.props.loading){
+      return <div style={{
+          width: this.state.savedWidth,
+          height: this.state.savedHeight
+        }}></div>;
+    }
     const commentsItems = this.props.comments.map(comment =>(
       <li key={`comment${comment.id}`}>
         <CommentItemContainer comment={comment}/>

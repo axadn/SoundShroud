@@ -30810,8 +30810,8 @@ var CommentsIndex = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CommentsIndex.__proto__ || Object.getPrototypeOf(CommentsIndex)).call(this, props));
 
     _this.state = { labelInput: true,
-      body: "" };
-
+      body: "", savedWidth: 0,
+      savedHeight: 0 };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
     return _this;
@@ -30826,6 +30826,9 @@ var CommentsIndex = function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      var element = document.querySelector(".commentsIndex");
+      this.setState({ body: "", labelInput: true, savedWidth: element.offsetWidth,
+        savedHeight: element.offsetHeight });
       this.props.postComment(this.state, this.props.fetchComments);
     }
   }, {
@@ -30833,7 +30836,12 @@ var CommentsIndex = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      if (this.props.loading) return null;
+      if (this.props.loading) {
+        return _react2.default.createElement("div", { style: {
+            width: this.state.savedWidth,
+            height: this.state.savedHeight
+          } });
+      }
       var commentsItems = this.props.comments.map(function (comment) {
         return _react2.default.createElement(
           "li",
