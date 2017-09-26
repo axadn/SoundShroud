@@ -135,3 +135,7 @@ export const editTrackThunk = data => dispatch => {
       location.hash = `tracks/${data.id}`
     );
   };
+
+export const deleteTrackThunk = (trackId, callBack) => dispatch => {
+  TrackAPI.deleteTrack(trackId).then(callBack);
+}

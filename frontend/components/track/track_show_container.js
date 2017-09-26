@@ -4,9 +4,8 @@ import {withRouter} from "react-router-dom";
 import {receiveMainContentLoaded,
   receiveMainContentLoading} from "../../actions/loading_actions";
 import TrackShow from "./track_show";
-import {fetchTrackThunk} from "../../actions/track_actions";
+import {fetchTrackThunk, deleteTrackThunk} from "../../actions/track_actions";
 import {current_user_id} from "../../reducers/selectors";
-
 
 const mapDisplayStateToProps = (state, ownProps) => ({
   loading: state.loading.mainContent,
@@ -15,7 +14,9 @@ const mapDisplayStateToProps = (state, ownProps) => ({
 });
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
-  
+  deleteTrack: () =>{
+    dispatch(deleteTrackThunk(ownProps.trackId, ()=>location.hash = "/" ));
+  }
 });
 
 const mapContainerStateToProps = (state, ownProps) => ({

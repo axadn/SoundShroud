@@ -122,15 +122,15 @@ h2{
 
 }
 #track_show_options{
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: flex-start;
-  height: 30px;
   margin-left: 20px;
+  margin-right: -20px;
 }
-#track_show_options a {
-  padding-top: 5px;
+#track_show_options li{
+  padding: 5px;
+}
+#track_show_options a,
+#track_show_options button{
+  width: 100%;
 }
 #track_show_lower_half {
   padding-left: 40px;
@@ -297,6 +297,8 @@ form > div{
     color: white;
   box-sizing: border-box;
   outline: none;
+  display: inline-block;
+  text-align: center;
   animation-name: fadeFromTransparent;
   border-radius: 6px;
   background-color: $ming;
