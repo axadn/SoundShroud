@@ -22,8 +22,7 @@ const mapContainerStateToProps = (state, ownProps) =>({
 const mapDisplayStateToProps = (state, ownProps) => {
   return{
   loading: state.loading.comments || state.loading.users,
-  comments: state.entities.tracks[ownProps.trackId]
-    .comment_ids.map(id => state.entities.comments[id])
+  comments: state.entities.comments
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({

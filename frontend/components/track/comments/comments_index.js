@@ -5,17 +5,17 @@ export default class CommentsIndex extends React.Component{
   constructor(props){
     super(props);
     this.state ={labelInput: true,
-    commentBody: ""};
+    body: ""};
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e){
-    this.setState({commentBody: e.target.value});
+    this.setState({body: e.target.value});
   }
   handleSubmit(e){
-    debugger;
-    this.props.postComment(this.props.trackId, this.state,
+    e.preventDefault();
+    this.props.postComment(this.state,
       this.props.fetchComments);
   }
   render(){
@@ -29,9 +29,9 @@ export default class CommentsIndex extends React.Component{
       <form id="commentForm" onSubmit={this.handleSubmit}>
         <input type="text"
           onChange={this.handleChange}
-          onBlur={()=>this.setState({labelInput: this.state.commentBody.length === 0})}
+          onBlur={()=>this.setState({labelInput: this.state.body.length === 0})}
           onFocus = {()=>this.setState({labelInput: false})}
-          value={this.labelInput? "Add a Comment" : this.state.commentBody}>
+          value={this.labelInput? "Add a Comment" : this.state.body}>
         </input>
       </form>
       <ul>

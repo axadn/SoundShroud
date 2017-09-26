@@ -15,7 +15,7 @@ class Api::CommentsController < ApplicationController
   def index
     @track = Track.find_by(id: params[:track_id])
     if @track
-      @comments = @track.comments.includes(:user)
+      @comments = @track.comments.includes(:user).order("created_at DESC")
       render :index
     else
       render json: {general: ["No such track"]}, status: 404
