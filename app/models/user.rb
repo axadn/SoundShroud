@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :username,:password_digest, presence: true, uniqueness: true
   validates  :session_token,uniqueness: true, allow_nil: true
   after_initialize :ensure_session_token
-  has_many :tracks
+  has_many :tracks, foreign_key: :artist_id
   has_many :comments
   attr_accessor :password
 

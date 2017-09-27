@@ -5,6 +5,7 @@ import {AuthRoute, ProtectedRoute} from "../utils/route_utils";
 import LandingPage from "./landing_page";
 import TrackFormContainer from "./track/track_form_container";
 import TrackShowContainer from "./track/track_show_container";
+import UserShowContainer from "./user/user_show_container";
 
 export default props => (
   <div className="main_content" >
@@ -12,6 +13,7 @@ export default props => (
     <AuthRoute path="/login" component={SessionFormContainer}></AuthRoute>
     <AuthRoute path="/signup" component={SessionFormContainer}></AuthRoute>
     <Route exact path = "/tracks/:trackId" component={TrackShowContainer}></Route>
+    <Route exact path ="/users/:userId" component={UserShowContainer}></Route>
     <ProtectedRoute path="/upload" component={TrackFormContainer}></ProtectedRoute>
     <ProtectedRoute path="/tracks/:trackId/edit" component={TrackFormContainer}></ProtectedRoute>
   </div>

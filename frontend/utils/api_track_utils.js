@@ -50,3 +50,7 @@ export const postToS3 =(file,id) => {
 
 export const getS3Url = id => (
   $.ajax({method: "get", url: `/api/tracks/s3/${id}`}));
+
+export const fetchUserTracks = userId => (
+  $.ajax({method : "get", url: `api/users/${userId}/tracks`})
+)

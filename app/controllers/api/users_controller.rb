@@ -16,4 +16,13 @@ class Api::UsersController < ApplicationController
       render :index
     end
   end
+
+  def show
+    @user = User.find_by(id: params[:id])
+    if @user
+      render :show
+    else
+      render json: {general: ["no such user"]}, status: 422
+    end
+  end
 end

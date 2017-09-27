@@ -5,3 +5,7 @@ export const postUser = data =>(
 export const fetchTrackCommentsUsers = trackId => (
   $.ajax({method: "get", url: `/api/tracks/${trackId}/users`})
 );
+
+export const fetchUser = userId => (
+  $.ajax({method: "get", url: `/api/users/${userId}`})
+)

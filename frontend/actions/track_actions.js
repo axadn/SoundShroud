@@ -11,6 +11,17 @@
   export const RECEIVE_UPLOAD_ACTIVE = "RECEIVE_UPLOAD_ACTIVE";
   export const RECEIVE_UPLOAD_INACTIVE = "RECEIVE_UPLOAD_INACTIVE";
   export const RECEIVE_UPLOAD_PROCESSED = "RECEIVE_UPLOAD_PROCESSED";
+  export const RECEIVE_TRACKS_LOADED = "RECIEVE_TRACKS_LOADED";
+  export const RECEIVE_TRACKS_LOADING = "RECIEVE_TRACKS_LOADING";
+
+  export const receiveTracksLoading = () =>({
+    type: RECEIVE_TRACKS_LOADING
+  });
+
+  export const receiveTracksLoaded = () =>({
+    type: RECEIVE_TRACKS_LOADED
+  });
+
   export const receiveTrack = data => ({
     type: RECEIVE_TRACK,
     payload: data
@@ -161,3 +172,9 @@ export const editTrackThunk = data => dispatch => {
 export const deleteTrackThunk = (trackId, callBack) => dispatch => {
   TrackAPI.deleteTrack(trackId).then(callBack);
 }
+
+export const fetchUserTracksThunk = (userId, callback) => dispatch => (
+  TrackAPI.fetchUserTracks(userId)
+  .then(data => dispatch(receiveTracks(data)))
+  .then(callback)
+);
