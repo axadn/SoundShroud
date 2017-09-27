@@ -25,6 +25,9 @@ $false-calypso: #47a4b4;
   height: 100%;
   width: 100%;
 }
+.hidden{
+  display: none;
+}
 .app{
   width: 100%;
   height: 100%;
@@ -41,7 +44,7 @@ body > svg{
   padding: 20px;
   background-color: rgba(0,0,0,0.85);
 }
- h1{
+h1{
   font-size: 65px;
   text-align: center;
 }
@@ -50,54 +53,61 @@ h2{
  text-align: center;
 }
 .static_img_page{
+  position: relative;
   width: 100%;
   overflow: hidden;
 }
 .static_img_page > img{
   overflow-x: hidden;
-  min-width: 100%;
+  width: 100%;
   filter: url(#blue_filter);
 }
-#show_page_waveform_container{
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: auto;
-}
-#track_banner_left_side{
-  display:flex;
-  flex-direction: column;
-}
-#artist_and_comments{
-  display: flex;
-}
-#artist_and_comments > div:first-child{
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-.waveform{
-  max-width: 950px;
-  min-width: 200px;
-  height: 200px;
-  margin: 20px;
-  margin-bottom: 0px;
-  background-color: rgba(255,255,255,0.3);
-}
-.track_info_text{
-  white-space: nowrap;
-}
-.landing_info{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.blue_button, .logout_button{
+    color: white;
+  box-sizing: border-box;
+  outline: none;
+  display: inline-block;
+  text-align: center;
   animation-name: fadeFromTransparent;
-  animation-duration: 3s;
-  position: absolute;
-  left: 335px;
-  top: 324px;
-  width: 380px;
+  border-radius: 6px;
+  background-color: $ming;
+  // border-right: 3px solid rgb(0,90,180);
+  // border-bottom: 3px solid rgb(0,45,90);
+  // border-left: 3px solid rgb(0,90,180);
+  // border-top: 3px solid rgb(0,160,240);
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
 }
+.blue_button:hover{
+  background-color: $calypso;
+  cursor: pointer;
+}
+.blue_button:active
+.logout_button:active{
+    background-color: $ming;
+    border-top: 1px solid rgb(10,10,10);
+    border-left: 1px solid rgb(30,40,40);
+    border-right: 1px solid rgb(30,40,40);
+    border-bottom: 1px solid rgb(45,45,45);
+}
+
+.logout_button:hover{
+  cursor: pointer;
+  background-color: $false-calypso;
+}
+.logout_button{
+  background-color: $false-ming;
+  font-size: 20px;
+}
+@import "landing";
+@import "track show";
+
+
 .play_bar{
   flex-shrink: 0;
   background-color: #737577;
@@ -173,6 +183,7 @@ h2{
   display: inline-block;
 }
 #track_description{
+  word-break: break-all;
   display: inline-block;
 }
 .comment_body{
@@ -265,7 +276,7 @@ ul{
 
 
 .session_form {
-  left: calc(50% - 100px);
+  left: calc(50% - 173px);
   top: 100px;
   width: 250px;
   border-radius: 8px;
@@ -293,31 +304,7 @@ form > div{
   position: relative;
 }
 
-.blue_button, .logout_button{
-    color: white;
-  box-sizing: border-box;
-  outline: none;
-  display: inline-block;
-  text-align: center;
-  animation-name: fadeFromTransparent;
-  border-radius: 6px;
-  background-color: $ming;
-  // border-right: 3px solid rgb(0,90,180);
-  // border-bottom: 3px solid rgb(0,45,90);
-  // border-left: 3px solid rgb(0,90,180);
-  // border-top: 3px solid rgb(0,160,240);
-  border: none;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 12px;
-  padding-right: 12px;
-  font-size: 14px;
-  text-decoration: none;
-}
-.blue_button:hover{
-  background-color: $calypso;
-  cursor: pointer;
-}
+
 
 .red_button{
   background-color: red;
@@ -336,30 +323,8 @@ form > div{
 
 
 
-.blue_button:active
-.logout_button:active{
-    background-color: $ming;
-    border-top: 1px solid rgb(10,10,10);
-    border-left: 1px solid rgb(30,40,40);
-    border-right: 1px solid rgb(30,40,40);
-    border-bottom: 1px solid rgb(45,45,45);
-}
 
-.logout_button:hover{
-  cursor: pointer;
-  background-color: $false-calypso;
-}
-.logout_button{
-  background-color: $false-ming;
-  font-size: 20px;
-}
-.landing_button{
-  margin-top: 30px;
-  font-size: 30px;
-  width: 80%;
-  border-radius: 8px;
-  text-align: center;
-}
+
 form input[type="text"],
 form input[type="password"],
 form textarea{
@@ -407,7 +372,7 @@ form textarea:focus{
   position: absolute;
   margin-left: 20px;
   top: 0px;
-  left: 240px;
+  left: 100%;
 }
 .errors > div{
   background-color: rgb(155, 0, 14);
@@ -421,7 +386,6 @@ form textarea:focus{
 .errors > svg {
   display: inline-block;
   fill: rgb(155, 0, 14);
-  filter: drop-shadow(8px 8px 8px rgba(0,0,0,0.5));
 }
 .session_submit_buttons{
   margin-left: 8px;
@@ -473,6 +437,7 @@ form textarea:focus{
   padding: 5px;
   display: flex;
   height: 35px;
+  flex-shrink: 0;
   justify-content: space-around;
 }
 #upload_progress > div:first-child{

@@ -27,9 +27,6 @@ export default class SessionFrom extends React.Component{
     this.props.clearErrors();
   }
   render (){
-    let generalErrors;
-    let passwordErrors;
-    let usernameErrors;
     const passwordEmpty = this.state.password.length === 0;
     const usernameEmpty = this.state.username.length === 0;
     let errorElements = {};

@@ -36,7 +36,7 @@
   export const receiveUploadErrors = errors => {
     return{
     type: RECEIVE_UPLOAD_ERRORS,
-    payload: (errors.statusText ? {general: [errors.statusText]} : errors)
+    payload: errors
     };
   };
 
@@ -87,10 +87,6 @@
     }
 
     TrackAPI.verifyValidParams(trackParams)
-    .catch(
-      errors =>{
-      dispatch(receiveUploadParamsErrors(errors));
-     })
     .then(s3Info=>{
       trackParams.temp_filename = s3Info.temp_filename;
       dispatch(receiveUploadActive());
@@ -100,16 +96,21 @@
         progressCallback: e =>
           dispatch(receiveUploadProgress(e.loaded/ e.total))
         });
-    })
+      },errors =>{
+        dispatch(receiveUploadParamsErrors(errors.responseJSON));
+        return $.Deferred().reject();
+      }
+    )
     .then( temp_filename => (
-      TrackAPI.process_track(trackParams)
-    ))
-    .then(idObject => setTimeout(()=>
-      dispatch(checkAudioProcessStatus(idObject.id)), 1000))
-    .catch(
-      errors => {
+        TrackAPI.process_track(trackParams)
+      ),
+      errors =>{
         dispatch(receiveUploadErrors(errors));
-    });
+        return $.Deferred().reject();
+      }
+    )
+    .then(idObject => setTimeout(()=>
+      dispatch(checkAudioProcessStatus(idObject.id)), 1000));
   };
 
   const checkAudioProcessStatus =  id => dispatch => {
@@ -129,11 +130,32 @@
         }
       });
   };
-
+export const fetchBinaryData = (storageObj, id, callBack) => {
+  TrackAPI.getS3Url(id)
+  .then(url =>{
+      return new Promise((resolve,reject)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.open("get", url);
+        xhr.responseType = "blob";
+        xhr.onload = () => resolve(xhr.response);
+        xhr.onerror = reject;
+        xhr.send();
+      });
+    }
+  )
+  .then(data =>{
+    storageObj.binaryData = data;
+    storageObj.fetching = false;
+  })
+  .then(callBack)
+  .catch(() => storageObj.fetching = false);
+};
 export const editTrackThunk = data => dispatch => {
-    TrackAPI.updateTrack({track:data}).then(() =>
+    TrackAPI.updateTrack({track:data})
+    .then(() =>{
       location.hash = `tracks/${data.id}`
-    );
+    })
+    .catch(errors => dispatch(receiveUploadParamsErrors(errors.responseJSON)));
   };
 
 export const deleteTrackThunk = (trackId, callBack) => dispatch => {

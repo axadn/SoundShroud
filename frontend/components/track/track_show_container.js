@@ -6,17 +6,27 @@ import {receiveMainContentLoaded,
 import TrackShow from "./track_show";
 import {fetchTrackThunk, deleteTrackThunk} from "../../actions/track_actions";
 import {current_user_id} from "../../reducers/selectors";
+import {receivePlaylist, pausePlayback, startPlayback} from "../../actions/playlist_actions";
 
 const mapDisplayStateToProps = (state, ownProps) => ({
   loading: state.loading.mainContent,
   track: state.entities.tracks[ownProps.trackId],
-  current_user_id: current_user_id(state)
+  current_user_id: current_user_id(state),
+  playing: state.playlist.playing,
+  current_in_playlist: state.playlist.ids[state.playlist.currentIndex] === ownProps.trackId
 });
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
   deleteTrack: () =>{
     dispatch(deleteTrackThunk(ownProps.trackId, ()=>location.hash = "/" ));
-  }
+  },
+  playTrack: () =>{
+    dispatch(receivePlaylist([ownProps.trackId]));
+  },
+  resumeTrack: () => {
+    dispatch(startPlayback());
+  },
+  pauseTrack: () => dispatch(pausePlayback())
 });
 
 const mapContainerStateToProps = (state, ownProps) => ({

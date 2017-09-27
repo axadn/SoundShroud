@@ -1,0 +1,27 @@
+.landing_info{
+  font-size: 2vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation-name: fadeFromTransparent;
+  animation-duration: 3s;
+  position: absolute;
+  left: 16%;
+  top: 22%;
+  width: 45%;
+}
+
+.landing_info h1{
+  font-size: 5vw;
+}
+
+.landing_button{
+  width: 73%;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 4vw;
+    height: 5vw;
+    padding-top: 1.5vw;
+    font-size: 2vw;
+}

@@ -47,3 +47,6 @@ export const deleteTrack = id => (
 export const postToS3 =(file,id) => {
   req = new XMLHttpRequest();
 };
+
+export const getS3Url = id => (
+  $.ajax({method: "get", url: `/api/tracks/s3/${id}`}));

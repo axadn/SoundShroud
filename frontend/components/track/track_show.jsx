@@ -6,12 +6,29 @@ export default class TrackShow extends React.Component{
   constructor(props){
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handlePlayButton = this.handlePlayButton.bind(this);
   }
   handleDelete(){
     if(!confirm(`Are you sure you would like to
        delete "${this.props.track.title}"?`)) return;
     this.props.deleteTrack();
 
+  }
+  handlePlayButton(){
+    if(this.props.current_in_playlist){
+      if(this.props.playing){
+        this.props.pauseTrack();
+      }
+      else{
+        this.props.resumeTrack();
+      }
+    }
+    else{
+      this.props.playTrack();
+    }
+  }
+  currentlyPlaying(){
+    return this.props.current_in_playlist && this.props.playing;
   }
   render(){
     if(this.props.loading){
@@ -29,11 +46,19 @@ export default class TrackShow extends React.Component{
             <div id="track_banner_left_side">
               <div>
                 <div className= "artist_and_play_button">
-                  <div className = "track_info_text">
-                    <a>{this.props.track.artist_display_name} </a>
+                  <div className = "document-play-button" onClick={this.handlePlayButton}>
+                    <img className={this.currentlyPlaying()? "":"hidden"}
+                      src= {window.pause_img_url}></img>
+                    <img className={this.currentlyPlaying()? "hidden":""}
+                      src= {window.play_img_url}></img>
                   </div>
-                  <div className = "track_info_text">
-                    <a>{this.props.track.title}</a>
+                  <div className="track_info_container">
+                    <div className = "track_info_text">
+                      <a>{this.props.track.artist_display_name} </a>
+                    </div>
+                    <div className = "track_info_text">
+                      <a>{this.props.track.title}</a>
+                    </div>
                   </div>
                 </div>
                 <div>{this.props.track.created_at.slice(0,10)}</div>

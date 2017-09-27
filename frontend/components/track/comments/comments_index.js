@@ -9,12 +9,14 @@ export default class CommentsIndex extends React.Component{
     savedHeight: 0};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   handleChange(e){
     this.setState({body: e.target.value});
   }
   handleSubmit(e){
     e.preventDefault();
+    if(!this.props.loggedIn)return;
     const element = document.querySelector(".commentsIndex");
     this.setState({body: "", labelInput: true, savedWidth: element.offsetWidth,
       savedHeight: element.offsetHeight}
@@ -22,7 +24,14 @@ export default class CommentsIndex extends React.Component{
     this.props.postComment(this.state,
       this.props.fetchComments);
   }
+  handleClick(e){
+    e.preventDefault();
+    if(!this.props.loggedIn){
+      location.hash = "/login";
+    }
+  }
   render(){
+    const label = this.props.loggedIn? "Add a Comment" : "Please log in to add a comment";
     if(this.props.loading){
       return <div style={{
           width: this.state.savedWidth,
@@ -38,9 +47,10 @@ export default class CommentsIndex extends React.Component{
       <form id="commentForm" onSubmit={this.handleSubmit}>
         <input type="text"
           onChange={this.handleChange}
+          onClick = {this.handleClick}
           onBlur={()=>this.setState({labelInput: this.state.body.length === 0})}
           onFocus = {()=>this.setState({labelInput: false})}
-          value={this.labelInput? "Add a Comment" : this.state.body}>
+          value={this.state.labelInput? label : this.state.body}>
         </input>
       </form>
       <ul>

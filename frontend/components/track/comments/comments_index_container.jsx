@@ -5,6 +5,7 @@ import {fetchCommentsThunk, postCommentThunk,
 import {receiveUsersLoading, receiveUsersLoaded, fetchTrackCommentsUsersThunk} from "../../../actions/user_actions";
 import CommentsIndex from "./comments_index";
 import React from "react";
+import {logged_in} from "../../../reducers/selectors";
 
 const mapContainerDispatchToProps = (dispatch, ownProps) => ({
   fetchComments: () =>{
@@ -22,7 +23,8 @@ const mapContainerStateToProps = (state, ownProps) =>({
 const mapDisplayStateToProps = (state, ownProps) => {
   return{
   loading: state.loading.comments || state.loading.users,
-  comments: state.entities.comments
+  comments: state.entities.comments,
+  loggedIn: logged_in(state)
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({

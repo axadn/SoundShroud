@@ -74,7 +74,7 @@ class Api::TracksController < ApplicationController
     @track.artist_id = current_user.id
     errors = {}
     file_errors = []
-    if params[:filename]
+    if params[:filename] && params[:filename].length > 0
       @extension = Api::TracksController.valid_extension? params[:filename]
       file_errors << "not a supported file type" unless @extension
     else
@@ -104,7 +104,7 @@ class Api::TracksController < ApplicationController
     if @track.save
       render :show
     else
-      render json: @track.errors.messages
+      render json: @track.errors.messages, status: 422
     end
   end
 
@@ -132,7 +132,7 @@ class Api::TracksController < ApplicationController
   end
 
   def get_s3_url
-    obj = s3_bucket.object("tracks/#{params[:id]}")
+    obj = s3_bucket.object("tracks/#{params[:id]}.mp3")
     url = obj.presigned_url(:get, expires_in: PRESIGNED_URL_TIMEOUT)
     render plain: url
   end

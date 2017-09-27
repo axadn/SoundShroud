@@ -1,0 +1,39 @@
+#show_page_waveform_container{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: auto;
+}
+#track_banner_left_side{
+  display:flex;
+  flex-direction: column;
+}
+.artist_and_play_button{
+  display: flex;
+}
+.document-play-button{
+  width: 100px;
+  height: 100px;
+}
+.document-play-button img{
+  width: 100%;
+}
+#artist_and_comments{
+  display: flex;
+}
+#artist_and_comments > div:first-child{
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.waveform{
+  max-width: 950px;
+  min-width: 200px;
+  height: 200px;
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: rgba(255,255,255,0.3);
+}
+.track_info_text{
+  white-space: nowrap;
+}
