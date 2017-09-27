@@ -106,31 +106,14 @@ h2{
 }
 @import "landing";
 @import "track show";
-
+@import "comments";
 
 .play_bar{
   flex-shrink: 0;
   background-color: #737577;
   height: 100px;
 }
-.comment_item .profile_thumbnail{
-  display: inline-block;
-}
-.comment_body_and_info {
-  margin-left: 20px;
-  display: inline-block;
-}
-.comment_item {
-  display: flex;
-  margin-top: 10px;
-}
-.comment_info {
-  color: #858585;
-  font-size: 14px;
-}
-.comment_body{
 
-}
 #track_show_options{
   margin-left: 20px;
   margin-right: -20px;
@@ -163,36 +146,25 @@ h2{
 .song_show_artist_info img {
   width: 150px;
 }
-#commentForm{
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  height: auto;
-}
-#commentForm input{
-  margin-left: 0px;
-  margin-right: 0px;
-  width: 100%;
-}
-#description_and_comments{
-  flex-grow: 1;
-  margin-left: 8%;
-  margin-right: 40px;
-  margin-top: 20px;
-  display: inline-block;
-}
+
+
 #track_description{
   word-break: break-all;
   display: inline-block;
 }
-.comment_body{
-  width: 100%;
-  word-break: break-all;
+.user-img-medium:hover{
+  cursor: pointer;
 }
 .profile_thumbnail{
   width: 50px;
   height: 50px;
+}
+.profile_thumbnail:hover{
+  cursor:pointer;
+}
+.username-link:hover{
+  color:white;
+  cursor:pointer;
 }
 ul{
   list-style: none;

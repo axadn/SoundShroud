@@ -1,0 +1,43 @@
+#description_and_comments{
+  flex-grow: 1;
+  margin-left: 8%;
+  margin-right: 40px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.comment_item .profile_thumbnail{
+  display: inline-block;
+}
+.comment_body_and_info {
+  margin-left: 20px;
+  display: inline-block;
+}
+.comment_item {
+  display: flex;
+  margin-top: 10px;
+}
+.comment_info {
+  color: #858585;
+  font-size: 14px;
+}
+.comment_body{
+
+}
+#commentForm{
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: auto;
+}
+#commentForm input{
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
+
+.comment_body{
+  width: 100%;
+  word-break: break-all;
+}

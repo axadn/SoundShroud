@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import CommentsIndexContainer from "./comments/comments_index_container";
-
+import {redirectToUser} from "../../utils/route_utils";
 export default class TrackShow extends React.Component{
   constructor(props){
     super(props);
@@ -79,7 +79,9 @@ export default class TrackShow extends React.Component{
           <div id="track_show_lower_half">
               <div id="artist_and_comments">
                 <div className="song_show_artist_info">
-                  <img src={this.props.track.artist_img}>
+                  <img className="user-img-medium"
+                    onClick={redirectToUser(this.props.track.artist_id)}
+                     src={this.props.track.artist_img}>
                   </img>
                   {this.props.track.artist_display_name}
                 </div>
