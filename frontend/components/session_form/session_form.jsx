@@ -17,6 +17,7 @@ export default class SessionFrom extends React.Component{
     this.props.example();
   }
   handleSubmit(e){
+    debugger;
     e.preventDefault();
     this.props.action(this.state);
   }
@@ -84,7 +85,7 @@ export default class SessionFrom extends React.Component{
           {errorElements.password}
           </div>
           <div className ="session_submit_buttons">
-            <input type="submit" onClick={this.handleExample}
+            <input type="button" onClick={this.handleExample}
               className="form_button blue_button" value="Demo"></input>
             <input type="submit" className="form_button blue_button" value={
                 this.props.buttonText}></input>

@@ -27586,6 +27586,7 @@ var SessionFrom = function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      debugger;
       e.preventDefault();
       this.props.action(this.state);
     }
@@ -27679,7 +27680,7 @@ var SessionFrom = function (_React$Component) {
             _react2.default.createElement(
               "div",
               { className: "session_submit_buttons" },
-              _react2.default.createElement("input", { type: "submit", onClick: this.handleExample,
+              _react2.default.createElement("input", { type: "button", onClick: this.handleExample,
                 className: "form_button blue_button", value: "Demo" }),
               _react2.default.createElement("input", { type: "submit", className: "form_button blue_button", value: this.props.buttonText }),
               errorElements.general
