@@ -1,12 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import TrackItem from "./track_item";
 export default class TracksIndex extends React.Component{
 
   render(){
     if(this.props.loading) return null;
     const trackItems = this.props.tracks.map(track => (
       <li key={`trackItem${track.id}`}>
-        <Link to={`/tracks/${track.id}`}>{track.title}</Link>
+        <TrackItem track={track}></TrackItem>
       </li>
 
     ));

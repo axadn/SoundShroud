@@ -16,9 +16,6 @@
   width: 100px;
   height: 100px;
 }
-.document-play-button img{
-  width: 100%;
-}
 #artist_and_comments{
   display: flex;
 }
@@ -34,6 +31,9 @@
   margin-bottom: 0px;
   background-color: rgba(255,255,255,0.3);
 }
-.track_info_text{
+.banner-info-text{
   white-space: nowrap;
+}
+#track_banner_left_side .banner-info-text:last-of-type{
+  font-size: 24px;
 }

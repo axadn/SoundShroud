@@ -2,11 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import CommentsIndexContainer from "./comments/comments_index_container";
 import {redirectToUser} from "../../utils/route_utils";
+import DocumentPlayButtonContainer from "./document_play_button_container";
 export default class TrackShow extends React.Component{
   constructor(props){
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handlePlayButton = this.handlePlayButton.bind(this);
   }
   handleDelete(){
     if(!confirm(`Are you sure you would like to
@@ -14,22 +14,7 @@ export default class TrackShow extends React.Component{
     this.props.deleteTrack();
 
   }
-  handlePlayButton(){
-    if(this.props.current_in_playlist){
-      if(this.props.playing){
-        this.props.pauseTrack();
-      }
-      else{
-        this.props.resumeTrack();
-      }
-    }
-    else{
-      this.props.playTrack();
-    }
-  }
-  currentlyPlaying(){
-    return this.props.current_in_playlist && this.props.playing;
-  }
+
   render(){
     if(this.props.loading){
       return null;
@@ -42,21 +27,16 @@ export default class TrackShow extends React.Component{
       }
       return(
         <div className ="track_show_content" >
-          <div className ="track_banner">
+          <div className ="banner">
             <div id="track_banner_left_side">
               <div>
                 <div className= "artist_and_play_button">
-                  <div className = "document-play-button" onClick={this.handlePlayButton}>
-                    <img className={this.currentlyPlaying()? "":"hidden"}
-                      src= {window.pause_img_url}></img>
-                    <img className={this.currentlyPlaying()? "hidden":""}
-                      src= {window.play_img_url}></img>
-                  </div>
+                  <DocumentPlayButtonContainer large trackId={this.props.track.id}/>
                   <div className="track_info_container">
-                    <div className = "track_info_text">
+                    <div className = "banner-info-text">
                       <a>{this.props.track.artist_display_name} </a>
                     </div>
-                    <div className = "track_info_text">
+                    <div className = "banner-info-text">
                       <a>{this.props.track.title}</a>
                     </div>
                   </div>
@@ -67,13 +47,12 @@ export default class TrackShow extends React.Component{
                 <div className="waveform"></div>
               </div>
             </div>
-            <img id="track_show_img" src={this.props.track.img_url}></img>
+            <img className="large" src={this.props.track.img_url}></img>
               <ul id="track_show_options">
                 <li>{editButton}</li>
                 <li>{deleteButton}</li>
               </ul>
           </div>
-
 
 
           <div id="track_show_lower_half">
