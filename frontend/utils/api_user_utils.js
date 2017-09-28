@@ -9,3 +9,8 @@ export const fetchTrackCommentsUsers = trackId => (
 export const fetchUser = userId => (
   $.ajax({method: "get", url: `/api/users/${userId}`})
 )
+
+export const postImage = (userId, imageFile) => {
+  
+  $.ajax({method: "post", url: `/api/users/${userId}image`});
+};

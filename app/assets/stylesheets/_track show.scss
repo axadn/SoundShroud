@@ -31,6 +31,16 @@
   margin-bottom: 0px;
   background-color: rgba(255,255,255,0.3);
 }
+.track_show_content .rule{
+  margin-left: 40px;
+  margin-right: 40px;
+  height: 2px;
+  background-color: rgb(15,15,15);
+  border-top: 2px solid rgb(35,35,35);
+}
+.track_show_content img.large{
+    box-shadow:  10px 10px 0px rgba(255,255,255,0.3);
+}
 .banner-info-text{
   white-space: nowrap;
 }

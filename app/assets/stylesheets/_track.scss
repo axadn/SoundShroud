@@ -1,3 +1,20 @@
 div.track-item{
   display: flex;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+div.track-item .play-button-and-info{
+  display: flex;
+}
+div.track-item .info{
+  display: flex;
+  flex-direction: column;
+}
+
+div.track-item .document-play-button{
+  margin-left: 20px;
+
+}
+div.track-item img.medium {
+  box-shadow:  10px 10px 0px rgba(255,255,255,0.3)
 }

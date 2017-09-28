@@ -29197,6 +29197,11 @@ var fetchUser = exports.fetchUser = function fetchUser(userId) {
   return $.ajax({ method: "get", url: "/api/users/" + userId });
 };
 
+var postImage = exports.postImage = function postImage(userId, imageFile) {
+
+  $.ajax({ method: "post", url: "/api/users/" + userId + "image" });
+};
+
 /***/ }),
 /* 273 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -30831,6 +30836,7 @@ var TrackShow = function (_React$Component) {
               )
             )
           ),
+          _react2.default.createElement("div", { className: "rule" }),
           _react2.default.createElement(
             "div",
             { id: "track_show_lower_half" },
@@ -32662,11 +32668,16 @@ exports.default = function (props) {
     _react2.default.createElement("img", { className: "medium", src: props.track.img_url }),
     _react2.default.createElement(
       "div",
-      null,
+      { className: "play-button-and-info" },
       _react2.default.createElement(_document_play_button_container2.default, { trackId: props.track.id }),
       _react2.default.createElement(
         "div",
-        { className: "track-item-info" },
+        { className: "info" },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: "/users/" + props.track.artist_id },
+          props.track.artist_display_name
+        ),
         _react2.default.createElement(
           _reactRouterDom.Link,
           { to: "/tracks/" + props.track.id },

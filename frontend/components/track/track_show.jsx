@@ -53,7 +53,7 @@ export default class TrackShow extends React.Component{
                 <li>{deleteButton}</li>
               </ul>
           </div>
-
+          <div className = "rule"></div>
 
           <div id="track_show_lower_half">
               <div id="artist_and_comments">
