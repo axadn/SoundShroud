@@ -1,0 +1,61 @@
+.track-form-content{
+  width: 100%;
+  height: 100%;
+  margin-top: 11%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.track_form{
+  display: block;
+  flex-grow: 1;
+  width: 500px;
+  height: auto;
+}
+
+.track_form > *{
+  display: block;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.track_form input[type="text"],
+.track_form textarea{
+  width: 100%;
+}
+.track_form input[type="text"]{
+  font-size: 20px;
+}
+.track_form textarea{
+  font-size: 16px;
+}
+.track_form label{
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.track_form textarea{
+  height: 145px;
+}
+.track_form input[type="submit"]{
+  margin-top: 15px;
+}
+.floater2{
+  display: inline-block;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+.image-input-container{
+  display: inline-block;
+  position: relative;
+  margin-right: 40px;
+}
+
+.image-input-container button{
+  position: absolute;
+  bottom: 6%;
+  right: 32%;
+}

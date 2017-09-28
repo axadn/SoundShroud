@@ -17,6 +17,7 @@ export default class TrackForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
   handleChange(key){
     return e => {
@@ -25,7 +26,10 @@ export default class TrackForm extends React.Component {
     }
   }
   handleFileChange (e){
-    this.state.file = e.target.files[0];
+    this.setState({file: e.target.files[0]});
+  }
+  handleImageChange(e){
+    this.setState({imageFile: e.target.files[0]});
   }
   handleSubmit (e){
     e.preventDefault();
@@ -34,6 +38,9 @@ export default class TrackForm extends React.Component {
   }
   render(){
     let errorElements = {};
+    let imageUrl = this.state.imageFile? URL.createObjectURL(this.state.imageFile) : "";
+    if(this.state.imageFile){
+    }
     Object.keys(this.props.errors).forEach(key => {
       errorElements[key] =
       <div className="errors">
@@ -50,7 +57,15 @@ export default class TrackForm extends React.Component {
     <input type="file" onChange={this.handleFileChange}></input>;
   let imgSrc;
     return(
-      <div className ="track_form_content">
+      <div className ="track-form-content">
+        <div className="image-input-container">
+          <input className="image-input" type="file"
+            onChange={this.handleImageChange}></input>
+          <img src={imageUrl} className="medium-large cover-art"></img>
+          <button className="blue_button"
+            onClick={()=>document.querySelector(".image-input").click()}
+            >change image</button>
+        </div>
         <div className ="floater2">
           <h2>{this.props.editing? "Edit your Track" : "Upload a Track"}</h2>
         <form className="track_form" onSubmit={this.handleSubmit}>

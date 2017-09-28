@@ -10,6 +10,18 @@ class Api::TracksController < ApplicationController
     extension && SUPPORTED_EXTENSIONS.include?(extension) ? extension : nil
   end
 
+  def img_temp_presigned_post
+    @errors = image_params_errors
+    if !@errors.empty?
+      render json: { general: @errors }, status: 422
+    else
+      random_id = SecureRandom.urlsafe_base64
+      obj = s3_bucket.object("img/tracks/temp/#{random_id}")
+      post = obj.presigned_post(key: "img/tracks/temp/#{random_id}")
+      render json: post.fields
+    end
+  end
+
   def track_params
     unless params["track"].respond_to? :permit
       params["track"] = JSON.parse(params["track"])
@@ -31,8 +43,15 @@ class Api::TracksController < ApplicationController
     end
   end
 
-  def verify #verify form parms are valid and audio is valid extension before actual upload
+  def verify #verify form parms are valid and file extensions are supported before actual upload
+    return render json: { general: "forbidden" }, status: 403 unless logged_in?
+    @extension = Api::TracksController.valid_extension? params[:filename]
     @params_errors = params_errors
+    if params[:image_filename]
+      @image_extension = API::TracksController.valid_image_extension? params[:image_filename]
+      img_errors = image_params_errors
+      @params_errors[:image] = img_errors unless img_errors.emtpy?
+    end
     if @params_errors.empty?
       render json: track_temp_presigned_post
     else
@@ -41,46 +60,61 @@ class Api::TracksController < ApplicationController
   end
 
   def track_temp_presigned_post #returns the form fields necessary to upload to temp S3 storage
+    return render json: { general: "forbidden" }, status: 403 unless logged_in?
     random_id = SecureRandom.urlsafe_base64
     temp_filename = "#{random_id}#{@extension}"
     obj = s3_bucket.object("tracks/temp/#{temp_filename}")
-    post = obj.presigned_post(key: "tracks/temp/#{temp_filename}", acl: "private")
-    { fields: post.fields, url: post.url, temp_filename: temp_filename}
+    post = obj.presigned_post(key: "tracks/temp/#{temp_filename}",
+                              acl: "private")
+    s3_info = { audio: { fields: post.fields, url: post.url,
+                         temp_filename: temp_filename } }
+    if params[:image_filename]
+      img_temp_filename = "#{random_id}#{@image_extension}"
+      obj = s3_bucket.object("tracks/images/#{img_temp_filename}")
+      img_post = obj.presigned_post(key: "tracks/images/#{img_temp_filename}",
+                                    acl: "public-read")
+      s3_info[:image] = { fields: img_post.fields, url: img_post.url,
+                          temp_filename: img_temp_filename }
+    end
+    s3_info
   end
 
-  def process_track #convert audio from temp S3 storage
+  def process_track #convert file types from temp S3 storage
+    return render json: { general: "forbidden" }, status: 403 unless logged_in?
     track = Track.new(track_params)
     track.artist_id = current_user.id
     track.save!
-    Resque.enqueue(AudioProcessJob, params[:temp_filename], track.id)
-    render json: {id: track.id}
+    Resque.enqueue(AudioProcessJob, params[:temp_filename], track.id, params[:includes_image])
+    render json: { id: track.id }
   end
 
   def audio_process_status
-      @track = Track.find_by(id: params[:id])
-      if @track
-        if @track.processed
-          render :show
-        else
-          render json: {status: "processing"}
-        end
+    return render json: { general: "forbidden" }, status: 403 unless logged_in?
+    @track = Track.find_by(id: params[:id])
+    return render json: { general: "forbidden" }, status: 403 unless @track.artist_id == current_user.id
+    if @track
+      if @track.processed
+        render :show
       else
-        render json: {status: "failed"}
+        render json: { status: "processing" }
       end
+    else
+      render json: { status: "failed" }
+    end
   end
 
   def params_errors
     @track = Track.new(track_params)
     @track.artist_id = current_user.id
     errors = {}
+
     file_errors = []
-    if params[:filename] && params[:filename].length > 0
-      @extension = Api::TracksController.valid_extension? params[:filename]
+    if params[:filename] && !params[:filename].empty?
       file_errors << "not a supported file type" unless @extension
     else
       file_errors << "must select a file"
     end
-  #  if parames[:image]
+
     errors[:file] = file_errors unless file_errors.empty?
     errors.merge!(@track.errors.messages) unless @track.valid?
     errors
@@ -122,13 +156,6 @@ class Api::TracksController < ApplicationController
     else
       render json: { general: ["nothing to delete"] }, status: 404
     end
-  end
-
-  def get_img_temp_presigned_post
-    random_id = SecureRandom.urlsafe_base64
-    obj = s3_bucket.object("img/tracks/temp/#{random_id}")
-    post = obj.presigned_post(key: "img/tracks/temp/#{random_id}")
-    render json: post.fields
   end
 
   def get_s3_url

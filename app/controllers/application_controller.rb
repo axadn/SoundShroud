@@ -19,6 +19,13 @@ class ApplicationController < ActionController::Base
     (extension && SUPPORTED_EXTENSIONS.include?(extension)) ? extension : nil
   end
 
+  def image_params_errors
+    errors = []
+    errors << "must be under 5MB" if params[:image_size] >= 5000
+    errors << "not a supported file type" unless @image_extension
+    errors
+  end
+
   def current_user
     return nil if session[:session_token].nil?
     @current_user ||= User.find_by(session_token: session[:session_token])

@@ -57,6 +57,26 @@ h2{
  font-size: 45px;
  text-align: center;
 }
+.image-input{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.imag-input + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.image-input + label,
+.image-input + label:hover {
+    background-color: red;
+}
 .static_img_page{
   position: relative;
   width: 100%;
@@ -125,6 +145,10 @@ img.large{
 img.medium{
   width: 200px;
   height: 200px;
+}
+img.medium-large{
+  width: 300px;
+  height: 300px;
 }
 #track_show_options{
   margin-left: 20px;
@@ -460,48 +484,7 @@ form textarea:focus{
 #upload_progress > div:last-child{
   width: 200px;
 }
-.track_form{
-  display: block;
-  flex-grow: 1;
-  width: 500px;
-  height: auto;
-}
 
-.track_form > *{
-  display: block;
-  margin-left: 8px;
-  margin-right: 8px;
-}
-.track_form input[type="text"],
-.track_form textarea{
-  width: 100%;
-}
-.track_form input[type="text"]{
-  font-size: 20px;
-}
-.track_form textarea{
-  font-size: 16px;
-}
-.track_form label{
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-.track_form textarea{
-  height: 145px;
-}
-.track_form input[type="submit"]{
-  margin-top: 15px;
-}
-.floater2{
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  left: 35%;
-  top: 50px;
-}
 textarea{
   resize: none;
 }

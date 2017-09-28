@@ -1,7 +1,7 @@
 class AudioProcessJob
   @queue = :audio_process
 
-  def self.perform(temp_name, trackId)
+  def self.perform(temp_name, trackId, includes_image)
     track = Track.find(trackId)
     aws_client = Aws::S3::Client.new(region: 'us-west-1',
     access_key_id: ENV["S3_ID"],
