@@ -23,9 +23,9 @@ const mapContainerStateToProps = (state, ownProps) => ({
   trackId: ownProps.match.params.trackId
 });
 const mapContainerDispatchToProps = (dispatch, ownProps) => ({
-  fetchTrack: () =>{
+  fetchTrack: id =>{
     dispatch(receiveMainContentLoading());
-    dispatch(fetchTrackThunk( ownProps.match.params.trackId,
+    dispatch(fetchTrackThunk( id,
       () => dispatch(receiveMainContentLoaded())));
   }
 });
@@ -33,11 +33,11 @@ const mapContainerDispatchToProps = (dispatch, ownProps) => ({
 
 class TrackShowContainer extends React.Component{
   componentWillMount(){
-    this.props.fetchTrack();
+    this.props.fetchTrack(this.props.trackId);
   }
-  componentWillReceiveNewProps(newProps){
+  componentWillReceiveProps(newProps){
     if(newProps.trackId!= this.props.trackId){
-      this.props.fetchTrack();
+      this.props.fetchTrack(newProps.trackId);
     }
   }
   render(){

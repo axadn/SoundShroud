@@ -15,9 +15,9 @@ const mapContainerStateToProps = (state, props) => ({
 });
 
 const mapContainerDispatchToProps = (dispatch, props) =>({
-  fetchUser: () =>{
+  fetchUser: id =>{
     dispatch(receiveMainContentLoading());
-    dispatch(fetchUserThunk(props.match.params.userId, () =>
+    dispatch(fetchUserThunk(id, () =>
       dispatch(receiveMainContentLoaded())));
     }
 });
@@ -29,11 +29,11 @@ const mapDisplayDispatchToProps = ({
 
 class UserShowContainer extends React.Component{
   componentWillMount(){
-    this.props.fetchUser();
+    this.props.fetchUser(this.props.userId);
   }
   componentWillReceiveProps(newProps){
     if(this.props.userId !== newProps.userId){
-      this.props.fetchUser();
+      this.props.fetchUser(newProps.userId);
     }
   }
   render(){

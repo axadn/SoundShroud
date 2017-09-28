@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'sprockets'
+
+gem 'paperclip'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
@@ -33,7 +35,6 @@ gem 'jquery-rails'
 gem 'ruby-sox'
 gem "mini_magick"
 gem "resque"
-gem 'memfd', github: 'bear-metal/memfd'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

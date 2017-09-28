@@ -11,6 +11,5 @@ export const fetchUser = userId => (
 )
 
 export const postImage = (userId, imageFile) => {
-  
   $.ajax({method: "post", url: `/api/users/${userId}image`});
 };
