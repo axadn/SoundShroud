@@ -17,7 +17,6 @@ export default class SessionFrom extends React.Component{
     this.props.example();
   }
   handleSubmit(e){
-    debugger;
     e.preventDefault();
     this.props.action(this.state);
   }
