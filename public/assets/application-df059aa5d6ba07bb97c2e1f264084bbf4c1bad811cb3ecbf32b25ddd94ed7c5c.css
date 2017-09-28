@@ -1,0 +1,908 @@
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+#description_and_comments {
+  flex-grow: 1;
+  margin-left: 8%;
+  margin-right: 40px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* line 9, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_item .profile_thumbnail {
+  display: inline-block;
+}
+
+/* line 12, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_body_and_info {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+/* line 16, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_item {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* line 23, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+#commentForm {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+/* line 30, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+#commentForm input {
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
+
+/* line 36, /home/adan/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_body {
+  width: 100%;
+  word-break: break-all;
+}
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_info {
+  font-size: 2vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation-name: fadeFromTransparent;
+  animation-duration: 3s;
+  position: absolute;
+  left: 16%;
+  top: 22%;
+  width: 45%;
+}
+
+/* line 15, /home/adan/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_info h1 {
+  font-size: 5vw;
+}
+
+/* line 19, /home/adan/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_button {
+  width: 73%;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 4vw;
+  height: 5vw;
+  padding-top: 1.5vw;
+  font-size: 2vw;
+}
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track-form-content {
+  width: 100%;
+  height: 100%;
+  margin-top: 11%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 11, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form {
+  display: block;
+  flex-grow: 1;
+  width: 500px;
+  height: auto;
+}
+
+/* line 18, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form > * {
+  display: block;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+/* line 23, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form input[type="text"],
+.track_form textarea {
+  width: 100%;
+}
+
+/* line 27, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form input[type="text"] {
+  font-size: 20px;
+}
+
+/* line 30, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form textarea {
+  font-size: 16px;
+}
+
+/* line 33, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* line 38, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form textarea {
+  height: 145px;
+}
+
+/* line 41, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form input[type="submit"] {
+  margin-top: 15px;
+}
+
+/* line 44, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.floater2 {
+  display: inline-block;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+/* line 51, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.image-input-container {
+  display: inline-block;
+  position: relative;
+  margin-right: 40px;
+}
+
+/* line 57, /home/adan/SoundShroud/app/assets/stylesheets/_track form.scss */
+.image-input-container button {
+  position: absolute;
+  bottom: 6%;
+  right: 32%;
+}
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item {
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+/* line 6, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .play-button-and-info {
+  display: flex;
+}
+
+/* line 9, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 14, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .document-play-button {
+  margin-left: 20px;
+}
+
+/* line 19, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item img:first-of-type:hover {
+  cursor: pointer;
+}
+
+/* line 23, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .title-link {
+  font-size: 18px;
+  color: #c8c8c8;
+  text-decoration: none;
+}
+
+/* line 30, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .title-link:hover {
+  font-size: 20px;
+  color: white;
+}
+
+/* line 35, /home/adan/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .info {
+  margin-left: 10px;
+}
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#show_page_waveform_container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: auto;
+}
+
+/* line 8, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_left_side {
+  margin-top: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 14, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_right_side {
+  display: flex;
+}
+
+/* line 17, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_right_side .image-input-container {
+  margin-right: 0;
+}
+
+/* line 20, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.artist_and_play_button {
+  display: flex;
+}
+
+/* line 23, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.document-play-button {
+  width: 100px;
+  height: 100px;
+}
+
+/* line 27, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#artist_and_comments {
+  display: flex;
+}
+
+/* line 30, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#artist_and_comments > div:first-child {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* line 34, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.waveform {
+  max-width: 950px;
+  min-width: 200px;
+  height: 200px;
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* line 42, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.track_show_content .rule {
+  margin-left: 40px;
+  margin-right: 40px;
+  height: 2px;
+  background-color: #0f0f0f;
+  border-top: 2px solid #232323;
+}
+
+/* line 49, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.banner-info-text {
+  white-space: nowrap;
+}
+
+/* line 52, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_left_side .banner-info-text:last-of-type {
+  font-size: 24px;
+}
+
+/* line 55, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info {
+  text-align: center;
+  font-size: 14px;
+  width: 150px;
+  height: 200px;
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+}
+
+/* line 66, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info img {
+  width: 150px;
+  height: 150px;
+}
+
+/* line 71, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options {
+  margin-left: 20px;
+  margin-right: -20px;
+}
+
+/* line 75, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options li {
+  padding: 5px;
+}
+
+/* line 78, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options a,
+#track_show_options button {
+  width: 100%;
+}
+
+/* line 82, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_lower_half {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+/* line 90, /home/adan/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_description {
+  word-break: break-all;
+  display: inline-block;
+}
+/* line 1, /home/adan/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show .banner-info-text:first-of-type {
+  font-size: 24px;
+}
+
+/* line 4, /home/adan/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show {
+  margin: 35px;
+  background-color: rgba(100, 100, 100, 0.05);
+}
+
+/* line 8, /home/adan/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show img:first-of-type {
+  border-radius: 50%;
+}
+
+/* line 12, /home/adan/SoundShroud/app/assets/stylesheets/_user show.scss */
+.tracks-index {
+  padding: 20px;
+}
+
+/* line 16, /home/adan/SoundShroud/app/assets/stylesheets/_user show.scss */
+img .user-show-medium:hover {
+  cursor: pointer;
+}
+/* line 21, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#root {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 28, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.hidden {
+  display: none;
+}
+
+/* line 31, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 35, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+body > svg {
+  width: 0px;
+  height: 0px;
+}
+
+/* line 39, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.floater1 {
+  animation-name: fadeFromTransparent;
+  animation-duration: 1.2s;
+  position: absolute;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* line 47, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.cover-art {
+  border: 1px solid #646464;
+  box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.3);
+}
+
+/* line 52, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+h1 {
+  font-size: 65px;
+  text-align: center;
+}
+
+/* line 56, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+h2 {
+  font-size: 45px;
+  text-align: center;
+}
+
+/* line 60, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.image-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+/* line 68, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.imag-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+
+/* line 76, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.image-input + label,
+.image-input + label:hover {
+  background-color: red;
+}
+
+/* line 80, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.static_img_page {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 85, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.static_img_page > img {
+  overflow-x: hidden;
+  width: 100%;
+  filter: url(#blue_filter);
+}
+
+/* line 90, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button, .logout_button {
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  animation-name: fadeFromTransparent;
+  border-radius: 6px;
+  background-color: #35617b;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* line 111, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button:hover {
+  background-color: #2d7387;
+  cursor: pointer;
+}
+
+/* line 115, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button:active
+.logout_button:active {
+  background-color: #35617b;
+  border-top: 1px solid #0a0a0a;
+  border-left: 1px solid #1e2828;
+  border-right: 1px solid #1e2828;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+/* line 124, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.logout_button:hover {
+  cursor: pointer;
+  background-color: #47a4b4;
+}
+
+/* line 128, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.logout_button {
+  background-color: #4b8aaf;
+  font-size: 20px;
+}
+
+/* line 133, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.play_bar {
+  flex-shrink: 0;
+  background-color: #737577;
+  height: 100px;
+}
+
+/* line 138, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+img.large {
+  width: 400px;
+  height: 400px;
+}
+
+/* line 142, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+img.medium {
+  width: 200px;
+  height: 200px;
+}
+
+/* line 146, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+img.medium-large {
+  width: 300px;
+  height: 300px;
+}
+
+/* line 151, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.profile_thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+/* line 155, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.profile_thumbnail:hover {
+  cursor: pointer;
+}
+
+/* line 158, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.username-link {
+  text-decoration: none;
+  color: #858585;
+  font-size: 14px;
+}
+
+/* line 163, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.username-link:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* line 167, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* line 171, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.app {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Quicksand', sans-serif;
+  margin: auto;
+  background-color: #191919;
+  color: white;
+  max-width: 1500px;
+  min-width: 700px;
+}
+
+/* line 182, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d5d7d9;
+  height: 50px;
+}
+
+/* line 190, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_link_set {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* line 196, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_link_set * {
+  margin-right: 10px;
+}
+
+/* line 200, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link {
+  line-height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  height: 100%;
+  text-align: center;
+  width: 80px;
+  text-decoration: none;
+  color: #0B0B0C;
+}
+
+/* line 210, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+/* line 215, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.top_nav_link.active {
+  background-color: #F0F0F1;
+  cursor: default;
+}
+
+/* line 221, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.main_content {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes fadeFromTransparent {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: default;
+  }
+  from {
+    color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    color: default;
+    border-left-color: default;
+    border-right-color: default;
+    border-top-color: default;
+    border-bottom-color: default;
+    background-color: default;
+  }
+}
+/* line 248, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+form {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-around;
+}
+
+/* line 255, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+form > div {
+  position: relative;
+}
+
+/* line 261, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.red_button {
+  background-color: red;
+  box-sizing: border-box;
+  outline: none;
+  animation-name: fadeFromTransparent;
+  border-radius: 6px;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* line 280, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"],
+form input[type="password"],
+form textarea {
+  outline: none;
+  animation-name: fadeFromTransparent;
+  animation-duration: 3s;
+  border-radius: 4px;
+  background-color: rgba(40, 40, 40, 0.7);
+  border-top: 2px solid #0a0a0a;
+  border-left: 3px solid #1e2828;
+  border-right: 3px solid #1e2828;
+  border-bottom: 3px solid #2d2d2d;
+  color: #d5d7d9;
+}
+
+/* line 294, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"],
+form input[type="password"] {
+  box-sizing: border-box;
+  width: 234px;
+  margin-right: 8px;
+  margin-left: 8px;
+  padding: 5px;
+  height: 40px;
+}
+
+/* line 303, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+input.empty {
+  color: #8c8c8c;
+}
+
+/* line 307, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+  background-color: #212121;
+  outline: none;
+}
+
+/* line 313, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.form_button {
+  animation-duration: 1.5s;
+  align-self: flex-end;
+  width: 102px;
+  height: 40px;
+}
+
+/* line 321, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.errors {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  margin-left: 20px;
+  top: 0px;
+  left: 100%;
+}
+
+/* line 329, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.errors > div {
+  background-color: #9b000e;
+  color: white;
+  padding: 10px;
+  font-size: 12px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  white-space: pre;
+}
+
+/* line 338, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.errors > svg {
+  display: inline-block;
+  fill: #9b000e;
+}
+
+/* line 342, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.session_submit_buttons {
+  margin-left: 8px;
+  margin-right: 8px;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+/* line 351, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.track_show_content {
+  width: 100%;
+}
+
+/* line 354, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.user-show-content {
+  width: 100%;
+}
+
+/* line 357, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.banner {
+  padding: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+/* line 364, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.banner > div {
+  margin-right: 35px;
+}
+
+/* line 367, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.banner > div > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* line 371, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.banner-info-text {
+  margin: 20px;
+}
+
+/* line 374, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.banner-info-text > a {
+  padding: 5px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* line 380, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.upload_error {
+  color: red;
+}
+
+/* line 384, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress {
+  align-items: center;
+  background-color: #3f3f3f;
+  padding: 5px;
+  display: flex;
+  height: 35px;
+  flex-shrink: 0;
+  justify-content: space-around;
+}
+
+/* line 393, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button:hover {
+  cursor: pointer;
+}
+
+/* line 396, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button.large {
+  width: 100px;
+  height: 100px;
+}
+
+/* line 400, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button.small {
+  width: 50px;
+  height: 50px;
+}
+
+/* line 404, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 408, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:first-child {
+  width: 200px;
+  font-size: 12px;
+}
+
+/* line 413, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:first-child > a {
+  margin-right: 15px;
+}
+
+/* line 417, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress button {
+  padding: 2px;
+  width: 28px;
+  height: 20px;
+  font-size: 10px;
+}
+
+/* line 424, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#progress_bar {
+  width: 300px;
+  height: 4px;
+}
+
+/* line 429, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:last-child {
+  width: 200px;
+}
+
+/* line 433, /home/adan/SoundShroud/app/assets/stylesheets/root.scss */
+textarea {
+  resize: none;
+}
+/* line 5, /home/adan/SoundShroud/app/assets/stylesheets/session.scss */
+.session_form {
+  left: calc(50% - 173px);
+  top: 100px;
+  width: 250px;
+  border-radius: 8px;
+}
+
+/* line 11, /home/adan/SoundShroud/app/assets/stylesheets/session.scss */
+.session_form h2 {
+  font-size: 26px;
+  animation: fadeColorFromTransparent;
+  animation-duration: 1s;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* line 19, /home/adan/SoundShroud/app/assets/stylesheets/session.scss */
+.session_form span {
+  display: block;
+  margin-bottom: 5px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+

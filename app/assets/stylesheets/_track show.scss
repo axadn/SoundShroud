@@ -52,3 +52,42 @@
 #track_banner_left_side .banner-info-text:last-of-type{
   font-size: 24px;
 }
+.song_show_artist_info{
+  text-align: center;
+  font-size: 14px;
+  width: 150px;
+  height: 200px;
+  margin: 20px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  display: inline-block;
+  float:left;
+}
+.song_show_artist_info img {
+  width: 150px;
+  height: 150px;
+}
+
+#track_show_options{
+  margin-left: 20px;
+  margin-right: -20px;
+}
+#track_show_options li{
+  padding: 5px;
+}
+#track_show_options a,
+#track_show_options button{
+  width: 100%;
+}
+#track_show_lower_half {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+
+#track_description{
+  word-break: break-all;
+  display: inline-block;
+}

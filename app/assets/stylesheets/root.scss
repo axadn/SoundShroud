@@ -147,47 +147,7 @@ img.medium-large{
   width: 300px;
   height: 300px;
 }
-#track_show_options{
-  margin-left: 20px;
-  margin-right: -20px;
-}
-#track_show_options li{
-  padding: 5px;
-}
-#track_show_options a,
-#track_show_options button{
-  width: 100%;
-}
-#track_show_lower_half {
-  padding-left: 40px;
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
 
-.song_show_artist_info{
-  text-align: center;
-  font-size: 14px;
-  width: 150px;
-  height: 200px;
-  margin: 20px;
-  background-color: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  display: inline-block;
-  float:left;
-}
-.song_show_artist_info img {
-  width: 150px;
-}
-
-
-#track_description{
-  word-break: break-all;
-  display: inline-block;
-}
-.user-img-medium:hover{
-  cursor: pointer;
-}
 .profile_thumbnail{
   width: 50px;
   height: 50px;
@@ -285,24 +245,6 @@ ul{
 }
 
 
-.session_form {
-  left: calc(50% - 173px);
-  top: 100px;
-  width: 250px;
-  border-radius: 8px;
-}
-.session_form h2{
-  font-size: 26px;
-  animation: fadeColorFromTransparent;
-  animation-duration: 1s;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.session_form span{
-  display: block;
-  margin-bottom: 5px;
-}
 form{
   display: flex;
   flex-direction: column;
@@ -405,10 +347,7 @@ form textarea:focus{
   justify-content: space-between;
 }
 
-#track_show_img{
-  width: 400px;
-  height: 400px;
-}
+
 .track_show_content{
   width: 100%;
 }
