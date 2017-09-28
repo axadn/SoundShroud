@@ -129,9 +129,6 @@ h2{
   background-color: $false-ming;
   font-size: 20px;
 }
-@import "landing";
-@import "track show";
-@import "comments";
 
 .play_bar{
   flex-shrink: 0;
@@ -197,6 +194,11 @@ img.medium-large{
 }
 .profile_thumbnail:hover{
   cursor:pointer;
+}
+.username-link{
+  text-decoration: none;
+  color: #858585;
+  font-size: 14px;
 }
 .username-link:hover{
   color:white;

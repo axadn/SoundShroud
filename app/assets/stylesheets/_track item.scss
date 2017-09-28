@@ -1,0 +1,37 @@
+.track-item{
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+.track-item .play-button-and-info{
+  display: flex;
+}
+.track-item .info{
+  display: flex;
+  flex-direction: column;
+}
+
+.track-item .document-play-button{
+  margin-left: 20px;
+
+}
+
+.track-item img:first-of-type:hover{
+  cursor: pointer;
+}
+
+.track-item .title-link{
+  font-size: 18px;
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
+
+.track-item .title-link:hover{
+  font-size: 20px;
+  color: white;
+}
+
+.track-item .info{
+  margin-left: 10px;
+}
