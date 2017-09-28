@@ -20,7 +20,6 @@ class AudioProcessJob
           bucket: "soundshroud", key: s3_filename)
       end
       track = Track.find_by(id: track.id)
-      debugger
       if track
         if temp_image_name
           self.perform_img(temp_image_name, track, aws_client)
