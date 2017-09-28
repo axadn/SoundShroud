@@ -4,8 +4,13 @@ import {postUserImage, postTrackImage} from "../actions/image_actions";
 import {current_user_id} from "../reducers/selectors";
 const mapStateToProps = (state, props) =>{
   let editable;
-  if(props.type === "user") editable = props.id === current_user_id(state);
-  else editable = props.userId === current_user_id(state);
+
+  if(props.type === "user"){
+    editable = props.id == current_user_id(state);
+  }
+  else{
+    editable = props.userId == current_user_id(state);
+  }
   return {editable};
 };
 

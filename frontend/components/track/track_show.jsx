@@ -50,7 +50,8 @@ export default class TrackShow extends React.Component{
             </div>
 
             <div id="track_banner_right_side">
-              <UpdatableImageContainer className ="large cover-art"
+              <UpdatableImageContainer
+                size="large"
                 inputId="track-update-cover-art"
                 type="track"
                 userId={this.props.track.artist_id}

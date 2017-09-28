@@ -1,5 +1,6 @@
 import React from "react";
 import TracksIndexContainer from "./tracks_index_container";
+import UpdatableImageContainer from "../updatable_image_container";
 export default class UserShow extends React.Component{
   display_name(){
     return this.props.user.display_name? this.props.user.display_name : this.props.user.username
@@ -16,7 +17,12 @@ export default class UserShow extends React.Component{
     return(
       <div className = "user-show-content">
         <div className = "user-show banner">
-          <img className="medium" src={this.props.user.image_url}/>
+          <UpdatableImageContainer src={this.props.user.image_url}
+            inputId= "user-show-img-input"
+            size="medium"
+            type="user"
+            id={this.props.user.id}
+            ></UpdatableImageContainer>
           <div>
             <div className="banner-info-text">
               <a>{this.display_name()}</a>
