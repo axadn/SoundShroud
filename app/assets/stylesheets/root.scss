@@ -416,11 +416,12 @@ form textarea:focus{
 .banner{
   padding: 35px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
 }
 .banner > div{
   margin-right: 35px;
-  flex-grow: 1;
 }
 .banner > div >div:first-of-type{
   display: flex;
@@ -447,6 +448,9 @@ form textarea:focus{
   height: 35px;
   flex-shrink: 0;
   justify-content: space-around;
+}
+.document-play-button:hover{
+  cursor:pointer;
 }
 .document-play-button.large{
   width: 100px;

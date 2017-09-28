@@ -39,8 +39,8 @@ export default class TrackForm extends React.Component {
   render(){
     let errorElements = {};
     let imageUrl = this.state.imageFile? URL.createObjectURL(this.state.imageFile) : "";
-    if(this.state.imageFile){
-    }
+    let imageInputElement;
+
     Object.keys(this.props.errors).forEach(key => {
       errorElements[key] =
       <div className="errors">
@@ -55,17 +55,21 @@ export default class TrackForm extends React.Component {
     if(this.props.loading) return null;
   const fileUploadElement = this.props.editing? undefined:
     <input type="file" onChange={this.handleFileChange}></input>;
+  if (!this.props.editing){
+    imageInputElement =
+      <div className="image-input-container">
+        <input className="image-input" type="file"
+          onChange={this.handleImageChange}></input>
+        <img src={imageUrl} className="medium-large cover-art"></img>
+        <button className="blue_button"
+          onClick={()=>document.querySelector(".image-input").click()}
+          >change image</button>
+      </div>
+  }
   let imgSrc;
     return(
       <div className ="track-form-content">
-        <div className="image-input-container">
-          <input className="image-input" type="file"
-            onChange={this.handleImageChange}></input>
-          <img src={imageUrl} className="medium-large cover-art"></img>
-          <button className="blue_button"
-            onClick={()=>document.querySelector(".image-input").click()}
-            >change image</button>
-        </div>
+        {imageInputElement}
         <div className ="floater2">
           <h2>{this.props.editing? "Edit your Track" : "Upload a Track"}</h2>
         <form className="track_form" onSubmit={this.handleSubmit}>

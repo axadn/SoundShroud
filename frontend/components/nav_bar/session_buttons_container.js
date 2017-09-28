@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import SessionButtons from "./session_buttons";
 import {logged_in, current_user_id} from "../../reducers/selectors"
-import {deleteSession} from "../../actions/session_actions";
+import {deleteSessionThunk} from "../../actions/session_actions";
 
 const mapStateToProps = state => (
   {logged_in: logged_in(state),

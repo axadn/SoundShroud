@@ -38,7 +38,7 @@ class AudioProcessJob
   end
 
   def self.perform_img(temp_name, track, aws)
-    #begin
+    begin
       File.open("tmp/#{temp_name}", 'wb') do |file|
         aws.get_object({bucket: "soundshroud",
           key: "tracks/images/temp/#{temp_name}"}, target: file)
@@ -55,13 +55,14 @@ class AudioProcessJob
           bucket: "soundshroud", key: s3_filename, acl: "public-read")
       end
       track.custom_img = true
-    #rescue
-    #ensure
+      track.img_extension = ".jpeg"
+    rescue
+    ensure
       File.delete("tmp/#{track.id}.jpeg") if File.exist?("tmp/#{track.id}.jpeg")
       File.delete("tmp/#{temp_name}") if File.exist?("tmp/#{temp_name}")
       aws.delete_object(bucket: "soundshroud",
       key: "tracks/images/temp/#{temp_name}")
-    #end
+    end
   end
 
 end

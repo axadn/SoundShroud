@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import CommentsIndexContainer from "./comments/comments_index_container";
 import {redirectToUser} from "../../utils/route_utils";
 import DocumentPlayButtonContainer from "./document_play_button_container";
+import UpdatableImageContainer from "../updatable_image_container";
 export default class TrackShow extends React.Component{
   constructor(props){
     super(props);
@@ -47,11 +48,19 @@ export default class TrackShow extends React.Component{
                 <div className="waveform"></div>
               </div>
             </div>
-            <img className="large cover-art" src={this.props.track.img_url}></img>
-              <ul id="track_show_options">
-                <li>{editButton}</li>
-                <li>{deleteButton}</li>
-              </ul>
+
+            <div id="track_banner_right_side">
+              <UpdatableImageContainer className ="large cover-art"
+                inputId="track-update-cover-art"
+                type="track"
+                userId={this.props.track.artist_id}
+                id={this.props.track.id}
+                src={this.props.track.img_url}></UpdatableImageContainer>
+                <ul id="track_show_options">
+                  <li>{editButton}</li>
+                  <li>{deleteButton}</li>
+                </ul>
+              </div>
           </div>
           <div className = "rule"></div>
 
