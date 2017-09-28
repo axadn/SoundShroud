@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user, :verify_logged_in, :user_img_url,
   :track_img_url
   #protect_from_forgery with: :exception
-  SUPPORTED_EXTENSIONS = ['jpg', '.gif', '.png',
+  SUPPORTED_EXTENSIONS = ['.jpg', '.gif', '.png',
   '.jpeg']
 
   def user_img_url(id)
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def image_params_errors
     errors = []
-    errors << "must be under 5MB" if params[:image_size] >= 5000
+    #errors << "must be under 5MB" if params[:image_size] >= 5000
     errors << "not a supported file type" unless @image_extension
     errors
   end

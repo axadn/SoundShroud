@@ -48,9 +48,9 @@ class Api::TracksController < ApplicationController
     @extension = Api::TracksController.valid_extension? params[:filename]
     @params_errors = params_errors
     if params[:image_filename]
-      @image_extension = API::TracksController.valid_image_extension? params[:image_filename]
+      @image_extension = Api::TracksController.valid_image_extension? params[:image_filename]
       img_errors = image_params_errors
-      @params_errors[:image] = img_errors unless img_errors.emtpy?
+      @params_errors[:image] = img_errors unless img_errors.empty?
     end
     if @params_errors.empty?
       render json: track_temp_presigned_post
@@ -70,9 +70,9 @@ class Api::TracksController < ApplicationController
                          temp_filename: temp_filename } }
     if params[:image_filename]
       img_temp_filename = "#{random_id}#{@image_extension}"
-      obj = s3_bucket.object("tracks/images/#{img_temp_filename}")
-      img_post = obj.presigned_post(key: "tracks/images/#{img_temp_filename}",
-                                    acl: "public-read")
+      obj = s3_bucket.object("tracks/images/temp/#{img_temp_filename}")
+      img_post = obj.presigned_post(key: "tracks/images/temp/#{img_temp_filename}",
+                                    acl: "private")
       s3_info[:image] = { fields: img_post.fields, url: img_post.url,
                           temp_filename: img_temp_filename }
     end
@@ -84,7 +84,8 @@ class Api::TracksController < ApplicationController
     track = Track.new(track_params)
     track.artist_id = current_user.id
     track.save!
-    Resque.enqueue(AudioProcessJob, params[:temp_filename], track.id, params[:includes_image])
+    tmp_img = params.key?(:temp_image_filename) ? params[:temp_image_filename] : false
+    Resque.enqueue(AudioProcessJob, params[:temp_filename], track.id, tmp_img)
     render json: { id: track.id }
   end
 

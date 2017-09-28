@@ -87,8 +87,6 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
 
   const formData = new FormData();
   const trackParams = {track: {}};
-
-
   Object.keys(unprocessedData).forEach(key=>{
     if (key !== "file" && key!== "imageFile"){
       trackParams.track[key] = unprocessedData[key];
@@ -97,7 +95,7 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
 
   trackParams.filename = unprocessedData.file? unprocessedData.file.name : "";
   if(unprocessedData.imageFile)
-    trackParams.image_filename = unproccessedData.imageFile.name;
+    trackParams.image_filename = unprocessedData.imageFile.name;
 
 
 
@@ -192,6 +190,7 @@ class AudioAndImageUploadAwaiter{
     return (this.audioUploaded + this.imageUploaded)/this.total;
   }
 }
+
 const checkAudioProcessStatus =  id => dispatch => {
     $.ajax({
       method: "get",
@@ -209,6 +208,7 @@ const checkAudioProcessStatus =  id => dispatch => {
       }
     });
 };
+
 export const fetchBinaryData = (storageObj, id, callBack) => {
   TrackAPI.getS3Url(id)
   .then(url =>{
