@@ -44,6 +44,11 @@ body > svg{
   padding: 20px;
   background-color: rgba(0,0,0,0.85);
 }
+.cover-art{
+  border: 1px solid rgb(100,100,100);
+  box-shadow:  10px 10px 0px rgba(255,255,255,0.3);
+}
+
 h1{
   font-size: 65px;
   text-align: center;

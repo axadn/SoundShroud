@@ -30819,7 +30819,7 @@ var TrackShow = function (_React$Component) {
                 _react2.default.createElement("div", { className: "waveform" })
               )
             ),
-            _react2.default.createElement("img", { className: "large", src: this.props.track.img_url }),
+            _react2.default.createElement("img", { className: "large cover-art", src: this.props.track.img_url }),
             _react2.default.createElement(
               "ul",
               { id: "track_show_options" },
@@ -32664,7 +32664,7 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "track-item" },
-    _react2.default.createElement("img", { className: "medium", src: props.track.img_url }),
+    _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url }),
     _react2.default.createElement(
       "div",
       { className: "play-button-and-info" },

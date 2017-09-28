@@ -47,7 +47,7 @@ export default class TrackShow extends React.Component{
                 <div className="waveform"></div>
               </div>
             </div>
-            <img className="large" src={this.props.track.img_url}></img>
+            <img className="large cover-art" src={this.props.track.img_url}></img>
               <ul id="track_show_options">
                 <li>{editButton}</li>
                 <li>{deleteButton}</li>
