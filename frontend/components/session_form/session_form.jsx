@@ -43,6 +43,7 @@ export default class SessionFrom extends React.Component{
     });
     return(
       <div id ="session-form-content">
+        <div id="session-form-and-title">
         <h1>{this.props.message}</h1>
         <div id="session-form-container">
           <form onSubmit={this.handleSubmit}>
@@ -90,6 +91,7 @@ export default class SessionFrom extends React.Component{
                     {errorElements.general}
                 </div>
               </form>
+        </div>
         </div>
       </div>
     // <div className = "session_page_content static_img_page">

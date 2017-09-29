@@ -281,7 +281,6 @@ form textarea:focus{
   display: flex;
   align-items: center;
   position: absolute;
-  margin-left: 20px;
   top: 0px;
   left: 100%;
 }
@@ -291,10 +290,11 @@ form textarea:focus{
   padding: 10px;
   font-size: 12px;
   box-shadow: 8px 8px 8px rgba(0,0,0,0.5);
-  white-space: pre;
+  width:120px;
 }
 
 .errors > svg {
+  flex-shrink: 0;
   display: inline-block;
   fill: rgb(155, 0, 14);
 }

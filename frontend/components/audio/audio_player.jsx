@@ -1,5 +1,5 @@
 import React from "react";
-import AudioControls from "./audio_controls";
+import AudioControlsContainer from "./audio_controls_container";
 const CACHE_SIZE = 5;
 
 const MID_CACHE_INDEX = Math.floor(CACHE_SIZE/2);
@@ -137,7 +137,7 @@ export default class AudioPlayer extends React.Component{
   }
   render(){
     return <div className = "audio-progress">
-      <AudioControls/>
+      <AudioControlsContainer loaded={this.state.loaded} playing={this.props.playing}/>
     </div>;
   }
 }
