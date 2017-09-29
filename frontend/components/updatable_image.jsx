@@ -10,6 +10,7 @@ export default class UpdatableImage extends React.Component{
   handleChange(e){
     const file = e.target.files[0];
     this.setState({src: URL.createObjectURL(file)});
+    URL.revokeObjectURL(this.props.src);
     this.props.postAction(file);
   }
   render(){

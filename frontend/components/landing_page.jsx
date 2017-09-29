@@ -9,12 +9,13 @@ export default class LandingPage extends React.Component{
     return(
     <div className = "landing_page_content static_img_page">
       <img src="/assets/sax blue.jpeg"></img>
+      <div className ="image-gradient-overlay"></div>
       <div className = "landing_info">
         <h1> Connect on SoundShroud</h1>
         <div>Discover hot new music from emerging and major artists
            worldwide.
         </div>
-        <Link className ="blue_button landing_button" to="/signup"> Sign Up For Free!</Link>
+        <Link className ="blue_button" id="landing_button" to="/signup"> Sign Up For Free!</Link>
       </div>
     </div>
     );

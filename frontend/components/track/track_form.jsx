@@ -38,7 +38,7 @@ export default class TrackForm extends React.Component {
   }
   render(){
     let errorElements = {};
-    let imageUrl = this.state.imageFile? URL.createObjectURL(this.state.imageFile) : "";
+    let imageUrl = this.state.imageFile? URL.createObjectURL(this.state.imageFile) : "/assets/camera.svg";
     let imageInputElement;
 
     Object.keys(this.props.errors).forEach(key => {
@@ -54,13 +54,25 @@ export default class TrackForm extends React.Component {
     });
     if(this.props.loading) return null;
   const fileUploadElement = this.props.editing? undefined:
-    <input type="file" onChange={this.handleFileChange}></input>;
+    <div id="track-upload-select-container">
+      <input type="file" className="file-input"
+        onChange={this.handleFileChange}></input>
+      <div id="track-upload-select"
+        onClick={()=>document.querySelector(".file-input").click()}>
+
+        {this.state.file? this.state.file.name : "Select a file"}
+      </div>
+      {errorElements.file}
+    </div>;
   if (!this.props.editing){
     imageInputElement =
       <div className="image-input-container">
         <input className="image-input" type="file"
           onChange={this.handleImageChange}></input>
         <img src={imageUrl} className="medium-large cover-art"></img>
+        <div>
+
+        </div>
         <button className="blue_button"
           onClick={()=>document.querySelector(".image-input").click()}
           >change image</button>
@@ -73,11 +85,8 @@ export default class TrackForm extends React.Component {
         <div className ="floater2">
           <h2>{this.props.editing? "Edit your Track" : "Upload a Track"}</h2>
         <form className="track_form" onSubmit={this.handleSubmit}>
-            <div>
-              {fileUploadElement}
-              {errorElements.file}
-            </div>
-            <label>Title</label>
+            {fileUploadElement}
+
             <div>
               <input type="text"
                 value={this.state.labelTitle? "Name your track" : this.state.title}
@@ -87,7 +96,6 @@ export default class TrackForm extends React.Component {
                 {errorElements.title}
             </div>
 
-            <label>Description</label>
             <div>
               <textArea
                 value={this.state.labelDescription? "Describe your track" : this.state.description}
@@ -97,8 +105,12 @@ export default class TrackForm extends React.Component {
               {errorElements.description}
             </div>
 
-            <input type="submit" className = "blue_button"
-              value={this.props.editing ? "Update" : "Upload"}></input>
+            <div>
+              <input type="submit" className = "blue_button"
+                value={this.props.editing ? "Update" : "Upload"}></input>
+
+            </div>
+
           </form>
         </div>
       </div>

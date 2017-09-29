@@ -9,26 +9,29 @@
 }
 
 .track_form{
-  display: block;
-  flex-grow: 1;
-  width: 500px;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.track_form .blue_button{
+  width: 100%;
+  height: 40px;
 }
 
-.track_form > *{
-  display: block;
-  margin-left: 8px;
-  margin-right: 8px;
+.track_form > div {
+  padding: 10px;
+  width: 80%;
 }
 .track_form input[type="text"],
 .track_form textarea{
   width: 100%;
 }
 .track_form input[type="text"]{
-  font-size: 20px;
+  font-size: 22px;
 }
 .track_form textarea{
-  font-size: 16px;
+  font-size: 14px;
 }
 .track_form label{
   margin-top: 15px;
@@ -38,12 +41,13 @@
 .track_form textarea{
   height: 145px;
 }
-.track_form input[type="submit"]{
-  margin-top: 15px;
+.track_form .file-input-container > div{
+  width: 100%;
 }
 .floater2{
   display: inline-block;
   flex-direction: column;
+  align-items: center;
   width: 500px;
   height: 500px;
   position: relative;
@@ -53,9 +57,43 @@
   position: relative;
   margin-right: 40px;
 }
-
 .image-input-container button{
   position: absolute;
   bottom: 6%;
   right: 32%;
+}
+#track-upload-select-container{
+  display: relative;
+}
+#track-upload-select{
+  height: 40px;
+  box-shadow: 5px 5px 1px rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+#track-upload-select:active{
+  left: 5px;
+  top: 5px;
+  box-shadow: none;
+}
+#track-upload-select:hover{
+  cursor: pointer;
+}
+#track-upload-select{
+  box-shadow: 5px 5px 1px rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+#track-upload-select img{
+  width: 80px;
+  height: 80px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-
+import AudioControls from "./audio_controls";
 const CACHE_SIZE = 5;
 
 const MID_CACHE_INDEX = Math.floor(CACHE_SIZE/2);
@@ -10,10 +10,7 @@ const shiftCache = amount =>(state, props) =>{
     cache.push(state.cache[i + amount] ||
       props.playlist[props.indexInPlaylist + i - MID_CACHE_INDEX] );
   }
-  if(state.audioSource){
-    state.audioSource.pause();
-  }
-  return {cache, playing: false, waitingToPlay: true, audioSource: null};
+  return {cache, playing: false, waitingToPlay: true, audioSource: null, srcIsValid: false};
 };
 
 const assignCacheFromNewPlaylist = playlist => (state, props) =>{
@@ -21,25 +18,20 @@ const assignCacheFromNewPlaylist = playlist => (state, props) =>{
   for(let i = 0; i < CACHE_SIZE; ++i){
     cache.push({id: playlist[props.indexInPlaylist + i - MID_CACHE_INDEX]});
   }
-  if(state.audioSource){
-    state.audioSource.pause();
-  }
-  return{cache, playing: false, waitingToPlay: true, audioSource: null};
+  return{cache, playing: false, waitingToPlay: true, srcIsValid: false};
 };
 
 const assignAudioSource = (state, props)=>{
-  if(state.loaded && !state.audioSource){
-    const audioSource = document.querySelector("audio");
-    audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
+  if(state.loaded && !state.srcIsValid){
+    state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
     // const audioSource = state.audioCtx.createBufferSource();
     // state.audioCtx.decodeAudioData(state.cache[MID_CACHE_INDEX].binaryData,
     //   buffer => {
     //   audioSource.buffer = buffer;
     //   audioSource.connect(state.audioCtx.destination);
     // });
-    return {audioSource};
+    return{srcIsValid: true};
   }
-  return {audioSource: state.audioSource};
 }
 
 const setIfLoaded = (state, props) => {
@@ -100,7 +92,7 @@ export default class AudioPlayer extends React.Component{
       playing: false,
       cache,
       audioCtx: new (window.AudioContext || window.webkitAudioContext)(),
-      audioSource: undefined
+      audioSource: document.querySelector("audio")
     };
   }
 
@@ -145,7 +137,7 @@ export default class AudioPlayer extends React.Component{
   }
   render(){
     return <div className = "audio-progress">
-      <audio controls></audio>
+      <AudioControls/>
     </div>;
   }
 }

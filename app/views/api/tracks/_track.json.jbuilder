@@ -6,9 +6,9 @@ else
 end
 
 if track.custom_img
-  json.set! :img_url, track_img_url(track.id, track.img_extension)
+  json.set! :img_url, track_img_url(track)
 elsif track.artist.custom_img
-  json.set! :img_url, user_img_url(track.artist_id, track.artist.img_extension)
+  json.set! :img_url, user_img_url(track)
 else
   json.set! :img_url, asset_path("default_profile.jpeg")
 end

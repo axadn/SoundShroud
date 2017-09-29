@@ -56,6 +56,7 @@ class AudioProcessJob
       end
       track.custom_img = true
       track.img_extension = ".jpeg"
+      track.image_modified_at = DateTime.now
     rescue
     ensure
       File.delete("tmp/#{track.id}.jpeg") if File.exist?("tmp/#{track.id}.jpeg")

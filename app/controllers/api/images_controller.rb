@@ -9,6 +9,7 @@ class Api::ImagesController < ApplicationController
     post = obj.presigned_post(key: "tracks/images/#{params[:id]}#{@extension}", acl: "public-read")
     @track.custom_img = true
     @track.img_extension = @extension
+    @track.image_modified_at = DateTime.now
     @track.save
     render json: { fields: post.fields, url: post.url }
   end
@@ -24,6 +25,7 @@ class Api::ImagesController < ApplicationController
     post = obj.presigned_post(key: "users/images/#{params[:id]}#{@extension}", acl: "public-read")
     @user.custom_img = true
     @user.img_extension = @extension
+    @user.image_modified_at = DateTime.now
     @user.save
     render json: { fields: post.fields, url: post.url }
   end

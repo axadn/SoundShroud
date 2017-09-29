@@ -42,57 +42,63 @@ export default class SessionFrom extends React.Component{
       </div>
     });
     return(
-    <div className = "session_page_content static_img_page">
-      <img src="/assets/guit blue.jpeg"></img>
-      <div className = "floater1 session_form">
-        <h2>{this.props.message}</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input type="text"
-              onFocus={e => {
-                if(usernameEmpty){
-                  this.setState({label_username : false})
-                }
-              }}
-              onBlur ={e => {
-                if(this.state.username.length === 0){
-                  this.setState({label_username: true})
-                }
-              }}
-              className={this.state.label_username ? "empty" : ""}
-              onChange={this.handleChange("username")}
-              value = {this.state.label_username? "Username" : this.state.username }
-            ></input>
+      <div id ="session-form-content">
+        <h1>{this.props.message}</h1>
+        <div id="session-form-container">
+          <form onSubmit={this.handleSubmit}>
+                 <div>
+                   <input type="text"
+                    onFocus={e => {
+                       if(usernameEmpty){
+                         this.setState({label_username : false})
+                       }
+                    }}
+                    onBlur ={e => {
+                      if(this.state.username.length === 0){
+                        this.setState({label_username: true})
+                      }
+                    }}
+                    className={this.state.label_username ? "empty" : ""}
+                    onChange={this.handleChange("username")}
+                    value = {this.state.label_username? "Username" : this.state.username }
+                  ></input>
 
-          {errorElements.username}
-          </div>
-          <div>
-             <input type={this.state.label_password ? "text" : "password"}
-              onFocus ={ e => {
-                  this.setState({label_password: false})
-                }
-              }
-              onBlur ={e => {
-                if(this.state.password.length === 0){
-                  this.setState({label_password: true})
-                }
-              }}
-              onChange={this.handleChange("password")}
-              className={this.state.label_password ? "empty" : ""}
-              value = {this.state.label_password? "Password" : this.state.password}
-            ></input>
-          {errorElements.password}
-          </div>
-          <div className ="session_submit_buttons">
-            <input type="button" onClick={this.handleExample}
-              className="form_button blue_button" value="Demo"></input>
-            <input type="submit" className="form_button blue_button" value={
-                this.props.buttonText}></input>
-              {errorElements.general}
-          </div>
-        </form>
+                {errorElements.username}
+                </div>
+                <div>
+                   <input type={this.state.label_password ? "text" : "password"}
+                    onFocus ={ e => {
+                        this.setState({label_password: false})
+                      }
+                    }
+                    onBlur ={e => {
+                      if(this.state.password.length === 0){
+                        this.setState({label_password: true})
+                      }
+                    }}
+                    onChange={this.handleChange("password")}
+                    className={this.state.label_password ? "empty" : ""}
+                    value = {this.state.label_password? "Password" : this.state.password}
+                  ></input>
+                {errorElements.password}
+                </div>
+                <div className ="session_submit_buttons">
+                  <input type="button" onClick={this.handleExample}
+                    className="form_button blue_button" value="Demo"></input>
+                  <input type="submit" className="form_button blue_button" value={
+                      this.props.buttonText}></input>
+                    {errorElements.general}
+                </div>
+              </form>
+        </div>
       </div>
-    </div>
+    // <div className = "session_page_content static_img_page">
+    //   <img src="/assets/guit blue.jpeg"></img>
+    //   <div className = "floater1 session-form-container">
+    //     <h2>{this.props.message}</h2>
+    //
+    //   </div>
+    // </div>
     );
   }
 }

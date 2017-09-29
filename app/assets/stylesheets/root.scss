@@ -1,23 +1,7 @@
 // Place all the styles related to the root controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$iron : #d5d7d9;
-$outer_space : #333638;
-$alabaster: #F9F9F9;
-$athens-grey: #F0F0F1;
-$woodsmoke: #0B0B0C;
-$azure_radiance: #0087FE;
-$east-bae: #3a4f73;
-$cod-grey: #191919;
-$mine-shaft: #212121;
-$coral-red: #FD4041;
-$ship-grey: #434347;
-$ming: #35617b;
-$bahama-blue: #096caa;
-$calypso: #2d7387;
-$invisible-black: rgba(0,0,0,0);
-$false-ming: #4b8aaf;
-$false-calypso: #47a4b4;
+@import "colors";
 #root{
   position: absolute;
   left: 0;
@@ -46,7 +30,7 @@ body > svg{
 }
 .cover-art{
   border: 1px solid rgb(100,100,100);
-  box-shadow:  10px 10px 0px rgba(255,255,255,0.3);
+  box-shadow:  10px 10px 0px $shadow-color-1;
 }
 
 h1{
@@ -57,25 +41,13 @@ h2{
  font-size: 45px;
  text-align: center;
 }
-.image-input{
+input[type="file"]{
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
-}
-.imag-input + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-}
-
-.image-input + label,
-.image-input + label:hover {
-    background-color: red;
 }
 .static_img_page{
   position: relative;
@@ -176,7 +148,6 @@ ul{
   background-color: $cod-grey;
   color: white;
   max-width: 1500px;
-  min-width: 700px;
 }
 
 .nav_bar {
@@ -248,7 +219,6 @@ ul{
 form{
   display: flex;
   flex-direction: column;
-  height: 200px;
   justify-content: space-around;
 }
 
@@ -293,11 +263,7 @@ form textarea{
 }
 form input[type="text"],
 form input[type="password"]{
-  box-sizing: border-box;
-  width: 234px;
-  margin-right: 8px;
-  margin-left: 8px;
-  padding: 5px;
+
   height: 40px;
 }
 input.empty{
@@ -309,13 +275,6 @@ form input[type="password"]:focus,
 form textarea:focus{
   background-color: $mine-shaft;
   outline: none;
-}
-.form_button{
-  animation-duration: 1.5s;
-  align-self: flex-end;
-  width: 102px;
-  height: 40px;
-
 }
 
 .errors {

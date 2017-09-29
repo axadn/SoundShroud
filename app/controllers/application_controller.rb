@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   SUPPORTED_EXTENSIONS = ['.jpg', '.gif', '.png',
   '.jpeg']
 
-  def user_img_url(id, extension = ".jpeg")
-    "https://s3-us-west-1.amazonaws.com/soundshroud/users/images/#{id}#{extension}"
+  def user_img_url(user)
+    "https://s3-us-west-1.amazonaws.com/soundshroud/users/images/#{user.id}#{user.img_extension}?t=#{user.image_modified_at.hash}"
   end
 
-  def track_img_url(id, extension = ".jpeg")
-    "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/images/#{id}#{extension}"
+  def track_img_url(track)
+    "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/images/#{track.id}#{track.img_extension}?t=#{track.image_modified_at.hash}"
   end
 
   def self.valid_image_extension?(filename)
