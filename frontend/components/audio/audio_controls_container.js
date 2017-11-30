@@ -3,12 +3,13 @@ import AudioControls from "./audio_controls";
 import {startPlayback, pausePlayback, forwardPlayback, backPlayback}
   from "../../actions/playlist_actions";
 const mapStateToProps = (state, props) =>({
-
 });
 
 const mapDispatchToProps = (dispatch, props) =>({
   playAction: () => dispatch(startPlayback()),
-  pauseAction: () => dispatch(pausePlayback())
+  pauseAction: () => dispatch(pausePlayback()),
+  skipAction: () => dispatch(forwardPlayback()),
+  backAction: () => dispatch(backPlayback())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioControls);

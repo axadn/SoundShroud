@@ -1,20 +1,22 @@
 import {connect} from "react-redux";
 import DocumentPlayButton from "./document_play_button";
-import {receivePlaylist, pausePlayback, startPlayback} from "../../actions/playlist_actions";
+import {receivePlaylist, pausePlayback, startPlayback, receivePlaylistIndex}
+ from "../../actions/playlist_actions";
 
 const mapStateToProps = (state, props) => {
+  debugger;
   return{
   playing: state.playlist.playing,
-  current_in_playlist: state.playlist.ids[state.playlist.currentIndex] === props.trackId};
+  tracksOnPage: state.entities.tracks,
+  current_in_playlist: state.playlist.ids[state.playlist.currentIndex] == props.trackId};
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  playTrack: () =>{
-    dispatch(receivePlaylist([props.trackId]));
-  },
   resumeTrack: () => {
     dispatch(startPlayback());
   },
+  dispatchPlaylist: ids => dispatch(receivePlaylist(ids)),
+  playlistItemByIndex: index => dispatch(receivePlaylistIndex(index)),
   pauseTrack: () => dispatch(pausePlayback())
 });
 

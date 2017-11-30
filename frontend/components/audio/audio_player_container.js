@@ -5,7 +5,7 @@ import AudioPlayer from "./audio_player";
 const mapStateToProps = (state, ownProps) => ({
   playlist: state.playlist.ids,
   playing: state.playlist.playing,
-  indexInPlaylist: 0,
+  indexInPlaylist: state.playlist.currentIndex,
   fetchForCache: (storageObj, id, callBack) => fetchBinaryData(storageObj, id, callBack)
 });
 

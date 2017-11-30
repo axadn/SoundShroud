@@ -30,7 +30,7 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = User.find_by(id: params[:user_id]).tracks
+    @tracks = User.find_by(id: params[:user_id]).tracks.order("created_at DESC")
     render :index
   end
 

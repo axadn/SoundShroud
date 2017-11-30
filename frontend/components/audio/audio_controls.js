@@ -15,8 +15,9 @@ export default class AudioControls extends React.Component{
   }
   componentWillMount(){
     this.state = {progress: 0};
-    const audioElement = document.querySelector("audio");
-    audioElement.addEventListener("timeupdate", this.handleTimeChange(audioElement));
+    this.audioElement.addEventListener("timeupdate",
+      this.handleTimeChange(this.audioElement));
+    this.audioElement.addEventListener("ended", this.props.skipAction);
   }
   assignCanvasContainer(cont){
     this.canvasCont = cont;

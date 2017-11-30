@@ -22,7 +22,9 @@ const handlePlayButton = props => ()=> {
     }
   }
   else{
-    props.playTrack();
+    const trackIds = Object.keys(props.tracksOnPage);
+    props.dispatchPlaylist(trackIds);
+    props.playlistItemByIndex(trackIds.indexOf(props.trackId.toString()));
   }
 };
 

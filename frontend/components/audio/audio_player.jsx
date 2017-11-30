@@ -1,5 +1,6 @@
 import React from "react";
 import AudioControlsContainer from "./audio_controls_container";
+import {receivePlaylistId} from "../../actions/playlist_actions";
 const CACHE_SIZE = 5;
 
 const MID_CACHE_INDEX = Math.floor(CACHE_SIZE/2);
@@ -7,16 +8,22 @@ const MID_CACHE_INDEX = Math.floor(CACHE_SIZE/2);
 const shiftCache = amount =>(state, props) =>{
   const cache = [];
   for(let i = 0; i < CACHE_SIZE; ++ i){
-    cache.push(state.cache[i + amount] ||
-      props.playlist[props.indexInPlaylist + i - MID_CACHE_INDEX] );
+    if(state.cache[i + amount] === undefined){
+      cache.push(props.playlist[
+        (props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length
+      ]);
+    }
+    else{
+      cache.push(state.cache[i + amount]);
+    }
   }
-  return {cache, playing: false, waitingToPlay: true, audioSource: null, srcIsValid: false};
+  return {cache, playing: false, waitingToPlay: true, srcIsValid: false};
 };
 
-const assignCacheFromNewPlaylist = playlist => (state, props) =>{
+const assignCacheFromNewPlaylist = (playlist, indexInPlaylist) => (state, props) =>{
   const cache = [];
   for(let i = 0; i < CACHE_SIZE; ++i){
-    cache.push({id: playlist[props.indexInPlaylist + i - MID_CACHE_INDEX]});
+    cache.push({id: playlist[(indexInPlaylist + i - MID_CACHE_INDEX) % playlist.length]});
   }
   return{cache, playing: false, waitingToPlay: true, srcIsValid: false};
 };
@@ -24,12 +31,6 @@ const assignCacheFromNewPlaylist = playlist => (state, props) =>{
 const assignAudioSource = (state, props)=>{
   if(state.loaded && !state.srcIsValid){
     state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
-    // const audioSource = state.audioCtx.createBufferSource();
-    // state.audioCtx.decodeAudioData(state.cache[MID_CACHE_INDEX].binaryData,
-    //   buffer => {
-    //   audioSource.buffer = buffer;
-    //   audioSource.connect(state.audioCtx.destination);
-    // });
     return{srcIsValid: true};
   }
 }
@@ -58,24 +59,6 @@ const fetchForCache = player => (state, props) =>{
     );
     return;
   }
-  // let i = MID_CACHE_INDEX + 1;
-  // do{
-  //   if(!this.state.cache[i].binaryData &&
-  //     !this.state.cache[i].fetching){
-  //     this.props.fetchForCache(this.state.cache[i],
-  //       this.state.cache[i].id, this.fetchForCache);
-  //     return;
-  //   }
-  // }while(i <= CACHE_SIZE && this.state.cache[i].id);
-  // i = MID_CACHE_INDEX -1;
-  // do{
-  //   if(!this.state.cache[i].binaryData &&
-  //     !this.state.cache[i].fetching){
-  //     this.props.fetchForCache(this.state.cache[i],
-  //       this.state.cache[i].id, this.fetchForCache);
-  //     break;
-  //   }
-  // }while(i >= 0 && this.state.cache[i].id);
 }
 
 export default class AudioPlayer extends React.Component{
@@ -112,7 +95,7 @@ export default class AudioPlayer extends React.Component{
       }
     }
     else{
-      this.setState(assignCacheFromNewPlaylist(newProps.playlist));
+      this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
     }
     this.cacheHandleLoop();
   }
@@ -122,7 +105,6 @@ export default class AudioPlayer extends React.Component{
     this.setState(handleQueuedPlay);
     this.setState(fetchForCache(this));
   }
-
   handlePlay(){
     this.props.startPlayback();
   }

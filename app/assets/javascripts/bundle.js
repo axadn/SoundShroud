@@ -13961,18 +13961,23 @@ var _playlist_actions = __webpack_require__(132);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, props) {
+  debugger;
   return {
     playing: state.playlist.playing,
-    current_in_playlist: state.playlist.ids[state.playlist.currentIndex] === props.trackId };
+    tracksOnPage: state.entities.tracks,
+    current_in_playlist: state.playlist.ids[state.playlist.currentIndex] == props.trackId };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return {
-    playTrack: function playTrack() {
-      dispatch((0, _playlist_actions.receivePlaylist)([props.trackId]));
-    },
     resumeTrack: function resumeTrack() {
       dispatch((0, _playlist_actions.startPlayback)());
+    },
+    dispatchPlaylist: function dispatchPlaylist(ids) {
+      return dispatch((0, _playlist_actions.receivePlaylist)(ids));
+    },
+    playlistItemByIndex: function playlistItemByIndex(index) {
+      return dispatch((0, _playlist_actions.receivePlaylistIndex)(index));
     },
     pauseTrack: function pauseTrack() {
       return dispatch((0, _playlist_actions.pausePlayback)());
@@ -13993,6 +13998,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var RECEIVE_PLAYLIST = exports.RECEIVE_PLAYLIST = "RECEIVE_PLAYLIST";
+var RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST_ID = "RECEIVE_PLAYLIST_ID";
+var FORWARD_PLAYBACK = exports.FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
+var BACK_PLAYBACK = exports.BACK_PLAYBACK = "BACK_PLAYBACK";
 var PAUSE_PLAYBACK = exports.PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 var START_PLAYBACK = exports.START_PLAYBACK = "START_PLAYBACK";
 
@@ -14000,6 +14008,13 @@ var receivePlaylist = exports.receivePlaylist = function receivePlaylist(ids) {
   return {
     type: RECEIVE_PLAYLIST,
     payload: ids
+  };
+};
+
+var receivePlaylistIndex = exports.receivePlaylistIndex = function receivePlaylistIndex(index) {
+  return {
+    type: RECEIVE_PLAYLIST_ID,
+    payload: index
   };
 };
 
@@ -14012,6 +14027,18 @@ var pausePlayback = exports.pausePlayback = function pausePlayback() {
 var startPlayback = exports.startPlayback = function startPlayback() {
   return {
     type: START_PLAYBACK
+  };
+};
+
+var forwardPlayback = exports.forwardPlayback = function forwardPlayback() {
+  return {
+    type: FORWARD_PLAYBACK
+  };
+};
+
+var backPlayback = exports.backPlayback = function backPlayback() {
+  return {
+    type: BACK_PLAYBACK
   };
 };
 
@@ -31484,7 +31511,9 @@ var handlePlayButton = function handlePlayButton(props) {
         props.resumeTrack();
       }
     } else {
-      props.playTrack();
+      var trackIds = Object.keys(props.tracksOnPage);
+      props.dispatchPlaylist(trackIds);
+      props.playlistItemByIndex(trackIds.indexOf(props.trackId.toString()));
     }
   };
 };
@@ -32298,7 +32327,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     playlist: state.playlist.ids,
     playing: state.playlist.playing,
-    indexInPlaylist: 0,
+    indexInPlaylist: state.playlist.currentIndex,
     fetchForCache: function fetchForCache(storageObj, id, callBack) {
       return (0, _track_actions.fetchBinaryData)(storageObj, id, callBack);
     }
@@ -32331,6 +32360,8 @@ var _audio_controls_container = __webpack_require__(333);
 
 var _audio_controls_container2 = _interopRequireDefault(_audio_controls_container);
 
+var _playlist_actions = __webpack_require__(132);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32347,17 +32378,21 @@ var shiftCache = function shiftCache(amount) {
   return function (state, props) {
     var cache = [];
     for (var i = 0; i < CACHE_SIZE; ++i) {
-      cache.push(state.cache[i + amount] || props.playlist[props.indexInPlaylist + i - MID_CACHE_INDEX]);
+      if (state.cache[i + amount] === undefined) {
+        cache.push(props.playlist[(props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length]);
+      } else {
+        cache.push(state.cache[i + amount]);
+      }
     }
-    return { cache: cache, playing: false, waitingToPlay: true, audioSource: null, srcIsValid: false };
+    return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
   };
 };
 
-var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist) {
+var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist, indexInPlaylist) {
   return function (state, props) {
     var cache = [];
     for (var i = 0; i < CACHE_SIZE; ++i) {
-      cache.push({ id: playlist[props.indexInPlaylist + i - MID_CACHE_INDEX] });
+      cache.push({ id: playlist[(indexInPlaylist + i - MID_CACHE_INDEX) % playlist.length] });
     }
     return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
   };
@@ -32366,12 +32401,6 @@ var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist) {
 var assignAudioSource = function assignAudioSource(state, props) {
   if (state.loaded && !state.srcIsValid) {
     state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
-    // const audioSource = state.audioCtx.createBufferSource();
-    // state.audioCtx.decodeAudioData(state.cache[MID_CACHE_INDEX].binaryData,
-    //   buffer => {
-    //   audioSource.buffer = buffer;
-    //   audioSource.connect(state.audioCtx.destination);
-    // });
     return { srcIsValid: true };
   }
 };
@@ -32400,24 +32429,6 @@ var fetchForCache = function fetchForCache(player) {
       });
       return;
     }
-    // let i = MID_CACHE_INDEX + 1;
-    // do{
-    //   if(!this.state.cache[i].binaryData &&
-    //     !this.state.cache[i].fetching){
-    //     this.props.fetchForCache(this.state.cache[i],
-    //       this.state.cache[i].id, this.fetchForCache);
-    //     return;
-    //   }
-    // }while(i <= CACHE_SIZE && this.state.cache[i].id);
-    // i = MID_CACHE_INDEX -1;
-    // do{
-    //   if(!this.state.cache[i].binaryData &&
-    //     !this.state.cache[i].fetching){
-    //     this.props.fetchForCache(this.state.cache[i],
-    //       this.state.cache[i].id, this.fetchForCache);
-    //     break;
-    //   }
-    // }while(i >= 0 && this.state.cache[i].id);
   };
 };
 
@@ -32461,7 +32472,7 @@ var AudioPlayer = function (_React$Component) {
           this.setState(shiftCache(newProps.indexInPlaylist - this.props.indexInPlaylist));
         }
       } else {
-        this.setState(assignCacheFromNewPlaylist(newProps.playlist));
+        this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
       }
       this.cacheHandleLoop();
     }
@@ -33103,6 +33114,12 @@ exports.default = function () {
       return Object.assign({}, state, { playing: true });
     case _playlist_actions.PAUSE_PLAYBACK:
       return Object.assign({}, state, { playing: false });
+    case _playlist_actions.RECEIVE_PLAYLIST_ID:
+      return Object.assign({}, state, { currentIndex: action.payload });
+    case _playlist_actions.FORWARD_PLAYBACK:
+      return Object.assign({}, state, { currentIndex: (state.currentIndex + 1) % state.ids.length });
+    case _playlist_actions.BACK_PLAYBACK:
+      return Object.assign({}, state, { currentIndex: (state.currentIndex - 1) % state.ids.length });
     default:
       return state;
   }
@@ -33140,6 +33157,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     },
     pauseAction: function pauseAction() {
       return dispatch((0, _playlist_actions.pausePlayback)());
+    },
+    skipAction: function skipAction() {
+      return dispatch((0, _playlist_actions.forwardPlayback)());
+    },
+    backAction: function backAction() {
+      return dispatch((0, _playlist_actions.backPlayback)());
     }
   };
 };
@@ -33203,8 +33226,8 @@ var AudioControls = function (_React$Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.state = { progress: 0 };
-      var audioElement = document.querySelector("audio");
-      audioElement.addEventListener("timeupdate", this.handleTimeChange(audioElement));
+      this.audioElement.addEventListener("timeupdate", this.handleTimeChange(this.audioElement));
+      this.audioElement.addEventListener("ended", this.props.skipAction);
     }
   }, {
     key: "assignCanvasContainer",
