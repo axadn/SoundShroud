@@ -4,7 +4,6 @@ import {receivePlaylist, pausePlayback, startPlayback, receivePlaylistIndex}
  from "../../actions/playlist_actions";
 
 const mapStateToProps = (state, props) => {
-  debugger;
   return{
   playing: state.playlist.playing,
   tracksOnPage: state.entities.tracks,
@@ -17,7 +16,13 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   dispatchPlaylist: ids => dispatch(receivePlaylist(ids)),
   playlistItemByIndex: index => dispatch(receivePlaylistIndex(index)),
-  pauseTrack: () => dispatch(pausePlayback())
+  pauseTrack: () => dispatch(pausePlayback()),
+  generatePlaylist: trackId => generatePlaylist(trackId).then(
+    ids => {
+      dispatch(receivePlaylist(ids));
+      dispatch(receivePlaylistIndex(trackIds.indexOf(props.trackId)));
+    }
+  )
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentPlayButton);

@@ -14016,7 +14016,6 @@ var _playlist_actions = __webpack_require__(49);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  debugger;
   return {
     playing: state.playlist.playing,
     tracksOnPage: state.entities.tracks,
@@ -14036,7 +14035,23 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     },
     pauseTrack: function pauseTrack() {
       return dispatch((0, _playlist_actions.pausePlayback)());
-    }
+    },
+    generatePlaylist: function (_generatePlaylist) {
+      function generatePlaylist(_x) {
+        return _generatePlaylist.apply(this, arguments);
+      }
+
+      generatePlaylist.toString = function () {
+        return _generatePlaylist.toString();
+      };
+
+      return generatePlaylist;
+    }(function (trackId) {
+      return generatePlaylist(trackId).then(function (ids) {
+        dispatch((0, _playlist_actions.receivePlaylist)(ids));
+        dispatch((0, _playlist_actions.receivePlaylistIndex)(trackIds.indexOf(props.trackId)));
+      });
+    })
   };
 };
 
@@ -31511,9 +31526,15 @@ var handlePlayButton = function handlePlayButton(props) {
         props.resumeTrack();
       }
     } else {
-      var trackIds = Object.keys(props.tracksOnPage);
-      props.dispatchPlaylist(trackIds);
-      props.playlistItemByIndex(trackIds.indexOf(props.trackId.toString()));
+      var trackIds = Object.keys(props.tracksOnPage).map(function (key) {
+        return parseInt(key);
+      });
+      if (trackIds.length > 1) {
+        props.dispatchPlaylist(trackIds);
+        props.playlistItemByIndex(trackIds.indexOf(props.trackId));
+      } else {
+        props.generatePlaylist(props.trackId);
+      }
     }
   };
 };

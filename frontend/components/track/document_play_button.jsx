@@ -12,7 +12,7 @@ export default props => {
   );
 };
 
-const handlePlayButton = props => ()=> {
+const handlePlayButton = props => () => {
   if(props.current_in_playlist){
     if(props.playing){
       props.pauseTrack();
@@ -22,9 +22,14 @@ const handlePlayButton = props => ()=> {
     }
   }
   else{
-    const trackIds = Object.keys(props.tracksOnPage);
-    props.dispatchPlaylist(trackIds);
-    props.playlistItemByIndex(trackIds.indexOf(props.trackId.toString()));
+    let trackIds = Object.keys(props.tracksOnPage).map(key=> parseInt(key));
+    if(trackIds.length > 1){
+      props.dispatchPlaylist(trackIds);
+      props.playlistItemByIndex(trackIds.indexOf(props.trackId));
+    }
+    else {
+      props.generatePlaylist(props.trackId);
+    }
   }
 };
 
