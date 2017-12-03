@@ -14013,6 +14013,8 @@ var _document_play_button2 = _interopRequireDefault(_document_play_button);
 
 var _playlist_actions = __webpack_require__(49);
 
+var _api_playlist_utils = __webpack_require__(335);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, props) {
@@ -14036,22 +14038,15 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     pauseTrack: function pauseTrack() {
       return dispatch((0, _playlist_actions.pausePlayback)());
     },
-    generatePlaylist: function (_generatePlaylist) {
-      function generatePlaylist(_x) {
-        return _generatePlaylist.apply(this, arguments);
-      }
-
-      generatePlaylist.toString = function () {
-        return _generatePlaylist.toString();
-      };
-
-      return generatePlaylist;
-    }(function (trackId) {
-      return generatePlaylist(trackId).then(function (ids) {
+    generatePlaylist: function generatePlaylist(trackId) {
+      return (0, _api_playlist_utils.generatePlaylist)(trackId).then(function (ids) {
+        ids = ids.map(function (id) {
+          return id.id;
+        });
         dispatch((0, _playlist_actions.receivePlaylist)(ids));
-        dispatch((0, _playlist_actions.receivePlaylistIndex)(trackIds.indexOf(props.trackId)));
+        dispatch((0, _playlist_actions.receivePlaylistIndex)(ids.indexOf(props.trackId)));
       });
-    })
+    }
   };
 };
 
@@ -33409,6 +33404,20 @@ exports.default = function () {
     default:
       return state;
   }
+};
+
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var generatePlaylist = exports.generatePlaylist = function generatePlaylist(trackId) {
+  return $.ajax({ method: "get", url: "/api/playlists/tracks/" + trackId });
 };
 
 /***/ })
