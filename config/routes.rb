@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'api/tracks/:id/img/verify', to: 'api/images#track_verify'
   post 'api/users/:id/img/verify', to: 'api/images#user_verify'
   get '/api/tracks/s3/:id', to: 'api/tracks#get_s3_url'
+  get '/api/playlist/tracks/:id', to: 'api/playlist#from_track_id'
   post '/api/tracks/process', to: 'api/tracks#process_track'
   get 'api/tracks/:id/status', to: 'api/tracks#audio_process_status'
   get '/', to: 'root#show'
