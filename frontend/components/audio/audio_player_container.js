@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => ({
   playlist: state.playlist.ids,
   playing: state.playlist.playing,
   indexInPlaylist: state.playlist.currentIndex,
-  fetchForCache: (storageObj, id, callBack) => fetchBinaryData(storageObj, id, callBack)
+  fetchForCache: (id, callBack) => fetchBinaryData(id, callBack)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

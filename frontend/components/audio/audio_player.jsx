@@ -9,9 +9,9 @@ const shiftCache = amount =>(state, props) =>{
   const cache = [];
   for(let i = 0; i < CACHE_SIZE; ++ i){
     if(state.cache[i + amount] === undefined){
-      cache.push(props.playlist[
+      cache.push({id:props.playlist[
         (props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length
-      ]);
+      ]});
     }
     else{
       cache.push(state.cache[i + amount]);
@@ -35,6 +35,16 @@ const assignAudioSource = (state, props)=>{
   }
 }
 
+const receiveSongCacheData = payload => (state, props) =>{
+  let cache = state.cache;
+  debugger;
+  for(let i = 0; i < cache.length; ++i){
+    if(cache[i].id == payload.id){
+      cache[i].binaryData = payload.binaryData;
+    }
+  }
+  return {cache};
+}
 const setIfLoaded = (state, props) => {
   return {loaded: Boolean(state.cache[MID_CACHE_INDEX].binaryData)}
 }
@@ -47,10 +57,12 @@ const handleQueuedPlay = (state, props) => {
 }
 
 const fetchForCache = player => (state, props) =>{
+  debugger;
   const current = state.cache[MID_CACHE_INDEX];
   if(!current.id) return {};
   if(!current.binaryData && !current.fetching){
-    props.fetchForCache(current, current.id, ()=>{
+    props.fetchForCache(current.id, data=>{
+        player.setState(receiveSongCacheData(data));
         player.setState(setIfLoaded);
         player.setState(assignAudioSource);
         player.setState(handleQueuedPlay);
@@ -89,13 +101,13 @@ export default class AudioPlayer extends React.Component{
         this.state.audioSource.pause();
       }
     }
-    if(this.props.playlist === newProps.playlist){
-      if (newProps.indexInPlaylist != this.props.indexInPlaylist){
-        this.setState(shiftCache(newProps.indexInPlaylist - this.props.indexInPlaylist));
-      }
-    }
-    else{
-      this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
+      if (newProps.indexInPlaylist !== this.props.indexInPlaylist){
+        if(this.props.indexInPlaylist === null){
+          this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
+        }
+        else{
+          this.setState(shiftCache(newProps.indexInPlaylist - this.props.indexInPlaylist));
+        }
     }
     this.cacheHandleLoop();
   }

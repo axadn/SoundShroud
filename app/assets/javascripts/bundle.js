@@ -1751,7 +1751,7 @@ var checkAudioProcessStatus = function checkAudioProcessStatus(id) {
   };
 };
 
-var fetchBinaryData = exports.fetchBinaryData = function fetchBinaryData(storageObj, id, callBack) {
+var fetchBinaryData = exports.fetchBinaryData = function fetchBinaryData(id, callBack) {
   TrackAPI.getS3Url(id).then(function (url) {
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest();
@@ -1764,11 +1764,9 @@ var fetchBinaryData = exports.fetchBinaryData = function fetchBinaryData(storage
       xhr.send();
     });
   }).then(function (data) {
-    storageObj.binaryData = data;
-    storageObj.fetching = false;
-  }).then(callBack).catch(function () {
-    return storageObj.fetching = false;
+    return callBack({ id: id, binaryData: data });
   });
+  // .catch(() => storageObj.fetching = false);
 };
 var editTrackThunk = exports.editTrackThunk = function editTrackThunk(data) {
   return function (dispatch) {
@@ -14013,7 +14011,7 @@ var _document_play_button2 = _interopRequireDefault(_document_play_button);
 
 var _playlist_actions = __webpack_require__(49);
 
-var _api_playlist_utils = __webpack_require__(335);
+var _api_playlist_utils = __webpack_require__(301);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14065,7 +14063,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(9);
 
-var _updatable_image = __webpack_require__(301);
+var _updatable_image = __webpack_require__(302);
 
 var _updatable_image2 = _interopRequireDefault(_updatable_image);
 
@@ -14122,7 +14120,7 @@ var _s3_utils = __webpack_require__(131);
 
 var s3Util = _interopRequireWildcard(_s3_utils);
 
-var _api_image_util = __webpack_require__(302);
+var _api_image_util = __webpack_require__(303);
 
 var APIImageUtil = _interopRequireWildcard(_api_image_util);
 
@@ -14155,7 +14153,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _session_buttons_container = __webpack_require__(308);
+var _session_buttons_container = __webpack_require__(309);
 
 var _session_buttons_container2 = _interopRequireDefault(_session_buttons_container);
 
@@ -14204,7 +14202,7 @@ var _root = __webpack_require__(237);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _store = __webpack_require__(316);
+var _store = __webpack_require__(317);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -27614,13 +27612,13 @@ var _nav_bar = __webpack_require__(135);
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
 
-var _upload_progress_container = __webpack_require__(310);
+var _upload_progress_container = __webpack_require__(311);
 
 var _upload_progress_container2 = _interopRequireDefault(_upload_progress_container);
 
 var _reactRouterDom = __webpack_require__(10);
 
-var _audio_player_container = __webpack_require__(312);
+var _audio_player_container = __webpack_require__(313);
 
 var _audio_player_container2 = _interopRequireDefault(_audio_player_container);
 
@@ -27676,7 +27674,7 @@ var _track_show_container = __webpack_require__(293);
 
 var _track_show_container2 = _interopRequireDefault(_track_show_container);
 
-var _user_show_container = __webpack_require__(303);
+var _user_show_container = __webpack_require__(304);
 
 var _user_show_container2 = _interopRequireDefault(_user_show_container);
 
@@ -31548,6 +31546,20 @@ var currentlyPlaying = function currentlyPlaying(props) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var generatePlaylist = exports.generatePlaylist = function generatePlaylist(trackId) {
+  return $.ajax({ method: "get", url: "/api/playlists/tracks/" + trackId });
+};
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -31620,7 +31632,7 @@ var UpdatableImage = function (_React$Component) {
 exports.default = UpdatableImage;
 
 /***/ }),
-/* 302 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31640,7 +31652,7 @@ var presignedTrackPost = exports.presignedTrackPost = function presignedTrackPos
 };
 
 /***/ }),
-/* 303 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31656,7 +31668,7 @@ var _reactRedux = __webpack_require__(9);
 
 var _reactRouterDom = __webpack_require__(10);
 
-var _user_show = __webpack_require__(304);
+var _user_show = __webpack_require__(305);
 
 var _user_show2 = _interopRequireDefault(_user_show);
 
@@ -31736,7 +31748,7 @@ var UserShowContainer = function (_React$Component) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapContainerStateToProps, mapContainerDispatchToProps)(UserShowContainer));
 
 /***/ }),
-/* 304 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31752,7 +31764,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _tracks_index_container = __webpack_require__(305);
+var _tracks_index_container = __webpack_require__(306);
 
 var _tracks_index_container2 = _interopRequireDefault(_tracks_index_container);
 
@@ -31836,7 +31848,7 @@ var UserShow = function (_React$Component) {
 exports.default = UserShow;
 
 /***/ }),
-/* 305 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31858,7 +31870,7 @@ var _reactRouterDom = __webpack_require__(10);
 
 var _track_actions = __webpack_require__(16);
 
-var _tracks_index = __webpack_require__(306);
+var _tracks_index = __webpack_require__(307);
 
 var _tracks_index2 = _interopRequireDefault(_tracks_index);
 
@@ -31933,7 +31945,7 @@ var TracksIndexContainer = function (_React$Component) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapContainerStateToProps, mapContainerDispatchToProps)(TracksIndexContainer));
 
 /***/ }),
-/* 306 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31951,7 +31963,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(10);
 
-var _track_item = __webpack_require__(307);
+var _track_item = __webpack_require__(308);
 
 var _track_item2 = _interopRequireDefault(_track_item);
 
@@ -32001,7 +32013,7 @@ var TracksIndex = function (_React$Component) {
 exports.default = TracksIndex;
 
 /***/ }),
-/* 307 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32056,7 +32068,7 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 308 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32074,7 +32086,7 @@ var _reactRedux = __webpack_require__(9);
 
 var _reactRouterDom = __webpack_require__(10);
 
-var _session_buttons = __webpack_require__(309);
+var _session_buttons = __webpack_require__(310);
 
 var _session_buttons2 = _interopRequireDefault(_session_buttons);
 
@@ -32099,7 +32111,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_buttons2.default));
 
 /***/ }),
-/* 309 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32153,7 +32165,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 310 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32169,7 +32181,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(9);
 
-var _upload_progress = __webpack_require__(311);
+var _upload_progress = __webpack_require__(312);
 
 var _upload_progress2 = _interopRequireDefault(_upload_progress);
 
@@ -32197,7 +32209,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_upload_progress2.default);
 
 /***/ }),
-/* 311 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32319,7 +32331,7 @@ var UploadProgress = function (_React$Component) {
 exports.default = UploadProgress;
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32333,7 +32345,7 @@ var _reactRedux = __webpack_require__(9);
 
 var _track_actions = __webpack_require__(16);
 
-var _audio_player = __webpack_require__(313);
+var _audio_player = __webpack_require__(314);
 
 var _audio_player2 = _interopRequireDefault(_audio_player);
 
@@ -32344,8 +32356,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     playlist: state.playlist.ids,
     playing: state.playlist.playing,
     indexInPlaylist: state.playlist.currentIndex,
-    fetchForCache: function fetchForCache(storageObj, id, callBack) {
-      return (0, _track_actions.fetchBinaryData)(storageObj, id, callBack);
+    fetchForCache: function fetchForCache(id, callBack) {
+      return (0, _track_actions.fetchBinaryData)(id, callBack);
     }
   };
 };
@@ -32356,7 +32368,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_audio_player2.default);
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32372,7 +32384,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _audio_controls_container = __webpack_require__(314);
+var _audio_controls_container = __webpack_require__(315);
 
 var _audio_controls_container2 = _interopRequireDefault(_audio_controls_container);
 
@@ -32395,7 +32407,7 @@ var shiftCache = function shiftCache(amount) {
     var cache = [];
     for (var i = 0; i < CACHE_SIZE; ++i) {
       if (state.cache[i + amount] === undefined) {
-        cache.push(props.playlist[(props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length]);
+        cache.push({ id: props.playlist[(props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length] });
       } else {
         cache.push(state.cache[i + amount]);
       }
@@ -32421,6 +32433,18 @@ var assignAudioSource = function assignAudioSource(state, props) {
   }
 };
 
+var receiveSongCacheData = function receiveSongCacheData(payload) {
+  return function (state, props) {
+    var cache = state.cache;
+    debugger;
+    for (var i = 0; i < cache.length; ++i) {
+      if (cache[i].id == payload.id) {
+        cache[i].binaryData = payload.binaryData;
+      }
+    }
+    return { cache: cache };
+  };
+};
 var setIfLoaded = function setIfLoaded(state, props) {
   return { loaded: Boolean(state.cache[MID_CACHE_INDEX].binaryData) };
 };
@@ -32434,10 +32458,12 @@ var handleQueuedPlay = function handleQueuedPlay(state, props) {
 
 var fetchForCache = function fetchForCache(player) {
   return function (state, props) {
+    debugger;
     var current = state.cache[MID_CACHE_INDEX];
     if (!current.id) return {};
     if (!current.binaryData && !current.fetching) {
-      props.fetchForCache(current, current.id, function () {
+      props.fetchForCache(current.id, function (data) {
+        player.setState(receiveSongCacheData(data));
         player.setState(setIfLoaded);
         player.setState(assignAudioSource);
         player.setState(handleQueuedPlay);
@@ -32483,12 +32509,12 @@ var AudioPlayer = function (_React$Component) {
           this.state.audioSource.pause();
         }
       }
-      if (this.props.playlist === newProps.playlist) {
-        if (newProps.indexInPlaylist != this.props.indexInPlaylist) {
+      if (newProps.indexInPlaylist !== this.props.indexInPlaylist) {
+        if (this.props.indexInPlaylist === null) {
+          this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
+        } else {
           this.setState(shiftCache(newProps.indexInPlaylist - this.props.indexInPlaylist));
         }
-      } else {
-        this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
       }
       this.cacheHandleLoop();
     }
@@ -32537,7 +32563,7 @@ var AudioPlayer = function (_React$Component) {
 exports.default = AudioPlayer;
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32549,7 +32575,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(9);
 
-var _audio_controls = __webpack_require__(315);
+var _audio_controls = __webpack_require__(316);
 
 var _audio_controls2 = _interopRequireDefault(_audio_controls);
 
@@ -32581,7 +32607,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_audio_controls2.default);
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32802,7 +32828,7 @@ var AudioControls = function (_React$Component) {
 exports.default = AudioControls;
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32814,11 +32840,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _reduxThunk = __webpack_require__(317);
+var _reduxThunk = __webpack_require__(318);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _root_reducer = __webpack_require__(318);
+var _root_reducer = __webpack_require__(319);
 
 var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
@@ -32831,7 +32857,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32860,7 +32886,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32872,27 +32898,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _entities_reducer = __webpack_require__(319);
+var _entities_reducer = __webpack_require__(320);
 
 var _entities_reducer2 = _interopRequireDefault(_entities_reducer);
 
-var _session_reducer = __webpack_require__(323);
+var _session_reducer = __webpack_require__(324);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
-var _errors_reducer = __webpack_require__(324);
+var _errors_reducer = __webpack_require__(325);
 
 var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 
-var _upload_reducer = __webpack_require__(328);
+var _upload_reducer = __webpack_require__(329);
 
 var _upload_reducer2 = _interopRequireDefault(_upload_reducer);
 
-var _loading_reducer = __webpack_require__(329);
+var _loading_reducer = __webpack_require__(330);
 
 var _loading_reducer2 = _interopRequireDefault(_loading_reducer);
 
-var _playlist_reducer = __webpack_require__(334);
+var _playlist_reducer = __webpack_require__(335);
 
 var _playlist_reducer2 = _interopRequireDefault(_playlist_reducer);
 
@@ -32908,7 +32934,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 319 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32920,15 +32946,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _tracks_reducer = __webpack_require__(320);
+var _tracks_reducer = __webpack_require__(321);
 
 var _tracks_reducer2 = _interopRequireDefault(_tracks_reducer);
 
-var _users_reducer = __webpack_require__(321);
+var _users_reducer = __webpack_require__(322);
 
 var _users_reducer2 = _interopRequireDefault(_users_reducer);
 
-var _comments_reducer = __webpack_require__(322);
+var _comments_reducer = __webpack_require__(323);
 
 var _comments_reducer2 = _interopRequireDefault(_comments_reducer);
 
@@ -32941,7 +32967,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 320 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32970,7 +32996,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33005,7 +33031,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33030,7 +33056,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33061,7 +33087,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33073,15 +33099,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _session_errors_reducer = __webpack_require__(325);
+var _session_errors_reducer = __webpack_require__(326);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
-var _upload_errors_reducer = __webpack_require__(326);
+var _upload_errors_reducer = __webpack_require__(327);
 
 var _upload_errors_reducer2 = _interopRequireDefault(_upload_errors_reducer);
 
-var _upload_params_errors_reducer = __webpack_require__(327);
+var _upload_params_errors_reducer = __webpack_require__(328);
 
 var _upload_params_errors_reducer2 = _interopRequireDefault(_upload_params_errors_reducer);
 
@@ -33094,7 +33120,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33127,7 +33153,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33156,7 +33182,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33185,7 +33211,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33224,7 +33250,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33236,19 +33262,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _main_content_loading_reducer = __webpack_require__(330);
+var _main_content_loading_reducer = __webpack_require__(331);
 
 var _main_content_loading_reducer2 = _interopRequireDefault(_main_content_loading_reducer);
 
-var _comments_loading_reducer = __webpack_require__(331);
+var _comments_loading_reducer = __webpack_require__(332);
 
 var _comments_loading_reducer2 = _interopRequireDefault(_comments_loading_reducer);
 
-var _users_loading_reducer = __webpack_require__(332);
+var _users_loading_reducer = __webpack_require__(333);
 
 var _users_loading_reducer2 = _interopRequireDefault(_users_loading_reducer);
 
-var _tracks_loading_reducer = __webpack_require__(333);
+var _tracks_loading_reducer = __webpack_require__(334);
 
 var _tracks_loading_reducer2 = _interopRequireDefault(_tracks_loading_reducer);
 
@@ -33262,7 +33288,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33289,7 +33315,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33316,7 +33342,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33343,7 +33369,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33370,7 +33396,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33382,7 +33408,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _playlist_actions = __webpack_require__(49);
 
-var NO_PLAYLIST = { ids: [], currentIndex: 0, playing: false };
+var NO_PLAYLIST = { ids: [], currentIndex: null, playing: false };
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : NO_PLAYLIST;
@@ -33390,7 +33416,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _playlist_actions.RECEIVE_PLAYLIST:
-      return Object.assign({}, state, { ids: action.payload, playing: true });
+      return Object.assign({}, state, { ids: action.payload, playing: true, currentIndex: null });
     case _playlist_actions.START_PLAYBACK:
       return Object.assign({}, state, { playing: true });
     case _playlist_actions.PAUSE_PLAYBACK:
@@ -33404,20 +33430,6 @@ exports.default = function () {
     default:
       return state;
   }
-};
-
-/***/ }),
-/* 335 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var generatePlaylist = exports.generatePlaylist = function generatePlaylist(trackId) {
-  return $.ajax({ method: "get", url: "/api/playlists/tracks/" + trackId });
 };
 
 /***/ })

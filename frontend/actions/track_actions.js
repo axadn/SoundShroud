@@ -209,7 +209,7 @@ const checkAudioProcessStatus =  id => dispatch => {
     });
 };
 
-export const fetchBinaryData = (storageObj, id, callBack) => {
+export const fetchBinaryData = (id, callBack) => {
   TrackAPI.getS3Url(id)
   .then(url =>{
       return new Promise((resolve,reject)=>{
@@ -222,12 +222,10 @@ export const fetchBinaryData = (storageObj, id, callBack) => {
       });
     }
   )
-  .then(data =>{
-    storageObj.binaryData = data;
-    storageObj.fetching = false;
-  })
-  .then(callBack)
-  .catch(() => storageObj.fetching = false);
+  .then(data =>
+     callBack({id, binaryData: data})
+   )
+  // .catch(() => storageObj.fetching = false);
 };
 export const editTrackThunk = data => dispatch => {
     TrackAPI.updateTrack({track:data})
