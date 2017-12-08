@@ -14202,7 +14202,7 @@ var _root = __webpack_require__(237);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _store = __webpack_require__(317);
+var _store = __webpack_require__(318);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -27622,9 +27622,9 @@ var _audio_player_container = __webpack_require__(313);
 
 var _audio_player_container2 = _interopRequireDefault(_audio_player_container);
 
-var _reactModal = __webpack_require__(340);
+var _auth_modal = __webpack_require__(317);
 
-var _reactModal2 = _interopRequireDefault(_reactModal);
+var _auth_modal2 = _interopRequireDefault(_auth_modal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27635,9 +27635,14 @@ exports.default = function () {
     _react2.default.createElement(
       "div",
       { className: "app" },
-      _react2.default.createElement(_nav_bar2.default, null),
-      _react2.default.createElement(_upload_progress_container2.default, null),
-      _react2.default.createElement(_main_content2.default, null),
+      _react2.default.createElement(_auth_modal2.default, null),
+      _react2.default.createElement(
+        "div",
+        { className: "modal-hidden" },
+        _react2.default.createElement(_nav_bar2.default, null),
+        _react2.default.createElement(_upload_progress_container2.default, null),
+        _react2.default.createElement(_main_content2.default, null)
+      ),
       _react2.default.createElement(_audio_player_container2.default, null)
     )
   );
@@ -32840,13 +32845,40 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactModal = __webpack_require__(342);
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var AuthModal = function AuthModal(props) {
+  return _react2.default.createElement(_reactModal2.default, { isOpen: props.isOpen });
+};
+
+exports.default = AuthModal;
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _redux = __webpack_require__(29);
 
-var _reduxThunk = __webpack_require__(318);
+var _reduxThunk = __webpack_require__(319);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _root_reducer = __webpack_require__(319);
+var _root_reducer = __webpack_require__(320);
 
 var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
@@ -32859,7 +32891,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32888,54 +32920,6 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 319 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(29);
-
-var _entities_reducer = __webpack_require__(320);
-
-var _entities_reducer2 = _interopRequireDefault(_entities_reducer);
-
-var _session_reducer = __webpack_require__(324);
-
-var _session_reducer2 = _interopRequireDefault(_session_reducer);
-
-var _errors_reducer = __webpack_require__(325);
-
-var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
-
-var _upload_reducer = __webpack_require__(329);
-
-var _upload_reducer2 = _interopRequireDefault(_upload_reducer);
-
-var _loading_reducer = __webpack_require__(330);
-
-var _loading_reducer2 = _interopRequireDefault(_loading_reducer);
-
-var _playlist_reducer = __webpack_require__(335);
-
-var _playlist_reducer2 = _interopRequireDefault(_playlist_reducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-  entities: _entities_reducer2.default,
-  session: _session_reducer2.default,
-  errors: _errors_reducer2.default,
-  upload: _upload_reducer2.default,
-  loading: _loading_reducer2.default,
-  playlist: _playlist_reducer2.default
-});
-
-/***/ }),
 /* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32948,15 +32932,68 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _tracks_reducer = __webpack_require__(321);
+var _entities_reducer = __webpack_require__(321);
+
+var _entities_reducer2 = _interopRequireDefault(_entities_reducer);
+
+var _session_reducer = __webpack_require__(325);
+
+var _session_reducer2 = _interopRequireDefault(_session_reducer);
+
+var _errors_reducer = __webpack_require__(326);
+
+var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
+
+var _upload_reducer = __webpack_require__(330);
+
+var _upload_reducer2 = _interopRequireDefault(_upload_reducer);
+
+var _loading_reducer = __webpack_require__(331);
+
+var _loading_reducer2 = _interopRequireDefault(_loading_reducer);
+
+var _playlist_reducer = __webpack_require__(336);
+
+var _playlist_reducer2 = _interopRequireDefault(_playlist_reducer);
+
+var _auth_modal_reducer = __webpack_require__(337);
+
+var _auth_modal_reducer2 = _interopRequireDefault(_auth_modal_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  entities: _entities_reducer2.default,
+  session: _session_reducer2.default,
+  errors: _errors_reducer2.default,
+  upload: _upload_reducer2.default,
+  loading: _loading_reducer2.default,
+  playlist: _playlist_reducer2.default,
+  authModal: _auth_modal_reducer2.default
+});
+
+/***/ }),
+/* 321 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(29);
+
+var _tracks_reducer = __webpack_require__(322);
 
 var _tracks_reducer2 = _interopRequireDefault(_tracks_reducer);
 
-var _users_reducer = __webpack_require__(322);
+var _users_reducer = __webpack_require__(323);
 
 var _users_reducer2 = _interopRequireDefault(_users_reducer);
 
-var _comments_reducer = __webpack_require__(323);
+var _comments_reducer = __webpack_require__(324);
 
 var _comments_reducer2 = _interopRequireDefault(_comments_reducer);
 
@@ -32969,7 +33006,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32998,7 +33035,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33033,7 +33070,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33058,7 +33095,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33089,7 +33126,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33101,15 +33138,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _session_errors_reducer = __webpack_require__(326);
+var _session_errors_reducer = __webpack_require__(327);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
-var _upload_errors_reducer = __webpack_require__(327);
+var _upload_errors_reducer = __webpack_require__(328);
 
 var _upload_errors_reducer2 = _interopRequireDefault(_upload_errors_reducer);
 
-var _upload_params_errors_reducer = __webpack_require__(328);
+var _upload_params_errors_reducer = __webpack_require__(329);
 
 var _upload_params_errors_reducer2 = _interopRequireDefault(_upload_params_errors_reducer);
 
@@ -33122,7 +33159,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33155,7 +33192,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33184,7 +33221,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33213,7 +33250,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33252,7 +33289,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33264,19 +33301,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(29);
 
-var _main_content_loading_reducer = __webpack_require__(331);
+var _main_content_loading_reducer = __webpack_require__(332);
 
 var _main_content_loading_reducer2 = _interopRequireDefault(_main_content_loading_reducer);
 
-var _comments_loading_reducer = __webpack_require__(332);
+var _comments_loading_reducer = __webpack_require__(333);
 
 var _comments_loading_reducer2 = _interopRequireDefault(_comments_loading_reducer);
 
-var _users_loading_reducer = __webpack_require__(333);
+var _users_loading_reducer = __webpack_require__(334);
 
 var _users_loading_reducer2 = _interopRequireDefault(_users_loading_reducer);
 
-var _tracks_loading_reducer = __webpack_require__(334);
+var _tracks_loading_reducer = __webpack_require__(335);
 
 var _tracks_loading_reducer2 = _interopRequireDefault(_tracks_loading_reducer);
 
@@ -33290,7 +33327,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33317,7 +33354,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33344,7 +33381,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33371,7 +33408,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33398,7 +33435,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33435,7 +33472,38 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 336 */
+/* 337 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _auth_modal_actions = __webpack_require__(349);
+
+var defaultState = { login: false, register: false };
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _auth_modal_actions.ENABLE_LOGIN:
+      return { login: true, register: false };
+    case _auth_modal_actions.DISABLE_AUTH:
+      return { login: false, register: false };
+    case _auth_modal_actions.ENABLE_REGISTER:
+      return { login: false, register: true };
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33499,7 +33567,7 @@ function findTabbableDescendants(element) {
 module.exports = exports["default"];
 
 /***/ }),
-/* 337 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33572,7 +33640,7 @@ function resetForTesting() {
 }
 
 /***/ }),
-/* 338 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33614,7 +33682,7 @@ function totalCount() {
 }
 
 /***/ }),
-/* 339 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33625,7 +33693,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.canUseDOM = undefined;
 
-var _exenv = __webpack_require__(346);
+var _exenv = __webpack_require__(348);
 
 var _exenv2 = _interopRequireDefault(_exenv);
 
@@ -33640,7 +33708,7 @@ var canUseDOM = exports.canUseDOM = EE.canUseDOM;
 exports.default = SafeHTMLElement;
 
 /***/ }),
-/* 340 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33650,7 +33718,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Modal = __webpack_require__(341);
+var _Modal = __webpack_require__(343);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -33660,7 +33728,7 @@ exports.default = _Modal2.default;
 module.exports = exports["default"];
 
 /***/ }),
-/* 341 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33687,15 +33755,15 @@ var _propTypes = __webpack_require__(11);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _ModalPortal = __webpack_require__(342);
+var _ModalPortal = __webpack_require__(344);
 
 var _ModalPortal2 = _interopRequireDefault(_ModalPortal);
 
-var _ariaAppHider = __webpack_require__(337);
+var _ariaAppHider = __webpack_require__(339);
 
 var ariaAppHider = _interopRequireWildcard(_ariaAppHider);
 
-var _safeHTMLElement = __webpack_require__(339);
+var _safeHTMLElement = __webpack_require__(341);
 
 var _safeHTMLElement2 = _interopRequireDefault(_safeHTMLElement);
 
@@ -33910,7 +33978,7 @@ Modal.defaultStyles = {
 exports.default = Modal;
 
 /***/ }),
-/* 342 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33934,27 +34002,27 @@ var _propTypes = __webpack_require__(11);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _focusManager = __webpack_require__(343);
+var _focusManager = __webpack_require__(345);
 
 var focusManager = _interopRequireWildcard(_focusManager);
 
-var _scopeTab = __webpack_require__(344);
+var _scopeTab = __webpack_require__(346);
 
 var _scopeTab2 = _interopRequireDefault(_scopeTab);
 
-var _ariaAppHider = __webpack_require__(337);
+var _ariaAppHider = __webpack_require__(339);
 
 var ariaAppHider = _interopRequireWildcard(_ariaAppHider);
 
-var _refCount = __webpack_require__(338);
+var _refCount = __webpack_require__(340);
 
 var refCount = _interopRequireWildcard(_refCount);
 
-var _bodyClassList = __webpack_require__(345);
+var _bodyClassList = __webpack_require__(347);
 
 var bodyClassList = _interopRequireWildcard(_bodyClassList);
 
-var _safeHTMLElement = __webpack_require__(339);
+var _safeHTMLElement = __webpack_require__(341);
 
 var _safeHTMLElement2 = _interopRequireDefault(_safeHTMLElement);
 
@@ -34313,7 +34381,7 @@ module.exports = exports["default"];
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 343 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34330,7 +34398,7 @@ exports.popWithoutFocus = popWithoutFocus;
 exports.setupScopedFocus = setupScopedFocus;
 exports.teardownScopedFocus = teardownScopedFocus;
 
-var _tabbable = __webpack_require__(336);
+var _tabbable = __webpack_require__(338);
 
 var _tabbable2 = _interopRequireDefault(_tabbable);
 
@@ -34411,7 +34479,7 @@ function teardownScopedFocus() {
 }
 
 /***/ }),
-/* 344 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34422,7 +34490,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = scopeTab;
 
-var _tabbable = __webpack_require__(336);
+var _tabbable = __webpack_require__(338);
 
 var _tabbable2 = _interopRequireDefault(_tabbable);
 
@@ -34492,7 +34560,7 @@ function scopeTab(node, event) {
 module.exports = exports["default"];
 
 /***/ }),
-/* 345 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34504,7 +34572,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.add = add;
 exports.remove = remove;
 
-var _refCount = __webpack_require__(338);
+var _refCount = __webpack_require__(340);
 
 var refCount = _interopRequireWildcard(_refCount);
 
@@ -34529,7 +34597,7 @@ function remove(bodyClass) {
 }
 
 /***/ }),
-/* 346 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34574,6 +34642,38 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 }());
 
+
+/***/ }),
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var DISABLE_AUTH = exports.DISABLE_AUTH = "DISABLE_AUTH";
+var ENABLE_LOGIN = exports.ENABLE_LOGIN = "ENABLE_LOGIN";
+var ENABLE_REGISTER = exports.ENABLE_REGISTER = "ENABLE_REGISTER";
+
+var enableLogin = exports.enableLogin = function enableLogin() {
+  return {
+    type: ENABLE_LOGIN
+  };
+};
+
+var enableRegister = exports.enableRegister = function enableRegister() {
+  return {
+    type: ENABLE_REGISTER
+  };
+};
+
+var disableAuthModal = exports.disableAuthModal = function disableAuthModal() {
+  return {
+    type: DISABLE_AUTH
+  };
+};
 
 /***/ })
 /******/ ]);

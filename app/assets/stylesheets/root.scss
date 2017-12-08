@@ -188,7 +188,10 @@ ul{
   cursor: default;
 }
 
-
+.modal-hidden{
+  display: flex;
+  flex-direction: column;
+}
 .main_content{
   flex-grow: 1;
   overflow-y: auto;
