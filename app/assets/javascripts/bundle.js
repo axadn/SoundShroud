@@ -32436,7 +32436,6 @@ var assignAudioSource = function assignAudioSource(state, props) {
 var receiveSongCacheData = function receiveSongCacheData(payload) {
   return function (state, props) {
     var cache = state.cache;
-    debugger;
     for (var i = 0; i < cache.length; ++i) {
       if (cache[i].id == payload.id) {
         cache[i].binaryData = payload.binaryData;
@@ -32458,7 +32457,6 @@ var handleQueuedPlay = function handleQueuedPlay(state, props) {
 
 var fetchForCache = function fetchForCache(player) {
   return function (state, props) {
-    debugger;
     var current = state.cache[MID_CACHE_INDEX];
     if (!current.id) return {};
     if (!current.binaryData && !current.fetching) {

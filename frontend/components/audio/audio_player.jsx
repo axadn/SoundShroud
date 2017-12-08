@@ -37,7 +37,6 @@ const assignAudioSource = (state, props)=>{
 
 const receiveSongCacheData = payload => (state, props) =>{
   let cache = state.cache;
-  debugger;
   for(let i = 0; i < cache.length; ++i){
     if(cache[i].id == payload.id){
       cache[i].binaryData = payload.binaryData;
@@ -57,7 +56,6 @@ const handleQueuedPlay = (state, props) => {
 }
 
 const fetchForCache = player => (state, props) =>{
-  debugger;
   const current = state.cache[MID_CACHE_INDEX];
   if(!current.id) return {};
   if(!current.binaryData && !current.fetching){
