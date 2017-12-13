@@ -14408,9 +14408,9 @@ var _audio_player_container = __webpack_require__(148);
 
 var _audio_player_container2 = _interopRequireDefault(_audio_player_container);
 
-var _auth_modal = __webpack_require__(149);
+var _auth_modal_container = __webpack_require__(350);
 
-var _auth_modal2 = _interopRequireDefault(_auth_modal);
+var _auth_modal_container2 = _interopRequireDefault(_auth_modal_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14421,7 +14421,7 @@ exports.default = function () {
     _react2.default.createElement(
       "div",
       { className: "app" },
-      _react2.default.createElement(_auth_modal2.default, null),
+      _react2.default.createElement(_auth_modal_container2.default, null),
       _react2.default.createElement(
         "div",
         { className: "modal-hidden" },
@@ -14948,10 +14948,20 @@ var _reactModal = __webpack_require__(308);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
+var _session_form_container = __webpack_require__(155);
+
+var _session_form_container2 = _interopRequireDefault(_session_form_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AuthModal = function AuthModal(props) {
-  return _react2.default.createElement(_reactModal2.default, { isOpen: props.isOpen });
+  return _react2.default.createElement(
+    _reactModal2.default,
+    { isOpen: props.isOpen,
+      overlayClassName: "modal-overlay",
+      className: "auth-modal" },
+    _react2.default.createElement(_session_form_container2.default, null)
+  );
 };
 
 exports.default = AuthModal;
@@ -15110,9 +15120,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (_ref) {
   var delete_session = _ref.delete_session,
       logged_in = _ref.logged_in,
-      current_user_id = _ref.current_user_id;
+      current_user_id = _ref.current_user_id,
+      enable_login = _ref.enable_login,
+      enable_register = _ref.enable_register;
 
-  var logoutPlaceHolder = void 0;
+  var logoutPlaceHolder = void 0,
+      button1 = void 0,
+      button2 = void 0;
   if (logged_in) {
     logoutPlaceHolder = _react2.default.createElement(
       "button",
@@ -15122,22 +15136,34 @@ exports.default = function (_ref) {
         } },
       "Log Out"
     );
+    button1 = _react2.default.createElement(
+      _reactRouterDom.NavLink,
+      { className: "top_nav_link", to: "/upload" },
+      "Upload"
+    );
+    button2 = _react2.default.createElement(
+      _reactRouterDom.NavLink,
+      { className: "top_nav_link", to: "/users/" + current_user_id },
+      "Profile"
+    );
   } else {
     logoutPlaceHolder = null;
+    button1 = _react2.default.createElement(
+      "button",
+      { onClick: enable_login },
+      "Log In"
+    );
+    button2 = _react2.default.createElement(
+      "button",
+      { onClick: enable_register },
+      "Sign Up"
+    );
   }
   return _react2.default.createElement(
     "div",
     { className: "nav_link_set" },
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { className: "top_nav_link", to: logged_in ? "/upload" : "/login" },
-      logged_in ? "Upload" : "Log In"
-    ),
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { className: "top_nav_link", to: logged_in ? "/users/" + current_user_id : "/signup" },
-      logged_in ? "Profile" : "Sign Up"
-    ),
+    button1,
+    button2,
     logoutPlaceHolder
   );
 };
@@ -15169,6 +15195,8 @@ var _selectors = __webpack_require__(30);
 
 var _session_actions = __webpack_require__(21);
 
+var _auth_modal_actions = __webpack_require__(143);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -15180,6 +15208,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return { delete_session: function delete_session() {
       return dispatch((0, _session_actions.deleteSessionThunk)());
+    },
+    enable_login: function enable_login() {
+      return dispatch((0, _auth_modal_actions.enableLogin)());
+    },
+    enable_register: function enable_register() {
+      return dispatch((0, _auth_modal_actions.enableRegister)());
     } };
 };
 
@@ -34363,6 +34397,33 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 350 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(10);
+
+var _auth_modal = __webpack_require__(149);
+
+var _auth_modal2 = _interopRequireDefault(_auth_modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    isOpen: state.authModal.login || state.authModal.register
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(_auth_modal2.default);
 
 /***/ })
 /******/ ]);

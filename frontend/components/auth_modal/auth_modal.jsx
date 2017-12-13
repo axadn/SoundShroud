@@ -1,9 +1,12 @@
 import React from "react";
 import Modal from "react-modal";
+import SessionFormContainer from "../session_form/session_form_container";
 
 const AuthModal = props =>(
-  <Modal isOpen={props.isOpen}>
-
+  <Modal isOpen={props.isOpen}
+   overlayClassName = "modal-overlay"
+   className = "auth-modal">
+    <SessionFormContainer></SessionFormContainer>
   </Modal>
 );
 

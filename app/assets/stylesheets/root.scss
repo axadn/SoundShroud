@@ -194,6 +194,15 @@ ul{
   height: 1vh;
   flex-grow: 1;
 }
+.modal-overlay{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-modal{
+  position: relative;
+  background-color: white;
+}
 .main_content{
   flex-grow: 1;
   overflow-y: auto;
