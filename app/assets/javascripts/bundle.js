@@ -15149,13 +15149,13 @@ exports.default = function (_ref) {
   } else {
     logoutPlaceHolder = null;
     button1 = _react2.default.createElement(
-      "button",
-      { onClick: enable_login },
+      "div",
+      { className: "top_nav_link", onClick: enable_login },
       "Log In"
     );
     button2 = _react2.default.createElement(
-      "button",
-      { onClick: enable_register },
+      "div",
+      { className: "top_nav_link", onClick: enable_register },
       "Sign Up"
     );
   }

@@ -16,8 +16,8 @@ export default ({delete_session, logged_in, current_user_id,
   }
   else{
     logoutPlaceHolder = null;
-    button1 = <button onClick={enable_login}>Log In</button>;
-    button2 = <button onClick={enable_register}>Sign Up</button>;
+    button1 = <div className="top_nav_link" onClick={enable_login}>Log In</div>;
+    button2 = <div className="top_nav_link" onClick={enable_register}>Sign Up</div>;
   }
   return(
   <div className="nav_link_set">
