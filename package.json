@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/axadn/SoundShroud/issues"
   },
-  "homepage": "https://github.com/axadn/SoundShroud#readme"
+  "homepage": "https://github.com/axadn/SoundShroud#readme",
+  "devDependencies": {
+    "uglifyjs-webpack-plugin": "^1.0.0-rc.0"
+  }
 }

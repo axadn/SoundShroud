@@ -191,6 +191,8 @@ ul{
 .modal-hidden{
   display: flex;
   flex-direction: column;
+  height: 1vh;
+  flex-grow: 1;
 }
 .main_content{
   flex-grow: 1;
