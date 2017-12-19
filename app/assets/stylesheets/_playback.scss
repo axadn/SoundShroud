@@ -4,14 +4,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+    flex-wrap: wrap-reverse;
 }
-
+#audio-controls-content .controls{
+  flex-shrink: 0;
+}
 #audio-controls-content .controls > div{
   display: inline-block;
   width: 45px;
   margin-left: 15px;
   margin-right: 15px;
   position: relative;
+}
+.audio-progress{
+  height: 110px;
 }
 #audio-controls-content .controls > div >svg{
   position: absolute;
