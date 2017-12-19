@@ -15,7 +15,9 @@ export default class LandingPage extends React.Component{
         <div>Discover hot new music from emerging and major artists
            worldwide.
         </div>
-        <Link className ="blue_button" id="landing_button" to="/signup"> Sign Up For Free!</Link>
+        <div className ="blue_button" id="landing_button" onClick={
+          this.props.enableRegister
+        }> Sign Up For Free!</div>
       </div>
     </div>
     );

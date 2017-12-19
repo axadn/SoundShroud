@@ -6,6 +6,7 @@ const AuthModal = props =>(
   <Modal isOpen={props.isOpen}
    overlayClassName = "modal-overlay"
    className = "auth-modal">
+   <div className ="auth-modal-exit" onClick = {props.disable}>X</div>
     <SessionFormContainer></SessionFormContainer>
   </Modal>
 );
