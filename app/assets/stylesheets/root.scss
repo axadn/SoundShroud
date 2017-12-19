@@ -7,7 +7,7 @@
   left: 0;
   top: 0;
   height: 100%;
-  width: 100%;
+  min-width: 100%;
 }
 .hidden{
   display: none;
@@ -60,6 +60,7 @@ input[type="file"]{
   filter: url(#blue_filter);
 }
 .blue_button, .logout_button{
+  white-space: nowrap;
     color: white;
   box-sizing: border-box;
   outline: none;
