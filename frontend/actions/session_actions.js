@@ -3,6 +3,7 @@ export const RECEIVE_SESSION = "RECEIVE_SESSION";
 export const DELETE_SESSION = "DELETE_SESSION";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
+import {disableAuthModal} from "./auth_modal_actions";
 
 export const receiveSession = data =>({
   type: RECEIVE_SESSION,
@@ -23,7 +24,10 @@ const deleteSession = () =>({
 
 export const postSessionThunk = sessionData => dispatch => (
   SessionsAPI.postSession(sessionData).then(
-    userData => dispatch(receiveSession(userData)),
+    userData => {
+      dispatch(receiveSession(userData));
+      dispatch(disableAuthModal());
+    },
     errors => dispatch(receiveSessionErrors(errors.responseJSON))
   )
 );

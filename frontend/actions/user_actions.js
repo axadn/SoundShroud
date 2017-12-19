@@ -5,6 +5,7 @@ export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_USERS_LOADING = "RECEIVE_USERS_LOADING";
 export const RECEIVE_USERS_LOADED = "RECEIVE_USERS_LOADED";
 export const RECEIVE_USER = "RECEIVE_USER";
+import  {disableAuthModal} from "./auth_modal_actions";
 
 export const receiveUsers = userData =>({
   type: RECEIVE_USERS,
@@ -25,7 +26,11 @@ export const receiveUser = data => ({
 });
 export const postUserThunk = userData => dispatch => (
   UsersAPI.postUser(userData).then(
-    userData => dispatch(receiveSession(userData))).
+    userData => {
+      dispatch(receiveSession(userData));
+      dispatch(disableAuthModal());
+    }
+    ).
     catch(errors => dispatch(receiveSessionErrors(errors.responseJSON)))
 );
 export const fetchUserThunk = (userId, callback) => dispatch => ((

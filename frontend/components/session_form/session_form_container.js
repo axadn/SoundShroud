@@ -7,32 +7,38 @@ import {postSessionThunk, clearSessionErrors} from "../../actions/session_action
 
 const mapStateToProps = (state, ownProps) =>{
   const errors = state.errors.session
-  let message;
-  let buttonText;
-  if(ownProps.match.path === "/login"){
+  let message, buttonText, login;
+  if(state.authModal.login){
     message = "Welcome back to SoundShroud";
     buttonText = "Log In";
+    login = true;
   }
   else{
     message = "Sign up for SoundShroud";
     buttonText = "Sign Up";
+    login = false;
   }
   return {
+    login,
     message,
     buttonText,
     errors
   }
 };
 const mapDispatchToProps = (dispatch, ownProps) =>{
-  const action = ownProps.match.path === "/login" ?
-    postSessionThunk : postUserThunk;
   return {
-    action: data => dispatch(action({user: data})),
+    dispatch,
     example: () => dispatch(postSessionThunk({user:{username: "example",
             password: "password"}})),
     clearErrors: () => dispatch(clearSessionErrors())
   };
 };
+const mergeProps = (propsFromState, propsFromDispatch) =>{
+  const action = propsFromState.login ? postSessionThunk : postUserThunk;
+  const newProps = {
+    action: data => propsFromDispatch.dispatch(action({user: data}))};
+  return Object.assign(propsFromState, propsFromDispatch, newProps);
+};
 
 export default withRouter(connect(mapStateToProps,
-   mapDispatchToProps)(SessionFrom));
+   mapDispatchToProps, mergeProps)(SessionFrom));
