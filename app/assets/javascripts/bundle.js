@@ -15195,8 +15195,6 @@ exports.default = function (props) {
     "div",
     { className: "main_content" },
     _react2.default.createElement(_route_utils.AuthRoute, { exact: true, path: "/", component: _landing_page_container2.default }),
-    _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _session_form_container2.default }),
-    _react2.default.createElement(_route_utils.AuthRoute, { path: "/signup", component: _session_form_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/tracks/:trackId", component: _track_show_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/users/:userId", component: _user_show_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/upload", component: _track_form_container2.default }),

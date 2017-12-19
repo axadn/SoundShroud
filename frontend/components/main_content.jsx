@@ -10,8 +10,6 @@ import UserShowContainer from "./user/user_show_container";
 export default props => (
   <div className="main_content" >
     <AuthRoute exact path="/" component={LandingPageContainer}></AuthRoute>
-    <AuthRoute path="/login" component={SessionFormContainer}></AuthRoute>
-    <AuthRoute path="/signup" component={SessionFormContainer}></AuthRoute>
     <Route exact path = "/tracks/:trackId" component={TrackShowContainer}></Route>
     <Route exact path ="/users/:userId" component={UserShowContainer}></Route>
     <ProtectedRoute path="/upload" component={TrackFormContainer}></ProtectedRoute>
