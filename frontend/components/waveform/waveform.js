@@ -12,7 +12,7 @@ export default class Waveform extends React.Component{
     const width = this.refs.canvas.width;
     const height = this.refs.canvas.height;
     const rectWidth = width / this.props.samples.length;
-    ctx.clearRect(width, height);
+    ctx.clearRect(0,0,width, height);
     ctx.fillStyle = "rgb(255, 255, 255)";
     let yOffset, xOffset;
     for(let i = 0; i < this.props.samples.length; ++i){
@@ -22,6 +22,6 @@ export default class Waveform extends React.Component{
     }
   }
   render(){
-    <canvas ref="canvas" className="waveform-canvas">/<canvas>
+    return <canvas ref="canvas" className="waveform-canvas"></canvas>;
   }
 }
