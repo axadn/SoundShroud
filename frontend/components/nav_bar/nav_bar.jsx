@@ -6,7 +6,7 @@ export default ()=>(
   <div className="nav_bar">
     <div className="nav_link_set">
       <NavLink className="top_nav_link" to="/charts">
-        Charts
+        Discover
       </NavLink>
       <NavLink className="top_nav_link" exact to="/">
         Home

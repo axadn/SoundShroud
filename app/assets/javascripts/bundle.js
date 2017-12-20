@@ -14168,7 +14168,7 @@ exports.default = function () {
       _react2.default.createElement(
         _reactRouterDom.NavLink,
         { className: "top_nav_link", to: "/charts" },
-        "Charts"
+        "Discover"
       ),
       _react2.default.createElement(
         _reactRouterDom.NavLink,
