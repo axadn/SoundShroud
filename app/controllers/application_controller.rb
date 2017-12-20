@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   '.jpeg']
 
   def user_img_url(user)
-    "#{ENV[S3_URL]}users/images/#{user.id}#{user.img_extension}?t=#{user.image_modified_at.hash}"
+    "#{ENV["S3_URL"]}users/images/#{user.id}#{user.img_extension}?t=#{user.image_modified_at.hash}"
   end
 
   def track_img_url(track)
-    "#{ENV[S3_URL]}tracks/images/#{track.id}#{track.img_extension}?t=#{track.image_modified_at.hash}"
+    "#{ENV["S3_URL"]}tracks/images/#{track.id}#{track.img_extension}?t=#{track.image_modified_at.hash}"
   end
 
   def self.valid_image_extension?(filename)

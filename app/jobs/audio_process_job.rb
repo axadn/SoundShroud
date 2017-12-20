@@ -101,7 +101,7 @@ class AudioProcessJob
       image = MiniMagick::Image.open("tmp/#{temp_name}")
       if image.width > 400 || image.height > 400
         image.resize "400x400"
-      endf
+      end
       output_filename = "tmp/#{track.id}.jpeg"
       image.write(output_filename)
       s3_filename = "tracks/images/#{track.id}.jpeg"
