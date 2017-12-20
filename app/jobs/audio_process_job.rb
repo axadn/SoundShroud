@@ -11,14 +11,21 @@ class AudioProcessJob
         key: "tracks/temp/#{temp_name}"}, target: file)
     end
     begin
+
       output_filename = "tmp/#{track.id}.mp3"
+      wav_filename = "tmp/#{track.id}.wav"
+
       Sox::Cmd.new.add_input("tmp/#{temp_name}")
         .set_output(output_filename).run
+      Sox::Cmd.new.add_input("tmp/#{temp_name}")
+        .set_output(wav_filename).run
+
       s3_filename = "tracks/#{track.id}.mp3"
       File.open(output_filename, "rb") do |f|
         aws_client.put_object(body: f.read,
           bucket: "soundshroud", key: s3_filename)
       end
+
       track = Track.find_by(id: track.id)
       if track
         if temp_image_name
@@ -27,11 +34,13 @@ class AudioProcessJob
         track.processed = true
         track.save!
       end
+
     rescue Sox::Error
       track.delete
     ensure
       File.delete("tmp/#{temp_name}") if File.exist?("tmp/#{temp_name}")
       File.delete("tmp/#{track.id}.mp3") if File.exist?("tmp/#{track.id}.mp3")
+      File.delete("tmp/#{track.id}.wav") if File.exist?("tmp/#{track.id}.wav")
       aws_client.delete_object(bucket: "soundshroud",
       key: "tracks/temp/#{temp_name}")
     end
