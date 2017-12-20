@@ -4,4 +4,9 @@ class Api::PlaylistsController < ApplicationController
       "created_at DESC")
     render :index
   end
+
+  def random
+    @tracks = Track.select("*").limit("25").order("RANDOM()")
+    render :index_full
+  end
 end

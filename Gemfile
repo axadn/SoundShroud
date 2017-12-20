@@ -32,6 +32,7 @@ gem 'aws-sdk-s3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'jquery-rails'
+gem 'pry-rails'
 gem 'ruby-sox'
 gem "mini_magick"
 gem 'wavefile'

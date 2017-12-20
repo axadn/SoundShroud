@@ -70,6 +70,7 @@ GEM
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -122,6 +123,11 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pg (0.21.0)
+    pry (0.11.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
@@ -240,6 +246,7 @@ DEPENDENCIES
   mini_magick
   paperclip
   pg (~> 0.18)
+  pry-rails
   puma (~> 3.7)
   rails (~> 5.1.4)
   rails_12factor
