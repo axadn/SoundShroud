@@ -1,4 +1,4 @@
-json.extract! track, :id, :title, :artist_id, :created_at
+json.extract! track, :id, :title, :artist_id, :created_at, :waveform
 if track.artist.display_name.nil?
   json.set! :artist_display_name, track.artist.username
 else
