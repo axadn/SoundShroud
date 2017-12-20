@@ -8352,7 +8352,7 @@ var Protected = function Protected(_ref2) {
       path = _ref2.path,
       loggedIn = _ref2.loggedIn;
   return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: path, render: function render(props) {
-      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: "/login" });
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: "/" });
     } });
 };
 var mapStateToProps = function mapStateToProps(state) {
