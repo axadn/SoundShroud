@@ -7,7 +7,7 @@ class AudioProcessJob
     access_key_id: ENV["S3_ID"],
     secret_access_key: ENV["S3_KEY"])
     File.open("tmp/#{temp_name}", 'wb') do |file|
-      aws_client.get_object({bucket: "soundshroud",
+      aws_client.get_object({bucket: ENV["S3_BUCKET"],
         key: "tracks/temp/#{temp_name}"}, target: file)
     end
     begin
@@ -23,7 +23,7 @@ class AudioProcessJob
       s3_filename = "tracks/#{track.id}.mp3"
       File.open(output_filename, "rb") do |f|
         aws_client.put_object(body: f.read,
-          bucket: "soundshroud", key: s3_filename)
+          bucket: ENV["S3_BUCKET"], key: s3_filename)
       end
 
       track = Track.find_by(id: track.id)
@@ -42,7 +42,7 @@ class AudioProcessJob
       File.delete("tmp/#{temp_name}") if File.exist?("tmp/#{temp_name}")
       File.delete("tmp/#{track.id}.mp3") if File.exist?("tmp/#{track.id}.mp3")
       File.delete("tmp/#{track.id}.wav") if File.exist?("tmp/#{track.id}.wav")
-      aws_client.delete_object(bucket: "soundshroud",
+      aws_client.delete_object(bucket: ENV["S3_BUCKET"],
       key: "tracks/temp/#{temp_name}")
     end
   end
@@ -95,19 +95,19 @@ class AudioProcessJob
   def self.perform_img(temp_name, track, aws)
     begin
       File.open("tmp/#{temp_name}", 'wb') do |file|
-        aws.get_object({bucket: "soundshroud",
+        aws.get_object({bucket: ENV["S3_BUCKET"],
           key: "tracks/images/temp/#{temp_name}"}, target: file)
       end
       image = MiniMagick::Image.open("tmp/#{temp_name}")
       if image.width > 400 || image.height > 400
         image.resize "400x400"
-      end
+      endf
       output_filename = "tmp/#{track.id}.jpeg"
       image.write(output_filename)
       s3_filename = "tracks/images/#{track.id}.jpeg"
       File.open(output_filename, "rb") do |f|
         aws.put_object(body: f.read,
-          bucket: "soundshroud", key: s3_filename, acl: "public-read")
+          bucket: ENV["S3_BUCKET"], key: s3_filename, acl: "public-read")
       end
       track.custom_img = true
       track.img_extension = ".jpeg"
@@ -116,7 +116,7 @@ class AudioProcessJob
     ensure
       File.delete("tmp/#{track.id}.jpeg") if File.exist?("tmp/#{track.id}.jpeg")
       File.delete("tmp/#{temp_name}") if File.exist?("tmp/#{temp_name}")
-      aws.delete_object(bucket: "soundshroud",
+      aws.delete_object(bucket: ENV["S3_BUCKET"],
       key: "tracks/images/temp/#{temp_name}")
     end
   end
