@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   '.jpeg']
 
   def user_img_url(user)
-    "https://s3-us-west-1.amazonaws.com/soundshroud/users/images/#{user.id}#{user.img_extension}?t=#{user.image_modified_at.hash}"
+    "#{ENV[S3_URL]}users/images/#{user.id}#{user.img_extension}?t=#{user.image_modified_at.hash}"
   end
 
   def track_img_url(track)
-    "https://s3-us-west-1.amazonaws.com/soundshroud/tracks/images/#{track.id}#{track.img_extension}?t=#{track.image_modified_at.hash}"
+    "#{ENV[S3_URL]}tracks/images/#{track.id}#{track.img_extension}?t=#{track.image_modified_at.hash}"
   end
 
   def self.valid_image_extension?(filename)
@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     secret_access_key: ENV["S3_KEY"])
 
     s3 = Aws::S3::Resource.new(client: aws_client)
-    s3.bucket('soundshroud')
+    s3.bucket(ENV["S3_BUCKET"])
     )
   end
 end
