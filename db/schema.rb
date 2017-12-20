@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929005202) do
+ActiveRecord::Schema.define(version: 20171220163224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170929005202) do
     t.boolean "processed", default: false, null: false
     t.string "img_extension", default: ".jpeg", null: false
     t.datetime "image_modified_at", default: "2017-12-17 01:08:41", null: false
+    t.float "waveform", array: true
     t.index ["title", "artist_id"], name: "index_tracks_on_title_and_artist_id", unique: true
   end
 

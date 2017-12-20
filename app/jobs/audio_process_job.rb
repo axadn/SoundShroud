@@ -31,6 +31,7 @@ class AudioProcessJob
         if temp_image_name
           self.perform_img(temp_image_name, track, aws_client)
         end
+        track.waveform = self.generate_waveform(wav_filename)
         track.processed = true
         track.save!
       end
