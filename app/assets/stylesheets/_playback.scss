@@ -1,4 +1,7 @@
 @import "colors";
+.audio-progress{
+  overflow: scroll;
+}
 #audio-controls-content{
   display: flex;
   flex-direction: row;

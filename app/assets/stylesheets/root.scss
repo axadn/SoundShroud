@@ -7,7 +7,7 @@
   left: 0;
   top: 0;
   height: 100%;
-  min-width: 100%;
+  width: 100%;
 }
 .hidden{
   display: none;
@@ -152,17 +152,17 @@ ul{
 }
 
 .nav_bar {
+  flex-wrap: wrap;
   flex-shrink: 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   background-color: $iron;
-  height: 50px;
+  min-height: 50px;
 }
 .nav_link_set{
   display: flex;
-  align-items: center;
-  height: 100%;
+  align-items: stretch;
 }
 
 .nav_link_set *{
