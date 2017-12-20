@@ -37,6 +37,51 @@ class AudioProcessJob
     end
   end
 
+  def self.generate_waveform(temp_name)
+    reader = WaveFile::Reader.new(temp_name)
+    sample_offset = 0
+    preview_resolution = 64
+    form = reader.format()
+    sub_window_resolution = 8
+    sample_resolution = 2 ** form.bits_per_sample
+    num_channels = form.channels
+    window_size = reader.total_sample_frames / preview_resolution
+    sub_window_size = window_size / sub_window_resolution
+    amplitude_samples = []
+    until reader.current_sample_frame() >= reader.total_sample_frames
+      buffer = reader.read(window_size)
+      amplitude_samples.push(
+        self.averageBuffer(buffer, num_channels, sub_window_size) / sample_resolution
+      )
+    end
+    amplitude_samples
+  end
+
+  def self.averageBuffer(buffer, num_channels, sub_window_size)
+    buffer_idx = 0
+    sum = 0
+    num_windows = 0
+    while buffer_idx < buffer.samples.length
+      sub_window = buffer.samples.slice(buffer_idx, sub_window_size)
+      sum += self.sub_window_max(sub_window, buffer.channels())
+      buffer_idx += sub_window_size
+      num_windows += 1
+    end
+    sum.to_f / num_windows
+  end
+
+  def self.sub_window_max(window, num_channels)
+    if(num_channels > 1)
+      window.max do |a,b|
+        a.inject(0){|accum, channel| accum + channel.abs} <=>
+          b.inject(0){|accum, channel| accum + channel.abs}
+      end.inject(0){|accum,channel| accum + channel.abs}
+    else
+      window.max{|a,b| a.abs <=> b.abs}.abs
+    end
+  end
+
+
   def self.perform_img(temp_name, track, aws)
     begin
       File.open("tmp/#{temp_name}", 'wb') do |file|
