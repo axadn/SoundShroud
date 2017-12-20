@@ -14842,6 +14842,7 @@ var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist, i
 var assignAudioSource = function assignAudioSource(state, props) {
   if (state.loaded && !state.srcIsValid) {
     state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
+    state.audioSource.currentTime = 0;
     return { srcIsValid: true };
   }
 };

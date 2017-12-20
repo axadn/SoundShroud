@@ -31,6 +31,7 @@ const assignCacheFromNewPlaylist = (playlist, indexInPlaylist) => (state, props)
 const assignAudioSource = (state, props)=>{
   if(state.loaded && !state.srcIsValid){
     state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
+    state.audioSource.currentTime = 0;
     return{srcIsValid: true};
   }
 }
