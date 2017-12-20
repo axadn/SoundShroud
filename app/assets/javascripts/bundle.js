@@ -30971,6 +30971,10 @@ var _updatable_image_container = __webpack_require__(136);
 
 var _updatable_image_container2 = _interopRequireDefault(_updatable_image_container);
 
+var _waveform = __webpack_require__(353);
+
+var _waveform2 = _interopRequireDefault(_waveform);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31066,7 +31070,7 @@ var TrackShow = function (_React$Component) {
               _react2.default.createElement(
                 "div",
                 { id: "show_page_waveform_container" },
-                _react2.default.createElement("div", { className: "waveform" })
+                _react2.default.createElement(_waveform2.default, { samples: this.props.track.waveform })
               )
             ),
             _react2.default.createElement(

@@ -4,6 +4,7 @@ import CommentsIndexContainer from "./comments/comments_index_container";
 import {redirectToUser} from "../../utils/route_utils";
 import DocumentPlayButtonContainer from "./document_play_button_container";
 import UpdatableImageContainer from "../updatable_image_container";
+import Waveform from "../waveform/waveform";
 export default class TrackShow extends React.Component{
   constructor(props){
     super(props);
@@ -45,7 +46,7 @@ export default class TrackShow extends React.Component{
                 <div>{this.props.track.created_at.slice(0,10)}</div>
               </div>
               <div id="show_page_waveform_container">
-                <div className="waveform"></div>
+                <Waveform samples = {this.props.track.waveform}/>
               </div>
             </div>
 
