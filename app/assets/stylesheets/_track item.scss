@@ -10,12 +10,6 @@
   display: flex;
   flex-direction: column;
 }
-
-.track-item .document-play-button{
-  margin-left: 20px;
-
-}
-
 .track-item img:first-of-type:hover{
   cursor: pointer;
 }
@@ -34,4 +28,17 @@
 
 .track-item .info{
   margin-left: 10px;
+}
+
+.play-info-and-waveform{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 40px;
+  width: 100%;
+}
+
+.waveform-canvas{
+  width: 100%;
+  height: 125px;
 }

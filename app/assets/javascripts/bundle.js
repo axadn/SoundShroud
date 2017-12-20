@@ -32024,26 +32024,30 @@ exports.default = function (props) {
       } }),
     _react2.default.createElement(
       "div",
-      { className: "play-button-and-info" },
-      _react2.default.createElement(_document_play_button_container2.default, { trackId: props.track.id }),
+      { className: "play-info-and-waveform" },
       _react2.default.createElement(
         "div",
-        { className: "info" },
+        { className: "play-button-and-info" },
+        _react2.default.createElement(_document_play_button_container2.default, { trackId: props.track.id }),
         _react2.default.createElement(
-          _reactRouterDom.Link,
-          { className: "username-link",
-            to: "/users/" + props.track.artist_id },
-          props.track.artist_display_name
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { className: "title-link",
-            to: "/tracks/" + props.track.id },
-          props.track.title
+          "div",
+          { className: "info" },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "username-link",
+              to: "/users/" + props.track.artist_id },
+            props.track.artist_display_name
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "title-link",
+              to: "/tracks/" + props.track.id },
+            props.track.title
+          )
         )
-      )
-    ),
-    _react2.default.createElement(_waveform2.default, { samples: props.track.waveform })
+      ),
+      _react2.default.createElement(_waveform2.default, { samples: props.track.waveform })
+    )
   );
 };
 
@@ -34537,35 +34541,45 @@ var Waveform = function (_React$Component) {
   function Waveform(props) {
     _classCallCheck(this, Waveform);
 
-    return _possibleConstructorReturn(this, (Waveform.__proto__ || Object.getPrototypeOf(Waveform)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Waveform.__proto__ || Object.getPrototypeOf(Waveform)).call(this, props));
+
+    _this.updateCanvas = _this.updateCanvas.bind(_this);
+    return _this;
   }
 
   _createClass(Waveform, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.setState({ resizeId: window.addEventListener("resize", this.updateCanvas) });
       this.updateCanvas();
     }
   }, {
     key: "updateCanvas",
     value: function updateCanvas() {
       var ctx = this.refs.canvas.getContext('2d');
+      this.refs.canvas.width = this.refs.canvas.clientWidth;
+      this.refs.canvas.heigth = this.refs.canvas.clientHeight;
       var width = this.refs.canvas.width;
       var height = this.refs.canvas.height;
       var rectWidth = width / this.props.samples.length;
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "rgb(255, 255, 255)";
       var yOffset = void 0,
           xOffset = void 0;
       for (var i = 0; i < this.props.samples.length; ++i) {
+        ctx.fillStyle = "rgb(200, 200, 200)";
         xOffset = i * rectWidth;
         yOffset = height * (1 - this.props.samples[i]) / 2;
-        ctx.fillRect(xOffset, yOffset, rectWidth, this.props.samples[i] * height);
+        ctx.fillRect(xOffset + 1, yOffset, rectWidth / 2, this.props.samples[i] * height / 2);
+        ctx.fillStyle = "rgb(70, 70, 70)";
+        yOffset += this.props.samples[i] * height / 2;
+        ctx.fillRect(xOffset, yOffset, rectWidth * 2 / 3, this.props.samples[i] * height / 2);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement("canvas", { ref: "canvas", className: "waveform-canvas" });
+      return _react2.default.createElement("canvas", { ref: "canvas", onresize: this.updateCanvas,
+        className: "waveform-canvas" });
     }
   }]);
 
