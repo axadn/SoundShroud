@@ -34535,6 +34535,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var DEFAULT_SAMPLES = [];
+for (var i = 0; i < 16; ++i) {
+  DEFAULT_SAMPLES.push(0.25);
+  DEFAULT_SAMPLES.push(0.5);
+  DEFAULT_SAMPLES.push(0.15);
+  DEFAULT_SAMPLES.push(0.5);
+}
+
 var Waveform = function (_React$Component) {
   _inherits(Waveform, _React$Component);
 
@@ -34561,24 +34569,30 @@ var Waveform = function (_React$Component) {
       this.refs.canvas.heigth = this.refs.canvas.clientHeight;
       var width = this.refs.canvas.width;
       var height = this.refs.canvas.height;
-      var rectWidth = width / this.props.samples.length;
+      var samples = void 0;
+      if (this.props.samples) {
+        samples = this.props.samples;
+      } else {
+        samples = DEFAULT_SAMPLES;
+      }
+      var rectWidth = width / samples.length;
       ctx.clearRect(0, 0, width, height);
       var yOffset = void 0,
           xOffset = void 0;
-      for (var i = 0; i < this.props.samples.length; ++i) {
+      for (var _i = 0; _i < samples.length; ++_i) {
         ctx.fillStyle = "rgb(200, 200, 200)";
-        xOffset = i * rectWidth;
-        yOffset = height * (1 - this.props.samples[i]) / 2;
-        ctx.fillRect(xOffset + 1, yOffset, rectWidth / 2, this.props.samples[i] * height / 2);
+        xOffset = _i * rectWidth;
+        yOffset = height * (1 - samples[_i]) / 2;
+        ctx.fillRect(xOffset + 1, yOffset, rectWidth / 2, samples[_i] * height / 2);
         ctx.fillStyle = "rgb(70, 70, 70)";
-        yOffset += this.props.samples[i] * height / 2;
-        ctx.fillRect(xOffset, yOffset, rectWidth * 2 / 3, this.props.samples[i] * height / 2);
+        yOffset += samples[_i] * height / 2;
+        ctx.fillRect(xOffset, yOffset, rectWidth * 0.65, samples[_i] * height / 2);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement("canvas", { ref: "canvas", onresize: this.updateCanvas,
+      return _react2.default.createElement("canvas", { ref: "canvas",
         className: "waveform-canvas" });
     }
   }]);

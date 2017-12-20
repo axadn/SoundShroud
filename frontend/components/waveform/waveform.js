@@ -1,5 +1,12 @@
 import React from "react";
 
+const DEFAULT_SAMPLES = [];
+for(let i = 0; i < 16; ++i){
+  DEFAULT_SAMPLES.push(0.25);
+  DEFAULT_SAMPLES.push(0.5);
+  DEFAULT_SAMPLES.push(0.15);
+  DEFAULT_SAMPLES.push(0.5);
+}
 export default class Waveform extends React.Component{
   constructor(props){
     super(props);
@@ -15,21 +22,28 @@ export default class Waveform extends React.Component{
     this.refs.canvas.heigth = this.refs.canvas.clientHeight;
     const width = this.refs.canvas.width;
     const height = this.refs.canvas.height;
-    const rectWidth = width / this.props.samples.length;
+    let samples;
+    if(this.props.samples){
+      samples = this.props.samples;
+    }
+    else{
+      samples = DEFAULT_SAMPLES;
+    }
+    const rectWidth = width / samples.length;
     ctx.clearRect(0,0,width, height);
     let yOffset, xOffset;
-    for(let i = 0; i < this.props.samples.length; ++i){
+    for(let i = 0; i < samples.length; ++i){
       ctx.fillStyle = "rgb(200, 200, 200)";
       xOffset = i * rectWidth;
-      yOffset = height * (1 - this.props.samples[i]) / 2;
-      ctx.fillRect(xOffset + 1, yOffset,rectWidth/2, this.props.samples[i] * height / 2);
+      yOffset = height * (1 - samples[i]) / 2;
+      ctx.fillRect(xOffset + 1, yOffset,rectWidth/2, samples[i] * height / 2);
       ctx.fillStyle = "rgb(70, 70, 70)";
-      yOffset += this.props.samples[i] * height / 2;
-      ctx.fillRect(xOffset, yOffset,rectWidth * 2/3, this.props.samples[i] * height / 2 )
+      yOffset += samples[i] * height / 2;
+      ctx.fillRect(xOffset, yOffset,rectWidth * 0.65, samples[i] * height / 2 )
     }
   }
   render(){
-    return <canvas ref="canvas" onresize={this.updateCanvas}
+    return <canvas ref="canvas"
     className="waveform-canvas"></canvas>;
   }
 }
