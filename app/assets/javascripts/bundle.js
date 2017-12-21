@@ -5852,13 +5852,22 @@ var receiveMainContentLoading = exports.receiveMainContentLoading = function rec
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.fetchRandomPlaylistThunk = exports.backPlayback = exports.forwardPlayback = exports.startPlayback = exports.pausePlayback = exports.receivePlaylistIndex = exports.receivePlaylist = exports.START_PLAYBACK = exports.PAUSE_PLAYBACK = exports.BACK_PLAYBACK = exports.FORWARD_PLAYBACK = exports.RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST = undefined;
+
+var _track_actions = __webpack_require__(16);
+
+var _api_playlist_utils = __webpack_require__(307);
+
+var APIUtils = _interopRequireWildcard(_api_playlist_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 var RECEIVE_PLAYLIST = exports.RECEIVE_PLAYLIST = "RECEIVE_PLAYLIST";
 var RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST_ID = "RECEIVE_PLAYLIST_ID";
 var FORWARD_PLAYBACK = exports.FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 var BACK_PLAYBACK = exports.BACK_PLAYBACK = "BACK_PLAYBACK";
 var PAUSE_PLAYBACK = exports.PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 var START_PLAYBACK = exports.START_PLAYBACK = "START_PLAYBACK";
-
 var receivePlaylist = exports.receivePlaylist = function receivePlaylist(ids) {
   return {
     type: RECEIVE_PLAYLIST,
@@ -5894,6 +5903,14 @@ var forwardPlayback = exports.forwardPlayback = function forwardPlayback() {
 var backPlayback = exports.backPlayback = function backPlayback() {
   return {
     type: BACK_PLAYBACK
+  };
+};
+
+var fetchRandomPlaylistThunk = exports.fetchRandomPlaylistThunk = function fetchRandomPlaylistThunk(callback) {
+  return function (dispatch) {
+    APIUtils.fetchRandomPlaylist().then(function (tracks) {
+      return dispatch((0, _track_actions.receiveTracks)(tracks));
+    }).then(callback);
   };
 };
 
@@ -14167,7 +14184,7 @@ exports.default = function () {
       { className: "nav_link_set" },
       _react2.default.createElement(
         _reactRouterDom.NavLink,
-        { className: "top_nav_link", to: "/charts" },
+        { className: "top_nav_link", to: "/discover" },
         "Discover"
       ),
       _react2.default.createElement(
@@ -27685,6 +27702,10 @@ var _user_show_container = __webpack_require__(310);
 
 var _user_show_container2 = _interopRequireDefault(_user_show_container);
 
+var _discover_container = __webpack_require__(355);
+
+var _discover_container2 = _interopRequireDefault(_discover_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
@@ -27695,6 +27716,7 @@ exports.default = function (props) {
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/tracks/:trackId", component: _track_show_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/users/:userId", component: _user_show_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/upload", component: _track_form_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: "/discover", component: _discover_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/tracks/:trackId/edit", component: _track_form_container2.default })
   );
 };
@@ -31499,10 +31521,11 @@ var handlePlayButton = function handlePlayButton(props) {
       }
     } else {
       var trackIds = Object.keys(props.tracksOnPage).map(function (key) {
-        return parseInt(key);
+        return parseInt(props.tracksOnPage[key].id);
       });
       if (trackIds.length > 1) {
         props.dispatchPlaylist(trackIds);
+        debugger;
         props.playlistItemByIndex(trackIds.indexOf(props.trackId));
       } else {
         props.generatePlaylist(props.trackId);
@@ -31527,6 +31550,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 var generatePlaylist = exports.generatePlaylist = function generatePlaylist(trackId) {
   return $.ajax({ method: "get", url: "/api/playlists/tracks/" + trackId });
+};
+
+var fetchRandomPlaylist = exports.fetchRandomPlaylist = function fetchRandomPlaylist() {
+  return $.ajax({ method: "get", url: "/api/playlists/random" });
 };
 
 /***/ }),
@@ -31849,7 +31876,7 @@ var _reactRouterDom = __webpack_require__(11);
 
 var _track_actions = __webpack_require__(16);
 
-var _tracks_index = __webpack_require__(313);
+var _tracks_index = __webpack_require__(356);
 
 var _tracks_index2 = _interopRequireDefault(_tracks_index);
 
@@ -31924,138 +31951,8 @@ var TracksIndexContainer = function (_React$Component) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapContainerStateToProps, mapContainerDispatchToProps)(TracksIndexContainer));
 
 /***/ }),
-/* 313 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(11);
-
-var _track_item = __webpack_require__(314);
-
-var _track_item2 = _interopRequireDefault(_track_item);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TracksIndex = function (_React$Component) {
-  _inherits(TracksIndex, _React$Component);
-
-  function TracksIndex() {
-    _classCallCheck(this, TracksIndex);
-
-    return _possibleConstructorReturn(this, (TracksIndex.__proto__ || Object.getPrototypeOf(TracksIndex)).apply(this, arguments));
-  }
-
-  _createClass(TracksIndex, [{
-    key: "render",
-    value: function render() {
-      if (this.props.loading) return null;
-      var trackItems = this.props.tracks.map(function (track) {
-        return _react2.default.createElement(
-          "li",
-          { key: "trackItem" + track.id },
-          _react2.default.createElement(_track_item2.default, { track: track })
-        );
-      });
-      return _react2.default.createElement(
-        "div",
-        { className: "tracks-index" },
-        _react2.default.createElement(
-          "ul",
-          null,
-          trackItems
-        )
-      );
-    }
-  }]);
-
-  return TracksIndex;
-}(_react2.default.Component);
-
-exports.default = TracksIndex;
-
-/***/ }),
-/* 314 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(11);
-
-var _waveform = __webpack_require__(353);
-
-var _waveform2 = _interopRequireDefault(_waveform);
-
-var _document_play_button_container = __webpack_require__(135);
-
-var _document_play_button_container2 = _interopRequireDefault(_document_play_button_container);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "track-item" },
-    _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url,
-      onClick: function onClick() {
-        return location.hash = "/tracks/" + props.track.id;
-      } }),
-    _react2.default.createElement(
-      "div",
-      { className: "play-info-and-waveform" },
-      _react2.default.createElement(
-        "div",
-        { className: "play-button-and-info" },
-        _react2.default.createElement(_document_play_button_container2.default, { trackId: props.track.id }),
-        _react2.default.createElement(
-          "div",
-          { className: "info" },
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: "username-link",
-              to: "/users/" + props.track.artist_id },
-            props.track.artist_display_name
-          ),
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: "title-link",
-              to: "/tracks/" + props.track.id },
-            props.track.title
-          )
-        )
-      ),
-      _react2.default.createElement(_waveform2.default, { samples: props.track.waveform })
-    )
-  );
-};
-
-/***/ }),
+/* 313 */,
+/* 314 */,
 /* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34616,6 +34513,260 @@ var Waveform = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Waveform;
+
+/***/ }),
+/* 354 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _tracks_index = __webpack_require__(356);
+
+var _tracks_index2 = _interopRequireDefault(_tracks_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Discover = function (_React$Component) {
+  _inherits(Discover, _React$Component);
+
+  function Discover(props) {
+    _classCallCheck(this, Discover);
+
+    return _possibleConstructorReturn(this, (Discover.__proto__ || Object.getPrototypeOf(Discover)).call(this, props));
+  }
+
+  _createClass(Discover, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.props.fetchPlaylist();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      debugger;
+      var tracks = Object.keys(this.props.tracks).map(function (key) {
+        return _this2.props.tracks[key];
+      });
+      if (!this.props.loading && tracks.length > 0) {
+        return _react2.default.createElement(
+          "div",
+          { className: "discover-page" },
+          _react2.default.createElement(
+            "button",
+            { className: "blue button", onClick: this.props.fetchPlaylist },
+            "shuffle"
+          ),
+          _react2.default.createElement(_tracks_index2.default, { tracks: tracks })
+        );
+      } else {
+        return _react2.default.createElement("div", null);
+      }
+    }
+  }]);
+
+  return Discover;
+}(_react2.default.Component);
+
+exports.default = Discover;
+
+/***/ }),
+/* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(8);
+
+var _loading_actions = __webpack_require__(49);
+
+var _playlist_actions = __webpack_require__(50);
+
+var _discover = __webpack_require__(354);
+
+var _discover2 = _interopRequireDefault(_discover);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    loading: state.loading.mainContent,
+    tracks: state.entities.tracks
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchPlaylist: function fetchPlaylist() {
+      dispatch((0, _loading_actions.receiveMainContentLoading)());
+      dispatch((0, _playlist_actions.fetchRandomPlaylistThunk)(function () {
+        return dispatch((0, _loading_actions.receiveMainContentLoaded)());
+      }));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_discover2.default);
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(11);
+
+var _track_item = __webpack_require__(357);
+
+var _track_item2 = _interopRequireDefault(_track_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TracksIndex = function (_React$Component) {
+  _inherits(TracksIndex, _React$Component);
+
+  function TracksIndex() {
+    _classCallCheck(this, TracksIndex);
+
+    return _possibleConstructorReturn(this, (TracksIndex.__proto__ || Object.getPrototypeOf(TracksIndex)).apply(this, arguments));
+  }
+
+  _createClass(TracksIndex, [{
+    key: "render",
+    value: function render() {
+      debugger;
+      if (this.props.loading) return null;
+      var trackItems = this.props.tracks.map(function (track) {
+        return _react2.default.createElement(
+          "li",
+          { key: "trackItem" + track.id },
+          _react2.default.createElement(_track_item2.default, { track: track })
+        );
+      });
+      return _react2.default.createElement(
+        "div",
+        { className: "tracks-index" },
+        _react2.default.createElement(
+          "ul",
+          null,
+          trackItems
+        )
+      );
+    }
+  }]);
+
+  return TracksIndex;
+}(_react2.default.Component);
+
+exports.default = TracksIndex;
+
+/***/ }),
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(11);
+
+var _waveform = __webpack_require__(353);
+
+var _waveform2 = _interopRequireDefault(_waveform);
+
+var _document_play_button_container = __webpack_require__(135);
+
+var _document_play_button_container2 = _interopRequireDefault(_document_play_button_container);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "track-item" },
+    _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url,
+      onClick: function onClick() {
+        return location.hash = "/tracks/" + props.track.id;
+      } }),
+    _react2.default.createElement(
+      "div",
+      { className: "play-info-and-waveform" },
+      _react2.default.createElement(
+        "div",
+        { className: "play-button-and-info" },
+        _react2.default.createElement(_document_play_button_container2.default, { trackId: props.track.id }),
+        _react2.default.createElement(
+          "div",
+          { className: "info" },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "username-link",
+              to: "/users/" + props.track.artist_id },
+            props.track.artist_display_name
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "title-link",
+              to: "/tracks/" + props.track.id },
+            props.track.title
+          )
+        )
+      ),
+      _react2.default.createElement(_waveform2.default, { samples: props.track.waveform })
+    )
+  );
+};
 
 /***/ })
 /******/ ]);

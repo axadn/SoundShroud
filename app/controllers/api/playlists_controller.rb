@@ -7,6 +7,6 @@ class Api::PlaylistsController < ApplicationController
 
   def random
     @tracks = Track.select("*").limit("25").order("RANDOM()")
-    render :index_full
+    render "api/tracks/index"
   end
 end

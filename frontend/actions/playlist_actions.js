@@ -4,6 +4,8 @@ export const FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 export const BACK_PLAYBACK = "BACK_PLAYBACK";
 export const PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 export const START_PLAYBACK = "START_PLAYBACK";
+import {receiveTracks} from "./track_actions";
+import * as APIUtils from "../utils/api_playlist_utils";
 
 export const receivePlaylist = ids => ({
   type: RECEIVE_PLAYLIST,
@@ -30,3 +32,10 @@ export const forwardPlayback = () =>({
 export const backPlayback = () =>({
   type: BACK_PLAYBACK
 });
+
+export const fetchRandomPlaylistThunk = callback => dispatch => {
+  APIUtils.fetchRandomPlaylist().then(tracks=> dispatch(
+    receiveTracks(tracks)
+  )).then(callback);
+
+};

@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {fetchUserTracksThunk,
   receiveTracksLoading, receiveTracksLoaded}
    from "../../actions/track_actions";
-import TracksIndex from "./tracks_index";
+import TracksIndex from "../track/tracks_index";
 
 const mapContainerStateToProps = (state, props) => ({});
 
