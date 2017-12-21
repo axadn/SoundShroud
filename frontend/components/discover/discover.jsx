@@ -10,8 +10,7 @@ export default class Discover extends React.Component{
   }
   render(){
     debugger;
-    const tracks = Object.keys(this.props.tracks).map(
-      key=> this.props.tracks[key]);
+    const tracks = this.props.tracks;
     if(!this.props.loading && tracks.length > 0){
       return(
         <div className="discover-page">

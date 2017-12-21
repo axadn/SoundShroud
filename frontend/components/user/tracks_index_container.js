@@ -19,7 +19,7 @@ const mapContainerDispatchToProps =(dispatch, props) => ({
 
 const mapDisplayStateToProps = (state, props) => ({
   loading: state.loading.tracks,
-  tracks: props.trackIds.map(id => state.entities.tracks[id])
+  tracks: props.trackIds.map(id => state.entities.tracks.tracks[id])
 });
 
 const mapDisplayDispatchToProps = (dispatch, props) => ({

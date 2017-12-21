@@ -14032,7 +14032,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, props) {
   return {
     playing: state.playlist.playing,
-    tracksOnPage: state.entities.tracks,
+    tracksOnPage: state.entities.tracks.ids,
     current_in_playlist: state.playlist.ids[state.playlist.currentIndex] == props.trackId };
 };
 
@@ -31520,9 +31520,7 @@ var handlePlayButton = function handlePlayButton(props) {
         props.resumeTrack();
       }
     } else {
-      var trackIds = Object.keys(props.tracksOnPage).map(function (key) {
-        return parseInt(props.tracksOnPage[key].id);
-      });
+      var trackIds = props.tracksOnPage;
       if (trackIds.length > 1) {
         props.dispatchPlaylist(trackIds);
         debugger;
@@ -31907,7 +31905,7 @@ var mapDisplayStateToProps = function mapDisplayStateToProps(state, props) {
   return {
     loading: state.loading.tracks,
     tracks: props.trackIds.map(function (id) {
-      return state.entities.tracks[id];
+      return state.entities.tracks.tracks[id];
     })
   };
 };
@@ -33927,12 +33925,12 @@ var _track_actions = __webpack_require__(16);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { tracks: {}, ids: [] };
   var action = arguments[1];
 
   switch (action.type) {
     case _track_actions.RECEIVE_TRACKS:
-      return action.payload;
+      return { tracks: action.payload.tracks, ids: action.payload.ids };
     case _track_actions.RECEIVE_TRACK:
       return Object.assign({}, state, _defineProperty({}, action.payload.id, action.payload));
     default:
@@ -34560,12 +34558,8 @@ var Discover = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       debugger;
-      var tracks = Object.keys(this.props.tracks).map(function (key) {
-        return _this2.props.tracks[key];
-      });
+      var tracks = this.props.tracks;
       if (!this.props.loading && tracks.length > 0) {
         return _react2.default.createElement(
           "div",
@@ -34616,9 +34610,12 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
+  debugger;
   return {
     loading: state.loading.mainContent,
-    tracks: state.entities.tracks
+    tracks: state.entities.tracks.ids.map(function (id) {
+      return state.entities.tracks.tracks[id];
+    })
   };
 };
 

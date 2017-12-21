@@ -6,7 +6,7 @@ import {generatePlaylist} from "../../utils/api_playlist_utils";
 const mapStateToProps = (state, props) => {
   return{
   playing: state.playlist.playing,
-  tracksOnPage: state.entities.tracks,
+  tracksOnPage: state.entities.tracks.ids,
   current_in_playlist: state.playlist.ids[state.playlist.currentIndex] == props.trackId};
 };
 

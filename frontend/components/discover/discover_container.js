@@ -5,10 +5,13 @@ import {fetchRandomPlaylistThunk} from "../../actions/playlist_actions";
 import Discover from "./discover";
 import React from "react";
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  debugger;
+  return{
   loading: state.loading.mainContent,
-  tracks: state.entities.tracks
-});
+  tracks: state.entities.tracks.ids.map(id =>
+    state.entities.tracks.tracks[id])
+}};
 
 const mapDispatchToProps = dispatch => ({
   fetchPlaylist: () =>{
