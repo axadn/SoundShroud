@@ -4,8 +4,11 @@ import Waveform from "../waveform/waveform";
 import DocumentPlayButtonContainer from "../track/document_play_button_container";
 export default (props)=> (
   <div className= "track-item">
-    <img className="medium cover-art" src={props.track.img_url}
+    <div className = "track-item-cover-art-container">
+      <div className = "track-item-cover-art-padding-fix"></div>
+      <img className="medium cover-art" src={props.track.img_url}
       onClick={() => location.hash =`/tracks/${props.track.id}`}></img>
+    </div>
     <div className="play-info-and-waveform">
       <div className="play-button-and-info">
         <DocumentPlayButtonContainer trackId={props.track.id}/>

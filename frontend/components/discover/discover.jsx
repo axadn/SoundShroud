@@ -9,7 +9,6 @@ export default class Discover extends React.Component{
     this.props.fetchPlaylist();
   }
   render(){
-    debugger;
     const tracks = this.props.tracks;
     if(!this.props.loading && tracks.length > 0){
       return(

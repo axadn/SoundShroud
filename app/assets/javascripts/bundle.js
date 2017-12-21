@@ -34558,7 +34558,6 @@ var Discover = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var tracks = this.props.tracks;
       if (!this.props.loading && tracks.length > 0) {
         return _react2.default.createElement(
@@ -34610,7 +34609,6 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     loading: state.loading.mainContent,
     tracks: state.entities.tracks.ids.map(function (id) {
@@ -34675,7 +34673,6 @@ var TracksIndex = function (_React$Component) {
   _createClass(TracksIndex, [{
     key: "render",
     value: function render() {
-      debugger;
       if (this.props.loading) return null;
       var trackItems = this.props.tracks.map(function (track) {
         return _react2.default.createElement(
@@ -34732,10 +34729,15 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "track-item" },
-    _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url,
-      onClick: function onClick() {
-        return location.hash = "/tracks/" + props.track.id;
-      } }),
+    _react2.default.createElement(
+      "div",
+      { className: "track-item-cover-art-container" },
+      _react2.default.createElement("div", { className: "track-item-cover-art-padding-fix" }),
+      _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url,
+        onClick: function onClick() {
+          return location.hash = "/tracks/" + props.track.id;
+        } })
+    ),
     _react2.default.createElement(
       "div",
       { className: "play-info-and-waveform" },

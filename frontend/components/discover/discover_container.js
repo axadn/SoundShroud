@@ -6,7 +6,6 @@ import Discover from "./discover";
 import React from "react";
 
 const mapStateToProps = state => {
-  debugger;
   return{
   loading: state.loading.mainContent,
   tracks: state.entities.tracks.ids.map(id =>
