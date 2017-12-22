@@ -13,8 +13,11 @@ export default class Waveform extends React.Component{
     this.updateCanvas = this.updateCanvas.bind(this);
   }
   componentDidMount(){
-    this.setState({resizeId: window.addEventListener("resize", this.updateCanvas)});
+    window.addEventListener("resize", this.updateCanvas);
     this.updateCanvas();
+  }
+  componentWillUnmount(){
+    window.removeEventListener("resize", this.updateCanvas);
   }
   updateCanvas(){
     const ctx = this.refs.canvas.getContext('2d');

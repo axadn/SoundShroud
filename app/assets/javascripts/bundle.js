@@ -34483,8 +34483,13 @@ var Waveform = function (_React$Component) {
   _createClass(Waveform, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({ resizeId: window.addEventListener("resize", this.updateCanvas) });
+      window.addEventListener("resize", this.updateCanvas);
       this.updateCanvas();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener("resize", this.updateCanvas);
     }
   }, {
     key: "updateCanvas",
