@@ -32357,7 +32357,6 @@ var assignAudioSource = function assignAudioSource(state, props) {
 };
 var invalidateCache = function invalidateCache(state) {
   var cache = state.cache;
-  debugger;
   for (var i = 0; i < cache.length; ++i) {
     cache[i].binaryData = null;
   }
@@ -32379,7 +32378,6 @@ var setIfLoaded = function setIfLoaded(state, props) {
 };
 
 var handleQueuedPlay = function handleQueuedPlay(state, props) {
-  debugger;
   if (state.waitingToPlay && !state.playing && state.loaded) {
     state.audioSource.play();
     return { waitingToPlay: false, playing: true };
@@ -32431,7 +32429,6 @@ var AudioPlayer = function (_React$Component) {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(newProps) {
       if (JSON.stringify(newProps.playlist) !== JSON.stringify(this.props.playlist)) {
-        debugger;
         this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
       } else if (newProps.indexInPlaylist !== this.props.indexInPlaylist) {
         if (this.props.indexInPlaylist === null) {
@@ -32599,6 +32596,11 @@ var AudioControls = function (_React$Component) {
       this.audioElement.addEventListener("ended", this.props.skipAction);
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.drawCanvas();
+    }
+  }, {
     key: "assignCanvasContainer",
     value: function assignCanvasContainer(cont) {
       this.canvasCont = cont;
@@ -32716,7 +32718,7 @@ var AudioControls = function (_React$Component) {
       var width = this.canvas.width;
       var progressX = this.canvas.width * this.state.progress;
       var height = this.canvas.height;
-      this.canvasCtx.fillStyle = "#3f3f3f";
+      this.canvasCtx.fillStyle = "#4a4a4a";
       this.canvasCtx.fillRect(0, 0, width, height);
       if (this.props.loaded) {
         this.canvasCtx.fillStyle = "#0c70ae";
@@ -33803,8 +33805,17 @@ var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var setupAudioAnalyser = function setupAudioAnalyser() {
+  var audioCtx = new window.AudioContext();
+  var analyser = audioCtx.createAnalyser();
+  var audioSrc = audioCtx.createMediaElementSource(document.querySelector("audio"));
+  audioSrc.connect(analyser);
+  audioSrc.connect(audioCtx.destination);
+  return analyser;
+};
+
 exports.default = function () {
-  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { audioAnalyser: setupAudioAnalyser() };
 
   return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
 };
@@ -33882,6 +33893,9 @@ var _auth_modal_reducer2 = _interopRequireDefault(_auth_modal_reducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
+  audioAnalyser: function audioAnalyser(state) {
+    return state || null;
+  },
   entities: _entities_reducer2.default,
   session: _session_reducer2.default,
   errors: _errors_reducer2.default,
@@ -34461,6 +34475,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var DEFAULT_SAMPLES = [];
+var BUFFER_LENGTH = 2048;
 for (var i = 0; i < 16; ++i) {
   DEFAULT_SAMPLES.push(0.25);
   DEFAULT_SAMPLES.push(0.5);
@@ -34492,8 +34507,24 @@ var Waveform = function (_React$Component) {
       window.removeEventListener("resize", this.updateCanvas);
     }
   }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(newProps) {
+      if (newProps.currentlyPlaying && !this.props.currentlyPlaying) {
+        debugger;
+        this.dataArray = new Uint8Array(BUFFER_LENGTH);
+        this.updateCanvas();
+      } else if (this.props.currentlyPlaying && !newProps.currentlyPlaying) {
+        this.dataArray = null;
+      }
+    }
+  }, {
     key: "updateCanvas",
     value: function updateCanvas() {
+      if (this.props.currentlyPlaying) {
+        this.props.analyser.getByteTimeDomainData(this.dataArray);
+        console.log(this.dataArray);
+        window.requestAnimationFrame(this.updateCanvas);
+      }
       var ctx = this.refs.canvas.getContext('2d');
       this.refs.canvas.width = this.refs.canvas.clientWidth;
       this.refs.canvas.heigth = this.refs.canvas.clientHeight;
@@ -34735,9 +34766,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(11);
 
-var _waveform = __webpack_require__(353);
+var _waveform_container = __webpack_require__(358);
 
-var _waveform2 = _interopRequireDefault(_waveform);
+var _waveform_container2 = _interopRequireDefault(_waveform_container);
 
 var _document_play_button_container = __webpack_require__(135);
 
@@ -34782,10 +34813,43 @@ exports.default = function (props) {
           )
         )
       ),
-      _react2.default.createElement(_waveform2.default, { samples: props.track.waveform })
+      _react2.default.createElement(_waveform_container2.default, { id: props.track.id })
     )
   );
 };
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(8);
+
+var _waveform = __webpack_require__(353);
+
+var _waveform2 = _interopRequireDefault(_waveform);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  return {
+    samples: state.entities.tracks.tracks[props.id].waveform,
+    currentlyPlaying: state.playlist.ids[state.playlist.currentIndex] === props.id,
+    audioAnalyser: state.audioAnalyser
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(_waveform2.default);
 
 /***/ })
 /******/ ]);

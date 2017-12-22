@@ -19,6 +19,9 @@ export default class AudioControls extends React.Component{
       this.handleTimeChange(this.audioElement));
     this.audioElement.addEventListener("ended", this.props.skipAction);
   }
+  componentDidMount(){
+    this.drawCanvas();
+  }
   assignCanvasContainer(cont){
     this.canvasCont = cont;
   }
@@ -98,7 +101,7 @@ export default class AudioControls extends React.Component{
     const width = this.canvas.width;
     const progressX = this.canvas.width * this.state.progress;
     const height = this.canvas.height;
-    this.canvasCtx.fillStyle = "#3f3f3f";
+    this.canvasCtx.fillStyle = "#4a4a4a";
     this.canvasCtx.fillRect(0,0,width, height);
     if(this.props.loaded){
       this.canvasCtx.fillStyle = "#0c70ae";

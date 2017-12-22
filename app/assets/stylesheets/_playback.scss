@@ -11,6 +11,7 @@
     flex-wrap: wrap-reverse;
     background-color: #273233;
   border-top: 1px solid black;
+  box-shadow: inset 0px 0px 11px 3px #ffffff24;
 }
 #audio-controls-content .controls{
   flex-shrink: 0;
@@ -52,7 +53,7 @@
   cursor: pointer;
 }
 #audio-duration, #audio-current-time{
-  color: #3f3f3f;
+  color: #4a4a4a;
   width: 20px;
   flex-shrink: 0;
 }

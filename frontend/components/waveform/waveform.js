@@ -1,6 +1,7 @@
 import React from "react";
 
 const DEFAULT_SAMPLES = [];
+const BUFFER_LENGTH =2048;
 for(let i = 0; i < 16; ++i){
   DEFAULT_SAMPLES.push(0.25);
   DEFAULT_SAMPLES.push(0.5);
@@ -19,7 +20,22 @@ export default class Waveform extends React.Component{
   componentWillUnmount(){
     window.removeEventListener("resize", this.updateCanvas);
   }
+  componentWillReceiveProps(newProps){
+    if(newProps.currentlyPlaying && !this.props.currentlyPlaying){
+      debugger;
+      this.dataArray = new Uint8Array(BUFFER_LENGTH);
+      this.updateCanvas();
+    }
+    else if(this.props.currentlyPlaying && !newProps.currentlyPlaying){
+      this.dataArray = null;
+    }
+  }
   updateCanvas(){
+    if(this.props.currentlyPlaying){
+      this.props.analyser.getByteTimeDomainData(this.dataArray);
+      console.log(this.dataArray);
+      window.requestAnimationFrame(this.updateCanvas);
+    }
     const ctx = this.refs.canvas.getContext('2d');
     this.refs.canvas.width = this.refs.canvas.clientWidth;
     this.refs.canvas.heigth = this.refs.canvas.clientHeight;

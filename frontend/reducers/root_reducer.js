@@ -8,6 +8,7 @@ import playlistReducer from "./playlist_reducer";
 import authModalReducer from "./auth_modal_reducer";
 
 export default combineReducers({
+  audioAnalyser: state => state || null,
   entities: entitiesReducer,
   session: sessionReducer,
   errors: errorsReducer,
