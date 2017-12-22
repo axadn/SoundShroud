@@ -1,0 +1,15 @@
+@media(max-width: 600px){
+  .tracks-index{
+    width: 90%;
+    max-height:24vw;
+  }
+  .track-item{
+    max-height: 27vw;
+  }
+  .track-item a.title-link{
+    font-size: 16px
+  }
+  .play-info-and-waveform{
+    margin-left:16px;
+  }
+}

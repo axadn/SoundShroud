@@ -10,6 +10,17 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require _colors
+ *= require root
+ *= require _track\ item
+ *= require _comments
+ *= require _playback
+ *= require session
+ *= require _tracks\ index
+ *= require _track\ show
+ *= require _track\ form
+ *= require _user\ show
+ *= require _landing
+
  */
