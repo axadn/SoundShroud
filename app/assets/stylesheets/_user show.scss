@@ -7,6 +7,15 @@
 }
 .user-show img:first-of-type{
   border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.user-show .image-input-container{
+  height: 25vw;
+  width: 25vw;
+  max-height: 200px;
+  max-width: 200px;
 }
 
 

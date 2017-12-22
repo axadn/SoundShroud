@@ -14432,15 +14432,30 @@ var _image_actions = __webpack_require__(137);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
+  addAutoplayListeners();
   var root = document.getElementById("root");
   var store = (0, _store2.default)();
   window.postUserImage = _image_actions.postUserImage;
   window.postTrackImage = _image_actions.postTrackImage;
+  document.addEventListener;
   if (window.currentUser) {
     store.dispatch((0, _session_actions.receiveSession)(currentUser));
   }
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
+
+function addAutoplayListeners() {
+  window.removeEventListener('keydown', enableAutoplay);
+  window.removeEventListener('mousedown', enableAutoplay);
+  window.removeEventListener('touchstart', enableAutoplay);
+}
+
+function enableAutoplay() {
+  document.querySelector("audio").load();
+  window.removeEventListener('keydown', enableAutoplay);
+  window.removeEventListener('mousedown', enableAutoplay);
+  window.removeEventListener('touchstart', enableAutoplay);
+}
 
 /***/ }),
 /* 144 */

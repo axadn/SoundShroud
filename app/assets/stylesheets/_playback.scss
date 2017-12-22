@@ -1,6 +1,7 @@
 @import "colors";
 .audio-progress{
-  overflow: scroll;
+  z-index: 1000;
+  box-shadow: 0 0 16vh 8vh #000000a8;
 }
 #audio-controls-content{
   display: flex;
@@ -9,6 +10,7 @@
   justify-content: center;
     flex-wrap: wrap-reverse;
     background-color: #273233;
+  border-top: 1px solid black;
 }
 #audio-controls-content .controls{
   flex-shrink: 0;

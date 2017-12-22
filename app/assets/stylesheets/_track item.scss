@@ -1,6 +1,6 @@
 .track-item{
   display: flex;
-  margin-left: 40px;
+  margin-left: 3vw;
   margin-bottom: 40px;
   max-width: 900px;
   max-height: 20vw;
@@ -25,7 +25,6 @@
   text-decoration: none;
 
 }
-
 .track-item-cover-art-container{
   flex-grow: 0.8;
   position: relative;
@@ -59,7 +58,8 @@
   justify-content: space-between;
   margin-left: 40px;
   width: 12vw;
-
+  background-color: #232323;
+    box-shadow: 0 0 21px 8px #232323;
 }
 
 .waveform-canvas{
