@@ -14445,9 +14445,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addAutoplayListeners() {
-  window.removeEventListener('keydown', enableAutoplay);
-  window.removeEventListener('mousedown', enableAutoplay);
-  window.removeEventListener('touchstart', enableAutoplay);
+  window.addEventListener('keydown', enableAutoplay);
+  window.addEventListener('mousedown', enableAutoplay);
+  window.addEventListener('touchstart', enableAutoplay);
 }
 
 function enableAutoplay() {
