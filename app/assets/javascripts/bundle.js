@@ -30904,7 +30904,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
   return {
     loading: state.loading.mainContent,
-    track: state.entities.tracks[ownProps.trackId],
+    track: state.entities.tracks.tracks[ownProps.trackId],
     current_user_id: (0, _selectors.current_user_id)(state)
   };
 };
@@ -31003,9 +31003,9 @@ var _updatable_image_container = __webpack_require__(136);
 
 var _updatable_image_container2 = _interopRequireDefault(_updatable_image_container);
 
-var _waveform = __webpack_require__(353);
+var _waveform_container = __webpack_require__(358);
 
-var _waveform2 = _interopRequireDefault(_waveform);
+var _waveform_container2 = _interopRequireDefault(_waveform_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31102,7 +31102,7 @@ var TrackShow = function (_React$Component) {
               _react2.default.createElement(
                 "div",
                 { id: "show_page_waveform_container" },
-                _react2.default.createElement(_waveform2.default, { samples: this.props.track.waveform })
+                _react2.default.createElement(_waveform_container2.default, { id: this.props.track.id })
               )
             ),
             _react2.default.createElement(
@@ -33955,7 +33955,10 @@ exports.default = function () {
     case _track_actions.RECEIVE_TRACKS:
       return { tracks: action.payload.tracks, ids: action.payload.ids };
     case _track_actions.RECEIVE_TRACK:
-      return Object.assign({}, state, _defineProperty({}, action.payload.id, action.payload));
+      return Object.assign({}, state, {
+        tracks: _defineProperty({}, action.payload.id, action.payload),
+        ids: [action.payload.id]
+      });
     default:
       return state;
   }

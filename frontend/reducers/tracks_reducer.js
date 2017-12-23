@@ -7,7 +7,8 @@ export default (state = {tracks: {}, ids: []}, action) => {
       return {tracks: action.payload.tracks, ids: action.payload.ids};
     case RECEIVE_TRACK:
       return Object.assign({}, state, {
-        [action.payload.id]: action.payload
+        tracks:{[action.payload.id]: action.payload},
+        ids: [action.payload.id]
       });
     default:
       return state;

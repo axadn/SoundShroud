@@ -9,7 +9,7 @@ import {current_user_id} from "../../reducers/selectors";
 
 const mapDisplayStateToProps = (state, ownProps) => ({
   loading: state.loading.mainContent,
-  track: state.entities.tracks[ownProps.trackId],
+  track: state.entities.tracks.tracks[ownProps.trackId],
   current_user_id: current_user_id(state),
 });
 
