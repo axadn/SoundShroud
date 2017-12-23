@@ -8,9 +8,6 @@ export default ()=>(
       <NavLink className="top_nav_link" to="/discover">
         Discover
       </NavLink>
-      <NavLink className="top_nav_link" exact to="/">
-        Home
-      </NavLink>
     </div>
     <SessionButtonsContainer/>
   </div>

@@ -10,7 +10,7 @@ import DiscoverContainer from "./discover/discover_container";
 
 export default props => (
   <div className="main_content" >
-    <AuthRoute exact path="/" component={LandingPageContainer}></AuthRoute>
+    <Route exact path="/" component={DiscoverContainer}></Route>
     <Route exact path = "/tracks/:trackId" component={TrackShowContainer}></Route>
     <Route exact path ="/users/:userId" component={UserShowContainer}></Route>
     <ProtectedRoute path="/upload" component={TrackFormContainer}></ProtectedRoute>

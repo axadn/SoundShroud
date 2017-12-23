@@ -14186,11 +14186,6 @@ exports.default = function () {
         _reactRouterDom.NavLink,
         { className: "top_nav_link", to: "/discover" },
         "Discover"
-      ),
-      _react2.default.createElement(
-        _reactRouterDom.NavLink,
-        { className: "top_nav_link", exact: true, to: "/" },
-        "Home"
       )
     ),
     _react2.default.createElement(_session_buttons_container2.default, null)
@@ -27727,7 +27722,7 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "main_content" },
-    _react2.default.createElement(_route_utils.AuthRoute, { exact: true, path: "/", component: _landing_page_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _discover_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/tracks/:trackId", component: _track_show_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/users/:userId", component: _user_show_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/upload", component: _track_form_container2.default }),
