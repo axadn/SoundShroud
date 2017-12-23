@@ -25,7 +25,6 @@ const handlePlayButton = props => () => {
     let trackIds = props.tracksOnPage;
     if(trackIds.length > 1){
       props.dispatchPlaylist(trackIds);
-      debugger;
       props.playlistItemByIndex(trackIds.indexOf(props.trackId));
     }
     else {

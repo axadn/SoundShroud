@@ -31538,7 +31538,6 @@ var handlePlayButton = function handlePlayButton(props) {
       var trackIds = props.tracksOnPage;
       if (trackIds.length > 1) {
         props.dispatchPlaylist(trackIds);
-        debugger;
         props.playlistItemByIndex(trackIds.indexOf(props.trackId));
       } else {
         props.generatePlaylist(props.trackId);
@@ -34499,31 +34498,61 @@ var Waveform = function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       window.addEventListener("resize", this.updateCanvas);
+      this.mounted = true;
       this.updateCanvas();
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       window.removeEventListener("resize", this.updateCanvas);
+      this.mounted = false;
+      this.dataArray = null;
     }
   }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(newProps) {
-      if (newProps.currentlyPlaying && !this.props.currentlyPlaying) {
-        debugger;
+      if (newProps.currentlyPlaying && !this.dataArray) {
         this.dataArray = new Uint8Array(BUFFER_LENGTH);
-        this.updateCanvas();
       } else if (this.props.currentlyPlaying && !newProps.currentlyPlaying) {
         this.dataArray = null;
       }
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      if (this.props.currentlyPlaying) {
+        this.updateCanvas();
+      }
+    }
+  }, {
     key: "updateCanvas",
     value: function updateCanvas() {
+      if (!this.mounted) return;
+      if (this.props.currentlyPlaying && !this.dataArray) this.dataArray = new Uint8Array(BUFFER_LENGTH);
+      var colors = void 0,
+          intensities = void 0,
+          intensity = void 0,
+          r = void 0,
+          g = void 0,
+          b = void 0;
       if (this.props.currentlyPlaying) {
-        this.props.analyser.getByteTimeDomainData(this.dataArray);
-        console.log(this.dataArray);
+        this.props.audioAnalyser.getByteTimeDomainData(this.dataArray);
         window.requestAnimationFrame(this.updateCanvas);
+        var sampleFrequency = Math.floor(this.dataArray.length / this.props.samples.length);
+        colors = [];
+        intensities = [];
+        for (var _i = 0; _i < this.dataArray.length; _i += sampleFrequency) {
+          intensity = Math.abs(128.0 - this.dataArray[_i]) / 128.0;
+          intensities.push(intensity);
+          r = intensity > 0.2 ? 230 : 149;
+          g = intensity > 0.2 ? 230 : 187;
+          b = intensity > 0.2 ? 230 : 193;
+          colors.push("rgb(" + r + ", " + g + ", " + b + ")");
+        }
+      } else {
+        colors = this.props.samples.map(function (sample) {
+          return "rgb(200, 200, 200)";
+        });
       }
       var ctx = this.refs.canvas.getContext('2d');
       this.refs.canvas.width = this.refs.canvas.clientWidth;
@@ -34540,14 +34569,23 @@ var Waveform = function (_React$Component) {
       ctx.clearRect(0, 0, width, height);
       var yOffset = void 0,
           xOffset = void 0;
-      for (var _i = 0; _i < samples.length; ++_i) {
-        ctx.fillStyle = "rgb(200, 200, 200)";
-        xOffset = _i * rectWidth;
-        yOffset = height * (1 - samples[_i]) / 2;
-        ctx.fillRect(xOffset + 1, yOffset, rectWidth / 2, samples[_i] * height / 2);
-        ctx.fillStyle = "rgb(70, 70, 70)";
-        yOffset += samples[_i] * height / 2;
-        ctx.fillRect(xOffset, yOffset, rectWidth * 0.65, samples[_i] * height / 2);
+      var topHeight = void 0;
+      for (var _i2 = 0; _i2 < samples.length; ++_i2) {
+        ctx.fillStyle = colors[_i2];
+        xOffset = _i2 * rectWidth;
+        yOffset = height * (1 - samples[_i2]) / 2;
+        topHeight = samples[_i2] * height / 2;
+        var topOffset = yOffset;
+        if (this.props.currentlyPlaying) {
+          topHeight = intensities[_i2] * height;
+          topOffset = height * (1 - intensities[_i2]) / 2;
+        }
+        ctx.fillRect(xOffset + 1, topOffset, rectWidth / 2, topHeight);
+        if (!this.props.currentlyPlaying) {
+          ctx.fillStyle = "rgb(70, 70, 70)";
+          yOffset += samples[_i2] * height / 2;
+          ctx.fillRect(xOffset, yOffset, rectWidth * 0.65, samples[_i2] * height / 2);
+        }
       }
     }
   }, {
