@@ -114,7 +114,7 @@ export default class AudioPlayer extends React.Component{
         this.setState({waitingToPlay: true})
       }
       else{
-        this.setState({playing: false});
+        this.setState({waitingToPlay: false,playing: false});
         this.state.audioSource.pause();
       }
     }
