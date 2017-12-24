@@ -19,10 +19,6 @@ export default (state = NO_PLAYLIST , action) => {
     case BACK_PLAYBACK:
       return Object.assign({}, state, {currentIndex:
                                       (state.currentIndex - 1) % state.ids.length});
-    case RECEIVE_AUDIO_LOADED:
-      return Object.assign({}, state, {loading: false});
-    case RECEIVE_AUDIO_LOADING:
-      return Object.assign({}, state, {loading: true});
     default:
       return state;
   }
