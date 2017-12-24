@@ -1,6 +1,8 @@
 import {connect} from "react-redux";
 import {fetchBinaryData} from "../../actions/track_actions";
 import AudioPlayer from "./audio_player";
+import {currentlyLoadingAudioAction, finishedLoadingAudioAction}
+  from "../../actions/playlist_actions"
 
 const mapStateToProps = (state, ownProps) => ({
   playlist: state.playlist.ids,
@@ -10,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  currentlyLoadingAudioAction: () => dispatch(currentlyLoadingAudioAction()),
+  finishedLoadingAudioAction: () => dispatch(finishedLoadingAudioAction())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayer);

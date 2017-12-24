@@ -1,7 +1,7 @@
 import {RECEIVE_PLAYLIST,
   START_PLAYBACK, PAUSE_PLAYBACK, RECEIVE_PLAYLIST_ID,
-  FORWARD_PLAYBACK, BACK_PLAYBACK} from "../actions/playlist_actions";
-
+  FORWARD_PLAYBACK, BACK_PLAYBACK, RECEIVE_AUDIO_LOADED, RECEIVE_AUDIO_LOADING}
+   from "../actions/playlist_actions";
 const NO_PLAYLIST = {ids: [], currentIndex: null, playing: false};
 export default (state = NO_PLAYLIST , action) => {
   switch(action.type){
@@ -19,6 +19,10 @@ export default (state = NO_PLAYLIST , action) => {
     case BACK_PLAYBACK:
       return Object.assign({}, state, {currentIndex:
                                       (state.currentIndex - 1) % state.ids.length});
+    case RECEIVE_AUDIO_LOADED:
+      return Object.assign({}, state, {loading: false});
+    case RECEIVE_AUDIO_LOADING:
+      return Object.assign({}, state, {loading: true});
     default:
       return state;
   }

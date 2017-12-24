@@ -66,14 +66,18 @@ const fetchForCache = player => (state, props) =>{
   const current = state.cache[MID_CACHE_INDEX];
   if(!current.id) return {};
   if(!current.binaryData && !current.fetching){
+    props.currentlyLoadingAudioAction();
     props.fetchForCache(current.id, data=>{
+        current.fetching = false;
         player.setState(receiveSongCacheData(data));
         player.setState(setIfLoaded);
         player.setState(assignAudioSource);
         player.setState(handleQueuedPlay);
+        props.finishedLoadingAudioAction();
         player.setState(fetchForCache(player));
       }
     );
+    current.fetching = true;
     return;
   }
 }

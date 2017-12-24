@@ -4409,7 +4409,7 @@ var receiveMainContentLoading = exports.receiveMainContentLoading = function rec
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchRandomPlaylistThunk = exports.backPlayback = exports.forwardPlayback = exports.startPlayback = exports.pausePlayback = exports.receivePlaylistIndex = exports.receivePlaylist = exports.START_PLAYBACK = exports.PAUSE_PLAYBACK = exports.BACK_PLAYBACK = exports.FORWARD_PLAYBACK = exports.RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST = undefined;
+exports.finishedLoadingAudioAction = exports.currentlyLoadingAudioAction = exports.fetchRandomPlaylistThunk = exports.backPlayback = exports.forwardPlayback = exports.startPlayback = exports.pausePlayback = exports.receivePlaylistIndex = exports.receivePlaylist = exports.RECEIVE_AUDIO_LOADING = exports.RECEIVE_AUDIO_LOADED = exports.START_PLAYBACK = exports.PAUSE_PLAYBACK = exports.BACK_PLAYBACK = exports.FORWARD_PLAYBACK = exports.RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST = undefined;
 
 var _track_actions = __webpack_require__(16);
 
@@ -4425,6 +4425,9 @@ var FORWARD_PLAYBACK = exports.FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 var BACK_PLAYBACK = exports.BACK_PLAYBACK = "BACK_PLAYBACK";
 var PAUSE_PLAYBACK = exports.PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 var START_PLAYBACK = exports.START_PLAYBACK = "START_PLAYBACK";
+var RECEIVE_AUDIO_LOADED = exports.RECEIVE_AUDIO_LOADED = "RECEIVE_AUDIO_LOADED";
+var RECEIVE_AUDIO_LOADING = exports.RECEIVE_AUDIO_LOADING = "RECEIVE_AUDIO_LOADING";
+
 var receivePlaylist = exports.receivePlaylist = function receivePlaylist(ids) {
   return {
     type: RECEIVE_PLAYLIST,
@@ -4468,6 +4471,18 @@ var fetchRandomPlaylistThunk = exports.fetchRandomPlaylistThunk = function fetch
     APIUtils.fetchRandomPlaylist().then(function (tracks) {
       return dispatch((0, _track_actions.receiveTracks)(tracks));
     }).then(callback);
+  };
+};
+
+var currentlyLoadingAudioAction = exports.currentlyLoadingAudioAction = function currentlyLoadingAudioAction() {
+  return {
+    type: RECEIVE_AUDIO_LOADING
+  };
+};
+
+var finishedLoadingAudioAction = exports.finishedLoadingAudioAction = function finishedLoadingAudioAction() {
+  return {
+    type: RECEIVE_AUDIO_LOADED
   };
 };
 
@@ -32738,6 +32753,8 @@ var _audio_player = __webpack_require__(324);
 
 var _audio_player2 = _interopRequireDefault(_audio_player);
 
+var _playlist_actions = __webpack_require__(39);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
@@ -32752,7 +32769,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  return {};
+  return {
+    currentlyLoadingAudioAction: function currentlyLoadingAudioAction() {
+      return dispatch((0, _playlist_actions.currentlyLoadingAudioAction)());
+    },
+    finishedLoadingAudioAction: function finishedLoadingAudioAction() {
+      return dispatch((0, _playlist_actions.finishedLoadingAudioAction)());
+    }
+  };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_audio_player2.default);
 
@@ -32856,13 +32880,17 @@ var fetchForCache = function fetchForCache(player) {
     var current = state.cache[MID_CACHE_INDEX];
     if (!current.id) return {};
     if (!current.binaryData && !current.fetching) {
+      props.currentlyLoadingAudioAction();
       props.fetchForCache(current.id, function (data) {
+        current.fetching = false;
         player.setState(receiveSongCacheData(data));
         player.setState(setIfLoaded);
         player.setState(assignAudioSource);
         player.setState(handleQueuedPlay);
+        props.finishedLoadingAudioAction();
         player.setState(fetchForCache(player));
       });
+      current.fetching = true;
       return;
     }
   };
@@ -34875,6 +34903,10 @@ exports.default = function () {
       return Object.assign({}, state, { currentIndex: (state.currentIndex + 1) % state.ids.length });
     case _playlist_actions.BACK_PLAYBACK:
       return Object.assign({}, state, { currentIndex: (state.currentIndex - 1) % state.ids.length });
+    case _playlist_actions.RECEIVE_AUDIO_LOADED:
+      return Object.assign({}, state, { loading: false });
+    case _playlist_actions.RECEIVE_AUDIO_LOADING:
+      return Object.assign({}, state, { loading: true });
     default:
       return state;
   }

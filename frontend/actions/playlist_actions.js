@@ -4,6 +4,9 @@ export const FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 export const BACK_PLAYBACK = "BACK_PLAYBACK";
 export const PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 export const START_PLAYBACK = "START_PLAYBACK";
+export const RECEIVE_AUDIO_LOADED = "RECEIVE_AUDIO_LOADED";
+export const RECEIVE_AUDIO_LOADING = "RECEIVE_AUDIO_LOADING";
+
 import {receiveTracks} from "./track_actions";
 import * as APIUtils from "../utils/api_playlist_utils";
 
@@ -39,3 +42,11 @@ export const fetchRandomPlaylistThunk = callback => dispatch => {
   )).then(callback);
 
 };
+
+export const currentlyLoadingAudioAction = () =>({
+  type: RECEIVE_AUDIO_LOADING
+});
+
+export const finishedLoadingAudioAction = () =>({
+  type: RECEIVE_AUDIO_LOADED
+});
