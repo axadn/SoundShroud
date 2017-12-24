@@ -5,6 +5,7 @@ import {fetchCommentsThunk, postCommentThunk,
 import {receiveUsersLoading, receiveUsersLoaded, fetchTrackCommentsUsersThunk} from "../../../actions/user_actions";
 import CommentsIndex from "./comments_index";
 import React from "react";
+import {enableLogin} from "../../../actions/auth_modal_actions";
 import {logged_in} from "../../../reducers/selectors";
 
 const mapContainerDispatchToProps = (dispatch, ownProps) => ({
@@ -28,8 +29,9 @@ const mapDisplayStateToProps = (state, ownProps) => {
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({
-  postComment: (commentData, callBack) =>{
-    dispatch(postCommentThunk(ownProps.trackId, commentData, callBack))}
+  postComment: (commentData, callBack) =>
+    dispatch(postCommentThunk(ownProps.trackId, commentData, callBack)),
+  enableLogin: () => dispatch(enableLogin())
 });
 
 const ConnectedDisplayComponent = connect(mapDisplayStateToProps,

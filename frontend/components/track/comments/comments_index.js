@@ -27,7 +27,8 @@ export default class CommentsIndex extends React.Component{
   handleClick(e){
     e.preventDefault();
     if(!this.props.loggedIn){
-      location.hash = "/login";
+      this.props.enableLogin();
+      e.currentTarget.blur();
     }
   }
   render(){

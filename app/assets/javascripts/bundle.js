@@ -31316,6 +31316,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _auth_modal_actions = __webpack_require__(30);
+
 var _selectors = __webpack_require__(37);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31352,7 +31354,10 @@ var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
 var mapDisplayDispatchToProps = function mapDisplayDispatchToProps(dispatch, ownProps) {
   return {
     postComment: function postComment(commentData, callBack) {
-      dispatch((0, _comment_actions.postCommentThunk)(ownProps.trackId, commentData, callBack));
+      return dispatch((0, _comment_actions.postCommentThunk)(ownProps.trackId, commentData, callBack));
+    },
+    enableLogin: function enableLogin() {
+      return dispatch((0, _auth_modal_actions.enableLogin)());
     }
   };
 };
@@ -31484,7 +31489,8 @@ var CommentsIndex = function (_React$Component) {
     value: function handleClick(e) {
       e.preventDefault();
       if (!this.props.loggedIn) {
-        location.hash = "/login";
+        this.props.enableLogin();
+        e.currentTarget.blur();
       }
     }
   }, {
