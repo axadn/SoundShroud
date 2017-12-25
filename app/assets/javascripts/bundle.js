@@ -14211,6 +14211,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, props) {
   return {
     samples: state.entities.tracks.tracks[props.id].waveform,
+    loading: state.loading.audio,
     currentlyPlaying: state.playlist.ids[state.playlist.currentIndex] === props.id,
     audioAnalyser: state.audioAnalyser
   };
@@ -31832,6 +31833,11 @@ var Waveform = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Waveform.__proto__ || Object.getPrototypeOf(Waveform)).call(this, props));
 
+    _this.loadingDataArray = [];
+    _this.previewCenterIndex = 0;
+    for (var _i = 0; _i < OSCILLOSCOPE_SAMPLE_COUNT; ++_i) {
+      _this.loadingDataArray.push(0);
+    }
     _this.drawFullWaveForm = _this.drawFullWaveForm.bind(_this);
     _this.drawOscilloscope = _this.drawOscilloscope.bind(_this);
     _this.updateCanvasHeight = _this.updateCanvasHeight.bind(_this);
@@ -31892,20 +31898,24 @@ var Waveform = function (_React$Component) {
           rectHeight = void 0;
 
       ctx.fillStyle = UPPER_COLOR;
-      for (var _i = 0; _i < samples.length; ++_i) {
-        yOffset = height * (1 - samples[_i]) / 2;
-        rectHeight = samples[_i] * height / 2;
-        ctx.fillRect(rectWidth * _i + 1, yOffset, rectWidth / 2, rectHeight);
+      for (var _i2 = 0; _i2 < samples.length; ++_i2) {
+        yOffset = height * (1 - samples[_i2]) / 2;
+        rectHeight = samples[_i2] * height / 2;
+        ctx.fillRect(rectWidth * _i2 + 1, yOffset, rectWidth / 2, rectHeight);
       }
       ctx.fillStyle = LOWER_COLOR;
-      for (var _i2 = 0; _i2 < samples.length; ++_i2) {
-        ctx.fillRect(rectWidth * _i2, halfHeight, rectWidth * 0.65, samples[_i2] * height / 2);
+      for (var _i3 = 0; _i3 < samples.length; ++_i3) {
+        ctx.fillRect(rectWidth * _i3, halfHeight, rectWidth * 0.65, samples[_i3] * height / 2);
       }
     }
   }, {
     key: "drawOscilloscope",
     value: function drawOscilloscope() {
+      var timestamp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
       if (!this.dataArray || !this.mounted) return;
+      this.lastTimeStamp = this.lastTimeStamp || timestamp;
+
       var width = this.refs.canvas.width;
       var height = this.refs.canvas.height;
       var halfHeight = height / 2;
@@ -31915,16 +31925,39 @@ var Waveform = function (_React$Component) {
       var bottomWidth = rectWidth * 0.65;
 
       ctx.clearRect(0, 0, width, height);
-      this.props.audioAnalyser.getByteTimeDomainData(this.dataArray);
+
+      var dataArray = void 0;
+      var sampleLength = void 0;
+      if (this.props.loading) {
+        sampleLength = 1;
+        dataArray = this.loadingDataArray;
+        this.previewCenterIndex += (timestamp - this.lastTimeStamp) / 200.0;
+        if (this.previewCenterIndex > this.loadingDataArray.length) {
+          this.previewCenterIndex -= Math.floor(this.previewCenterIndex / this.loadingDataArray.length) * this.loadingDataArray.length;
+        }
+        for (var _i4 = 0; _i4 < this.loadingDataArray.length; ++_i4) {
+          if (_i4 === Math.floor(this.previewCenterIndex)) {
+            this.loadingDataArray[_i4] = 256;
+          } else {
+            this.loadingDataArray[_i4] = 128;
+          }
+        }
+        debugger;
+      } else {
+        sampleLength = OSCILLOSCOPE_SAMPLE_LENGTH;
+        dataArray = this.dataArray;
+        this.props.audioAnalyser.getByteTimeDomainData(this.dataArray);
+      }
 
       var sample = void 0;
       var sampleNumber = 0;
-      for (var _i3 = 0; _i3 < this.dataArray.length; _i3 += OSCILLOSCOPE_SAMPLE_LENGTH) {
-        sample = this.dataArray[_i3];
+      for (var _i5 = 0; _i5 < dataArray.length; _i5 += sampleLength) {
+        sample = dataArray[_i5];
         ctx.fillStyle = sample > 128 ? UPPER_COLOR : LOWER_COLOR;
         ctx.fillRect(rectWidth * sampleNumber, halfHeight, sample > 128 ? topWidth : bottomWidth, halfHeight * ((128 - sample) / 128.0));
         ++sampleNumber;
       }
+      this.lastTimeStamp = timestamp;
       window.requestAnimationFrame(this.drawOscilloscope);
     }
     // updateCanvas(){

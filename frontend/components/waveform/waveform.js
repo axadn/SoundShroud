@@ -15,6 +15,11 @@ for(let i = 0; i < 16; ++i){
 export default class Waveform extends React.Component{
   constructor(props){
     super(props);
+    this.loadingDataArray = [];
+    this.previewCenterIndex = 0;
+    for(let i = 0; i < OSCILLOSCOPE_SAMPLE_COUNT; ++i){
+      this.loadingDataArray.push(0);
+    }
     this.drawFullWaveForm = this.drawFullWaveForm.bind(this);
     this.drawOscilloscope = this.drawOscilloscope.bind(this);
     this.updateCanvasHeight = this.updateCanvasHeight.bind(this);
@@ -75,8 +80,10 @@ export default class Waveform extends React.Component{
     }
 
   }
-  drawOscilloscope(){
+  drawOscilloscope(timestamp = 0){
     if(!this.dataArray || !this.mounted) return;
+    this.lastTimeStamp = this.lastTimeStamp || timestamp;
+
     const width = this.refs.canvas.width;
     const height = this.refs.canvas.height;
     const halfHeight = height/ 2;
@@ -86,18 +93,46 @@ export default class Waveform extends React.Component{
     const bottomWidth = rectWidth * 0.65;
 
     ctx.clearRect(0,0,width, height);
-    this.props.audioAnalyser.getByteTimeDomainData(this.dataArray);
+
+    let dataArray;
+    let sampleLength;
+    if(this.props.loading){
+      sampleLength = 1;
+      dataArray = this.loadingDataArray;
+      this.previewCenterIndex += (timestamp - this.lastTimeStamp) / 200.0;
+      if(this.previewCenterIndex > this.loadingDataArray.length){
+        this.previewCenterIndex -=
+          Math.floor(this.previewCenterIndex /
+             this.loadingDataArray.length) * this.loadingDataArray.length;
+      }
+      for(let i = 0; i < this.loadingDataArray.length; ++i){
+        if(i === Math.floor(this.previewCenterIndex)){
+          this.loadingDataArray[i] = 256;
+        }
+        else{
+          this.loadingDataArray[i] = 128;
+        }
+      }
+      debugger;
+    }
+    else{
+      sampleLength = OSCILLOSCOPE_SAMPLE_LENGTH;
+      dataArray = this.dataArray;
+      this.props.audioAnalyser.getByteTimeDomainData(this.dataArray);
+    }
+
 
     let sample;
     let sampleNumber = 0;
-    for(let i = 0; i < this.dataArray.length; i += OSCILLOSCOPE_SAMPLE_LENGTH){
-      sample = this.dataArray[i];
+    for(let i = 0; i < dataArray.length; i += sampleLength){
+      sample = dataArray[i];
       ctx.fillStyle = (sample > 128) ? UPPER_COLOR : LOWER_COLOR;
       ctx.fillRect(rectWidth * sampleNumber, halfHeight,
          (sample > 128) ? topWidth : bottomWidth,
           halfHeight * ((128  - sample) / 128.0));
       ++sampleNumber;
     }
+    this.lastTimeStamp = timestamp;
     window.requestAnimationFrame(this.drawOscilloscope);
   }
   // updateCanvas(){
