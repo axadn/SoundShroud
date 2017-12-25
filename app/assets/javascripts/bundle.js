@@ -31860,7 +31860,7 @@ var Waveform = function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      window.removeEventListener("resize", this.updateCanvasCanvasHeight);
+      window.removeEventListener("resize", this.updateCanvasHeight);
       this.mounted = false;
       this.dataArray = null;
     }

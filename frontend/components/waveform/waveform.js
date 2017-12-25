@@ -37,7 +37,7 @@ export default class Waveform extends React.Component{
     }
   }
   componentWillUnmount(){
-    window.removeEventListener("resize", this.updateCanvasCanvasHeight);
+    window.removeEventListener("resize", this.updateCanvasHeight);
     this.mounted = false;
     this.dataArray = null;
   }
