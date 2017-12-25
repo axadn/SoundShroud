@@ -10,11 +10,12 @@ export default class Discover extends React.Component{
     this.props.fetchPlaylist();
   }
   render(){
+    const landingPagePlaceholder = this.props.logged_in ? "" : <LandingPageContainer/>;
     const tracks = this.props.tracks;
     if(!this.props.loading && tracks.length > 0){
       return(
         <div className="discover-page">
-          <LandingPageContainer/>
+          {landingPagePlaceholder}
           <button className="blue button" onClick={this.props.fetchPlaylist}>
             shuffle
           </button>

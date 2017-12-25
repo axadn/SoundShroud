@@ -32273,6 +32273,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _selectors = __webpack_require__(37);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -32280,7 +32282,8 @@ var mapStateToProps = function mapStateToProps(state) {
     loading: state.loading.mainContent,
     tracks: state.entities.tracks.ids.map(function (id) {
       return state.entities.tracks.tracks[id];
-    })
+    }),
+    logged_in: (0, _selectors.logged_in)(state)
   };
 };
 
@@ -32347,12 +32350,13 @@ var Discover = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var landingPagePlaceholder = this.props.logged_in ? "" : _react2.default.createElement(_landing_page_container2.default, null);
       var tracks = this.props.tracks;
       if (!this.props.loading && tracks.length > 0) {
         return _react2.default.createElement(
           "div",
           { className: "discover-page" },
-          _react2.default.createElement(_landing_page_container2.default, null),
+          landingPagePlaceholder,
           _react2.default.createElement(
             "button",
             { className: "blue button", onClick: this.props.fetchPlaylist },
