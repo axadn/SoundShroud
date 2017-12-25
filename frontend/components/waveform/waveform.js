@@ -113,7 +113,6 @@ export default class Waveform extends React.Component{
           this.loadingDataArray[i] = 128;
         }
       }
-      debugger;
     }
     else{
       sampleLength = OSCILLOSCOPE_SAMPLE_LENGTH;

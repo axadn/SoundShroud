@@ -31942,7 +31942,6 @@ var Waveform = function (_React$Component) {
             this.loadingDataArray[_i4] = 128;
           }
         }
-        debugger;
       } else {
         sampleLength = OSCILLOSCOPE_SAMPLE_LENGTH;
         dataArray = this.dataArray;
@@ -32858,6 +32857,7 @@ var shiftCache = function shiftCache(amount) {
         cache.push(state.cache[i + amount]);
       }
     }
+    state.audioSource.pause();
     return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
   };
 };
@@ -32868,6 +32868,7 @@ var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist, i
     for (var i = 0; i < CACHE_SIZE; ++i) {
       cache.push({ id: playlist[(indexInPlaylist + i - MID_CACHE_INDEX) % playlist.length] });
     }
+    state.audioSource.pause();
     return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
   };
 };

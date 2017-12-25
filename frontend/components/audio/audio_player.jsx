@@ -17,6 +17,7 @@ const shiftCache = amount =>(state, props) =>{
       cache.push(state.cache[i + amount]);
     }
   }
+  state.audioSource.pause();
   return {cache, playing: false, waitingToPlay: true, srcIsValid: false};
 };
 
@@ -25,6 +26,7 @@ const assignCacheFromNewPlaylist = (playlist, indexInPlaylist) => (state, props)
   for(let i = 0; i < CACHE_SIZE; ++i){
     cache.push({id: playlist[(indexInPlaylist + i - MID_CACHE_INDEX) % playlist.length]});
   }
+  state.audioSource.pause();
   return{cache, playing: false, waitingToPlay: true, srcIsValid: false};
 };
 
