@@ -1,5 +1,6 @@
 import React from "react";
 import TracksIndex from "../track/tracks_index";
+import LandingPageContainer from "../landing_page/landing_page_container";
 
 export default class Discover extends React.Component{
   constructor(props){
@@ -13,6 +14,7 @@ export default class Discover extends React.Component{
     if(!this.props.loading && tracks.length > 0){
       return(
         <div className="discover-page">
+          <LandingPageContainer/>
           <button className="blue button" onClick={this.props.fetchPlaylist}>
             shuffle
           </button>

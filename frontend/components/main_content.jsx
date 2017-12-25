@@ -2,7 +2,6 @@ import React from "react";
 import SessionFormContainer from "./session_form/session_form_container";
 import {Route} from "react-router-dom";
 import {AuthRoute, ProtectedRoute} from "../utils/route_utils";
-import LandingPageContainer from "./landing_page_container";
 import TrackFormContainer from "./track/track_form_container";
 import TrackShowContainer from "./track/track_show_container";
 import UserShowContainer from "./user/user_show_container";

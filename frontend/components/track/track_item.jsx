@@ -5,7 +5,7 @@ import DocumentPlayButtonContainer from "../track/document_play_button_container
 export default (props)=> (
   <div className= "track-item">
     <div className = "track-item-cover-art-container">
-      <div className = "track-item-cover-art-padding-fix"></div>
+      <div className = "padding-fix"></div>
       <img className="medium cover-art" src={props.track.img_url}
       onClick={() => location.hash =`/tracks/${props.track.id}`}></img>
     </div>

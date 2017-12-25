@@ -27831,10 +27831,6 @@ var _reactRouterDom = __webpack_require__(11);
 
 var _route_utils = __webpack_require__(77);
 
-var _landing_page_container = __webpack_require__(297);
-
-var _landing_page_container2 = _interopRequireDefault(_landing_page_container);
-
 var _track_form_container = __webpack_require__(299);
 
 var _track_form_container2 = _interopRequireDefault(_track_form_container);
@@ -30507,117 +30503,8 @@ NavLink.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
 
 /***/ }),
-/* 297 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(7);
-
-var _auth_modal_actions = __webpack_require__(30);
-
-var _landing_page = __webpack_require__(298);
-
-var _landing_page2 = _interopRequireDefault(_landing_page);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    enableLogin: function enableLogin() {
-      return dispatch((0, _auth_modal_actions.enableLogin)());
-    },
-    enableRegister: function enableRegister() {
-      return dispatch((0, _auth_modal_actions.enableRegister)());
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(undefined, mapDispatchToProps)(_landing_page2.default);
-
-/***/ }),
-/* 298 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(11);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var LandingPage = function (_React$Component) {
-  _inherits(LandingPage, _React$Component);
-
-  function LandingPage() {
-    _classCallCheck(this, LandingPage);
-
-    return _possibleConstructorReturn(this, (LandingPage.__proto__ || Object.getPrototypeOf(LandingPage)).apply(this, arguments));
-  }
-
-  _createClass(LandingPage, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      document.getElementById('blue_filter_in').beginElement();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "landing_page_content static_img_page" },
-        _react2.default.createElement("img", { src: "/assets/sax blue.jpeg" }),
-        _react2.default.createElement("div", { className: "image-gradient-overlay" }),
-        _react2.default.createElement(
-          "div",
-          { className: "landing_info" },
-          _react2.default.createElement(
-            "h1",
-            null,
-            " Connect on SoundShroud"
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            "Discover hot new music from emerging and major artists worldwide."
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "blue_button", id: "landing_button", onClick: this.props.enableRegister },
-            " Sign Up For Free!"
-          )
-        )
-      );
-    }
-  }]);
-
-  return LandingPage;
-}(_react2.default.Component);
-
-exports.default = LandingPage;
-
-/***/ }),
+/* 297 */,
+/* 298 */,
 /* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32326,7 +32213,7 @@ exports.default = function (props) {
     _react2.default.createElement(
       "div",
       { className: "track-item-cover-art-container" },
-      _react2.default.createElement("div", { className: "track-item-cover-art-padding-fix" }),
+      _react2.default.createElement("div", { className: "padding-fix" }),
       _react2.default.createElement("img", { className: "medium cover-art", src: props.track.img_url,
         onClick: function onClick() {
           return location.hash = "/tracks/" + props.track.id;
@@ -32431,6 +32318,10 @@ var _tracks_index = __webpack_require__(140);
 
 var _tracks_index2 = _interopRequireDefault(_tracks_index);
 
+var _landing_page_container = __webpack_require__(358);
+
+var _landing_page_container2 = _interopRequireDefault(_landing_page_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32461,6 +32352,7 @@ var Discover = function (_React$Component) {
         return _react2.default.createElement(
           "div",
           { className: "discover-page" },
+          _react2.default.createElement(_landing_page_container2.default, null),
           _react2.default.createElement(
             "button",
             { className: "blue button", onClick: this.props.fetchPlaylist },
@@ -35012,6 +34904,115 @@ exports.default = function () {
       return state;
   }
 };
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(7);
+
+var _auth_modal_actions = __webpack_require__(30);
+
+var _landing_page = __webpack_require__(359);
+
+var _landing_page2 = _interopRequireDefault(_landing_page);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    enableLogin: function enableLogin() {
+      return dispatch((0, _auth_modal_actions.enableLogin)());
+    },
+    enableRegister: function enableRegister() {
+      return dispatch((0, _auth_modal_actions.enableRegister)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(undefined, mapDispatchToProps)(_landing_page2.default);
+
+/***/ }),
+/* 359 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LandingPage = function (_React$Component) {
+  _inherits(LandingPage, _React$Component);
+
+  function LandingPage() {
+    _classCallCheck(this, LandingPage);
+
+    return _possibleConstructorReturn(this, (LandingPage.__proto__ || Object.getPrototypeOf(LandingPage)).apply(this, arguments));
+  }
+
+  _createClass(LandingPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.getElementById('blue_filter_in').beginElement();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "landing_page_content" },
+        _react2.default.createElement(
+          "div",
+          { className: "landing_info" },
+          _react2.default.createElement(
+            "h1",
+            null,
+            " Connect on SoundShroud"
+          ),
+          _react2.default.createElement(
+            "div",
+            null,
+            "Discover hot new music from emerging and major artists worldwide."
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "blue_button", id: "landing_button", onClick: this.props.enableRegister },
+            " Sign Up For Free!"
+          )
+        )
+      );
+    }
+  }]);
+
+  return LandingPage;
+}(_react2.default.Component);
+
+exports.default = LandingPage;
 
 /***/ })
 /******/ ]);
