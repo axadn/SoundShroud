@@ -1,22 +1,36 @@
 @import "colors";
 .landing_info{
-
+  font-size: 14px;
 }
 
 .landing_info h1{
-  font-size: 5vw;
+  font-size: 37px;
 }
 
 #landing_button{
-  width: 22vw;
+  width: 200px;
   border-radius: 8px;
   text-align: center;
-  margin-top: 4vw;
-    height: 5vw;
-    padding-top: 1.5vw;
-    font-size: 2vw;
+  margin-top: 4vh;
+  font-size: 17px;
+}
+.landing_info{
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 75%;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: rgba(1,1,1,0.75);
+    transform: translate(-50%,-50%);
 }
 .landing_page_content{
+  position: relative;
   text-align: center;
   height: 50vh;
+  overflow: hidden;
+}
+
+.landing_page_content > img {
+  min-width: 100%;
 }

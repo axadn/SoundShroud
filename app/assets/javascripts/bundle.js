@@ -34990,6 +34990,7 @@ var LandingPage = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "landing_page_content" },
+        _react2.default.createElement("img", { src: "/assets/guit blue.jpeg" }),
         _react2.default.createElement(
           "div",
           { className: "landing_info" },
