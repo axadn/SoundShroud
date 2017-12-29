@@ -1,3 +1,6 @@
+.tracks-index{
+  position: relative;
+}
 @media(max-width: 600px){
   .tracks-index{
     width: 90%;
@@ -12,4 +15,31 @@
   .play-info-and-waveform{
     margin-left:16px;
   }
+}
+
+@keyframes tracks-ease-in-left{
+  from{
+    left: -100vw;
+  }
+  to{
+    left: 0;
+  }
+}
+
+@keyframes tracks-ease-in-right{
+  from{
+    left: 100vw;
+  }
+  to{
+    left: 0;
+  }
+}
+
+.tracks-ease-in-left{
+  animation-name: tracks-ease-in-left;
+  animation-duration: 0.5s;
+}
+.tracks-ease-in-right{
+  animation-name: tracks-ease-in-right;
+  animation-duration: 0.5s;
 }

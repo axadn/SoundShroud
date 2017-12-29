@@ -30,7 +30,8 @@ export default class UserShow extends React.Component{
             {locationElement}
           </div>
         </div>
-        <TracksIndexContainer trackIds={this.props.user.track_ids}/>
+        <TracksIndexContainer trackIds={this.props.user.track_ids}
+         animationClassName="tracks-ease-in-right"/>
       </div>
     );
   }

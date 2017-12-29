@@ -11,7 +11,7 @@ export default class TracksIndex extends React.Component{
       </li>
 
     ));
-    return <div className="tracks-index">
+    return <div className={`tracks-index ${this.props.animationClassName}`}>
       <ul>
         {trackItems}
       </ul>

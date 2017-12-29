@@ -38,7 +38,8 @@ class TracksIndexContainer extends React.Component{
     }
   }
   render(){
-    return <ConnectedDisplayComponent trackIds={this.props.trackIds}/>
+    return <ConnectedDisplayComponent trackIds={this.props.trackIds}
+      animationClassName ={this.props.animationClassName}/>
   }
 }
 

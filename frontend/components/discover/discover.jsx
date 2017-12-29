@@ -17,7 +17,7 @@ export default class Discover extends React.Component{
           <button className="blue button" onClick={this.props.fetchPlaylist}>
             shuffle
           </button>
-          <TracksIndexContainer/>
+          <TracksIndexContainer animationClassName="tracks-ease-in-left"/>
         </div>
       );
   }

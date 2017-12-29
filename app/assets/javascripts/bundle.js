@@ -14272,7 +14272,7 @@ var TracksIndex = function (_React$Component) {
       });
       return _react2.default.createElement(
         "div",
-        { className: "tracks-index" },
+        { className: "tracks-index " + this.props.animationClassName },
         _react2.default.createElement(
           "ul",
           null,
@@ -32057,7 +32057,8 @@ var UserShow = function (_React$Component) {
             locationElement
           )
         ),
-        _react2.default.createElement(_tracks_index_container2.default, { trackIds: this.props.user.track_ids })
+        _react2.default.createElement(_tracks_index_container2.default, { trackIds: this.props.user.track_ids,
+          animationClassName: "tracks-ease-in-right" })
       );
     }
   }]);
@@ -32155,7 +32156,8 @@ var TracksIndexContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement(ConnectedDisplayComponent, { trackIds: this.props.trackIds });
+      return _react2.default.createElement(ConnectedDisplayComponent, { trackIds: this.props.trackIds,
+        animationClassName: this.props.animationClassName });
     }
   }]);
 
@@ -32341,7 +32343,7 @@ var Discover = function (_React$Component) {
           { className: "blue button", onClick: this.props.fetchPlaylist },
           "shuffle"
         ),
-        _react2.default.createElement(_tracks_index_container2.default, null)
+        _react2.default.createElement(_tracks_index_container2.default, { animationClassName: "tracks-ease-in-left" })
       );
     }
   }]);
