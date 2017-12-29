@@ -8,11 +8,17 @@
   padding: 25px;
   box-sizing: border-box;
 }
+@media(max-width: 700px){
+  .auth-modal{
+      width: 220px;
+  }
+}
 
 .auth-modal input{
   width: 100%;
   font-size: 16px;
 }
+
 .auth-modal input[type="text"]{
   padding-left: 10px;
   box-sizing: border-box;
@@ -23,4 +29,7 @@
   height: 40px;
   margin: 1em 0;
   width: 100%;
+}
+.auth-modal .errors{
+  display: flex;
 }
