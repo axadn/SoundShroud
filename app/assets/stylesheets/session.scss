@@ -3,7 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "colors";
 
+@keyframes easeInModal{
+  from{
+    top: -100vh;
+  }
+  to{
+    top: 0;
+  }
+}
+
 .auth-modal{
+  animation-name: easeInModal;
+  animation-duration: 0.5s;
   width: 450px;
   padding: 25px;
   box-sizing: border-box;

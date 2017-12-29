@@ -218,20 +218,7 @@ ul{
     align-items: center;
     justify-content: center;
 }
-.auth-modal{
-  position: relative;
-  background-color: white;
-}
-.auth-modal-exit{
-  position: relative;
-  left: 90%;
-  width: 10px;
-  padding-top: 10px;
-  padding-right: 10px;
-}
-.auth-modal-exit:hover{
-  cursor: pointer;
-}
+
 .main_content{
   flex-grow: 1;
   overflow-y: auto;
