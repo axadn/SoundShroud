@@ -8,9 +8,6 @@ import {logged_in} from "../../reducers/selectors";
 
 const mapStateToProps = state => {
   return{
-  loading: state.loading.mainContent,
-  tracks: state.entities.tracks.ids.map(id =>
-    state.entities.tracks.tracks[id]),
     logged_in: logged_in(state)
 }};
 
