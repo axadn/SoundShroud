@@ -43,8 +43,6 @@ export default class SessionFrom extends React.Component{
     });
     return(
       <div id ="session-form-content">
-        <div id="session-form-and-title">
-        <h1>{this.props.message}</h1>
         <div id="session-form-container">
           <form onSubmit={this.handleSubmit}>
                  <div>
@@ -83,15 +81,12 @@ export default class SessionFrom extends React.Component{
                   ></input>
                 {errorElements.password}
                 </div>
-                <div className ="session_submit_buttons">
                   <input type="button" onClick={this.handleExample}
                     className="form_button blue_button" value="Demo"></input>
                   <input type="submit" className="form_button blue_button" value={
                       this.props.buttonText}></input>
                     {errorElements.general}
-                </div>
               </form>
-        </div>
         </div>
       </div>
     // <div className = "session_page_content static_img_page">

@@ -7,7 +7,7 @@ import {receiveMainContentLoaded,
 import TrackForm from "./track_form";
 import React from "react";
 const mapDisplayStateToProps = (state, ownProps) => ({
-  track: state.entities.tracks[ownProps.trackId],
+  track: state.entities.tracks.tracks[ownProps.trackId],
   loading: ownProps.editing && state.loading.mainContent,
   initial_state: {title: "", labelTitle: true, labelDescription: true,
     description: "", file: undefined},
