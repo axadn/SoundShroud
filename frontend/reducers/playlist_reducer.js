@@ -17,8 +17,9 @@ export default (state = NO_PLAYLIST , action) => {
       return Object.assign({}, state, {currentIndex:
                                       (state.currentIndex + 1) % state.ids.length});
     case BACK_PLAYBACK:
-      return Object.assign({}, state, {currentIndex:
-                                      (state.currentIndex - 1) % state.ids.length});
+      let newIdx = state.currentIndex - 1;
+      if(newIdx == -1) newIdx = state.ids.length - 1;
+      return Object.assign({}, state, {currentIndex: newIdx});
     default:
       return state;
   }

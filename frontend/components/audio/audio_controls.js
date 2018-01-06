@@ -41,7 +41,7 @@ export default class AudioControls extends React.Component{
         );
     const forwardButton =( <svg
       viewBox= "0,0,50,50"
-    onClick={this.props.forwardAction}>
+    onClick={this.props.skipAction}>
     <polygon points="0,10 25,25 0,40" fill="white"/>
     <polygon points="25,10 50,25 25,40" fill="white"/>
         </svg>
