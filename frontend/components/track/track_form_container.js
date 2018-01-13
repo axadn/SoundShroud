@@ -6,13 +6,18 @@ import {receiveMainContentLoaded,
    receiveMainContentLoading} from "../../actions/loading_actions";
 import TrackForm from "./track_form";
 import React from "react";
-const mapDisplayStateToProps = (state, ownProps) => ({
-  track: state.entities.tracks.tracks[ownProps.trackId],
+const mapDisplayStateToProps = (state, ownProps) => {
+  let track;
+  if(ownProps.editing){
+    track = state.entities.tracks.tracks[ownProps.trackId];
+  }
+  return{
+  track,
   loading: ownProps.editing && state.loading.mainContent,
   initial_state: {title: "", labelTitle: true, labelDescription: true,
     description: "", file: undefined},
   errors: state.errors.uploadParams
-});
+}};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => {
   let formAction;

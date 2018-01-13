@@ -30529,8 +30529,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
+  var track = void 0;
+  if (ownProps.editing) {
+    track = state.entities.tracks.tracks[ownProps.trackId];
+  }
   return {
-    track: state.entities.tracks.tracks[ownProps.trackId],
+    track: track,
     loading: ownProps.editing && state.loading.mainContent,
     initial_state: { title: "", labelTitle: true, labelDescription: true,
       description: "", file: undefined },
