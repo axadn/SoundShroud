@@ -1,4 +1,5 @@
 import React from "react";
+import PlaybackTrackInfoContainer from "./playback_track_info_container";
 
 export default class AudioControls extends React.Component{
   handleTimeChange(audioElement){
@@ -83,6 +84,7 @@ export default class AudioControls extends React.Component{
           {this.props.loaded? this.formatTime(this.audioElement.duration) :
             this.formatTime(0)}
         </div>
+        <PlaybackTrackInfoContainer/>
       </div>
   </div>);
   }
