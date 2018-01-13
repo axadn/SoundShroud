@@ -32583,12 +32583,16 @@ exports.default = function (_ref) {
       button2 = void 0;
   if (logged_in) {
     logoutPlaceHolder = _react2.default.createElement(
-      "button",
-      { className: "logout_button", onClick: function onClick(e) {
-          e.preventDefault();
-          delete_session();
-        } },
-      "Log Out"
+      "div",
+      { className: "logout_button_container" },
+      _react2.default.createElement(
+        "button",
+        { className: "logout_button", onClick: function onClick(e) {
+            e.preventDefault();
+            delete_session();
+          } },
+        "Log Out"
+      )
     );
     button1 = _react2.default.createElement(
       _reactRouterDom.NavLink,

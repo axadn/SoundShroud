@@ -5,10 +5,14 @@ export default ({delete_session, logged_in, current_user_id,
                  enable_login, enable_register}) =>{
   let logoutPlaceHolder, button1, button2;
   if(logged_in){
-    logoutPlaceHolder = <button className="logout_button" onClick={e=>{
-      e.preventDefault();
-      delete_session();
-    }} >Log Out</button>;
+    logoutPlaceHolder = 
+    <div className="logout_button_container">
+      <button className="logout_button" onClick={e=>{
+        e.preventDefault();
+        delete_session();
+        }} >Log Out
+      </button>
+    </div>;
     button1 = <NavLink className="top_nav_link" to={"/upload"}>
          Upload</NavLink>
     button2 = <NavLink className="top_nav_link" to={`/users/${current_user_id}`}>
