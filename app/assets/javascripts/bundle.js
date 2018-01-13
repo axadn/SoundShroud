@@ -31151,7 +31151,11 @@ var TrackShow = function (_React$Component) {
                 _react2.default.createElement("img", { className: "user-img-medium",
                   onClick: (0, _route_utils.redirectToUser)(this.props.track.artist_id),
                   src: this.props.track.artist_img }),
-                this.props.track.artist_display_name
+                _react2.default.createElement(
+                  "a",
+                  { onClick: (0, _route_utils.redirectToUser)(this.props.track.artist_id) },
+                  this.props.track.artist_display_name
+                )
               ),
               _react2.default.createElement(
                 "div",

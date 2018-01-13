@@ -66,8 +66,10 @@
   margin: 20px;
   background-color: rgba(255,255,255,0.1);
   border-radius: 4px;
-  display: inline-block;
-  float:left;
+  float: left;
+}
+.song_show_artist_info a:hover{
+  cursor: pointer;
 }
 .song_show_artist_info img {
   width: 150px;

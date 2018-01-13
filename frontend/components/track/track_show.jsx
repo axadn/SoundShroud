@@ -73,7 +73,9 @@ export default class TrackShow extends React.Component{
                     onClick={redirectToUser(this.props.track.artist_id)}
                      src={this.props.track.artist_img}>
                   </img>
+                  <a onClick={redirectToUser(this.props.track.artist_id)}>
                   {this.props.track.artist_display_name}
+                  </a>
                 </div>
                 <div id="description_and_comments">
                   <div id="track_description">{this.props.track.description}</div>
