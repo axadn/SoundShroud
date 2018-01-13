@@ -32344,7 +32344,7 @@ var Discover = function (_React$Component) {
         landingPagePlaceholder,
         _react2.default.createElement(
           "button",
-          { className: "blue button", onClick: this.props.fetchPlaylist },
+          { className: "shuffle-button", onClick: this.props.fetchPlaylist },
           "shuffle"
         ),
         _react2.default.createElement(_tracks_index_container2.default, { animationClassName: "tracks-ease-in-left" })
