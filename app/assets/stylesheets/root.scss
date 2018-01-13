@@ -71,7 +71,7 @@ input[type="file"]{
   display: inline-block;
   text-align: center;
   animation-name: fadeFromTransparent;
-  border-radius: 6px;
+  border-radius: 2px;
   background-color: $ming;
   // border-right: 3px solid rgb(0,90,180);
   // border-bottom: 3px solid rgb(0,45,90);
@@ -113,20 +113,20 @@ input[type="file"]{
   height: 100px;
 }
 img.large{
-  width: 400px;
-  height: 400px;
+  width: 330px;
+  height: 330px;
   flex-shrink: 0;
   flex-grow: 0;
 }
 img.medium{
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   flex-grow: 0;
 }
 img.medium-large{
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   flex-grow: 0;
 }
