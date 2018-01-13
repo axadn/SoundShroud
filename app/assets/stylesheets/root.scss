@@ -154,11 +154,14 @@ ul{
 .app {
   display: flex;
   flex-direction: column;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Metrophobic', sans-serif;
   margin: auto;
   background-color: $cod-grey;
   color: white;
   max-width: 1500px;
+}
+button {
+  font-family: 'Metrophobic', sans-serif;
 }
 
 .nav_bar {
