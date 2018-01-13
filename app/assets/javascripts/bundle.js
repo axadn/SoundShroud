@@ -29505,8 +29505,10 @@ function pathToRegexp (path, keys, options) {
 /* 282 */
 /***/ (function(module, exports) {
 
+var toString = {}.toString;
+
 module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
+  return toString.call(arr) == '[object Array]';
 };
 
 
@@ -33832,7 +33834,7 @@ var ModalPortal = function (_Component) {
       }
 
       if (_this.props.shouldCloseOnEsc && event.keyCode === ESC_KEY) {
-        event.preventDefault();
+        event.stopPropagation();
         _this.requestClose(event);
       }
     };
