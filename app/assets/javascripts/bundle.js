@@ -32569,6 +32569,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -32577,60 +32579,99 @@ var _reactRouterDom = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (_ref) {
-  var delete_session = _ref.delete_session,
-      logged_in = _ref.logged_in,
-      current_user_id = _ref.current_user_id,
-      enable_login = _ref.enable_login,
-      enable_register = _ref.enable_register;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var logoutPlaceHolder = void 0,
-      button1 = void 0,
-      button2 = void 0;
-  if (logged_in) {
-    logoutPlaceHolder = _react2.default.createElement(
-      "div",
-      { className: "logout_button_container" },
-      _react2.default.createElement(
-        "button",
-        { className: "logout_button", onClick: function onClick(e) {
-            e.preventDefault();
-            delete_session();
-          } },
-        "Log Out"
-      )
-    );
-    button1 = _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { className: "top_nav_link", to: "/upload" },
-      "Upload"
-    );
-    button2 = _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { className: "top_nav_link", to: "/users/" + current_user_id },
-      "Profile"
-    );
-  } else {
-    logoutPlaceHolder = null;
-    button1 = _react2.default.createElement(
-      "div",
-      { className: "top_nav_link", onClick: enable_login },
-      "Log In"
-    );
-    button2 = _react2.default.createElement(
-      "div",
-      { className: "top_nav_link", onClick: enable_register },
-      "Sign Up"
-    );
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SessionButtons = function (_React$Component) {
+  _inherits(SessionButtons, _React$Component);
+
+  function SessionButtons() {
+    _classCallCheck(this, SessionButtons);
+
+    return _possibleConstructorReturn(this, (SessionButtons.__proto__ || Object.getPrototypeOf(SessionButtons)).apply(this, arguments));
   }
-  return _react2.default.createElement(
-    "div",
-    { className: "nav_link_set" },
-    button1,
-    button2,
-    logoutPlaceHolder
-  );
-};
+
+  _createClass(SessionButtons, [{
+    key: "render",
+    value: function render() {
+      var button1 = void 0,
+          button2 = void 0;
+      if (this.props.logged_in) {
+        button1 = _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { className: "top_nav_link", to: "/upload" },
+          "Upload"
+        );
+        button2 = _react2.default.createElement(
+          "div",
+          { className: "drop-down-menu" },
+          this.props.current_user_id,
+          _react2.default.createElement(
+            "ul",
+            null,
+            _react2.default.createElement(
+              "li",
+              null,
+              "Profile"
+            ),
+            _react2.default.createElement(
+              "li",
+              null,
+              "Log out"
+            )
+          )
+        );
+      } else {
+        button1 = _react2.default.createElement(
+          "div",
+          { className: "top_nav_link",
+            onClick: this.props.enable_login },
+          "Log In"
+        );
+        button2 = _react2.default.createElement(
+          "div",
+          { className: "top_nav_link",
+            onClick: this.props.enable_register },
+          "Sign Up"
+        );
+      }
+      return _react2.default.createElement(
+        "div",
+        { className: "nav_link_set" },
+        button1,
+        button2
+      );
+    }
+  }]);
+
+  return SessionButtons;
+}(_react2.default.Component);
+// export default ({delete_session, logged_in, current_user_id,
+//                  enable_login, enable_register}) =>{
+//   let logoutPlaceHolder, button1, button2;
+//   if(logged_in){
+//     logoutPlaceHolder = 
+//     <div className="logout_button_container">
+//       <button className="logout_button" onClick={e=>{
+//         e.preventDefault();
+//         delete_session();
+//         }} >Log Out
+//       </button>
+//     </div>;
+
+//     button2 = <NavLink className="top_nav_link" to={`/users/${current_user_id}`}>
+//          Profile</NavLink>;
+//   }
+//   else{
+//     logoutPlaceHolder = null
+//   }
+// };
+
+
+exports.default = SessionButtons;
 
 /***/ }),
 /* 322 */

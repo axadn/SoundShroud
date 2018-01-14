@@ -13,10 +13,11 @@
  *= require_self
  *= require _colors
  *= require root
+ *= require _nav_bar
  *= require _track\ item
  *= require _comments
  *= require _playback
- *= require session
+ *= require _session
  *= require _tracks\ index
  *= require _track\ show
  *= require _track\ form
