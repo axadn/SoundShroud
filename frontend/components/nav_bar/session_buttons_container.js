@@ -8,7 +8,7 @@ import {enableLogin, enableRegister} from "../../actions/auth_modal_actions";
 
 const mapStateToProps = state => (
   {logged_in: logged_in(state),
-    current_user_id: current_user_id(state)
+    current_user: state.session.current_user
   }
 );
 

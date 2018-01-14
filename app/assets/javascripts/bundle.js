@@ -3799,7 +3799,7 @@ var logged_in = exports.logged_in = function logged_in(state) {
   return Boolean(state.session.current_user);
 };
 var current_user_id = exports.current_user_id = function current_user_id(state) {
-  return state.session.current_user;
+  return state.session.current_user.id;
 };
 
 /***/ }),
@@ -32540,7 +32540,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return { logged_in: (0, _selectors.logged_in)(state),
-    current_user_id: (0, _selectors.current_user_id)(state)
+    current_user: state.session.current_user
   };
 };
 
@@ -32634,7 +32634,8 @@ var SessionButtons = function (_React$Component) {
           { className: "drop-down-menu",
             ref: "dropdown",
             onClick: this.handleClick },
-          this.props.current_user_id,
+          _react2.default.createElement("img", { className: "small", src: this.props.current_user.image_url }),
+          this.props.current_user.username,
           _react2.default.createElement(
             "ul",
             { className: "" + hidden },
@@ -32643,7 +32644,7 @@ var SessionButtons = function (_React$Component) {
               null,
               _react2.default.createElement(
                 "a",
-                { href: "#/users/" + this.props.current_user_id },
+                { href: "#/users/" + this.props.current_user.id },
                 "Profile"
               )
             ),
@@ -34719,7 +34720,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _session_actions.RECEIVE_SESSION:
-      return { current_user: action.payload.id };
+      return { current_user: action.payload };
     case _session_actions.DELETE_SESSION:
       return NO_USER_SESSION;
     default:

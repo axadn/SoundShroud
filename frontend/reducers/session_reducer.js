@@ -7,7 +7,7 @@ const NO_USER_SESSION = {
 export default (state = NO_USER_SESSION, action) =>{
   switch(action.type) {
     case RECEIVE_SESSION:
-      return {current_user: action.payload.id};
+      return {current_user: action.payload};
     case DELETE_SESSION:
       return NO_USER_SESSION;
     default:
