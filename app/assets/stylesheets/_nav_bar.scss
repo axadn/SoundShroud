@@ -14,7 +14,7 @@
     align-items: stretch;
   }
   
-  .nav_link_set *{
+  .nav_link_set > *{
     margin-right: 10px;
   }
   
@@ -49,6 +49,7 @@
     position: absolute;
     top: 100%;
     z-index: 1100;
+    width: 100%;
     background-color: #72888b;
     margin: 0;
   }
