@@ -58,7 +58,7 @@ const setIfLoaded = (state, props) => {
 }
 
 const handleQueuedPlay = (state, props) => {
-  if(state.waitingToPlay && !state.playing && state.loaded){
+  if(props.playing && !state.playing && state.loaded){
     state.audioSource.play();
     return {waitingToPlay: false, playing: true};
   }
