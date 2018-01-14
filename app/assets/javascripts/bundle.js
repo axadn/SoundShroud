@@ -32890,7 +32890,7 @@ var shiftCache = function shiftCache(amount) {
       }
     }
     state.audioSource.pause();
-    return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
+    return { cache: cache, playing: false, srcIsValid: false };
   };
 };
 

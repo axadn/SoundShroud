@@ -18,7 +18,7 @@ const shiftCache = amount =>(state, props) =>{
     }
   }
   state.audioSource.pause();
-  return {cache, playing: false, waitingToPlay: true, srcIsValid: false};
+  return {cache, playing: false, srcIsValid: false};
 };
 
 const assignCacheFromNewPlaylist = (playlist, indexInPlaylist) => (state, props) =>{
@@ -132,6 +132,7 @@ export default class AudioPlayer extends React.Component{
     this.setState(handleQueuedPlay);
     this.setState(fetchForCache(this));
   }
+
   handlePlay(){
     this.props.startPlayback();
   }
