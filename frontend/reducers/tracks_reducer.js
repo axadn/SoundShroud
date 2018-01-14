@@ -40,10 +40,10 @@ playlistIndex: undefined}, action) => {
       return Object.assign({}, state, {playlistIndex: action.payload});
     case FORWARD_PLAYBACK:
       return Object.assign({}, state, {playlistIndex:
-                                      (state.playlistIndex + 1) % state.ids.length});
+                                      (state.playlistIndex + 1) % state.playlistIds.length});
     case BACK_PLAYBACK:
       let newIdx = state.playlistIndex - 1;
-      if(newIdx == -1) newIdx = state.ids.length - 1;
+      if(newIdx == -1) newIdx = state.playlistIds.length - 1;
       return Object.assign({}, state, {playlistIndex: newIdx});
     default:
       return state;

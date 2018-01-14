@@ -34549,10 +34549,10 @@ exports.default = function () {
     case _playlist_actions.RECEIVE_PLAYLIST_INDEX:
       return Object.assign({}, state, { playlistIndex: action.payload });
     case _playlist_actions.FORWARD_PLAYBACK:
-      return Object.assign({}, state, { playlistIndex: (state.playlistIndex + 1) % state.ids.length });
+      return Object.assign({}, state, { playlistIndex: (state.playlistIndex + 1) % state.playlistIds.length });
     case _playlist_actions.BACK_PLAYBACK:
       var newIdx = state.playlistIndex - 1;
-      if (newIdx == -1) newIdx = state.ids.length - 1;
+      if (newIdx == -1) newIdx = state.playlistIds.length - 1;
       return Object.assign({}, state, { playlistIndex: newIdx });
     default:
       return state;

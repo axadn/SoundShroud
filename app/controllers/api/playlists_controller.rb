@@ -1,8 +1,8 @@
 class Api::PlaylistsController < ApplicationController
   def from_track_id
-    @tracks = Track.find(params[:id]).artist.tracks.select(:id).order(
+    @tracks = Track.find(params[:id]).artist.tracks.order(
       "created_at DESC")
-    render :index
+    render "api/tracks/index"
   end
 
   def random
