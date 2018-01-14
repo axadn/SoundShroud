@@ -3196,7 +3196,7 @@ var disableAuthModal = exports.disableAuthModal = function disableAuthModal() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.finishedLoadingAudioAction = exports.currentlyLoadingAudioAction = exports.fetchRandomPlaylistThunk = exports.backPlayback = exports.forwardPlayback = exports.startPlayback = exports.pausePlayback = exports.receivePlaylistIndex = exports.receivePlaylist = exports.RECEIVE_AUDIO_LOADING = exports.RECEIVE_AUDIO_LOADED = exports.START_PLAYBACK = exports.PAUSE_PLAYBACK = exports.BACK_PLAYBACK = exports.FORWARD_PLAYBACK = exports.RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST = undefined;
+exports.finishedLoadingAudioAction = exports.currentlyLoadingAudioAction = exports.fetchRandomPlaylistThunk = exports.backPlayback = exports.forwardPlayback = exports.startPlayback = exports.pausePlayback = exports.receivePlaylistIndex = exports.copyPlaylistFromPage = exports.receivePlaylist = exports.COPY_PLAYLIST_FROM_PAGE = exports.RECEIVE_AUDIO_LOADING = exports.RECEIVE_AUDIO_LOADED = exports.START_PLAYBACK = exports.PAUSE_PLAYBACK = exports.BACK_PLAYBACK = exports.FORWARD_PLAYBACK = exports.RECEIVE_PLAYLIST_INDEX = exports.RECEIVE_PLAYLIST = undefined;
 
 var _track_actions = __webpack_require__(16);
 
@@ -3207,24 +3207,30 @@ var APIUtils = _interopRequireWildcard(_api_playlist_utils);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var RECEIVE_PLAYLIST = exports.RECEIVE_PLAYLIST = "RECEIVE_PLAYLIST";
-var RECEIVE_PLAYLIST_ID = exports.RECEIVE_PLAYLIST_ID = "RECEIVE_PLAYLIST_ID";
+var RECEIVE_PLAYLIST_INDEX = exports.RECEIVE_PLAYLIST_INDEX = "RECEIVE_PLAYLIST_ID";
 var FORWARD_PLAYBACK = exports.FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 var BACK_PLAYBACK = exports.BACK_PLAYBACK = "BACK_PLAYBACK";
 var PAUSE_PLAYBACK = exports.PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 var START_PLAYBACK = exports.START_PLAYBACK = "START_PLAYBACK";
 var RECEIVE_AUDIO_LOADED = exports.RECEIVE_AUDIO_LOADED = "RECEIVE_AUDIO_LOADED";
 var RECEIVE_AUDIO_LOADING = exports.RECEIVE_AUDIO_LOADING = "RECEIVE_AUDIO_LOADING";
+var COPY_PLAYLIST_FROM_PAGE = exports.COPY_PLAYLIST_FROM_PAGE = "COPY_PLAYLIST_FROM_PAGE";
 
-var receivePlaylist = exports.receivePlaylist = function receivePlaylist(ids) {
+var receivePlaylist = exports.receivePlaylist = function receivePlaylist(payload) {
   return {
     type: RECEIVE_PLAYLIST,
-    payload: ids
+    payload: payload
   };
 };
-
+var copyPlaylistFromPage = exports.copyPlaylistFromPage = function copyPlaylistFromPage(id) {
+  return {
+    type: COPY_PLAYLIST_FROM_PAGE,
+    payload: id
+  };
+};
 var receivePlaylistIndex = exports.receivePlaylistIndex = function receivePlaylistIndex(index) {
   return {
-    type: RECEIVE_PLAYLIST_ID,
+    type: RECEIVE_PLAYLIST_INDEX,
     payload: index
   };
 };
@@ -14046,9 +14052,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, props) {
   return {
-    playing: state.playlist.playing,
+    playing: state.entities.tracks.playing,
     tracksOnPage: state.entities.tracks.ids,
-    current_in_playlist: state.playlist.ids[state.playlist.currentIndex] == props.trackId };
+    current_in_playlist: state.entities.tracks.playlistIds[state.entities.tracks.playlistIndex] == props.trackId
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
@@ -14056,22 +14063,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     resumeTrack: function resumeTrack() {
       dispatch((0, _playlist_actions.startPlayback)());
     },
-    dispatchPlaylist: function dispatchPlaylist(ids) {
-      return dispatch((0, _playlist_actions.receivePlaylist)(ids));
-    },
-    playlistItemByIndex: function playlistItemByIndex(index) {
-      return dispatch((0, _playlist_actions.receivePlaylistIndex)(index));
+    copyPlaylistFromPage: function copyPlaylistFromPage() {
+      dispatch((0, _playlist_actions.copyPlaylistFromPage)(props.trackId));
     },
     pauseTrack: function pauseTrack() {
       return dispatch((0, _playlist_actions.pausePlayback)());
     },
     generatePlaylist: function generatePlaylist(trackId) {
-      return (0, _api_playlist_utils.generatePlaylist)(trackId).then(function (ids) {
-        ids = ids.map(function (id) {
-          return id.id;
-        });
-        dispatch((0, _playlist_actions.receivePlaylist)(ids));
-        dispatch((0, _playlist_actions.receivePlaylistIndex)(ids.indexOf(props.trackId)));
+      return (0, _api_playlist_utils.generatePlaylist)(trackId).then(function (payload) {
+        dispatch((0, _playlist_actions.receivePlaylist)(payload));
+        dispatch((0, _playlist_actions.receivePlaylistIndex)(payload.ids.indexOf(props.trackId)));
       });
     }
   };
@@ -14212,7 +14213,7 @@ var mapStateToProps = function mapStateToProps(state, props) {
   return {
     samples: state.entities.tracks.tracks[props.id].waveform,
     loading: state.loading.audio,
-    currentlyPlaying: state.playlist.ids[state.playlist.currentIndex] === props.id,
+    currentlyPlaying: state.entities.tracks.playlistIds[state.entities.tracks.playlistIndex] == props.id,
     audioAnalyser: state.audioAnalyser
   };
 };
@@ -31555,8 +31556,7 @@ var handlePlayButton = function handlePlayButton(props) {
     } else {
       var trackIds = props.tracksOnPage;
       if (trackIds.length > 1) {
-        props.dispatchPlaylist(trackIds);
-        props.playlistItemByIndex(trackIds.indexOf(props.trackId));
+        props.copyPlaylistFromPage();
       } else {
         props.generatePlaylist(props.trackId);
       }
@@ -32823,9 +32823,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    playlist: state.playlist.ids,
-    playing: state.playlist.playing,
-    indexInPlaylist: state.playlist.currentIndex,
+    playlist: state.entities.tracks.playlistIds,
+    playing: state.entities.tracks.playing,
+    indexInPlaylist: state.entities.tracks.playlistIndex,
     fetchForCache: function fetchForCache(id, callBack) {
       return (0, _track_actions.fetchBinaryData)(id, callBack);
     }
@@ -34448,10 +34448,6 @@ var _loading_reducer = __webpack_require__(350);
 
 var _loading_reducer2 = _interopRequireDefault(_loading_reducer);
 
-var _playlist_reducer = __webpack_require__(356);
-
-var _playlist_reducer2 = _interopRequireDefault(_playlist_reducer);
-
 var _auth_modal_reducer = __webpack_require__(357);
 
 var _auth_modal_reducer2 = _interopRequireDefault(_auth_modal_reducer);
@@ -34467,7 +34463,6 @@ exports.default = (0, _redux.combineReducers)({
   errors: _errors_reducer2.default,
   upload: _upload_reducer2.default,
   loading: _loading_reducer2.default,
-  playlist: _playlist_reducer2.default,
   authModal: _auth_modal_reducer2.default
 });
 
@@ -34517,20 +34512,48 @@ Object.defineProperty(exports, "__esModule", {
 
 var _track_actions = __webpack_require__(16);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _playlist_actions = __webpack_require__(26);
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { tracks: {}, ids: [] };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { tracks: {}, ids: [], playlistIds: [], playing: false,
+    playlistIndex: undefined };
   var action = arguments[1];
 
   switch (action.type) {
     case _track_actions.RECEIVE_TRACKS:
-      return { tracks: action.payload.tracks, ids: action.payload.ids };
-    case _track_actions.RECEIVE_TRACK:
-      return Object.assign({}, state, {
-        tracks: _defineProperty({}, action.payload.id, action.payload),
-        ids: [action.payload.id]
+      var oldTracks = {};
+      state.playlistIds.forEach(function (id) {
+        oldTracks[id.toString()] = state.tracks[id.toString()];
       });
+      return Object.assign({}, state, { tracks: Object.assign(oldTracks, action.payload.tracks), ids: action.payload.ids });
+    case _track_actions.RECEIVE_TRACK:
+      var playlistTracks = {};
+      state.playlistIds.forEach(function (id) {
+        playlistTracks[id.toString()] = state.tracks[id.toString()];
+      });
+      playlistTracks[action.payload.id.toString()] = action.payload;
+      return Object.assign({}, state, { tracks: playlistTracks,
+        ids: [action.payload.id] });
+    case _playlist_actions.RECEIVE_PLAYLIST:
+      var playlistAttribs = { playlistIds: action.payload.ids,
+        tracks: Object.assign({}, state.tracks, action.payload.tracks),
+        playing: true, playlistIndex: null };
+      return Object.assign({}, state, playlistAttribs);
+    case _playlist_actions.COPY_PLAYLIST_FROM_PAGE:
+      return Object.assign({}, state, { playlistIds: state.ids.slice(),
+        playing: true, playlistIndex: state.ids.indexOf(action.payload) });
+    case _playlist_actions.START_PLAYBACK:
+      return Object.assign({}, state, { playing: true });
+    case _playlist_actions.PAUSE_PLAYBACK:
+      return Object.assign({}, state, { playing: false });
+    case _playlist_actions.RECEIVE_PLAYLIST_INDEX:
+      return Object.assign({}, state, { playlistIndex: action.payload });
+    case _playlist_actions.FORWARD_PLAYBACK:
+      return Object.assign({}, state, { playlistIndex: (state.playlistIndex + 1) % state.ids.length });
+    case _playlist_actions.BACK_PLAYBACK:
+      var newIdx = state.playlistIndex - 1;
+      if (newIdx == -1) newIdx = state.ids.length - 1;
+      return Object.assign({}, state, { playlistIndex: newIdx });
     default:
       return state;
   }
@@ -34975,45 +34998,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 356 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _playlist_actions = __webpack_require__(26);
-
-var NO_PLAYLIST = { ids: [], currentIndex: null, playing: false };
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : NO_PLAYLIST;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _playlist_actions.RECEIVE_PLAYLIST:
-      return Object.assign({}, state, { ids: action.payload, playing: true, currentIndex: null });
-    case _playlist_actions.START_PLAYBACK:
-      return Object.assign({}, state, { playing: true });
-    case _playlist_actions.PAUSE_PLAYBACK:
-      return Object.assign({}, state, { playing: false });
-    case _playlist_actions.RECEIVE_PLAYLIST_ID:
-      return Object.assign({}, state, { currentIndex: action.payload });
-    case _playlist_actions.FORWARD_PLAYBACK:
-      return Object.assign({}, state, { currentIndex: (state.currentIndex + 1) % state.ids.length });
-    case _playlist_actions.BACK_PLAYBACK:
-      var newIdx = state.currentIndex - 1;
-      if (newIdx == -1) newIdx = state.ids.length - 1;
-      return Object.assign({}, state, { currentIndex: newIdx });
-    default:
-      return state;
-  }
-};
-
-/***/ }),
+/* 356 */,
 /* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35076,9 +35061,9 @@ var _playback_track_info2 = _interopRequireDefault(_playback_track_info);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var index = state.playlist.currentIndex;
+    var index = state.entities.tracks.playlistIndex;
     return {
-        track: index ? state.entities.tracks.tracks[state.playlist.ids[index]] : null
+        track: index != null && index != undefined ? state.entities.tracks.tracks[state.entities.tracks.playlistIds[index]] : null
     };
 };
 

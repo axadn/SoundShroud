@@ -5,7 +5,8 @@ import Waveform from "./waveform";
 const mapStateToProps = (state, props) =>({
   samples: state.entities.tracks.tracks[props.id].waveform,
   loading: state.loading.audio,
-  currentlyPlaying: state.playlist.ids[state.playlist.currentIndex] === props.id,
+  currentlyPlaying: state.entities.tracks.playlistIds[
+    state.entities.tracks.playlistIndex] == props.id,
   audioAnalyser: state.audioAnalyser
 });
 

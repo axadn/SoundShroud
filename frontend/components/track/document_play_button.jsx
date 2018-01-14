@@ -24,8 +24,7 @@ const handlePlayButton = props => () => {
   else{
     let trackIds = props.tracksOnPage;
     if(trackIds.length > 1){
-      props.dispatchPlaylist(trackIds);
-      props.playlistItemByIndex(trackIds.indexOf(props.trackId));
+      props.copyPlaylistFromPage();
     }
     else {
       props.generatePlaylist(props.trackId);

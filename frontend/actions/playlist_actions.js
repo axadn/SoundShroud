@@ -1,22 +1,26 @@
 export const RECEIVE_PLAYLIST = "RECEIVE_PLAYLIST";
-export const RECEIVE_PLAYLIST_ID = "RECEIVE_PLAYLIST_ID";
+export const RECEIVE_PLAYLIST_INDEX = "RECEIVE_PLAYLIST_ID";
 export const FORWARD_PLAYBACK = "FORWARD_PLAYBACK";
 export const BACK_PLAYBACK = "BACK_PLAYBACK";
 export const PAUSE_PLAYBACK = "PAUSE_PLAYBACK";
 export const START_PLAYBACK = "START_PLAYBACK";
 export const RECEIVE_AUDIO_LOADED = "RECEIVE_AUDIO_LOADED";
 export const RECEIVE_AUDIO_LOADING = "RECEIVE_AUDIO_LOADING";
+export const COPY_PLAYLIST_FROM_PAGE = "COPY_PLAYLIST_FROM_PAGE";
 
 import {receiveTracks} from "./track_actions";
 import * as APIUtils from "../utils/api_playlist_utils";
 
-export const receivePlaylist = ids => ({
+export const receivePlaylist = payload => ({
   type: RECEIVE_PLAYLIST,
-  payload: ids
+  payload
 });
-
+export const copyPlaylistFromPage = (id) =>({
+  type: COPY_PLAYLIST_FROM_PAGE,
+  payload: id
+});
 export const receivePlaylistIndex = index => ({
-  type: RECEIVE_PLAYLIST_ID,
+  type: RECEIVE_PLAYLIST_INDEX,
   payload: index
 });
 
