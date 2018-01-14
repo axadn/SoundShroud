@@ -54,7 +54,7 @@
 }
 #audio-duration, #audio-current-time{
   color: #4a4a4a;
-  width: 20px;
+  width: 40px;
   flex-shrink: 0;
 }
 
@@ -72,4 +72,17 @@
   width: 100%;
   height: 4px;
   border-top: 1px solid rgb(25,25,25);
+}
+
+.playback-track-info{
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100px;
+}
+.playback-track-info .info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
 }

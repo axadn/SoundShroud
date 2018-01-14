@@ -16,7 +16,7 @@ export default props =>{
         </div>);
     }
     else{
-        html = <div></div>;
+        html = <div className="playback-track-info"></div>;
     }
     return html;
 };

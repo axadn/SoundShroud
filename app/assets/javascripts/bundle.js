@@ -35116,7 +35116,7 @@ exports.default = function (props) {
             )
         );
     } else {
-        html = _react2.default.createElement("div", null);
+        html = _react2.default.createElement("div", { className: "playback-track-info" });
     }
     return html;
 };
