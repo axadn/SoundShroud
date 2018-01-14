@@ -26,25 +26,31 @@
     text-align: center;
     width: 80px;
     text-decoration: none;
-    color: $woodsmoke;
+    color:  #252525;
   }
   
-  .top_nav_link:hover{
-    background-color: white;
-  
+  .top_nav_link:hover,
+  .nav_bar .drop-down-menu:hover{
+    color: black;
     cursor: pointer;
   }
-  .top_nav_link.active{
-    background-color: $athens-grey;
-    cursor: default;
+  .top_nav_link.active,
+  .nav_bar .drop-down-menu:active,
+  .nav_bar .drop-down-menu.active{
+    background-color: #72888b;
+    color: black;
   }
   .nav_bar .drop-down-menu{
     color: black;
     position: relative;
-    width: 80px;
-    padding-top: 20px;
+    display: flex;
+    margin-right: 20px;
+    justify-content: center;
+    align-items: center;
   }
-
+  .nav_bar .drop-down-menu > a{
+    margin-left: 5px;
+  }
   .nav_bar .drop-down-menu ul{
     position: absolute;
     top: 100%;

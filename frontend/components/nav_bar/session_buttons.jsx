@@ -34,7 +34,7 @@ export default class SessionButtons extends React.Component{
           ref="dropdown"
           onClick = {this.handleClick}>
           <img className="small" src={this.props.current_user.image_url}></img>
-          {this.props.current_user.username}
+          <a>{this.props.current_user.username}</a>
           <ul className={`${hidden}`}>
             <li><a href={`#/users/${this.props.current_user.id}`}>Profile</a></li>
             <li onClick={this.props.delete_session}>Log out</li>

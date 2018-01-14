@@ -8394,7 +8394,8 @@ var Protected = function Protected(_ref2) {
     } });
 };
 var mapStateToProps = function mapStateToProps(state) {
-  return { loggedIn: (0, _selectors.logged_in)(state), current_user_id: (0, _selectors.current_user_id)(state) };
+  return { loggedIn: (0, _selectors.logged_in)(state),
+    current_user_id: (0, _selectors.logged_in)(state) ? (0, _selectors.current_user_id)(state) : null };
 };
 
 var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Auth));
@@ -32540,7 +32541,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return { logged_in: (0, _selectors.logged_in)(state),
-    current_user: state.session.current_user
+    current_user: (0, _selectors.logged_in)(state) ? state.session.current_user : null
   };
 };
 
@@ -32635,7 +32636,11 @@ var SessionButtons = function (_React$Component) {
             ref: "dropdown",
             onClick: this.handleClick },
           _react2.default.createElement("img", { className: "small", src: this.props.current_user.image_url }),
-          this.props.current_user.username,
+          _react2.default.createElement(
+            "a",
+            null,
+            this.props.current_user.username
+          ),
           _react2.default.createElement(
             "ul",
             { className: "" + hidden },
