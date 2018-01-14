@@ -32588,17 +32588,42 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SessionButtons = function (_React$Component) {
   _inherits(SessionButtons, _React$Component);
 
-  function SessionButtons() {
+  function SessionButtons(props) {
     _classCallCheck(this, SessionButtons);
 
-    return _possibleConstructorReturn(this, (SessionButtons.__proto__ || Object.getPrototypeOf(SessionButtons)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SessionButtons.__proto__ || Object.getPrototypeOf(SessionButtons)).call(this, props));
+
+    _this.state = {
+      enabled: false
+    };
+    _this.handleClick = _this.handleClick.bind(_this);
+    _this.toggle = _this.toggle.bind(_this);
+    return _this;
   }
 
   _createClass(SessionButtons, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      if (this.state.enabled) {
+        window.removeEventListener("click", this.handleClick);
+      } else {
+        window.addEventListener("click", this.handleClick);
+      }
+      this.setState(this.toggle);
+    }
+  }, {
+    key: "toggle",
+    value: function toggle(state) {
+      return { enabled: !state.enabled };
+    }
+  }, {
     key: "render",
     value: function render() {
       var button1 = void 0,
           button2 = void 0;
+      var hidden = this.state.enabled ? "" : "hidden";
       if (this.props.logged_in) {
         button1 = _react2.default.createElement(
           _reactRouterDom.NavLink,
@@ -32607,11 +32632,13 @@ var SessionButtons = function (_React$Component) {
         );
         button2 = _react2.default.createElement(
           "div",
-          { className: "drop-down-menu" },
+          { className: "drop-down-menu",
+            ref: "dropdown",
+            onClick: this.handleClick },
           this.props.current_user_id,
           _react2.default.createElement(
             "ul",
-            null,
+            { className: "" + hidden },
             _react2.default.createElement(
               "li",
               null,

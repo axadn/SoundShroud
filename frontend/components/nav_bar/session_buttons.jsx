@@ -2,15 +2,40 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 
 export default class SessionButtons extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      enabled: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+  handleClick(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if(this.state.enabled){
+      window.removeEventListener("click", this.handleClick);
+    }
+    else{
+      window.addEventListener("click", this.handleClick);
+    }
+    this.setState(this.toggle);
+  }
+  toggle(state){
+    return{enabled: !state.enabled};
+  }
   render(){
     let button1, button2;
+    const hidden = this.state.enabled? "" : "hidden";
     if(this.props.logged_in){
       button1 = <NavLink className="top_nav_link" to={"/upload"}>
          Upload</NavLink>;
       button2 = 
-        <div className="drop-down-menu">
+        <div className="drop-down-menu"
+          ref="dropdown"
+          onClick = {this.handleClick}>
           {this.props.current_user_id}
-          <ul>
+          <ul className={`${hidden}`}>
             <li>Profile</li>
             <li>Log out</li>
           </ul>
