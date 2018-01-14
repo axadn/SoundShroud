@@ -26,11 +26,12 @@ export default class SessionButtons extends React.Component{
   render(){
     let button1, button2;
     const hidden = this.state.enabled? "" : "hidden";
+    const active = this.state.enabled? "active" : "";
     if(this.props.logged_in){
       button1 = <NavLink className="top_nav_link" to={"/upload"}>
          Upload</NavLink>;
       button2 = 
-        <div className="drop-down-menu"
+        <div className={`drop-down-menu ${active}`}
           ref="dropdown"
           onClick = {this.handleClick}>
           <img className="small" src={this.props.current_user.image_url}></img>

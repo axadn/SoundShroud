@@ -14126,9 +14126,9 @@ var mapStateToProps = function mapStateToProps(state, props) {
   var editable = void 0;
 
   if (props.type === "user") {
-    editable = props.id == (0, _selectors.current_user_id)(state);
+    editable = (0, _selectors.logged_in)(state) && props.id == (0, _selectors.current_user_id)(state);
   } else {
-    editable = props.userId == (0, _selectors.current_user_id)(state);
+    editable = (0, _selectors.logged_in)(state) && props.userId == (0, _selectors.current_user_id)(state);
   }
   return { editable: editable };
 };
@@ -32624,6 +32624,7 @@ var SessionButtons = function (_React$Component) {
       var button1 = void 0,
           button2 = void 0;
       var hidden = this.state.enabled ? "" : "hidden";
+      var active = this.state.enabled ? "active" : "";
       if (this.props.logged_in) {
         button1 = _react2.default.createElement(
           _reactRouterDom.NavLink,
@@ -32632,7 +32633,7 @@ var SessionButtons = function (_React$Component) {
         );
         button2 = _react2.default.createElement(
           "div",
-          { className: "drop-down-menu",
+          { className: "drop-down-menu " + active,
             ref: "dropdown",
             onClick: this.handleClick },
           _react2.default.createElement("img", { className: "small", src: this.props.current_user.image_url }),

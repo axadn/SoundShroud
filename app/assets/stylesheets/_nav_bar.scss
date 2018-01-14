@@ -41,15 +41,18 @@
     color: black;
   }
   .nav_bar .drop-down-menu{
-    color: black;
+    color:  #252525;
     position: relative;
     display: flex;
     margin-right: 20px;
     justify-content: center;
     align-items: center;
   }
-  .nav_bar .drop-down-menu > a{
+  .nav_bar .drop-down-menu > img{
     margin-left: 5px;
+  }
+  .nav_bar .drop-down-menu > a{
+    margin: 5px;
   }
   .nav_bar .drop-down-menu ul{
     position: absolute;
