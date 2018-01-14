@@ -32605,7 +32605,6 @@ var SessionButtons = function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       e.stopPropagation();
-      e.preventDefault();
       if (this.state.enabled) {
         window.removeEventListener("click", this.handleClick);
       } else {
@@ -32642,11 +32641,15 @@ var SessionButtons = function (_React$Component) {
             _react2.default.createElement(
               "li",
               null,
-              "Profile"
+              _react2.default.createElement(
+                "a",
+                { href: "#/users/" + this.props.current_user_id },
+                "Profile"
+              )
             ),
             _react2.default.createElement(
               "li",
-              null,
+              { onClick: this.props.delete_session },
               "Log out"
             )
           )

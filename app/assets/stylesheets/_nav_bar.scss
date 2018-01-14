@@ -48,4 +48,16 @@
     position: absolute;
     top: 100%;
     z-index: 1100;
+    background-color: #72888b;
+    margin: 0;
+  }
+
+  .nav_bar .drop-down-menu li:hover{
+    cursor:pointer;
+    background-color: #556669;
+  }
+  .nav_bar .drop-down-menu ul a,
+  .nav_bar .drop-down-menu ul div{
+    text-decoration: none;
+    color: white;
   }

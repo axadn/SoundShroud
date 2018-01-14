@@ -12,7 +12,6 @@ export default class SessionButtons extends React.Component{
   }
   handleClick(e){
     e.stopPropagation();
-    e.preventDefault();
     if(this.state.enabled){
       window.removeEventListener("click", this.handleClick);
     }
@@ -36,8 +35,8 @@ export default class SessionButtons extends React.Component{
           onClick = {this.handleClick}>
           {this.props.current_user_id}
           <ul className={`${hidden}`}>
-            <li>Profile</li>
-            <li>Log out</li>
+            <li><a href={`#/users/${this.props.current_user_id}`}>Profile</a></li>
+            <li onClick={this.props.delete_session}>Log out</li>
           </ul>
         </div>;
     }
