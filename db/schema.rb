@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220163224) do
+ActiveRecord::Schema.define(version: 20180115221802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20171220163224) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
@@ -35,7 +44,7 @@ ActiveRecord::Schema.define(version: 20171220163224) do
     t.boolean "custom_img", default: false
     t.boolean "processed", default: false, null: false
     t.string "img_extension", default: ".jpeg", null: false
-    t.datetime "image_modified_at", default: "2018-01-13 07:06:38", null: false
+    t.datetime "image_modified_at", default: "2018-01-15 22:26:59", null: false
     t.float "waveform", array: true
     t.index ["title", "artist_id"], name: "index_tracks_on_title_and_artist_id", unique: true
   end
@@ -50,7 +59,7 @@ ActiveRecord::Schema.define(version: 20171220163224) do
     t.datetime "updated_at", null: false
     t.boolean "custom_img", default: false, null: false
     t.string "img_extension", default: ".jpeg", null: false
-    t.datetime "image_modified_at", default: "2018-01-13 07:06:38", null: false
+    t.datetime "image_modified_at", default: "2018-01-15 22:26:58", null: false
     t.index ["display_name"], name: "index_users_on_display_name"
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

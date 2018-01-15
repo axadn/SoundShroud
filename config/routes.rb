@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :api do
+    get 'search/search'
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: {format: :json} do
     resources :tracks, only: [:create, :destroy, :show,:update]  do
@@ -19,6 +23,7 @@ Rails.application.routes.draw do
   get 'api/playlists/random', to: 'api/playlists#random'
   post '/api/tracks/process', to: 'api/tracks#process_track'
   get 'api/tracks/:id/status', to: 'api/tracks#audio_process_status'
+  get 'api/search', to: 'api/search#index'
   get '/', to: 'root#show'
 
 end

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include PgSearch
   validates :password, length: {minimum: 6, allow_nil: true}
   validates :username,:password_digest, presence: true, uniqueness: true
   validates  :session_token,uniqueness: true, allow_nil: true
@@ -6,6 +7,15 @@ class User < ApplicationRecord
   has_many :tracks, foreign_key: :artist_id
   has_many :comments
   attr_accessor :password
+
+  multisearchable against:
+    [:display_name, :username],
+    using: {
+      tsearch: {
+        negation: true,
+        any_word: true                      
+      }
+    }
 
   def self.find_by_credentials(opts)
     user = User.find_by(username: opts[:username])
