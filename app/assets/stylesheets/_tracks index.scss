@@ -1,19 +1,23 @@
-.tracks-index{
+.tracks-index,
+.search-results-list{
   position: relative;
   margin-left: 3vw;
 }
 @media(max-width: 600px){
-  .tracks-index{
+  .tracks-index,
+  .search-results-list{
     width: 90%;
     max-height:24vw;
   }
-  .track-item{
+  .track-item,
+  .search-results-list{
     height: 27vw;
   }
   .track-item a.title-link{
     font-size: 16px
   }
-  .play-info-and-waveform{
+  .play-info-and-waveform,
+  .user-item .info{
     margin-left:16px;
   }
 }

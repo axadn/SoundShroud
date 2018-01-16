@@ -1,0 +1,11 @@
+.user-item a.username-link{
+    font-size: 18px;
+    width: fit-content;
+    padding: 5px;
+    background-color: black;
+}
+.user-item .info{
+    margin-left: 40px;
+    padding-top: 20px;
+    flex-grow: 1;
+}

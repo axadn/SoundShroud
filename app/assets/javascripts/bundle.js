@@ -35387,6 +35387,10 @@ var _track_item = __webpack_require__(314);
 
 var _track_item2 = _interopRequireDefault(_track_item);
 
+var _user_item = __webpack_require__(366);
+
+var _user_item2 = _interopRequireDefault(_user_item);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
@@ -35406,7 +35410,11 @@ exports.default = function (props) {
                 { key: "trackItem" + result.id },
                 _react2.default.createElement(_track_item2.default, { track: result })
             );
-        } else return "";
+        } else return _react2.default.createElement(
+            "li",
+            { key: "userItem" + result.id },
+            _react2.default.createElement(_user_item2.default, { user: result })
+        );
     });
     return _react2.default.createElement(
         "div",
@@ -35482,6 +35490,51 @@ exports.default = function () {
             _react2.default.createElement("i", { className: "fa fa-search", "aria-hidden": "true" })
         )
     );
+};
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _route_utils = __webpack_require__(77);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "user-item" },
+    _react2.default.createElement(
+      "div",
+      { className: "track-item-cover-art-container" },
+      _react2.default.createElement("div", { className: "padding-fix" }),
+      _react2.default.createElement("img", { className: "medium cover-art", src: props.user.image_url,
+        onClick: (0, _route_utils.redirectToUser)(props.user.id) })
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "info" },
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: "username-link",
+          to: "/users/" + props.user.id },
+        props.user.display_name ? props.user.display_name : props.user.username
+      )
+    )
+  );
 };
 
 /***/ })

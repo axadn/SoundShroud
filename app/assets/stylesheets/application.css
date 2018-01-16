@@ -15,6 +15,7 @@
  *= require root
  *= require _nav_bar
  *= require _track\ item
+ *= require _user_item
  *= require _comments
  *= require _playback
  *= require _session
@@ -25,5 +26,6 @@
  *= require _landing
  *= require _discover
  *= require _search
+
 
  */

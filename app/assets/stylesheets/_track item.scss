@@ -1,4 +1,4 @@
-.track-item{
+.track-item, .user-item{
   display: flex;
   margin-bottom: 40px;
   max-width: 650px;
@@ -8,14 +8,16 @@
 .track-item .play-button-and-info{
   display: flex;
 }
-.track-item .info{
+.track-item .info, .user-item .info{
   display: flex;
   flex-direction: column;
 }
-.track-item img:first-of-type:hover{
+.track-item img:first-of-type:hover,
+.user-item img:first-of-type:hover{
   cursor: pointer;
 }
-.track-item a{
+.track-item a,
+.user-item a{
   width: 0;
   white-space: nowrap;
 }
@@ -39,20 +41,27 @@
   padding-top: 100%;
   height: 0;
 }
-.track-item img.medium{
+.track-item img.medium,
+.user-item img.medium{
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
+ 
+}
+.user-item img.medium{
+  border-radius: 50%;
 }
 
 
-.track-item .info{
+.track-item .info,
+.user-item .info{
   margin-left: 10px;
 }
 
-.play-info-and-waveform{
+.play-info-and-waveform,
+.user-item .info{
   display: flex;
   flex-grow: 1;
   flex-direction: column;
