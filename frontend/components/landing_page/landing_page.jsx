@@ -8,7 +8,7 @@ export default class LandingPage extends React.Component{
   render(){
     return(
     <div className = "landing_page_content">
-      <img src="/assets/guit blue.jpeg"></img>
+      <img src="/assets/micro.jpeg"></img>
       <div className = "landing_info">
         <h1> Connect on SoundShroud</h1>
         <div>Discover hot new music from emerging and major artists

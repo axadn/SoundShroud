@@ -25,6 +25,10 @@
   text-decoration: none;
 
 }
+.track-item .title-link:hover{
+  font-size: 18.5px;
+  color: white;
+}
 .track-item-cover-art-container{
   flex-grow: 0.8;
   position: relative;
@@ -42,10 +46,7 @@
   top: 0;
   left: 0;
 }
-.track-item .title-link:hover{
-  font-size: 20px;
-  color: white;
-}
+
 
 .track-item .info{
   margin-left: 10px;
