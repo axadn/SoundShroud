@@ -96,6 +96,10 @@
     border: none;
     background-color: transparent;
     color: rgb(196, 196, 196);
+    outline: none;
+  }
+  .search-bar button:focus{
+    outline: none;
   }
   .search-bar button:hover{
     cursor: pointer;
