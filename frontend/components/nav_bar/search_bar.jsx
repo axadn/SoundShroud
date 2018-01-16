@@ -8,7 +8,7 @@ export default ()=>{
         }`
         document.querySelector(".search-text").value = "";
     }}>
-        <input type="text" className="search-text"></input>
+        <input type="text" className="search-text" placeholder="Search"></input>
         <button type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
     </form>
 }

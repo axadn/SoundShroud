@@ -35467,7 +35467,7 @@ exports.default = function () {
                 window.location = "/#/search/" + document.querySelector(".search-text").value;
                 document.querySelector(".search-text").value = "";
             } },
-        _react2.default.createElement("input", { type: "text", className: "search-text" }),
+        _react2.default.createElement("input", { type: "text", className: "search-text", placeholder: "Search" }),
         _react2.default.createElement(
             "button",
             { type: "submit" },
