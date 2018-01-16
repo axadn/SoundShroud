@@ -36,7 +36,7 @@ class SearchPageContainer extends React.Component{
         this.props.fetchSearch(this.props.query);
     }
     render(){
-        return <ConnectedChild/>;
+        return <ConnectedChild query={this.props.query}/>;
     }
  }
 

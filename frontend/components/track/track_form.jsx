@@ -83,7 +83,7 @@ export default class TrackForm extends React.Component {
       <div className ="track-form-content">
         {imageInputElement}
         <div className ="floater2">
-          <h2>{this.props.editing? "Edit your Track" : "Upload a Track"}</h2>
+          <h3>{this.props.editing? "Edit your Track" : "Upload a Track"}</h3>
         <form className="track_form" onSubmit={this.handleSubmit}>
             {fileUploadElement}
 

@@ -30826,7 +30826,7 @@ var TrackForm = function (_React$Component) {
           "div",
           { className: "floater2" },
           _react2.default.createElement(
-            "h2",
+            "h3",
             null,
             this.props.editing ? "Edit your Track" : "Upload a Track"
           ),
@@ -32351,6 +32351,11 @@ var Discover = function (_React$Component) {
         "div",
         { className: "discover-page" },
         landingPagePlaceholder,
+        _react2.default.createElement(
+          "h3",
+          null,
+          "Discover New Music"
+        ),
         _react2.default.createElement(
           "button",
           { className: "shuffle-button", onClick: this.props.fetchPlaylist },
@@ -35291,7 +35296,7 @@ var SearchPageContainer = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            return _react2.default.createElement(ConnectedChild, null);
+            return _react2.default.createElement(ConnectedChild, { query: this.props.query });
         }
     }]);
 
@@ -35372,8 +35377,15 @@ var _track_item2 = _interopRequireDefault(_track_item);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-    if (props.loading) return _react2.default.createElement("div", null);
-    debugger;
+    if (props.loading) return _react2.default.createElement(
+        "div",
+        { className: "search-page" },
+        _react2.default.createElement(
+            "h3",
+            null,
+            "Loading"
+        )
+    );
     var results = props.results.map(function (result) {
         if (result.searchable_type == "Track") {
             return _react2.default.createElement(
@@ -35385,10 +35397,15 @@ exports.default = function (props) {
     });
     return _react2.default.createElement(
         "div",
-        { className: "searchPage" },
+        { className: "search-page" },
+        _react2.default.createElement(
+            "h3",
+            null,
+            "Search Results for " + props.query
+        ),
         _react2.default.createElement(
             "ul",
-            null,
+            { className: "search-result-list" },
             results
         )
     );

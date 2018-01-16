@@ -14,6 +14,7 @@ export default class Discover extends React.Component{
       return(
         <div className="discover-page">
           {landingPagePlaceholder}
+          <h3>Discover New Music</h3>
           <button className="shuffle-button" onClick={this.props.fetchPlaylist}>
             shuffle
           </button>
