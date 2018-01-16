@@ -46,7 +46,7 @@ export default class TrackShow extends React.Component{
                 <div>{this.props.track.created_at.slice(0,10)}</div>
               </div>
               <div id="show_page_waveform_container">
-                <WaveformContainer id ={this.props.track.id}/>
+                <WaveformContainer id ={this.props.track.id} samples={this.props.track.waveform}/>
               </div>
             </div>
 

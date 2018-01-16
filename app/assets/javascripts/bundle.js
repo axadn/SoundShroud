@@ -31132,7 +31132,7 @@ var TrackShow = function (_React$Component) {
               _react2.default.createElement(
                 "div",
                 { id: "show_page_waveform_container" },
-                _react2.default.createElement(_waveform_container2.default, { id: this.props.track.id })
+                _react2.default.createElement(_waveform_container2.default, { id: this.props.track.id, samples: this.props.track.waveform })
               )
             ),
             _react2.default.createElement(
