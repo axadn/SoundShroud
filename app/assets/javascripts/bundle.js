@@ -32228,7 +32228,6 @@ var _document_play_button_container2 = _interopRequireDefault(_document_play_but
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-  s;
   return _react2.default.createElement(
     "div",
     { className: "track-item" },

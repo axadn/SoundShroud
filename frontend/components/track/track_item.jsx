@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import WaveformContainer from "../waveform/waveform_container";
 import DocumentPlayButtonContainer from "../track/document_play_button_container";
-export default (props)=> {s
+export default (props)=> {
   return(
   <div className= "track-item">
     <div className = "track-item-cover-art-container">
