@@ -35296,7 +35296,6 @@ var SearchPageContainer = function (_React$Component) {
     }, {
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(newProps) {
-            debugger;
             if (this.props.query != newProps.query) this.props.fetchSearch(newProps.query);
         }
     }, {

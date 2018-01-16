@@ -33,7 +33,6 @@ class SearchPageContainer extends React.Component{
         this.props.fetchSearch(this.props.query);
     }
     componentWillReceiveProps(newProps){
-        debugger;
         if(this.props.query != newProps.query)
             this.props.fetchSearch(newProps.query);
     }

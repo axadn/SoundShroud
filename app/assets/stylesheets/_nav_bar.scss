@@ -73,3 +73,25 @@
     text-decoration: none;
     color: black;
   }
+  .search-bar{
+    flex-grow: 1;
+    position: relative;
+
+  }
+  .search-bar .search-text{
+    width: 100%;
+    height: 51%;
+    margin-top: 12px;
+    border: 1px solid black;
+  }
+  .search-bar button{
+    position: absolute;
+    right: 0;
+    bottom: 13px;
+    border: none;
+    background-color: transparent;
+    color: white;
+  }
+  .search-bar button:hover{
+    cursor: pointer;
+  }
