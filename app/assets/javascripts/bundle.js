@@ -14309,6 +14309,10 @@ var _session_buttons_container2 = _interopRequireDefault(_session_buttons_contai
 
 var _reactRouterDom = __webpack_require__(11);
 
+var _search_bar = __webpack_require__(365);
+
+var _search_bar2 = _interopRequireDefault(_search_bar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
@@ -14324,6 +14328,7 @@ exports.default = function () {
         "Discover"
       )
     ),
+    _react2.default.createElement(_search_bar2.default, null),
     _react2.default.createElement(_session_buttons_container2.default, null)
   );
 };
@@ -35291,7 +35296,8 @@ var SearchPageContainer = function (_React$Component) {
     }, {
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(newProps) {
-            this.props.fetchSearch(this.props.query);
+            debugger;
+            if (this.props.query != newProps.query) this.props.fetchSearch(newProps.query);
         }
     }, {
         key: "render",
@@ -35401,7 +35407,7 @@ exports.default = function (props) {
         _react2.default.createElement(
             "h3",
             null,
-            "Search Results for " + props.query
+            "Search Results for \"" + props.query + "\""
         ),
         _react2.default.createElement(
             "ul",
@@ -35434,6 +35440,41 @@ exports.default = function () {
         default:
             return state;
     }
+};
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        "form",
+        { className: "search-bar",
+            onSubmit: function onSubmit(e) {
+                e.preventDefault();
+                window.location = "/#/search/" + document.querySelector(".search-text").value;
+                document.querySelector(".search-text").value = "";
+            } },
+        _react2.default.createElement("input", { type: "text", className: "search-text" }),
+        _react2.default.createElement(
+            "button",
+            { type: "submit" },
+            "search"
+        )
+    );
 };
 
 /***/ })

@@ -15,7 +15,7 @@ export default props=>{
         else return "";
     });
     return (<div className="search-page">
-        <h3>{`Search Results for ${props.query}`}</h3>
+        <h3>{`Search Results for "${props.query}"`}</h3>
         <ul className="search-result-list">
             {results}
         </ul>
