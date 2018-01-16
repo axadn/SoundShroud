@@ -4,6 +4,7 @@
  import {SearchPage} from "search_page";
  import {receiveMainContentLoaded,
     receiveMainContentLoading} from "../../actions/loading_actions";
+import {fetchSearchThunk} from "../../actions/search_actions";
 
  const parentMapState = state =>({
     query: props.match.params.query
@@ -11,7 +12,7 @@
  const parentMapDispatch = (dispatch, props) =>({
     fetchSearch: query =>{
         dispatch(receiveMainContentLoading());
-        dispatch(fetchSearch(
+        dispatch(fetchSearchResultsThunk(
                     query,
                     ()=> dispatch(receiveMainContentLoaded())
                 )
