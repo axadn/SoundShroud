@@ -5,12 +5,12 @@ import {receiveMainContentLoaded,
   receiveMainContentLoading} from "../../actions/loading_actions";
 import TrackShow from "./track_show";
 import {fetchTrackThunk, deleteTrackThunk} from "../../actions/track_actions";
-import {current_user_id} from "../../reducers/selectors";
+import {current_user_id, logged_in} from "../../reducers/selectors";
 
 const mapDisplayStateToProps = (state, ownProps) => ({
   loading: state.loading.mainContent,
   track: state.entities.tracks.tracks[ownProps.trackId],
-  current_user_id: current_user_id(state),
+  current_user_id: logged_in(state) ? current_user_id(state): null,
 });
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({

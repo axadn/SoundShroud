@@ -30927,7 +30927,7 @@ var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
   return {
     loading: state.loading.mainContent,
     track: state.entities.tracks.tracks[ownProps.trackId],
-    current_user_id: (0, _selectors.current_user_id)(state)
+    current_user_id: (0, _selectors.logged_in)(state) ? (0, _selectors.current_user_id)(state) : null
   };
 };
 
