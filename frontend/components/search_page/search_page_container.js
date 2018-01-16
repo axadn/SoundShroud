@@ -1,12 +1,12 @@
  import {connect} from "react-redux";
  import React from "react";
  import {withRouter} from "react-router-dom";
- import {SearchPage} from "search_page";
+ import SearchPage from "./search_page";
  import {receiveMainContentLoaded,
     receiveMainContentLoading} from "../../actions/loading_actions";
-import {fetchSearchThunk} from "../../actions/search_actions";
+import {fetchSearchResultsThunk} from "../../actions/search_actions";
 
- const parentMapState = state =>({
+ const parentMapState = (state, props) =>({
     query: props.match.params.query
  });
  const parentMapDispatch = (dispatch, props) =>({
@@ -24,11 +24,11 @@ import {fetchSearchThunk} from "../../actions/search_actions";
     loading: state.loading.mainContent,
     results: state.entities.searchResults
  });
- const childMapDispatch = dispatch({
+ const childMapDispatch = dispatch=>({
 
  });
-
- class SearchPageContainer extends React.Component{
+ const ConnectedChild = connect(childMapState, childMapDispatch)(SearchPage);
+class SearchPageContainer extends React.Component{
     componentDidMount(){
         this.props.fetchSearch(this.props.query);
     }
@@ -39,4 +39,6 @@ import {fetchSearchThunk} from "../../actions/search_actions";
         return <ConnectedChild/>;
     }
  }
- const ConnectedChild = connect(childMapState, childMapDispatch)(SearchPage);
+
+ export default withRouter(connect(parentMapState, parentMapDispatch)(SearchPageContainer));
+ 

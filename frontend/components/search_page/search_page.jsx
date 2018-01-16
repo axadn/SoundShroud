@@ -1,4 +1,8 @@
+import React from "react";
+import TrackItem from "../track/track_item";
 export default props=>{
+    if (props.loading) return <div></div>;
+    debugger;
     const results = props.results.map(result=>{
         if(result.searchable_type == "Track"){
             return(

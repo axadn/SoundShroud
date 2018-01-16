@@ -19,7 +19,7 @@ export default (props)=> (
             to={`/tracks/${props.track.id}`}>{props.track.title}</Link>
         </div>
       </div>
-      <WaveformContainer id={props.track.id}/>
+      <WaveformContainer id={props.track.id} samples={props.track.samples}/>
     </div>
   </div>
 );
