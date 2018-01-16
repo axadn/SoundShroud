@@ -18,6 +18,7 @@ export default class TrackForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
   handleChange(key){
     return e => {
@@ -31,10 +32,15 @@ export default class TrackForm extends React.Component {
   handleImageChange(e){
     this.setState({imageFile: e.target.files[0]});
   }
+  clearForm(){
+    document.querySelector(".track-form-content .image-input-container input").value = "";
+    document.querySelector("#track-upload-select-container input").value = "";
+    this.setState(this.props.initial_state);
+  }
   handleSubmit (e){
     e.preventDefault();
     this.props.clearParamsErrors();
-    this.props.formAction(this.state);
+    this.props.formAction(this.state, this.clearForm);
   }
   render(){
     let errorElements = {};

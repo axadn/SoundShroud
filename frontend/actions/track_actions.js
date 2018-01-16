@@ -83,8 +83,7 @@ export const fetchTrackThunk = (id, callback) => dispatch => (
     })
 );
 
-export const verifyThenPostThunk = unprocessedData => dispatch => {
-
+export const verifyThenPostThunk = (unprocessedData, clearFormCallback) => dispatch => {
   const formData = new FormData();
   const trackParams = {track: {}};
   Object.keys(unprocessedData).forEach(key=>{
@@ -102,6 +101,7 @@ export const verifyThenPostThunk = unprocessedData => dispatch => {
   TrackAPI.verifyValidParams(trackParams)
   .then(
     s3Info => {
+      clearFormCallback();
       let awaiter = new AudioAndImageUploadAwaiter(unprocessedData.file.size,
         unprocessedData.imageFile? unprocessedData.imageFile.size: 0);
 

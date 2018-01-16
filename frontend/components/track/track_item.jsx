@@ -2,7 +2,8 @@ import React from "react";
 import {Link} from "react-router-dom";
 import WaveformContainer from "../waveform/waveform_container";
 import DocumentPlayButtonContainer from "../track/document_play_button_container";
-export default (props)=> (
+export default (props)=> {s
+  return(
   <div className= "track-item">
     <div className = "track-item-cover-art-container">
       <div className = "padding-fix"></div>
@@ -19,7 +20,8 @@ export default (props)=> (
             to={`/tracks/${props.track.id}`}>{props.track.title}</Link>
         </div>
       </div>
-      <WaveformContainer id={props.track.id} samples={props.track.samples}/>
+      <WaveformContainer id={props.track.id} samples={props.track.waveform}/>
     </div>
   </div>
 );
+};

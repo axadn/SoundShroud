@@ -12,11 +12,11 @@ const mapDisplayStateToProps = (state, ownProps) => {
     track = state.entities.tracks.tracks[ownProps.trackId];
   }
   return{
-  track,
-  loading: ownProps.editing && state.loading.mainContent,
-  initial_state: {title: "", labelTitle: true, labelDescription: true,
-    description: "", file: undefined},
-  errors: state.errors.uploadParams
+    track,
+    loading: ownProps.editing && state.loading.mainContent,
+    initial_state: {title: "", labelTitle: true, labelDescription: true,
+      description: "", file: undefined},
+    errors: state.errors.uploadParams
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => {
@@ -29,8 +29,8 @@ const mapDisplayDispatchToProps = (dispatch, ownProps) => {
     };
   }
   else{
-    formAction = unprocessedData => dispatch(
-      verifyThenPostThunk(unprocessedData));
+    formAction = (unprocessedData, clearFormCallback) => dispatch(
+      verifyThenPostThunk(unprocessedData, clearFormCallback));
   }
   return {
     formAction,

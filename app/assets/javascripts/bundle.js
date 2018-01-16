@@ -1598,9 +1598,8 @@ var fetchTrackThunk = exports.fetchTrackThunk = function fetchTrackThunk(id, cal
   };
 };
 
-var verifyThenPostThunk = exports.verifyThenPostThunk = function verifyThenPostThunk(unprocessedData) {
+var verifyThenPostThunk = exports.verifyThenPostThunk = function verifyThenPostThunk(unprocessedData, clearFormCallback) {
   return function (dispatch) {
-
     var formData = new FormData();
     var trackParams = { track: {} };
     Object.keys(unprocessedData).forEach(function (key) {
@@ -1613,6 +1612,7 @@ var verifyThenPostThunk = exports.verifyThenPostThunk = function verifyThenPostT
     if (unprocessedData.imageFile) trackParams.image_filename = unprocessedData.imageFile.name;
 
     TrackAPI.verifyValidParams(trackParams).then(function (s3Info) {
+      clearFormCallback();
       var awaiter = new AudioAndImageUploadAwaiter(unprocessedData.file.size, unprocessedData.imageFile ? unprocessedData.imageFile.size : 0);
 
       trackParams.temp_filename = s3Info.audio.temp_filename;
@@ -30559,8 +30559,8 @@ var mapDisplayDispatchToProps = function mapDisplayDispatchToProps(dispatch, own
       dispatch((0, _track_actions.editTrackThunk)(data));
     };
   } else {
-    formAction = function formAction(unprocessedData) {
-      return dispatch((0, _track_actions.verifyThenPostThunk)(unprocessedData));
+    formAction = function formAction(unprocessedData, clearFormCallback) {
+      return dispatch((0, _track_actions.verifyThenPostThunk)(unprocessedData, clearFormCallback));
     };
   }
   return {
@@ -30732,6 +30732,7 @@ var TrackForm = function (_React$Component) {
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleFileChange = _this.handleFileChange.bind(_this);
     _this.handleImageChange = _this.handleImageChange.bind(_this);
+    _this.clearForm = _this.clearForm.bind(_this);
     return _this;
   }
 
@@ -30756,11 +30757,18 @@ var TrackForm = function (_React$Component) {
       this.setState({ imageFile: e.target.files[0] });
     }
   }, {
+    key: "clearForm",
+    value: function clearForm() {
+      document.querySelector(".track-form-content .image-input-container input").value = "";
+      document.querySelector("#track-upload-select-container input").value = "";
+      this.setState(this.props.initial_state);
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
       this.props.clearParamsErrors();
-      this.props.formAction(this.state);
+      this.props.formAction(this.state, this.clearForm);
     }
   }, {
     key: "render",
@@ -32220,6 +32228,7 @@ var _document_play_button_container2 = _interopRequireDefault(_document_play_but
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
+  s;
   return _react2.default.createElement(
     "div",
     { className: "track-item" },
@@ -32256,7 +32265,7 @@ exports.default = function (props) {
           )
         )
       ),
-      _react2.default.createElement(_waveform_container2.default, { id: props.track.id, samples: props.track.samples })
+      _react2.default.createElement(_waveform_container2.default, { id: props.track.id, samples: props.track.waveform })
     )
   );
 };
