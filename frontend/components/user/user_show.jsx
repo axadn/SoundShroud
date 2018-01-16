@@ -8,6 +8,8 @@ export default class UserShow extends React.Component{
   render(){
     let locationElement;
     if(this.props.loading) return null;
+
+    const display_name = this.display_name();
     if(this.props.user.location &&
       this.props.user.location.length > 0){
       locationElement = <div className="banner-info-text">
@@ -25,11 +27,12 @@ export default class UserShow extends React.Component{
             ></UpdatableImageContainer>
           <div>
             <div className="banner-info-text">
-              <a>{this.display_name()}</a>
+              <a>{display_name}</a>
             </div>
             {locationElement}
           </div>
         </div>
+        <h3>Tracks by {display_name}</h3>
         <TracksIndexContainer trackIds={this.props.user.track_ids}
          animationClassName="tracks-ease-in-right"/>
       </div>

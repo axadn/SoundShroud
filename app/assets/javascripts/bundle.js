@@ -32037,6 +32037,8 @@ var UserShow = function (_React$Component) {
     value: function render() {
       var locationElement = void 0;
       if (this.props.loading) return null;
+
+      var display_name = this.display_name();
       if (this.props.user.location && this.props.user.location.length > 0) {
         locationElement = _react2.default.createElement(
           "div",
@@ -32069,11 +32071,17 @@ var UserShow = function (_React$Component) {
               _react2.default.createElement(
                 "a",
                 null,
-                this.display_name()
+                display_name
               )
             ),
             locationElement
           )
+        ),
+        _react2.default.createElement(
+          "h3",
+          null,
+          "Tracks by ",
+          display_name
         ),
         _react2.default.createElement(_tracks_index_container2.default, { trackIds: this.props.user.track_ids,
           animationClassName: "tracks-ease-in-right" })
