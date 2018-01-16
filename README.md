@@ -7,9 +7,10 @@ Amazon web services S3 service is used for additional file storage.
 The frontend makes use of React and Redux.
 
 ## Features:
-* User Authentication
+* User authentication
 * User uploaded content
 * Continuous playback of music while navigating
 * Time domain waveforms while playing music
 * Auto-generated playlists
 * Users can comments on tracks
+* Full-text-search for tracks by title and description
