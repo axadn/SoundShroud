@@ -35471,7 +35471,7 @@ exports.default = function () {
         _react2.default.createElement(
             "button",
             { type: "submit" },
-            "search"
+            _react2.default.createElement("i", { className: "fa fa-search", "aria-hidden": "true" })
         )
     );
 };

@@ -9,6 +9,6 @@ export default ()=>{
         document.querySelector(".search-text").value = "";
     }}>
         <input type="text" className="search-text"></input>
-        <button type="submit">search</button>
+        <button type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
     </form>
 }

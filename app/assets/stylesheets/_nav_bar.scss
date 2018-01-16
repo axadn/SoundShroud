@@ -76,7 +76,8 @@
   .search-bar{
     flex-grow: 1;
     position: relative;
-
+    margin-left: 20px;
+    margin-right: 20px;
   }
   .search-bar .search-text{
     width: 100%;
@@ -88,9 +89,10 @@
     position: absolute;
     right: 0;
     bottom: 13px;
+    font-size: 18px;
     border: none;
     background-color: transparent;
-    color: white;
+    color: rgb(196, 196, 196);
   }
   .search-bar button:hover{
     cursor: pointer;
