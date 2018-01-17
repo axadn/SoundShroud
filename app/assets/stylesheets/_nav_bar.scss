@@ -5,13 +5,13 @@
   box-shadow: 0 2px 1vh 0 #000000;
 }
 .nav_bar {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    background-color: #556669;
+    background-color: #c2cdd2;
     min-height: 50px;
-    box-shadow: inset 0px 4px 4px 0px #ffffff38;
+    box-shadow: inset 0px 4px 4px 0px #ffffff8c;
   }
   .nav_link_set{
     display: flex;
@@ -41,7 +41,7 @@
   .top_nav_link.active,
   .nav_bar .drop-down-menu:active,
   .nav_bar .drop-down-menu.active{
-    background-color: #72888b;
+    background-color: white;
     color: black;
   }
   .nav_bar .drop-down-menu{
@@ -63,13 +63,13 @@
     top: 100%;
     z-index: 1100;
     width: 100%;
-    background-color: #72888b;
+    background-color: white;
     margin: 0;
   }
 
   .nav_bar .drop-down-menu li:hover{
     cursor:pointer;
-    background-color: #556669;
+    background-color: #c2cdd2;
   }
   .nav_bar .drop-down-menu ul a,
   .nav_bar .drop-down-menu ul div{
