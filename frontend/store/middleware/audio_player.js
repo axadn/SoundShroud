@@ -20,6 +20,7 @@ export default store=>next=>action=>{
             const result = next(action);
             const nextId = currentPlaylistId(store.getState());
             if(playlistId != nextId){
+                document.querySelector("audio").pause();
                 TrackAPIUtils.getS3Url(nextId).then(
                     url=>{
                         document.querySelector("audio").src = url;

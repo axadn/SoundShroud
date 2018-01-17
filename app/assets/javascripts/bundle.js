@@ -35539,6 +35539,7 @@ exports.default = function (store) {
                     var result = next(action);
                     var nextId = (0, _selectors.currentPlaylistId)(store.getState());
                     if (playlistId != nextId) {
+                        document.querySelector("audio").pause();
                         TrackAPIUtils.getS3Url(nextId).then(function (url) {
                             document.querySelector("audio").src = url;
                             document.querySelector("audio").crossOrigin = "anonymous";
