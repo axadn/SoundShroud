@@ -14,6 +14,6 @@ export const postImage = (userId, imageFile) => {
   $.ajax({method: "post", url: `/api/users/${userId}image`});
 };
 
-export const fetchReccomendedUsers = (currentUserId) => {
+export const fetchRecommendedUsers = (currentUserId) => {
   $.ajax({method: "get", url: `/api/users/recommended/${currentUserId}`});
 };

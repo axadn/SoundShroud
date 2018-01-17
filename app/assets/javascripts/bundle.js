@@ -29560,7 +29560,7 @@ var postImage = exports.postImage = function postImage(userId, imageFile) {
   $.ajax({ method: "post", url: "/api/users/" + userId + "image" });
 };
 
-var fetchReccomendedUsers = exports.fetchReccomendedUsers = function fetchReccomendedUsers(currentUserId) {
+var fetchRecommendedUsers = exports.fetchRecommendedUsers = function fetchRecommendedUsers(currentUserId) {
   $.ajax({ method: "get", url: "/api/users/recommended/" + currentUserId });
 };
 
