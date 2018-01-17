@@ -43,6 +43,14 @@ export default class TrackForm extends React.Component {
     this.props.formAction(this.state, this.clearForm);
   }
   render(){
+    if (this.props.processing){
+      return (
+      <div className="track-form-content"><h3>
+        Please wait for the current track to process before uploading another
+        </h3>
+        </div>
+      );
+    }
     let errorElements = {};
     let imageUrl = this.state.imageFile? URL.createObjectURL(this.state.imageFile) : "/assets/camera.svg";
     let imageInputElement;

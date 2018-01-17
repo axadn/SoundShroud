@@ -1,13 +1,17 @@
 @import "colors";
+.nav_bar_container{
+  flex-shrink: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 1vh 0 #000000;
+}
 .nav_bar {
     flex-wrap: wrap;
-    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     background-color: #556669;
     min-height: 50px;
-    border-bottom: 1px solid black;
+    box-shadow: inset 0px 4px 4px 0px #ffffff38;
   }
   .nav_link_set{
     display: flex;

@@ -16,7 +16,8 @@ const mapDisplayStateToProps = (state, ownProps) => {
     loading: ownProps.editing && state.loading.mainContent,
     initial_state: {title: "", labelTitle: true, labelDescription: true,
       description: "", file: undefined},
-    errors: state.errors.uploadParams
+    errors: state.errors.uploadParams,
+    processing: state.upload.active && !state.upload.processed
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => {

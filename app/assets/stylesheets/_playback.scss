@@ -1,17 +1,17 @@
 @import "colors";
 .audio-progress{
   z-index: 1000;
-  box-shadow: 0 0 16vh 8vh #000000a8;
+  box-shadow: 0 -2px 1vh 0 #000000;
 }
 #audio-controls-content{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap-reverse;
     background-color: #273233;
-  border-top: 1px solid black;
-  box-shadow: inset 0px 0px 11px 3px #ffffff24;
+    box-shadow: inset 0px 8px 10px 0px #ffffff1a
+
 }
 #audio-controls-content .controls{
   flex-shrink: 0;

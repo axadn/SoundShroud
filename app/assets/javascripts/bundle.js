@@ -14318,18 +14318,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
   return _react2.default.createElement(
     "div",
-    { className: "nav_bar" },
+    { className: "nav_bar_container" },
     _react2.default.createElement(
       "div",
-      { className: "nav_link_set" },
+      { className: "nav_bar" },
       _react2.default.createElement(
-        _reactRouterDom.NavLink,
-        { className: "top_nav_link", to: "/discover" },
-        "Discover"
-      )
-    ),
-    _react2.default.createElement(_search_bar2.default, null),
-    _react2.default.createElement(_session_buttons_container2.default, null)
+        "div",
+        { className: "nav_link_set" },
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { className: "top_nav_link", to: "/discover" },
+          "Discover"
+        )
+      ),
+      _react2.default.createElement(_search_bar2.default, null),
+      _react2.default.createElement(_session_buttons_container2.default, null)
+    )
   );
 };
 
@@ -30547,7 +30551,8 @@ var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
     loading: ownProps.editing && state.loading.mainContent,
     initial_state: { title: "", labelTitle: true, labelDescription: true,
       description: "", file: undefined },
-    errors: state.errors.uploadParams
+    errors: state.errors.uploadParams,
+    processing: state.upload.active && !state.upload.processed
   };
 };
 
@@ -30775,6 +30780,17 @@ var TrackForm = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      if (this.props.processing) {
+        return _react2.default.createElement(
+          "div",
+          { className: "track-form-content" },
+          _react2.default.createElement(
+            "h3",
+            null,
+            "Please wait for the current track to process before uploading another"
+          )
+        );
+      }
       var errorElements = {};
       var imageUrl = this.state.imageFile ? URL.createObjectURL(this.state.imageFile) : "/assets/camera.svg";
       var imageInputElement = void 0;
