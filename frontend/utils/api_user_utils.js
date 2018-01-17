@@ -15,5 +15,5 @@ export const postImage = (userId, imageFile) => {
 };
 
 export const fetchReccomendedUsers = (currentUserId) => {
-  $.ajax({method: "get", url: `/api/users/recommended`});
+  $.ajax({method: "get", url: `/api/users/recommended/${currentUserId}`});
 };

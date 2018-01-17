@@ -27,7 +27,7 @@ class Api::UsersController < ApplicationController
   end
 
   def recommended
-    @users = User.limit(25).order("RANDOM()")
+    @users = User.limit(5).order("RANDOM()")
     render :index
   end
 end
