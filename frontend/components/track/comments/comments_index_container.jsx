@@ -22,7 +22,10 @@ const mapContainerStateToProps = (state, ownProps) =>({
 });
 
 const mapDisplayStateToProps = (state, ownProps) => {
-  return{mmeded (state)
+  return{
+  loading: state.loading.comments || state.loading.users,
+  comments: state.entities.comments,
+  loggedIn: logged_in(state)
 }};
 
 const mapDisplayDispatchToProps = (dispatch, ownProps) => ({

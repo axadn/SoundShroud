@@ -30,7 +30,9 @@
     text-align: center;
     width: 80px;
     text-decoration: none;
-    color:  #252525;
+  }
+  .top_nav_link, .nav_bar .drop-down-menu{
+    color:  #353535;
   }
   
   .top_nav_link:hover,
@@ -45,15 +47,13 @@
     color: black;
   }
   .nav_bar .drop-down-menu{
-    color:  #252525;
     position: relative;
     display: flex;
     margin-right: 20px;
+    padding-left: 6px;
+    padding-right: 6px;
     justify-content: center;
     align-items: center;
-  }
-  .nav_bar .drop-down-menu > img{
-    margin-left: 5px;
   }
   .nav_bar .drop-down-menu > a{
     margin: 5px;
@@ -73,6 +73,8 @@
   }
   .nav_bar .drop-down-menu ul a,
   .nav_bar .drop-down-menu ul div{
+    padding-left: 5px;
+    padding-right: 5px;
     display: block;
     text-decoration: none;
     color: black;
