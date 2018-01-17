@@ -1,10 +1,20 @@
-.discover-page .shuffle-button{
-    margin-left: 3vw;
-}
 .discover-page h3{
     margin-left: 3vw;
+    margin-bottom: 0;
 }
 .discover-page .tracks-index{
     display: inline-block;
     max-width: 775px;
+    width: 75%;
+}
+.discover-page .shuffle-button-container{
+    z-index: 900;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 775px;
+    margin-left: 3vw;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-color: #191919;
 }

@@ -16,9 +16,11 @@ export default class Discover extends React.Component{
         <div className="discover-page">
           {landingPagePlaceholder}
           <h3>Discover New Music</h3>
-          <button className="shuffle-button" onClick={this.props.fetchPlaylist}>
-            shuffle
-          </button>
+            <div className="shuffle-button-container">
+              <button className="shuffle-button" onClick={this.props.fetchPlaylist}>
+              shuffle
+              </button>
+            </div>
           <div className="tracks-index-and-recommendations">
             <TracksIndexContainer animationClassName="tracks-ease-in-left"/>
             <UserRecommendations/>

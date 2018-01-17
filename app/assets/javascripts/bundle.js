@@ -32411,9 +32411,13 @@ var Discover = function (_React$Component) {
           "Discover New Music"
         ),
         _react2.default.createElement(
-          "button",
-          { className: "shuffle-button", onClick: this.props.fetchPlaylist },
-          "shuffle"
+          "div",
+          { className: "shuffle-button-container" },
+          _react2.default.createElement(
+            "button",
+            { className: "shuffle-button", onClick: this.props.fetchPlaylist },
+            "shuffle"
+          )
         ),
         _react2.default.createElement(
           "div",
