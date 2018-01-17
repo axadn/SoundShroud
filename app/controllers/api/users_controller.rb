@@ -25,4 +25,9 @@ class Api::UsersController < ApplicationController
       render json: {general: ["no such user"]}, status: 422
     end
   end
+
+  def recommended
+    @users = User.limit(25).order("RANDOM()")
+    render :index
+  end
 end

@@ -40,6 +40,15 @@ export const fetchUserThunk = (userId, callback) => dispatch => ((
   .then(callback)
 ));
 
+export const fetchRecommendedUsersThunk = (userId, callback) => dispatch => {
+  UserAPI.fetchRecommendedUsers(userId).then(
+    userData =>{
+      dispatch(receiveUsers(userData));
+      callback(userData);
+    }
+  );
+};
+
 export const fetchTrackCommentsUsersThunk = trackId => dispatch => (
   UsersAPI.fetchTrackCommentsUsers(trackId)
   .then(userData =>{

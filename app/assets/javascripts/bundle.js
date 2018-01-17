@@ -3020,7 +3020,7 @@ module.exports = PooledClass;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchTrackCommentsUsersThunk = exports.fetchUserThunk = exports.postUserThunk = exports.receiveUser = exports.receiveUsersLoaded = exports.receiveUsersLoading = exports.receiveUsers = exports.RECEIVE_USER = exports.RECEIVE_USERS_LOADED = exports.RECEIVE_USERS_LOADING = exports.RECEIVE_USERS = undefined;
+exports.fetchTrackCommentsUsersThunk = exports.fetchRecommendedUsersThunk = exports.fetchUserThunk = exports.postUserThunk = exports.receiveUser = exports.receiveUsersLoaded = exports.receiveUsersLoading = exports.receiveUsers = exports.RECEIVE_USER = exports.RECEIVE_USERS_LOADED = exports.RECEIVE_USERS_LOADING = exports.RECEIVE_USERS = undefined;
 
 var _api_user_utils = __webpack_require__(283);
 
@@ -3076,6 +3076,15 @@ var fetchUserThunk = exports.fetchUserThunk = function fetchUserThunk(userId, ca
     return UsersAPI.fetchUser(userId).then(function (userData) {
       return dispatch(receiveUser(userData));
     }).then(callback);
+  };
+};
+
+var fetchRecommendedUsersThunk = exports.fetchRecommendedUsersThunk = function fetchRecommendedUsersThunk(userId, callback) {
+  return function (dispatch) {
+    UserAPI.fetchRecommendedUsers(userId).then(function (userData) {
+      dispatch(receiveUsers(userData));
+      callback(userData);
+    });
   };
 };
 
@@ -29551,6 +29560,10 @@ var postImage = exports.postImage = function postImage(userId, imageFile) {
   $.ajax({ method: "post", url: "/api/users/" + userId + "image" });
 };
 
+var fetchReccomendedUsers = exports.fetchReccomendedUsers = function fetchReccomendedUsers(currentUserId) {
+  $.ajax({ method: "get", url: "/api/users/recommended" });
+};
+
 /***/ }),
 /* 284 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31220,114 +31233,9 @@ exports.default = TrackShow;
 
 /***/ }),
 /* 302 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactRedux = __webpack_require__(7);
-
-var _reactRouterDom = __webpack_require__(11);
-
-var _comment_actions = __webpack_require__(78);
-
-var _user_actions = __webpack_require__(23);
-
-var _comments_index = __webpack_require__(304);
-
-var _comments_index2 = _interopRequireDefault(_comments_index);
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _auth_modal_actions = __webpack_require__(25);
-
-var _selectors = __webpack_require__(32);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var mapContainerDispatchToProps = function mapContainerDispatchToProps(dispatch, ownProps) {
-  return {
-    fetchComments: function fetchComments() {
-      dispatch((0, _comment_actions.receiveCommentsLoading)());
-      dispatch((0, _user_actions.receiveUsersLoading)());
-      dispatch((0, _comment_actions.fetchCommentsThunk)(ownProps.trackId));
-      dispatch((0, _user_actions.fetchTrackCommentsUsersThunk)(ownProps.trackId));
-    }
-  };
-};
-
-var mapContainerStateToProps = function mapContainerStateToProps(state, ownProps) {
-  return {};
-};
-
-var mapDisplayStateToProps = function mapDisplayStateToProps(state, ownProps) {
-  return {
-    loading: state.loading.comments || state.loading.users,
-    comments: state.entities.comments,
-    loggedIn: (0, _selectors.logged_in)(state)
-  };
-};
-
-var mapDisplayDispatchToProps = function mapDisplayDispatchToProps(dispatch, ownProps) {
-  return {
-    postComment: function postComment(commentData, callBack) {
-      return dispatch((0, _comment_actions.postCommentThunk)(ownProps.trackId, commentData, callBack));
-    },
-    enableLogin: function enableLogin() {
-      return dispatch((0, _auth_modal_actions.enableLogin)());
-    }
-  };
-};
-
-var ConnectedDisplayComponent = (0, _reactRedux.connect)(mapDisplayStateToProps, mapDisplayDispatchToProps)(_comments_index2.default);
-
-var CommentsIndexContainer = function (_React$Component) {
-  _inherits(CommentsIndexContainer, _React$Component);
-
-  function CommentsIndexContainer() {
-    _classCallCheck(this, CommentsIndexContainer);
-
-    return _possibleConstructorReturn(this, (CommentsIndexContainer.__proto__ || Object.getPrototypeOf(CommentsIndexContainer)).apply(this, arguments));
-  }
-
-  _createClass(CommentsIndexContainer, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.props.fetchComments();
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(newProps) {
-      if (this.props.trackId !== newProps.trackId) {
-        this.props.fetchComments();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(ConnectedDisplayComponent, { trackId: this.props.trackId,
-        fetchComments: this.props.fetchComments });
-    }
-  }]);
-
-  return CommentsIndexContainer;
-}(_react2.default.Component);
-
-exports.default = (0, _reactRedux.connect)(mapContainerStateToProps, mapContainerDispatchToProps)(CommentsIndexContainer);
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected { (26:0)\n\n\u001b[0m \u001b[90m 24 | \u001b[39m\u001b[36mconst\u001b[39m mapDisplayStateToProps \u001b[33m=\u001b[39m (state\u001b[33m,\u001b[39m ownProps) \u001b[33m=>\u001b[39m {\n \u001b[90m 25 | \u001b[39m  \u001b[36mreturn\u001b[39m{mmeded (state)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 | \u001b[39m}}\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 27 | \u001b[39m\n \u001b[90m 28 | \u001b[39m\u001b[36mconst\u001b[39m mapDisplayDispatchToProps \u001b[33m=\u001b[39m (dispatch\u001b[33m,\u001b[39m ownProps) \u001b[33m=>\u001b[39m ({\n \u001b[90m 29 | \u001b[39m  postComment\u001b[33m:\u001b[39m (commentData\u001b[33m,\u001b[39m callBack) \u001b[33m=>\u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 303 */
@@ -31355,200 +31263,9 @@ var postComment = exports.postComment = function postComment(track_id, comment) 
 };
 
 /***/ }),
-/* 304 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _comment_item_container = __webpack_require__(305);
-
-var _comment_item_container2 = _interopRequireDefault(_comment_item_container);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CommentsIndex = function (_React$Component) {
-  _inherits(CommentsIndex, _React$Component);
-
-  function CommentsIndex(props) {
-    _classCallCheck(this, CommentsIndex);
-
-    var _this = _possibleConstructorReturn(this, (CommentsIndex.__proto__ || Object.getPrototypeOf(CommentsIndex)).call(this, props));
-
-    _this.state = { labelInput: true,
-      body: "", savedWidth: 0,
-      savedHeight: 0 };
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(CommentsIndex, [{
-    key: "handleChange",
-    value: function handleChange(e) {
-      this.setState({ body: e.target.value });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      if (!this.props.loggedIn) return;
-      var element = document.querySelector(".commentsIndex");
-      this.setState({ body: "", labelInput: true, savedWidth: element.offsetWidth,
-        savedHeight: element.offsetHeight });
-      this.props.postComment(this.state, this.props.fetchComments);
-    }
-  }, {
-    key: "handleClick",
-    value: function handleClick(e) {
-      e.preventDefault();
-      if (!this.props.loggedIn) {
-        this.props.enableLogin();
-        e.currentTarget.blur();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var label = this.props.loggedIn ? "Add a Comment" : "Please log in to add a comment";
-      if (this.props.loading) {
-        return _react2.default.createElement("div", { style: {
-            width: this.state.savedWidth,
-            height: this.state.savedHeight
-          } });
-      }
-      var commentsItems = this.props.comments.map(function (comment) {
-        return _react2.default.createElement(
-          "li",
-          { key: "comment" + comment.id },
-          _react2.default.createElement(_comment_item_container2.default, { comment: comment })
-        );
-      });
-      return _react2.default.createElement(
-        "div",
-        { className: "commentsIndex" },
-        _react2.default.createElement(
-          "form",
-          { id: "commentForm", onSubmit: this.handleSubmit },
-          _react2.default.createElement("input", { type: "text",
-            onChange: this.handleChange,
-            onClick: this.handleClick,
-            onBlur: function onBlur() {
-              return _this2.setState({ labelInput: _this2.state.body.length === 0 });
-            },
-            onFocus: function onFocus() {
-              return _this2.setState({ labelInput: false });
-            },
-            value: this.state.labelInput ? label : this.state.body })
-        ),
-        _react2.default.createElement(
-          "ul",
-          null,
-          commentsItems
-        )
-      );
-    }
-  }]);
-
-  return CommentsIndex;
-}(_react2.default.Component);
-
-exports.default = CommentsIndex;
-;
-
-/***/ }),
-/* 305 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(7);
-
-var _comment_item = __webpack_require__(306);
-
-var _comment_item2 = _interopRequireDefault(_comment_item);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {
-    user: state.entities.users[ownProps.comment.user_id]
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(_comment_item2.default);
-
-/***/ }),
-/* 306 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _route_utils = __webpack_require__(77);
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "comment_item" },
-    _react2.default.createElement("img", { className: "profile_thumbnail", onClick: (0, _route_utils.redirectToUser)(props.user.id),
-      src: props.user.image_url }),
-    _react2.default.createElement(
-      "div",
-      { className: "comment_body_and_info" },
-      _react2.default.createElement(
-        "div",
-        { className: "comment_info" },
-        _react2.default.createElement(
-          "div",
-          { className: "username-link", onClick: (0, _route_utils.redirectToUser)(props.user.id) },
-          "" + (props.user.display_name ? props.user.display_name : props.user.username)
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "comment_body" },
-        props.comment.body
-      )
-    )
-  );
-};
-
-/***/ }),
+/* 304 */,
+/* 305 */,
+/* 306 */,
 /* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 

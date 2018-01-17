@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post '/api/tracks/process', to: 'api/tracks#process_track'
   get 'api/tracks/:id/status', to: 'api/tracks#audio_process_status'
   get 'api/search', to: 'api/search#index'
+  get 'api/users/recommended', to: 'api/users#recommended'
   get '/', to: 'root#show'
 
 end
