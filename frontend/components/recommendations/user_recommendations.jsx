@@ -1,5 +1,6 @@
 import React from "react";
 import * as UsersAPI from "../../utils/api_user_utils";
+import UserRecommendationItem from "./user_recommendation_item";
 
 export default class UserRecommendations extends React.Component{
     constructor(props){
@@ -9,26 +10,24 @@ export default class UserRecommendations extends React.Component{
     }
 
     componentDidMount(){
-       UsersAPI.fetchRecommendedUsers.then(
+       UsersAPI.fetchRecommendedUsers().then(
            userData=>this.setState({loading: false, users: userData}));
     }
-    componentWillRecieveProps(newProps){
+    componentWillReceiveProps(newProps){
         
     }
     render(){
-        let userList;
         if(this.state.loading){
-            userListList = "";
+            return <div className="user-recommendations"/>
         }
-        else{
-            userList = this.state.users.map(user =>{
-                <li key={`userRecommendation${user.id}`}>
-                    {user.username}
-                </li>
-            });
-        }
+        const userList = Object.keys(this.state.users).map(key =>
+            <li key={`userRecommendation${this.state.users[key].id}`}>
+                <UserRecommendationItem user={this.state.users[key]}/>
+            </li>
+        );
         
-        return <div className="user-recommendations">
+        return <div className="user-recommendations recommendations">
+            <h4 className="recommendation-heading">Who to follow</h4>
             <ul>
                 {userList}
             </ul>

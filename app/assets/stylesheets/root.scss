@@ -191,7 +191,7 @@ button {
 
 .main_content{
   flex-grow: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
   display: flex;

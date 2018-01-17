@@ -14272,7 +14272,7 @@ var TracksIndex = function (_React$Component) {
   _createClass(TracksIndex, [{
     key: "render",
     value: function render() {
-      if (this.props.loading) return null;
+      if (this.props.loading) return _react2.default.createElement("div", { className: "tracks-index" });
       var trackItems = this.props.tracks.map(function (track) {
         return _react2.default.createElement(
           "li",
@@ -29561,7 +29561,7 @@ var postImage = exports.postImage = function postImage(userId, imageFile) {
 };
 
 var fetchRecommendedUsers = exports.fetchRecommendedUsers = function fetchRecommendedUsers(currentUserId) {
-  $.ajax({ method: "get", url: "/api/users/recommended/" + currentUserId });
+  return $.ajax({ method: "get", url: "/api/users/recommended/" + currentUserId });
 };
 
 /***/ }),
@@ -32371,6 +32371,10 @@ var _landing_page_container = __webpack_require__(318);
 
 var _landing_page_container2 = _interopRequireDefault(_landing_page_container);
 
+var _user_recommendations = __webpack_require__(369);
+
+var _user_recommendations2 = _interopRequireDefault(_user_recommendations);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32411,7 +32415,12 @@ var Discover = function (_React$Component) {
           { className: "shuffle-button", onClick: this.props.fetchPlaylist },
           "shuffle"
         ),
-        _react2.default.createElement(_tracks_index_container2.default, { animationClassName: "tracks-ease-in-left" })
+        _react2.default.createElement(
+          "div",
+          { className: "tracks-index-and-recommendations" },
+          _react2.default.createElement(_tracks_index_container2.default, { animationClassName: "tracks-ease-in-left" }),
+          _react2.default.createElement(_user_recommendations2.default, null)
+        )
       );
     }
   }]);
@@ -35583,6 +35592,138 @@ exports.default = function (props) {
       )
     )
   );
+};
+
+/***/ }),
+/* 367 */,
+/* 368 */,
+/* 369 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _api_user_utils = __webpack_require__(283);
+
+var UsersAPI = _interopRequireWildcard(_api_user_utils);
+
+var _user_recommendation_item = __webpack_require__(370);
+
+var _user_recommendation_item2 = _interopRequireDefault(_user_recommendation_item);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserRecommendations = function (_React$Component) {
+    _inherits(UserRecommendations, _React$Component);
+
+    function UserRecommendations(props) {
+        _classCallCheck(this, UserRecommendations);
+
+        var _this = _possibleConstructorReturn(this, (UserRecommendations.__proto__ || Object.getPrototypeOf(UserRecommendations)).call(this, props));
+
+        _this.state = { loading: true,
+            users: false };
+        return _this;
+    }
+
+    _createClass(UserRecommendations, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            UsersAPI.fetchRecommendedUsers().then(function (userData) {
+                return _this2.setState({ loading: false, users: userData });
+            });
+        }
+    }, {
+        key: "componentWillReceiveProps",
+        value: function componentWillReceiveProps(newProps) {}
+    }, {
+        key: "render",
+        value: function render() {
+            var _this3 = this;
+
+            if (this.state.loading) {
+                return _react2.default.createElement("div", { className: "user-recommendations" });
+            }
+            var userList = Object.keys(this.state.users).map(function (key) {
+                return _react2.default.createElement(
+                    "li",
+                    { key: "userRecommendation" + _this3.state.users[key].id },
+                    _react2.default.createElement(_user_recommendation_item2.default, { user: _this3.state.users[key] })
+                );
+            });
+
+            return _react2.default.createElement(
+                "div",
+                { className: "user-recommendations recommendations" },
+                _react2.default.createElement(
+                    "h4",
+                    { className: "recommendation-heading" },
+                    "Who to follow"
+                ),
+                _react2.default.createElement(
+                    "ul",
+                    null,
+                    userList
+                )
+            );
+        }
+    }]);
+
+    return UserRecommendations;
+}(_react2.default.Component);
+
+exports.default = UserRecommendations;
+
+/***/ }),
+/* 370 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+    var name = props.user.display_name || props.user.username;
+
+    return _react2.default.createElement(
+        "div",
+        { className: "user-recommendation-item" },
+        _react2.default.createElement("img", { className: "small", src: props.user.image_url }),
+        _react2.default.createElement(
+            "a",
+            null,
+            name
+        )
+    );
 };
 
 /***/ })

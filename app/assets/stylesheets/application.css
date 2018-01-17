@@ -16,6 +16,7 @@
  *= require _nav_bar
  *= require _track\ item
  *= require _user_item
+ *= require _recommendations
  *= require _comments
  *= require _playback
  *= require _session
