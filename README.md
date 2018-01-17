@@ -15,3 +15,7 @@ The frontend makes use of React and Redux.
 * Users can comments on tracks
 * Full-text-search for tracks by title and description, users by username and display name
 * Audio is converted to mp3 for decreased storage need and faster streaming (at the cost of upload processing time)
+
+## Future Features:
+* Recommended Artists
+* Following
