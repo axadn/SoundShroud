@@ -180,6 +180,7 @@ button {
   border-radius: 50%;
 }
 .modal-overlay{
+  z-index: 1500;
   position: absolute;
     top: 0;
     left: 0;
