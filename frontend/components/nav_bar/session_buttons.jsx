@@ -34,7 +34,7 @@ export default class SessionButtons extends React.Component{
         <div className={`drop-down-menu ${active}`}
           ref="dropdown"
           onClick = {this.handleClick}>
-          <img className="small" src={this.props.current_user.image_url}></img>
+          <img className="small user-img" src={this.props.current_user.image_url}></img>
           <a>{this.props.current_user.username}</a>
           <i className="fa fa-caret-down" aria-hidden="true"></i>
           <ul className={`${hidden}`}>

@@ -32704,7 +32704,7 @@ var SessionButtons = function (_React$Component) {
           { className: "drop-down-menu " + active,
             ref: "dropdown",
             onClick: this.handleClick },
-          _react2.default.createElement("img", { className: "small", src: this.props.current_user.image_url }),
+          _react2.default.createElement("img", { className: "small user-img", src: this.props.current_user.image_url }),
           _react2.default.createElement(
             "a",
             null,
@@ -35678,6 +35678,7 @@ var UserRecommendations = function (_React$Component) {
                 _react2.default.createElement(
                     "h4",
                     { className: "recommendation-heading" },
+                    _react2.default.createElement("i", { className: "fa fa-users", "aria-hidden": "true" }),
                     "Who to follow"
                 ),
                 _react2.default.createElement(
@@ -35709,6 +35710,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _route_utils = __webpack_require__(77);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
@@ -35717,10 +35720,12 @@ exports.default = function (props) {
     return _react2.default.createElement(
         "div",
         { className: "user-recommendation-item" },
-        _react2.default.createElement("img", { className: "small", src: props.user.image_url }),
+        _react2.default.createElement("img", { className: "small user-img",
+            onClick: (0, _route_utils.redirectToUser)(props.user.id),
+            src: props.user.image_url }),
         _react2.default.createElement(
             "a",
-            null,
+            { className: "username-link", onClick: (0, _route_utils.redirectToUser)(props.user.id) },
             name
         )
     );

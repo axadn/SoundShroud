@@ -6,11 +6,28 @@
     position: sticky;
     top: 20px;
 }
+.recommendations .username-link{
+    color: #dadada;
+}
+.recommendations .username-link:hover{
+    color: white;
+}
 .recommendations ul{
     margin-top: 5px;
 }
 .recommendation-heading{
     color: #858585;
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.user-recommendation-item a{
+    vertical-align: top;
+    margin-left: 5px;
+}
+.user-recommendation-item img:hover{
+    cursor: pointer;
+}
+.recommendations i{
+    margin-right: 5px;
 }

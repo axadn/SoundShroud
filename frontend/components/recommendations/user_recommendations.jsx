@@ -27,7 +27,11 @@ export default class UserRecommendations extends React.Component{
         );
         
         return <div className="user-recommendations recommendations">
-            <h4 className="recommendation-heading">Who to follow</h4>
+            
+            <h4 className="recommendation-heading">
+            <i className="fa fa-users" aria-hidden="true"></i>
+                Who to follow
+            </h4>
             <ul>
                 {userList}
             </ul>
