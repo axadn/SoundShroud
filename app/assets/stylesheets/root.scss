@@ -253,7 +253,7 @@ form textarea{
   animation-name: fadeFromTransparent;
   animation-duration: 3s;
   border-radius: 4px;
-  background-color: rgba(40,40,40,0.7);
+  background-color: rgba(40, 40, 40, 0.897);
   border-top: 2px solid rgb(10,10,10);
   border-left: 3px solid rgb(30,40,40);
   border-right: 3px solid rgb(30,40,40);
@@ -269,10 +269,23 @@ input.empty{
   color: rgb(140,140,140);
 }
 
+.nav_bar ::placeholder {
+  color: #a2a2a2;
+}
+
 form input[type="text"]:focus,
 form input[type="password"]:focus,
 form textarea:focus{
-  background-color: $mine-shaft;
+  background-color: rgba(40, 40, 40, 0.952);
+  color: white;
+  outline: none;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form textarea:focus{
+  background-color: rgba(40, 40, 40, 0.952);
+  color: white;
   outline: none;
 }
 

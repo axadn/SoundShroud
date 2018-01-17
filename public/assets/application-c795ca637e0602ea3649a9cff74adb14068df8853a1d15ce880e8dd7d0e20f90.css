@@ -1,0 +1,1587 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+
+/* line 7, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#root {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 14, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.hidden {
+  display: none;
+}
+
+/* line 17, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 21, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.discover-page {
+  width: 100%;
+}
+
+/* line 24, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.tracks-index {
+  width: 75%;
+}
+
+/* line 27, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+body > svg {
+  width: 0px;
+  height: 0px;
+}
+
+/* line 31, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.floater1 {
+  animation-name: fadeFromTransparent;
+  animation-duration: 1.2s;
+  position: absolute;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* line 39, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.cover-art {
+  border: 1px solid black;
+  box-shadow: 2vw 2vw 5vw black;
+}
+
+/* line 44, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+h1 {
+  font-size: 65px;
+  text-align: center;
+}
+
+/* line 48, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+h2 {
+  font-size: 45px;
+  text-align: center;
+}
+
+/* line 52, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+/* line 60, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.static_img_page > img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  filter: url(#blue_filter);
+}
+
+/* line 68, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button, .logout_button {
+  white-space: nowrap;
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  animation-name: fadeFromTransparent;
+  border-radius: 2px;
+  background-color: #35617b;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* line 90, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button:hover {
+  background-color: #2d7387;
+  cursor: pointer;
+}
+
+/* line 94, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.blue_button:active
+.logout_button:active {
+  background-color: #35617b;
+  border-top: 1px solid #0a0a0a;
+  border-left: 1px solid #1e2828;
+  border-right: 1px solid #1e2828;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+/* line 103, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.logout_button:hover {
+  cursor: pointer;
+  background-color: #47a4b4;
+}
+
+/* line 107, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.logout_button {
+  background-color: #4b8aaf;
+  font-size: 20px;
+}
+
+/* line 112, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.play_bar {
+  flex-shrink: 0;
+  background-color: #737577;
+  height: 100px;
+}
+
+/* line 117, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+img.large {
+  width: 330px;
+  height: 330px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* line 123, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+img.medium {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* line 129, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+img.medium-large {
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* line 135, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+img.small {
+  width: 37px;
+  height: 37px;
+}
+
+/* line 140, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.profile_thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+/* line 144, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.profile_thumbnail:hover {
+  cursor: pointer;
+}
+
+/* line 147, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.username-link {
+  text-decoration: none;
+  color: #858585;
+  font-size: 14px;
+}
+
+/* line 152, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.username-link:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* line 156, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* line 160, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.app {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Metrophobic', sans-serif;
+  margin: auto;
+  background-color: #191919;
+  color: white;
+  max-width: 1250px;
+}
+
+/* line 169, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+button {
+  font-family: 'Metrophobic', sans-serif;
+}
+
+/* line 173, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.modal-hidden {
+  display: flex;
+  flex-direction: column;
+  height: 1vh;
+  flex-grow: 1;
+}
+
+/* line 179, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.user-img {
+  border-radius: 50%;
+}
+
+/* line 182, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.modal-overlay {
+  z-index: 1500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: rgba(19, 18, 18, 0.72);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 196, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.main_content {
+  flex-grow: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes fadeFromTransparent {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: default;
+  }
+  from {
+    color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    color: default;
+    border-left-color: default;
+    border-right-color: default;
+    border-top-color: default;
+    border-bottom-color: default;
+    background-color: default;
+  }
+}
+/* line 224, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+form > div {
+  position: relative;
+}
+
+/* line 230, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.red_button {
+  background-color: red;
+  box-sizing: border-box;
+  outline: none;
+  animation-name: fadeFromTransparent;
+  border-radius: 6px;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* line 249, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"],
+form input[type="password"],
+form textarea {
+  outline: none;
+  animation-name: fadeFromTransparent;
+  animation-duration: 3s;
+  border-radius: 4px;
+  background-color: rgba(40, 40, 40, 0.897);
+  border-top: 2px solid #0a0a0a;
+  border-left: 3px solid #1e2828;
+  border-right: 3px solid #1e2828;
+  border-bottom: 3px solid #2d2d2d;
+  color: #d5d7d9;
+}
+
+/* line 263, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"],
+form input[type="password"] {
+  height: 40px;
+}
+
+/* line 268, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+input.empty {
+  color: #8c8c8c;
+}
+
+/* line 272, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.nav_bar ::placeholder {
+  color: #a2a2a2;
+}
+
+/* line 276, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+  background-color: rgba(40, 40, 40, 0.952);
+  color: white;
+  outline: none;
+}
+
+/* line 284, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+  background-color: rgba(40, 40, 40, 0.952);
+  color: white;
+  outline: none;
+}
+
+/* line 292, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.errors {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 100%;
+}
+
+/* line 299, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.errors > div {
+  background-color: #9b000e;
+  color: white;
+  padding: 10px;
+  font-size: 12px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  width: 120px;
+}
+
+/* line 308, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.errors > svg {
+  flex-shrink: 0;
+  display: inline-block;
+  fill: #9b000e;
+}
+
+/* line 313, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.session_submit_buttons {
+  margin-left: 8px;
+  margin-right: 8px;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+/* line 322, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.track_show_content {
+  width: 100%;
+}
+
+/* line 325, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.user-show-content {
+  width: 100%;
+}
+
+/* line 328, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.banner {
+  padding: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+/* line 335, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.banner > div {
+  margin-right: 35px;
+}
+
+/* line 338, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.banner > div > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* line 342, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.banner-info-text {
+  margin: 20px;
+}
+
+/* line 345, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.banner-info-text > a {
+  padding: 5px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* line 351, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.upload_error {
+  color: red;
+}
+
+/* line 355, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress {
+  align-items: center;
+  background-color: #3f3f3f;
+  padding: 5px;
+  display: flex;
+  height: 35px;
+  flex-shrink: 0;
+  justify-content: space-around;
+}
+
+/* line 364, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button:hover {
+  cursor: pointer;
+}
+
+/* line 367, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button.large {
+  width: 100px;
+  height: 100px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* line 373, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button.small {
+  width: 50px;
+  height: 50px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* line 379, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+.document-play-button img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 383, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:first-child {
+  width: 200px;
+  font-size: 12px;
+}
+
+/* line 388, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:first-child > a {
+  margin-right: 15px;
+}
+
+/* line 392, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress button {
+  padding: 2px;
+  width: 28px;
+  height: 20px;
+  font-size: 10px;
+}
+
+/* line 399, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#progress_bar {
+  width: 300px;
+  height: 4px;
+}
+
+/* line 404, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+#upload_progress > div:last-child {
+  width: 200px;
+}
+
+/* line 408, /home/axadn/SoundShroud/app/assets/stylesheets/root.scss */
+textarea {
+  resize: none;
+}
+/* line 2, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar_container {
+  flex-shrink: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 1vh 0 #000000;
+}
+
+/* line 7, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: #c2cdd2;
+  min-height: 50px;
+  box-shadow: inset 0px 4px 4px 0px #ffffff8c;
+}
+
+/* line 16, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_link_set {
+  display: flex;
+  align-items: stretch;
+}
+
+/* line 21, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_link_set > * {
+  margin-right: 10px;
+}
+
+/* line 25, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.top_nav_link {
+  line-height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  height: 100%;
+  text-align: center;
+  width: 80px;
+  text-decoration: none;
+}
+
+/* line 34, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.top_nav_link, .nav_bar .drop-down-menu {
+  color: #353535;
+}
+
+/* line 38, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.top_nav_link:hover,
+.nav_bar .drop-down-menu:hover {
+  color: black;
+  cursor: pointer;
+}
+
+/* line 43, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.top_nav_link.active,
+.nav_bar .drop-down-menu:active,
+.nav_bar .drop-down-menu.active {
+  background-color: white;
+  color: black;
+}
+
+/* line 49, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu {
+  position: relative;
+  display: flex;
+  margin-right: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 58, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu > a {
+  margin: 7px;
+}
+
+/* line 61, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu ul {
+  position: absolute;
+  top: 100%;
+  z-index: 1200;
+  width: 100%;
+  background-color: white;
+  margin: 0;
+}
+
+/* line 70, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu li:hover {
+  cursor: pointer;
+  background-color: #c2cdd2;
+}
+
+/* line 74, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu ul a,
+.nav_bar .drop-down-menu ul div {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+/* line 82, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu li {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+/* line 86, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.nav_bar .drop-down-menu i {
+  margin-right: 5px;
+}
+
+/* line 89, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.search-bar {
+  flex-grow: 1;
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* line 95, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.search-bar .search-text {
+  width: 100%;
+  height: 57%;
+  margin-top: 12px;
+  padding-left: 8px;
+  padding-right: 25px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+/* line 104, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.search-bar button {
+  position: absolute;
+  right: 0;
+  bottom: 13px;
+  font-size: 18px;
+  border: none;
+  background-color: transparent;
+  color: #c4c4c4;
+  outline: none;
+}
+
+/* line 114, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.search-bar button:focus {
+  outline: none;
+}
+
+/* line 117, /home/axadn/SoundShroud/app/assets/stylesheets/_nav_bar.scss */
+.search-bar button:hover {
+  cursor: pointer;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item, .user-item {
+  display: flex;
+  margin-bottom: 40px;
+  max-width: 650px;
+  max-height: 164px;
+  height: 20vw;
+}
+
+/* line 8, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .play-button-and-info {
+  display: flex;
+}
+
+/* line 11, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .info, .user-item .info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 15, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item img:first-of-type:hover,
+.user-item img:first-of-type:hover {
+  cursor: pointer;
+}
+
+/* line 19, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item a,
+.user-item a {
+  width: 0;
+  white-space: nowrap;
+}
+
+/* line 24, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .title-link {
+  font-size: 18px;
+  color: #c8c8c8;
+  text-decoration: none;
+}
+
+/* line 30, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .title-link:hover {
+  color: white;
+}
+
+/* line 33, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item-cover-art-container {
+  flex-grow: 0.8;
+  position: relative;
+  max-width: 180px;
+  height: fit-content;
+}
+
+/* line 39, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.padding-fix {
+  padding-top: 100%;
+  height: 0;
+}
+
+/* line 43, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item img.medium,
+.user-item img.medium {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* line 52, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.user-item img.medium {
+  border-radius: 50%;
+}
+
+/* line 57, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.track-item .info,
+.user-item .info {
+  margin-left: 10px;
+}
+
+/* line 62, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.play-info-and-waveform,
+.user-item .info {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 40px;
+  width: 12vw;
+  background-color: #232323;
+  box-shadow: 0 0 21px 8px #232323;
+}
+
+/* line 74, /home/axadn/SoundShroud/app/assets/stylesheets/_track item.scss */
+.waveform-canvas {
+  max-width: 600px;
+  max-height: 50%;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_user_item.scss */
+.user-item a.username-link {
+  font-size: 18px;
+  width: fit-content;
+  padding: 5px;
+  background-color: black;
+}
+
+/* line 7, /home/axadn/SoundShroud/app/assets/stylesheets/_user_item.scss */
+.user-item .info {
+  margin-left: 40px;
+  padding-top: 20px;
+  flex-grow: 1;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendations {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+  margin-top: 5px;
+  position: sticky;
+  top: 20px;
+  z-index: 950;
+}
+
+/* line 10, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendations .username-link {
+  color: #dadada;
+}
+
+/* line 13, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendations .username-link:hover {
+  color: white;
+}
+
+/* line 16, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendations ul {
+  margin-top: 5px;
+}
+
+/* line 19, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendation-heading {
+  color: #858585;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* line 25, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.user-recommendation-item {
+  margin-bottom: 3px;
+}
+
+/* line 29, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.user-recommendation-item a {
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+/* line 33, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.user-recommendation-item img:hover {
+  cursor: pointer;
+}
+
+/* line 36, /home/axadn/SoundShroud/app/assets/stylesheets/_recommendations.scss */
+.recommendations i {
+  margin-right: 5px;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+#description_and_comments {
+  flex-grow: 1;
+  margin-left: 8%;
+  margin-right: 40px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* line 9, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_item .profile_thumbnail {
+  display: inline-block;
+}
+
+/* line 12, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_body_and_info {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+/* line 16, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_item {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* line 23, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+#commentForm {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+/* line 30, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+#commentForm input {
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
+
+/* line 36, /home/axadn/SoundShroud/app/assets/stylesheets/_comments.scss */
+.comment_body {
+  width: 100%;
+  word-break: break-all;
+}
+/* line 2, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.audio-progress {
+  z-index: 1000;
+  box-shadow: 0 -1px 1vh 0 #000000;
+}
+
+/* line 6, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-controls-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  box-shadow: inset 0px 6px 10px 0px #ffffff1a;
+}
+
+/* line 15, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-controls-content .controls {
+  flex-shrink: 0;
+  padding: 20px;
+}
+
+/* line 19, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-controls-content .controls > div {
+  display: inline-block;
+  width: 45px;
+  margin-left: 15px;
+  margin-right: 15px;
+  position: relative;
+}
+
+/* line 26, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-controls-content .controls > div > svg {
+  position: absolute;
+  bottom: -17px;
+}
+
+/* line 31, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-controls-content .controls > div > svg:hover {
+  width: 48px;
+  cursor: pointer;
+}
+
+/* line 35, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-progress {
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* line 41, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-seek-container {
+  flex-grow: 1;
+  display: flex;
+  height: 70px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* line 51, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-seek-container.active:hover {
+  cursor: pointer;
+}
+
+/* line 54, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-duration, #audio-current-time {
+  margin-left: 10px;
+  color: #4a4a4a;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+/* line 61, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-current-time.active {
+  color: #0c70ae;
+}
+
+/* line 64, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-duration.active {
+  color: white;
+}
+
+/* line 67, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+#audio-seek-canvas {
+  width: 100%;
+  height: 4px;
+  border-top: 1px solid #191919;
+}
+
+/* line 73, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* line 78, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info .info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* line 85, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info img:hover {
+  cursor: pointer;
+}
+
+/* line 89, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info .username-link {
+  white-space: nowrap;
+  font-size: 12px;
+  color: #c8c8c8;
+  text-decoration: none;
+}
+
+/* line 95, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info .username-link:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* line 100, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info .title-link {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #c8c8c8;
+  text-decoration: none;
+}
+
+/* line 106, /home/axadn/SoundShroud/app/assets/stylesheets/_playback.scss */
+.playback-track-info .title-link:hover {
+  color: white;
+  cursor: pointer;
+}
+@keyframes easeInModal {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+/* line 15, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal {
+  animation-name: easeInModal;
+  animation-duration: 0.5s;
+  width: 450px;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  /* line 23, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+  .auth-modal {
+    width: 220px;
+  }
+}
+/* line 28, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal input {
+  width: 100%;
+  font-size: 16px;
+}
+
+/* line 32, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal {
+  position: relative;
+  background-color: black;
+  border: none;
+  z-index: 2000;
+}
+
+/* line 38, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal:focus {
+  outline: none;
+}
+
+/* line 41, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal-exit {
+  position: relative;
+  left: 90%;
+  width: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  color: white;
+}
+
+/* line 49, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal-exit:hover {
+  cursor: pointer;
+}
+
+/* line 52, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal input[type="text"],
+.auth-modal input[type="password"],
+.auth-modal input[type="text"]:focus,
+.auth-modal input[type="password"]:focus {
+  padding-left: 10px;
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+
+/* line 60, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal form > * {
+  display: block;
+  height: 40px;
+  margin: 1em 0;
+  width: 100%;
+}
+
+/* line 66, /home/axadn/SoundShroud/app/assets/stylesheets/_session.scss */
+.auth-modal .errors {
+  display: flex;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+.tracks-index,
+.search-results-list {
+  position: relative;
+  margin-left: 3vw;
+}
+
+@media (max-width: 600px) {
+  /* line 7, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+  .tracks-index,
+  .search-results-list {
+    width: 90%;
+    max-height: 24vw;
+  }
+
+  /* line 12, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+  .track-item,
+  .search-results-list {
+    height: 27vw;
+  }
+
+  /* line 16, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+  .track-item a.title-link {
+    font-size: 16px;
+  }
+
+  /* line 19, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+  .play-info-and-waveform,
+  .user-item .info {
+    margin-left: 16px;
+  }
+}
+@keyframes tracks-ease-in-left {
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0;
+  }
+}
+@keyframes tracks-ease-in-right {
+  from {
+    left: 100vw;
+  }
+  to {
+    left: 0;
+  }
+}
+/* line 43, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+.tracks-ease-in-left {
+  animation-name: tracks-ease-in-left;
+  animation-duration: 0.5s;
+}
+
+/* line 47, /home/axadn/SoundShroud/app/assets/stylesheets/_tracks index.scss */
+.tracks-ease-in-right {
+  animation-name: tracks-ease-in-right;
+  animation-duration: 0.5s;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#show_page_waveform_container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: auto;
+}
+
+/* line 8, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#show_page_waveform_container canvas {
+  max-width: 500px;
+}
+
+/* line 11, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_left_side {
+  margin-top: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 17, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_right_side {
+  display: flex;
+}
+
+/* line 20, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_right_side .image-input-container {
+  margin-right: 0;
+}
+
+/* line 23, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.track_show_content .waveform-canvas {
+  width: 100%;
+}
+
+/* line 26, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.artist_and_play_button {
+  display: flex;
+}
+
+/* line 29, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.document-play-button {
+  width: 100px;
+  height: 100px;
+}
+
+/* line 33, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#artist_and_comments {
+  display: flex;
+}
+
+/* line 36, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#artist_and_comments > div:first-child {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* line 40, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.waveform {
+  max-width: 950px;
+  min-width: 200px;
+  height: 200px;
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* line 48, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.track_show_content .rule {
+  margin-left: 40px;
+  margin-right: 40px;
+  height: 2px;
+  background-color: #0f0f0f;
+  border-top: 2px solid #232323;
+}
+
+/* line 55, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.banner-info-text {
+  white-space: nowrap;
+}
+
+/* line 58, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_banner_left_side .banner-info-text:last-of-type {
+  font-size: 24px;
+}
+
+/* line 61, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info {
+  text-align: center;
+  font-size: 14px;
+  width: 150px;
+  height: 200px;
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  float: left;
+}
+
+/* line 71, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info a:hover {
+  cursor: pointer;
+}
+
+/* line 74, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info img {
+  width: 150px;
+  height: 150px;
+}
+
+/* line 78, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+.song_show_artist_info img:hover {
+  cursor: pointer;
+}
+
+/* line 82, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options {
+  margin-left: 20px;
+  margin-right: -20px;
+}
+
+/* line 86, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options li {
+  padding: 5px;
+}
+
+/* line 89, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_options a,
+#track_show_options button {
+  width: 100%;
+}
+
+/* line 93, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_show_lower_half {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+/* line 101, /home/axadn/SoundShroud/app/assets/stylesheets/_track show.scss */
+#track_description {
+  word-break: break-all;
+  display: inline-block;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track-form-content {
+  width: 100%;
+  height: 100%;
+  margin-top: 11%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 10, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track-form-content h3 {
+  text-align: center;
+}
+
+/* line 13, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* line 19, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form .blue_button {
+  width: 100%;
+  height: 40px;
+}
+
+/* line 24, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form > div {
+  padding: 10px;
+  width: 80%;
+}
+
+/* line 28, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form input[type="text"],
+.track_form textarea {
+  width: 100%;
+}
+
+/* line 32, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form input[type="text"] {
+  font-size: 22px;
+}
+
+/* line 35, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form textarea {
+  font-size: 14px;
+}
+
+/* line 38, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* line 43, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form textarea {
+  height: 145px;
+}
+
+/* line 46, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.track_form .file-input-container > div {
+  width: 100%;
+}
+
+/* line 49, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.floater2 {
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+/* line 57, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.image-input-container {
+  display: inline-block;
+  position: relative;
+  margin-right: 40px;
+}
+
+/* line 62, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+.image-input-container button {
+  position: absolute;
+  bottom: 6%;
+  right: 32%;
+}
+
+/* line 67, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select-container {
+  display: relative;
+}
+
+/* line 70, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select {
+  height: 40px;
+  box-shadow: 5px 5px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* line 81, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select:active {
+  left: 5px;
+  top: 5px;
+  box-shadow: none;
+}
+
+/* line 86, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select:hover {
+  cursor: pointer;
+}
+
+/* line 89, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select {
+  box-shadow: 5px 5px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+/* line 98, /home/axadn/SoundShroud/app/assets/stylesheets/_track form.scss */
+#track-upload-select img {
+  width: 80px;
+  height: 80px;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show .banner-info-text:first-of-type {
+  font-size: 24px;
+}
+
+/* line 4, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show {
+  margin: 35px;
+  background-color: rgba(100, 100, 100, 0.05);
+}
+
+/* line 8, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show img:first-of-type {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 14, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show .image-input-container {
+  height: 25vw;
+  width: 25vw;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+/* line 20, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+.user-show-content h3 {
+  margin-left: 3vw;
+}
+
+/* line 24, /home/axadn/SoundShroud/app/assets/stylesheets/_user show.scss */
+img .user-show-medium:hover {
+  cursor: pointer;
+}
+/* line 2, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_info {
+  font-size: 14px;
+}
+
+/* line 6, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_info h1 {
+  font-size: 37px;
+}
+
+/* line 10, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+#landing_button {
+  width: 200px;
+  border-radius: 2px;
+  text-align: center;
+  margin-top: 4vh;
+  font-size: 17px;
+}
+
+/* line 17, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_info {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 75%;
+  padding: 40px;
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+}
+
+/* line 27, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_page_content {
+  position: relative;
+  text-align: center;
+  height: 50vh;
+  overflow: hidden;
+}
+
+/* line 34, /home/axadn/SoundShroud/app/assets/stylesheets/_landing.scss */
+.landing_page_content > img {
+  min-width: 100%;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_discover.scss */
+.discover-page h3 {
+  margin-left: 3vw;
+  margin-bottom: 0;
+}
+
+/* line 5, /home/axadn/SoundShroud/app/assets/stylesheets/_discover.scss */
+.discover-page .tracks-index {
+  display: inline-block;
+  max-width: 775px;
+  width: 75%;
+}
+
+/* line 10, /home/axadn/SoundShroud/app/assets/stylesheets/_discover.scss */
+.discover-page .shuffle-button-container {
+  z-index: 950;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 775px;
+  margin-left: 3vw;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background-color: #191919;
+}
+/* line 1, /home/axadn/SoundShroud/app/assets/stylesheets/_search.scss */
+.search-page {
+  width: 100%;
+}
+
+/* line 4, /home/axadn/SoundShroud/app/assets/stylesheets/_search.scss */
+.search-page .search-result-list {
+  margin-left: 3vw;
+  width: 90%;
+}
+
+/* line 8, /home/axadn/SoundShroud/app/assets/stylesheets/_search.scss */
+.search-page h3 {
+  margin-left: 3vw;
+}
+
+/* line 11, /home/axadn/SoundShroud/app/assets/stylesheets/_search.scss */
+.search-page .track-item,
+.search-page .user-item {
+  margin-bottom: 62px;
+}
