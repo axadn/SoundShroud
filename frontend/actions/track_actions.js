@@ -212,13 +212,17 @@ const checkAudioProcessStatus =  id => dispatch => {
 export const fetchBinaryData = (id, callBack) => {
   TrackAPI.getS3Url(id)
   .then(url =>{
+    debugger;
       return new Promise((resolve,reject)=>{
         const xhr = new XMLHttpRequest();
         xhr.open("get", url);
-        xhr.responseType = "blob";
+        xhr.responseType = "arraybuffer";
         xhr.onload = () => resolve(xhr.response);
         xhr.onerror = reject;
         xhr.send();
+        xhr.onreadystatechange = ()=>{
+          debugger;
+        };
       });
     }
   )

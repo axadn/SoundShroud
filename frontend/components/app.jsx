@@ -3,7 +3,7 @@ import MainContent from "./main_content";
 import NavBar from "./nav_bar/nav_bar";
 import UploadProgressContainer from "./upload/upload_progress_container";
 import {HashRouter} from "react-router-dom";
-import AudioPlayerContainer from "./audio/audio_player_container";
+import AudioControlsContainer from "./audio/audio_controls_container";
 import AuthModalContainer from "./auth_modal/auth_modal_container";
 export default () =>(
   <HashRouter>
@@ -14,7 +14,7 @@ export default () =>(
           <UploadProgressContainer/>
           <MainContent/>
         </div>
-      <AudioPlayerContainer/>
+        <AudioControlsContainer/>
     </div>
   </HashRouter>
 );

@@ -3,14 +3,14 @@ import {fetchBinaryData} from "../../actions/track_actions";
 import AudioPlayer from "./audio_player";
 import {currentlyLoadingAudioAction, finishedLoadingAudioAction}
   from "../../actions/playlist_actions"
-
+import {currentPlaylistId} from "../../reducers/selectors";
 const mapStateToProps = (state, ownProps) => {
+  debugger;
   return{
-  playlist: state.entities.tracks.playlistIds,
-  playing: state.entities.tracks.playing,
-  indexInPlaylist: state.entities.tracks.playlistIndex,
-  fetchForCache: (id, callBack) => fetchBinaryData(id, callBack)
-}};
+    trackId: currentPlaylistId(state),
+    playing: state.entities.tracks.playing
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   currentlyLoadingAudioAction: () => dispatch(currentlyLoadingAudioAction()),

@@ -1735,15 +1735,19 @@ var checkAudioProcessStatus = function checkAudioProcessStatus(id) {
 
 var fetchBinaryData = exports.fetchBinaryData = function fetchBinaryData(id, callBack) {
   TrackAPI.getS3Url(id).then(function (url) {
+    debugger;
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest();
       xhr.open("get", url);
-      xhr.responseType = "blob";
+      xhr.responseType = "arraybuffer";
       xhr.onload = function () {
         return resolve(xhr.response);
       };
       xhr.onerror = reject;
       xhr.send();
+      xhr.onreadystatechange = function () {
+        debugger;
+      };
     });
   }).then(function (data) {
     return callBack({ id: id, binaryData: data });
@@ -3802,13 +3806,16 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 var logged_in = exports.logged_in = function logged_in(state) {
-  return Boolean(state.session.current_user);
+    return Boolean(state.session.current_user);
 };
 var current_user_id = exports.current_user_id = function current_user_id(state) {
-  return state.session.current_user.id;
+    return state.session.current_user.id;
+};
+var currentPlaylistId = exports.currentPlaylistId = function currentPlaylistId(state) {
+    return state.entities.tracks.playlistIds[state.entities.tracks.playlistIndex];
 };
 
 /***/ }),
@@ -27797,9 +27804,9 @@ var _upload_progress_container2 = _interopRequireDefault(_upload_progress_contai
 
 var _reactRouterDom = __webpack_require__(11);
 
-var _audio_player_container = __webpack_require__(324);
+var _audio_controls_container = __webpack_require__(326);
 
-var _audio_player_container2 = _interopRequireDefault(_audio_player_container);
+var _audio_controls_container2 = _interopRequireDefault(_audio_controls_container);
 
 var _auth_modal_container = __webpack_require__(330);
 
@@ -27822,7 +27829,7 @@ exports.default = function () {
         _react2.default.createElement(_upload_progress_container2.default, null),
         _react2.default.createElement(_main_content2.default, null)
       ),
-      _react2.default.createElement(_audio_player_container2.default, null)
+      _react2.default.createElement(_audio_controls_container2.default, null)
     )
   );
 };
@@ -32960,260 +32967,8 @@ var UploadProgress = function (_React$Component) {
 exports.default = UploadProgress;
 
 /***/ }),
-/* 324 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(7);
-
-var _track_actions = __webpack_require__(16);
-
-var _audio_player = __webpack_require__(325);
-
-var _audio_player2 = _interopRequireDefault(_audio_player);
-
-var _playlist_actions = __webpack_require__(26);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {
-    playlist: state.entities.tracks.playlistIds,
-    playing: state.entities.tracks.playing,
-    indexInPlaylist: state.entities.tracks.playlistIndex,
-    fetchForCache: function fetchForCache(id, callBack) {
-      return (0, _track_actions.fetchBinaryData)(id, callBack);
-    }
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    currentlyLoadingAudioAction: function currentlyLoadingAudioAction() {
-      return dispatch((0, _playlist_actions.currentlyLoadingAudioAction)());
-    },
-    finishedLoadingAudioAction: function finishedLoadingAudioAction() {
-      return dispatch((0, _playlist_actions.finishedLoadingAudioAction)());
-    }
-  };
-};
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_audio_player2.default);
-
-/***/ }),
-/* 325 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _audio_controls_container = __webpack_require__(326);
-
-var _audio_controls_container2 = _interopRequireDefault(_audio_controls_container);
-
-var _playlist_actions = __webpack_require__(26);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CACHE_SIZE = 5;
-
-var MID_CACHE_INDEX = Math.floor(CACHE_SIZE / 2);
-
-var shiftCache = function shiftCache(amount) {
-  return function (state, props) {
-    var cache = [];
-    for (var i = 0; i < CACHE_SIZE; ++i) {
-      if (state.cache[i + amount] === undefined) {
-        cache.push({ id: props.playlist[(props.indexInPlaylist + i - MID_CACHE_INDEX) % props.playlist.length] });
-      } else {
-        cache.push(state.cache[i + amount]);
-      }
-    }
-    state.audioSource.pause();
-    return { cache: cache, playing: false, srcIsValid: false };
-  };
-};
-
-var assignCacheFromNewPlaylist = function assignCacheFromNewPlaylist(playlist, indexInPlaylist) {
-  return function (state, props) {
-    var cache = [];
-    for (var i = 0; i < CACHE_SIZE; ++i) {
-      cache.push({ id: playlist[(indexInPlaylist + i - MID_CACHE_INDEX) % playlist.length] });
-    }
-    state.audioSource.pause();
-    return { cache: cache, playing: false, waitingToPlay: true, srcIsValid: false };
-  };
-};
-
-var assignAudioSource = function assignAudioSource(state, props) {
-  if (state.loaded && !state.srcIsValid) {
-    state.audioSource.src = URL.createObjectURL(state.cache[MID_CACHE_INDEX].binaryData);
-    state.audioSource.currentTime = 0;
-    return { srcIsValid: true };
-  }
-};
-var invalidateCache = function invalidateCache(state) {
-  var cache = state.cache;
-  for (var i = 0; i < cache.length; ++i) {
-    cache[i].binaryData = null;
-  }
-  return { cache: cache };
-};
-var receiveSongCacheData = function receiveSongCacheData(payload) {
-  return function (state, props) {
-    var cache = state.cache;
-    for (var i = 0; i < cache.length; ++i) {
-      if (cache[i].id == payload.id) {
-        cache[i].binaryData = payload.binaryData;
-      }
-    }
-    return { cache: cache };
-  };
-};
-var setIfLoaded = function setIfLoaded(state, props) {
-  return { loaded: Boolean(state.cache[MID_CACHE_INDEX].binaryData) };
-};
-
-var handleQueuedPlay = function handleQueuedPlay(state, props) {
-  if (props.playing && !state.playing && state.loaded) {
-    state.audioSource.play();
-    return { waitingToPlay: false, playing: true };
-  }
-};
-
-var fetchForCache = function fetchForCache(player) {
-  return function (state, props) {
-    var current = state.cache[MID_CACHE_INDEX];
-    if (!current.id) return {};
-    if (!current.binaryData && !current.fetching) {
-      props.currentlyLoadingAudioAction();
-      props.fetchForCache(current.id, function (data) {
-        current.fetching = false;
-        player.setState(receiveSongCacheData(data));
-        player.setState(setIfLoaded);
-        player.setState(assignAudioSource);
-        player.setState(handleQueuedPlay);
-        props.finishedLoadingAudioAction();
-        player.setState(fetchForCache(player));
-      });
-      current.fetching = true;
-      return;
-    }
-  };
-};
-
-var AudioPlayer = function (_React$Component) {
-  _inherits(AudioPlayer, _React$Component);
-
-  function AudioPlayer(props) {
-    _classCallCheck(this, AudioPlayer);
-
-    var _this = _possibleConstructorReturn(this, (AudioPlayer.__proto__ || Object.getPrototypeOf(AudioPlayer)).call(this, props));
-
-    var cache = [];
-    for (var i = 0; i < CACHE_SIZE; ++i) {
-      cache.push({ id: undefined });
-    }
-    _this.state = {
-      position: 0,
-      loaded: false,
-      waitingToPlay: false,
-      playing: false,
-      cache: cache,
-      audioCtx: new (window.AudioContext || window.webkitAudioContext)(),
-      audioSource: document.querySelector("audio")
-    };
-    return _this;
-  }
-
-  _createClass(AudioPlayer, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(newProps) {
-      if (JSON.stringify(newProps.playlist) !== JSON.stringify(this.props.playlist)) {
-        this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
-      } else if (newProps.indexInPlaylist !== this.props.indexInPlaylist) {
-        if (this.props.indexInPlaylist === null) {
-          this.setState(assignCacheFromNewPlaylist(newProps.playlist, newProps.indexInPlaylist));
-        } else {
-          this.setState(shiftCache(newProps.indexInPlaylist - this.props.indexInPlaylist));
-        }
-      }
-      if (newProps.playing !== this.props.playing) {
-        if (newProps.playing) {
-          this.setState({ waitingToPlay: true });
-        } else {
-          this.setState({ waitingToPlay: false, playing: false });
-          this.state.audioSource.pause();
-        }
-      }
-      this.cacheHandleLoop();
-    }
-  }, {
-    key: "cacheHandleLoop",
-    value: function cacheHandleLoop() {
-      this.setState(setIfLoaded);
-      this.setState(assignAudioSource);
-      this.setState(handleQueuedPlay);
-      this.setState(fetchForCache(this));
-    }
-  }, {
-    key: "handlePlay",
-    value: function handlePlay() {
-      this.props.startPlayback();
-    }
-  }, {
-    key: "handleSeek",
-    value: function handleSeek(e) {
-      position = e.target.clientX / e.target.offsetX;
-      this.setState({ position: position });
-      this.setState(function (state, props) {
-        return { waitingToPlay: state.playing };
-      });
-      this.cacheHandleLoop();
-    }
-  }, {
-    key: "handlePause",
-    value: function handlePause() {
-      this.props.stopPlayback();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "audio-progress" },
-        _react2.default.createElement(_audio_controls_container2.default, { loaded: this.state.loaded, playing: this.props.playing })
-      );
-    }
-  }]);
-
-  return AudioPlayer;
-}(_react2.default.Component);
-
-exports.default = AudioPlayer;
-
-/***/ }),
+/* 324 */,
+/* 325 */,
 /* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33235,7 +32990,10 @@ var _playlist_actions = __webpack_require__(26);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {};
+  return {
+    loaded: !state.loading.audio,
+    playing: state.entities.tracks.playing
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
@@ -34614,6 +34372,10 @@ var _reduxLogger = __webpack_require__(359);
 
 var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
+var _audio_player = __webpack_require__(371);
+
+var _audio_player2 = _interopRequireDefault(_audio_player);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setupAudioAnalyser = function setupAudioAnalyser() {
@@ -34628,7 +34390,7 @@ var setupAudioAnalyser = function setupAudioAnalyser() {
 exports.default = function () {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { audioAnalyser: setupAudioAnalyser() };
 
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
+  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _audio_player2.default, _reduxLogger2.default));
 };
 
 /***/ }),
@@ -35735,6 +35497,66 @@ exports.default = function (props) {
             name
         )
     );
+};
+
+/***/ }),
+/* 371 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _playlist_actions = __webpack_require__(26);
+
+var _selectors = __webpack_require__(32);
+
+var _api_track_utils = __webpack_require__(298);
+
+var TrackAPIUtils = _interopRequireWildcard(_api_track_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+exports.default = function (store) {
+    return function (next) {
+        return function (action) {
+            switch (action.type) {
+                case _playlist_actions.PAUSE_PLAYBACK:
+                    document.querySelector("audio").pause();
+                    return next(action);
+                case _playlist_actions.START_PLAYBACK:
+                    document.querySelector("audio").play();
+                    return next(action);
+                case _playlist_actions.RECEIVE_PLAYLIST:
+                case _playlist_actions.COPY_PLAYLIST_FROM_PAGE:
+                case _playlist_actions.FORWARD_PLAYBACK:
+                case _playlist_actions.BACK_PLAYBACK:
+                case _playlist_actions.RECEIVE_PLAYLIST_INDEX:
+                    var playlistId = (0, _selectors.currentPlaylistId)(store.getState());
+                    var result = next(action);
+                    var nextId = (0, _selectors.currentPlaylistId)(store.getState());
+                    if (playlistId != nextId) {
+                        TrackAPIUtils.getS3Url(nextId).then(function (url) {
+                            document.querySelector("audio").src = url;
+                            document.querySelector("audio").crossOrigin = "anonymous";
+                            store.dispatch((0, _playlist_actions.currentlyLoadingAudioAction)());
+                            document.querySelector("audio").oncanplay = function () {
+                                store.dispatch((0, _playlist_actions.finishedLoadingAudioAction)());
+                                if (store.getState().entities.tracks.playing) {
+                                    document.querySelector("audio").play();
+                                }
+                            };
+                        });
+                    }
+                    return result;
+                default:
+                    return next(action);
+            }
+        };
+    };
 };
 
 /***/ })
