@@ -34725,13 +34725,18 @@ var _search_results_reducer = __webpack_require__(364);
 
 var _search_results_reducer2 = _interopRequireDefault(_search_results_reducer);
 
+var _recommendations_reducer = __webpack_require__(367);
+
+var _recommendations_reducer2 = _interopRequireDefault(_recommendations_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   tracks: _tracks_reducer2.default,
   users: _users_reducer2.default,
   comments: _comments_reducer2.default,
-  searchResults: _search_results_reducer2.default
+  searchResults: _search_results_reducer2.default,
+  recommendations: _recommendations_reducer2.default
 });
 
 /***/ }),
@@ -35584,6 +35589,36 @@ exports.default = function (props) {
     )
   );
 };
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _users_reducer = __webpack_require__(368);
+
+var _users_reducer2 = _interopRequireDefault(_users_reducer);
+
+var _redux = __webpack_require__(31);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    users: _users_reducer2.default
+});
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);
