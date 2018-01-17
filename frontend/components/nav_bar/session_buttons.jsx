@@ -38,12 +38,17 @@ export default class SessionButtons extends React.Component{
           <a>{this.props.current_user.username}</a>
           <i className="fa fa-caret-down" aria-hidden="true"></i>
           <ul className={`${hidden}`}>
-            <li><a href={`#/users/${this.props.current_user.id}`}>Profile</a></li>
-            <li><a onClick={e=>{
+            <li><a href={`#/users/${this.props.current_user.id}`}>
+              <i className="fa fa-user" aria-hidden="true"></i>
+              Profile</a></li>
+            <li>
+              <a onClick={e=>{
               e.preventDefault();
               e.stopPropagation();
               this.props.delete_session();}
-            }>Log out</a></li>
+            }>
+              <i className="fa fa-sign-out" aria-hidden="true"></i>
+              Log out</a></li>
           </ul>
         </div>;
     }

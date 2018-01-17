@@ -32724,6 +32724,7 @@ var SessionButtons = function (_React$Component) {
               _react2.default.createElement(
                 "a",
                 { href: "#/users/" + this.props.current_user.id },
+                _react2.default.createElement("i", { className: "fa fa-user", "aria-hidden": "true" }),
                 "Profile"
               )
             ),
@@ -32737,6 +32738,7 @@ var SessionButtons = function (_React$Component) {
                     e.stopPropagation();
                     _this2.props.delete_session();
                   } },
+                _react2.default.createElement("i", { className: "fa fa-sign-out", "aria-hidden": "true" }),
                 "Log out"
               )
             )

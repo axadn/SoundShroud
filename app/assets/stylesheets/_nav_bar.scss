@@ -56,7 +56,7 @@
     align-items: center;
   }
   .nav_bar .drop-down-menu > a{
-    margin: 5px;
+    margin: 7px;
   }
   .nav_bar .drop-down-menu ul{
     position: absolute;
@@ -78,6 +78,13 @@
     display: block;
     text-decoration: none;
     color: black;
+  }
+  .nav_bar .drop-down-menu li{
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+  .nav_bar .drop-down-menu i{
+    margin-right: 5px;
   }
   .search-bar{
     flex-grow: 1;
