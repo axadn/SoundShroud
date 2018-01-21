@@ -97,7 +97,6 @@ export default class Waveform extends React.Component{
     let dataArray;
     let sampleLength;
     if(this.props.loading){
-      console.log("loading");
       sampleLength = 1;
       dataArray = this.loadingDataArray;
       this.previewCenterIndex += (timestamp - this.lastTimeStamp) / 200.0;

@@ -31967,7 +31967,6 @@ var Waveform = function (_React$Component) {
       var dataArray = void 0;
       var sampleLength = void 0;
       if (this.props.loading) {
-        console.log("loading");
         sampleLength = 1;
         dataArray = this.loadingDataArray;
         this.previewCenterIndex += (timestamp - this.lastTimeStamp) / 200.0;
