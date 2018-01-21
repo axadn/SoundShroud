@@ -1,5 +1,7 @@
 import {PAUSE_PLAYBACK, START_PLAYBACK, FORWARD_PLAYBACK,
-     BACK_PLAYBACK, RECEIVE_PLAYLIST, RECEIVE_PLAYLIST_INDEX, COPY_PLAYLIST_FROM_PAGE, finishedLoadingAudioAction, currentlyLoadingAudioAction, startPlayback}
+     BACK_PLAYBACK, RECEIVE_PLAYLIST, RECEIVE_PLAYLIST_INDEX, 
+     COPY_PLAYLIST_FROM_PAGE, finishedLoadingAudioAction,
+      currentlyLoadingAudioAction, startPlayback}
     from "../../actions/playlist_actions";
 import {currentPlaylistId} from "../../reducers/selectors";
 import * as TrackAPIUtils from "../../utils/api_track_utils";
@@ -32,6 +34,9 @@ export default store=>next=>action=>{
                                 document.querySelector("audio").play(); 
                             }
                         }
+                        document.querySelector("audio").onwaiting = ()=>{
+                            store.dispatch(currentlyLoadingAudioAction());
+                        };
                     }
                 );
             }

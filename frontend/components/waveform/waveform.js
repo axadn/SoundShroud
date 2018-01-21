@@ -42,11 +42,11 @@ export default class Waveform extends React.Component{
     this.dataArray = null;
   }
   componentWillReceiveProps(newProps){
-    if(!newProps.currentlyPlaying){
+    if(this.props.currentlyPlaying && !newProps.currentlyPlaying){
       this.dataArray = null;
       this.drawFullWaveForm();
     }
-    else if(newProps.currentlyPlaying){
+    else if(newProps.currentlyPlaying && !this.props.currentlyPlaying){
       this.dataArray = new Uint8Array(BUFFER_LENGTH);
       this.drawOscilloscope();
     }
@@ -97,6 +97,7 @@ export default class Waveform extends React.Component{
     let dataArray;
     let sampleLength;
     if(this.props.loading){
+      console.log("loading");
       sampleLength = 1;
       dataArray = this.loadingDataArray;
       this.previewCenterIndex += (timestamp - this.lastTimeStamp) / 200.0;
