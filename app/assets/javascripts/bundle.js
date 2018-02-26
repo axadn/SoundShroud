@@ -34268,7 +34268,7 @@ var ModalPortal = function (_Component) {
       }
 
       if (_this.props.shouldCloseOnEsc && event.keyCode === ESC_KEY) {
-        event.stopPropagation();
+        event.preventDefault();
         _this.requestClose(event);
       }
     };
@@ -34801,11 +34801,11 @@ var _audio_player2 = _interopRequireDefault(_audio_player);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setupAudioAnalyser = function setupAudioAnalyser() {
-  var audioCtx = new window.AudioContext();
+  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var analyser = audioCtx.createAnalyser();
   var audioSrc = audioCtx.createMediaElementSource(document.querySelector("audio"));
   audioSrc.connect(analyser);
-  audioSrc.connect(audioCtx.destination);
+  audioSrc.connect(audioCtx.stination);
   return analyser;
 };
 
