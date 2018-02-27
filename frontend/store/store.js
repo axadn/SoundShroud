@@ -11,7 +11,7 @@ const setupAudioAnalyser = ()=>{
     document.querySelector("audio")
   );
   audioSrc.connect(analyser);
-  audioSrc.connect(audioCtx.  stination);
+  audioSrc.connect(audioCtx.destination);
   return analyser;
 };
 export default (preloadedState = {audioAnalyser: setupAudioAnalyser()}) => {
