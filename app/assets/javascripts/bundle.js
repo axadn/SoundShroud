@@ -31527,7 +31527,7 @@ var CommentsIndex = function (_React$Component) {
   _createClass(CommentsIndex, [{
     key: "handleChange",
     value: function handleChange(e) {
-      this.setState({ body: e.target.value });
+      if (this.props.loggedIn) this.setState({ body: e.target.value });
     }
   }, {
     key: "handleSubmit",
@@ -31551,8 +31551,6 @@ var CommentsIndex = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var label = this.props.loggedIn ? "Add a Comment" : "Please log in to add a comment";
       if (this.props.loading) {
         return _react2.default.createElement("div", { style: {
@@ -31574,15 +31572,10 @@ var CommentsIndex = function (_React$Component) {
           "form",
           { id: "commentForm", onSubmit: this.handleSubmit },
           _react2.default.createElement("input", { type: "text",
-            onChange: this.handleChange,
+            placeholder: label,
             onClick: this.handleClick,
-            onBlur: function onBlur() {
-              return _this2.setState({ labelInput: _this2.state.body.length === 0 });
-            },
-            onFocus: function onFocus() {
-              return _this2.setState({ labelInput: false });
-            },
-            value: this.state.labelInput ? label : this.state.body })
+            onChange: this.handleChange,
+            value: this.state.body })
         ),
         _react2.default.createElement(
           "ul",

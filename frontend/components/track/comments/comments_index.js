@@ -12,7 +12,7 @@ export default class CommentsIndex extends React.Component{
     this.handleClick = this.handleClick.bind(this);
   }
   handleChange(e){
-    this.setState({body: e.target.value});
+    if(this.props.loggedIn) this.setState({body: e.target.value});
   }
   handleSubmit(e){
     e.preventDefault();
@@ -47,11 +47,10 @@ export default class CommentsIndex extends React.Component{
     return <div className="commentsIndex">
       <form id="commentForm" onSubmit={this.handleSubmit}>
         <input type="text"
+          placeholder={label}
+          onClick={this.handleClick}
           onChange={this.handleChange}
-          onClick = {this.handleClick}
-          onBlur={()=>this.setState({labelInput: this.state.body.length === 0})}
-          onFocus = {()=>this.setState({labelInput: false})}
-          value={this.state.labelInput? label : this.state.body}>
+          value={this.state.body}>
         </input>
       </form>
       <ul>
