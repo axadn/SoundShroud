@@ -27,10 +27,6 @@ RSpec.describe 'tracks controller', type: :request do
                 description: "a short piece", genre: "soundtrack")
             post "/api/session", params: {user: {username: 'example', password: 'password'}}
         end
-        it 'destroys the track if logged in as the owner' do
-            delete "/api/tracks/#{@track1.id}"
-            expect(response.status).to be(200)
-        end
 
         it "doesn't destroy the track if not logged in as owner" do 
             delete "/api/tracks/#{@track2.id}"

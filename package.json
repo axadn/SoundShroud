@@ -24,7 +24,7 @@
   },
   "scripts": {
     "webpack": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,9 @@
   },
   "homepage": "https://github.com/axadn/SoundShroud#readme",
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "jest": "^22.4.3",
     "uglifyjs-webpack-plugin": "^1.0.0-rc.0"
   }
 }

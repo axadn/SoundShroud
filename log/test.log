@@ -823,3 +823,726 @@ Processing by Api::TracksController#destroy as JSON
   [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "YBbR3N5SX2W27DFQM4ZnlQ"], ["LIMIT", 1]]
 Completed 403 Forbidden in 5ms (Views: 0.2ms | ActiveRecord: 2.0ms)
   [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (19.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (92.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$440ZGSk8sRjJfF8kGd/A4OkmYCzfFpBLp.ToslxvsH7uZMWQvB/Oa"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "HFYtpC8F7e4u4TjxRL-4RA"], ["LIMIT", 1]]
+  [1m[35mSQL (40.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$440ZGSk8sRjJfF8kGd/A4OkmYCzfFpBLp.ToslxvsH7uZMWQvB/Oa"], ["session_token", "HFYtpC8F7e4u4TjxRL-4RA"], ["created_at", "2018-04-02 20:38:35.078559"], ["updated_at", "2018-04-02 20:38:35.078559"]]
+  [1m[36mPgSearch::Document Load (16.9ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 31], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (43.6ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 31], ["created_at", "2018-04-02 20:38:35.203804"], ["updated_at", "2018-04-02 20:38:35.203804"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (47.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 31], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  [1m[35mSQL (39.8ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 31], ["created_at", "2018-04-02 20:38:35.344355"], ["updated_at", "2018-04-02 20:38:35.344355"]]
+  [1m[36mPgSearch::Document Load (0.9ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 43], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 43], ["created_at", "2018-04-02 20:38:35.390094"], ["updated_at", "2018-04-02 20:38:35.390094"]]
+  [1m[35m (1.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 31], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 31], ["created_at", "2018-04-02 20:38:35.399065"], ["updated_at", "2018-04-02 20:38:35.399065"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 44], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 44], ["created_at", "2018-04-02 20:38:35.403215"], ["updated_at", "2018-04-02 20:38:35.403215"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/users/31/tracks" for 127.0.0.1 at 2018-04-02 13:38:35 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"31"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (2.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 31]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (9208.2ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (1.5ms)
+  Rendered api/tracks/index.json.jbuilder (9224.7ms)
+Completed 200 OK in 9385ms (Views: 9362.0ms | ActiveRecord: 4.0ms)
+Started GET "/api/users/31/tracks" for 127.0.0.1 at 2018-04-02 13:38:44 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"31"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 31]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.5ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (3.0ms)
+  Rendered api/tracks/index.json.jbuilder (8.5ms)
+Completed 200 OK in 11ms (Views: 6.9ms | ActiveRecord: 3.4ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$i1JZ4jHfkpTqDXDRbjquL.OiXE9Xc8VV.r1PyrgzwgFrbp365o1Ly"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "cb0XOkXiAVUJUUAz1v288A"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$i1JZ4jHfkpTqDXDRbjquL.OiXE9Xc8VV.r1PyrgzwgFrbp365o1Ly"], ["session_token", "cb0XOkXiAVUJUUAz1v288A"], ["created_at", "2018-04-02 20:38:44.981317"], ["updated_at", "2018-04-02 20:38:44.981317"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 32], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 32], ["created_at", "2018-04-02 20:38:44.986365"], ["updated_at", "2018-04-02 20:38:44.986365"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$M7ZuIkopd35hBA6BuNi89evirH5cZ368RFtMyPhCvYlEljJ/ZaEZW"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "4yj3RCu1NPpAaaOFHbNgIg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$M7ZuIkopd35hBA6BuNi89evirH5cZ368RFtMyPhCvYlEljJ/ZaEZW"], ["session_token", "4yj3RCu1NPpAaaOFHbNgIg"], ["created_at", "2018-04-02 20:38:45.072058"], ["updated_at", "2018-04-02 20:38:45.072058"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 33], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 33], ["created_at", "2018-04-02 20:38:45.078075"], ["updated_at", "2018-04-02 20:38:45.078075"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 32], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 32], ["created_at", "2018-04-02 20:38:45.084592"], ["updated_at", "2018-04-02 20:38:45.084592"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 45], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 45], ["created_at", "2018-04-02 20:38:45.088602"], ["updated_at", "2018-04-02 20:38:45.088602"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 33], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 33], ["created_at", "2018-04-02 20:38:45.098629"], ["updated_at", "2018-04-02 20:38:45.098629"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 46], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 46], ["created_at", "2018-04-02 20:38:45.102138"], ["updated_at", "2018-04-02 20:38:45.102138"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 13:38:45 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 32], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$i1JZ4jHfkpTqDXDRbjquL.OiXE9Xc8VV.r1PyrgzwgFrbp365o1Ly"], ["id", 32], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "YGOBjsHUii23JT2imXP0nw"], ["id", 32], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "YGOBjsHUii23JT2imXP0nw"], ["updated_at", "2018-04-02 20:38:45.220453"], ["id", 32]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 32], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered api/sessions/show.json.jbuilder (13.0ms)
+Completed 200 OK in 203ms (Views: 100.6ms | ActiveRecord: 6.5ms)
+Started DELETE "/api/tracks/45" for 127.0.0.1 at 2018-04-02 13:38:45 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"45"}
+  [1m[36mTrack Load (1.5ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 45], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "YGOBjsHUii23JT2imXP0nw"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2541ms (ActiveRecord: 2.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$nc6yKYw3B9tM2nu.OckBQOuL53WjCt03biSgiGyNKwFIv.1nG6sI."], ["LIMIT", 1]]
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "nDQL0Ht_mDGdtDuHgAmkMA"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$nc6yKYw3B9tM2nu.OckBQOuL53WjCt03biSgiGyNKwFIv.1nG6sI."], ["session_token", "nDQL0Ht_mDGdtDuHgAmkMA"], ["created_at", "2018-04-02 20:38:47.961786"], ["updated_at", "2018-04-02 20:38:47.961786"]]
+  [1m[36mPgSearch::Document Load (0.9ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 34], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 34], ["created_at", "2018-04-02 20:38:47.968181"], ["updated_at", "2018-04-02 20:38:47.968181"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$D6wzKESQh03PKlMAV9cJAe3tvN7swUgOqYsb59NlF.RMaOlZffp0W"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "oMJxUG6GrwcdfNsd8cozFg"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$D6wzKESQh03PKlMAV9cJAe3tvN7swUgOqYsb59NlF.RMaOlZffp0W"], ["session_token", "oMJxUG6GrwcdfNsd8cozFg"], ["created_at", "2018-04-02 20:38:48.048068"], ["updated_at", "2018-04-02 20:38:48.048068"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 35], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 35], ["created_at", "2018-04-02 20:38:48.051614"], ["updated_at", "2018-04-02 20:38:48.051614"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (4.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 34], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 34], ["created_at", "2018-04-02 20:38:48.062608"], ["updated_at", "2018-04-02 20:38:48.062608"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 47], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 47], ["created_at", "2018-04-02 20:38:48.066618"], ["updated_at", "2018-04-02 20:38:48.066618"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 35], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 35], ["created_at", "2018-04-02 20:38:48.073137"], ["updated_at", "2018-04-02 20:38:48.073137"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 48], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 48], ["created_at", "2018-04-02 20:38:48.078649"], ["updated_at", "2018-04-02 20:38:48.078649"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 13:38:48 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 34], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$nc6yKYw3B9tM2nu.OckBQOuL53WjCt03biSgiGyNKwFIv.1nG6sI."], ["id", 34], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "OAp0og4DhWaI8-5KhcGJsA"], ["id", 34], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "OAp0og4DhWaI8-5KhcGJsA"], ["updated_at", "2018-04-02 20:38:48.169427"], ["id", 34]]
+  [1m[36mPgSearch::Document Load (2.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 34], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (0.0ms)
+  Rendered api/sessions/show.json.jbuilder (1.0ms)
+Completed 200 OK in 98ms (Views: 1.3ms | ActiveRecord: 9.0ms)
+Started DELETE "/api/tracks/48" for 127.0.0.1 at 2018-04-02 13:38:48 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"48"}
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "OAp0og4DhWaI8-5KhcGJsA"], ["LIMIT", 1]]
+Completed 403 Forbidden in 4ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$ePYVd0WnECadkDTzHZPj/uMo3uYnVYRdrhlUe6Pde3KsJRasnGgle"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Ab_nW8WyWroX9cPF7YvX8A"], ["LIMIT", 1]]
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$ePYVd0WnECadkDTzHZPj/uMo3uYnVYRdrhlUe6Pde3KsJRasnGgle"], ["session_token", "Ab_nW8WyWroX9cPF7YvX8A"], ["created_at", "2018-04-02 21:03:56.175857"], ["updated_at", "2018-04-02 21:03:56.175857"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 36], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 36], ["created_at", "2018-04-02 21:03:56.238020"], ["updated_at", "2018-04-02 21:03:56.238020"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 36], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 36], ["created_at", "2018-04-02 21:03:56.279134"], ["updated_at", "2018-04-02 21:03:56.279134"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 49], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 49], ["created_at", "2018-04-02 21:03:56.285212"], ["updated_at", "2018-04-02 21:03:56.285212"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 36], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 36], ["created_at", "2018-04-02 21:03:56.293157"], ["updated_at", "2018-04-02 21:03:56.293157"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 50], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 50], ["created_at", "2018-04-02 21:03:56.297194"], ["updated_at", "2018-04-02 21:03:56.297194"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/users/36/tracks" for 127.0.0.1 at 2018-04-02 14:03:56 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"36"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.5ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 36]]
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (6531.3ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (1.5ms)
+  Rendered api/tracks/index.json.jbuilder (6545.3ms)
+Completed 200 OK in 6690ms (Views: 6669.1ms | ActiveRecord: 3.8ms)
+Started GET "/api/users/36/tracks" for 127.0.0.1 at 2018-04-02 14:04:03 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"36"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (0.5ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 36]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.5ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (1.5ms)
+  Rendered api/tracks/index.json.jbuilder (6.0ms)
+Completed 200 OK in 8ms (Views: 5.2ms | ActiveRecord: 2.1ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$uMYzVeDzIe.g1uMNs36ghey3Oc776J6MYEDdsHkVEtr5fB.L8ItZ6"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "119z3mMd0xozaf8iDrspDA"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$uMYzVeDzIe.g1uMNs36ghey3Oc776J6MYEDdsHkVEtr5fB.L8ItZ6"], ["session_token", "119z3mMd0xozaf8iDrspDA"], ["created_at", "2018-04-02 21:04:03.113195"], ["updated_at", "2018-04-02 21:04:03.113195"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 37], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 37], ["created_at", "2018-04-02 21:04:03.117977"], ["updated_at", "2018-04-02 21:04:03.117977"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$oGM6mQ9JCbWDL9dNBeM8PuMeNwq/jBa1rPmun10wZqjopgdAjiDpO"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "HLpOhFs9igDuIiRzUaIGfg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$oGM6mQ9JCbWDL9dNBeM8PuMeNwq/jBa1rPmun10wZqjopgdAjiDpO"], ["session_token", "HLpOhFs9igDuIiRzUaIGfg"], ["created_at", "2018-04-02 21:04:03.194682"], ["updated_at", "2018-04-02 21:04:03.194682"]]
+  [1m[36mPgSearch::Document Load (0.8ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 38], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 38], ["created_at", "2018-04-02 21:04:03.198843"], ["updated_at", "2018-04-02 21:04:03.198843"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 37], ["LIMIT", 1]]
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 37], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 37], ["created_at", "2018-04-02 21:04:03.206873"], ["updated_at", "2018-04-02 21:04:03.206873"]]
+  [1m[36mPgSearch::Document Load (0.8ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 51], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 51], ["created_at", "2018-04-02 21:04:03.210871"], ["updated_at", "2018-04-02 21:04:03.210871"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 38], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 38], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 38], ["created_at", "2018-04-02 21:04:03.217312"], ["updated_at", "2018-04-02 21:04:03.217312"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 52], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 52], ["created_at", "2018-04-02 21:04:03.221349"], ["updated_at", "2018-04-02 21:04:03.221349"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:04:03 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (1.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 37], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$uMYzVeDzIe.g1uMNs36ghey3Oc776J6MYEDdsHkVEtr5fB.L8ItZ6"], ["id", 37], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "s4X_v05nSCNfGC9YtM_tYw"], ["id", 37], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "s4X_v05nSCNfGC9YtM_tYw"], ["updated_at", "2018-04-02 21:04:03.322039"], ["id", 37]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 37], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered api/sessions/show.json.jbuilder (13.5ms)
+Completed 200 OK in 167ms (Views: 76.2ms | ActiveRecord: 7.3ms)
+Started DELETE "/api/tracks/51" for 127.0.0.1 at 2018-04-02 14:04:03 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"51"}
+  [1m[36mTrack Load (0.6ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "s4X_v05nSCNfGC9YtM_tYw"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 218ms (ActiveRecord: 1.5ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$aUg662RMO5tbJW18lRrbxORt4Jq9aiKjmxQHxPDUr5ij9SV482HeK"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "F2KQlxAg8OjyLVdxUX9ZSw"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$aUg662RMO5tbJW18lRrbxORt4Jq9aiKjmxQHxPDUr5ij9SV482HeK"], ["session_token", "F2KQlxAg8OjyLVdxUX9ZSw"], ["created_at", "2018-04-02 21:04:03.709940"], ["updated_at", "2018-04-02 21:04:03.709940"]]
+  [1m[36mPgSearch::Document Load (0.6ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 39], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 39], ["created_at", "2018-04-02 21:04:03.714067"], ["updated_at", "2018-04-02 21:04:03.714067"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$KuRsZyuNDsQYlymeGieH6ObThrdJSedLcPU1JFKg1T/GuNLaSF09."], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "FTiDZi9PNL0n-qPtRjE5aQ"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$KuRsZyuNDsQYlymeGieH6ObThrdJSedLcPU1JFKg1T/GuNLaSF09."], ["session_token", "FTiDZi9PNL0n-qPtRjE5aQ"], ["created_at", "2018-04-02 21:04:03.791056"], ["updated_at", "2018-04-02 21:04:03.791056"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 40], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 40], ["created_at", "2018-04-02 21:04:03.795066"], ["updated_at", "2018-04-02 21:04:03.795066"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 39], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 39], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 39], ["created_at", "2018-04-02 21:04:03.802549"], ["updated_at", "2018-04-02 21:04:03.802549"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 53], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 53], ["created_at", "2018-04-02 21:04:03.806058"], ["updated_at", "2018-04-02 21:04:03.806058"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 40], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 40], ["created_at", "2018-04-02 21:04:03.813055"], ["updated_at", "2018-04-02 21:04:03.813055"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 54], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 54], ["created_at", "2018-04-02 21:04:03.817036"], ["updated_at", "2018-04-02 21:04:03.817036"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:04:03 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 39], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$aUg662RMO5tbJW18lRrbxORt4Jq9aiKjmxQHxPDUr5ij9SV482HeK"], ["id", 39], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "PwX5R8hDcGvumUgoaClrug"], ["id", 39], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "PwX5R8hDcGvumUgoaClrug"], ["updated_at", "2018-04-02 21:04:03.897092"], ["id", 39]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 39], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered api/sessions/show.json.jbuilder (0.5ms)
+Completed 200 OK in 82ms (Views: 1.2ms | ActiveRecord: 6.6ms)
+Started DELETE "/api/tracks/54" for 127.0.0.1 at 2018-04-02 14:04:03 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"54"}
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 54], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "PwX5R8hDcGvumUgoaClrug"], ["LIMIT", 1]]
+Completed 403 Forbidden in 4ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$jF6vHmZ1WayQNhaLFXGEbuUuVGvrMJI/cHFTbwGACJMiImgAFLSXy"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "XPttY4M1IXyqQaech0l0fg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$jF6vHmZ1WayQNhaLFXGEbuUuVGvrMJI/cHFTbwGACJMiImgAFLSXy"], ["session_token", "XPttY4M1IXyqQaech0l0fg"], ["created_at", "2018-04-02 21:09:21.923765"], ["updated_at", "2018-04-02 21:09:21.923765"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 41], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 41], ["created_at", "2018-04-02 21:09:22.022683"], ["updated_at", "2018-04-02 21:09:22.022683"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 41], ["LIMIT", 1]]
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 41], ["created_at", "2018-04-02 21:09:22.094886"], ["updated_at", "2018-04-02 21:09:22.094886"]]
+  [1m[36mPgSearch::Document Load (3.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 55], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 55], ["created_at", "2018-04-02 21:09:22.105916"], ["updated_at", "2018-04-02 21:09:22.105916"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 41], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 41], ["created_at", "2018-04-02 21:09:22.115942"], ["updated_at", "2018-04-02 21:09:22.115942"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 56], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 56], ["created_at", "2018-04-02 21:09:22.122961"], ["updated_at", "2018-04-02 21:09:22.122961"]]
+  [1m[35m (5.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/users/41/tracks" for 127.0.0.1 at 2018-04-02 14:09:22 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"41"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.1ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 41]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (9093.8ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.0ms)
+  Rendered api/tracks/index.json.jbuilder (9110.8ms)
+Completed 200 OK in 9266ms (Views: 9245.1ms | ActiveRecord: 1.1ms)
+Started GET "/api/users/41/tracks" for 127.0.0.1 at 2018-04-02 14:09:31 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"41"}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 41]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (3.0ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.0ms)
+  Rendered api/tracks/index.json.jbuilder (7.0ms)
+Completed 200 OK in 10ms (Views: 6.0ms | ActiveRecord: 2.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$e91SxHzM8EpoasfQkXik2uuitCPfBaiVLscxVfHar1SsyeLhkSIrK"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "xQR6igKSgqBHNfLesjkhoQ"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$e91SxHzM8EpoasfQkXik2uuitCPfBaiVLscxVfHar1SsyeLhkSIrK"], ["session_token", "xQR6igKSgqBHNfLesjkhoQ"], ["created_at", "2018-04-02 21:09:31.539157"], ["updated_at", "2018-04-02 21:09:31.539157"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 42], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 42], ["created_at", "2018-04-02 21:09:31.544175"], ["updated_at", "2018-04-02 21:09:31.544175"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$RazLaa5YSJm3Ov3wmuRx8u4OT2z.uaswEtFKu7rhXlKno4K1ZmsN."], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "C9ZKGlwwgZzwGR-5PeM3QA"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$RazLaa5YSJm3Ov3wmuRx8u4OT2z.uaswEtFKu7rhXlKno4K1ZmsN."], ["session_token", "C9ZKGlwwgZzwGR-5PeM3QA"], ["created_at", "2018-04-02 21:09:31.633551"], ["updated_at", "2018-04-02 21:09:31.633551"]]
+  [1m[36mPgSearch::Document Load (2.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 43], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 43], ["created_at", "2018-04-02 21:09:31.641579"], ["updated_at", "2018-04-02 21:09:31.641579"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 42], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 42], ["created_at", "2018-04-02 21:09:31.648592"], ["updated_at", "2018-04-02 21:09:31.648592"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 57], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 57], ["created_at", "2018-04-02 21:09:31.655610"], ["updated_at", "2018-04-02 21:09:31.655610"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 43], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 43], ["created_at", "2018-04-02 21:09:31.664635"], ["updated_at", "2018-04-02 21:09:31.664635"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 58], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 58], ["created_at", "2018-04-02 21:09:31.669658"], ["updated_at", "2018-04-02 21:09:31.669658"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:09:31 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 42], ["LIMIT", 1]]
+  [1m[36mUser Exists (2.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$e91SxHzM8EpoasfQkXik2uuitCPfBaiVLscxVfHar1SsyeLhkSIrK"], ["id", 42], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "qm2ran3t2hRN-4Jjn3aKZw"], ["id", 42], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "qm2ran3t2hRN-4Jjn3aKZw"], ["updated_at", "2018-04-02 21:09:31.790379"], ["id", 42]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 42], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered api/sessions/show.json.jbuilder (15.0ms)
+Completed 200 OK in 228ms (Views: 122.2ms | ActiveRecord: 7.0ms)
+Started DELETE "/api/tracks/57" for 127.0.0.1 at 2018-04-02 14:09:31 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"57"}
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 57], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "qm2ran3t2hRN-4Jjn3aKZw"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 186ms (ActiveRecord: 2.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$VRAOnytMv0A7adSecjvtXuCO5mEsATDcr2sJm5HHH08kksbc9JXMK"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RYccZPtxre3RZEZJA-urKw"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$VRAOnytMv0A7adSecjvtXuCO5mEsATDcr2sJm5HHH08kksbc9JXMK"], ["session_token", "RYccZPtxre3RZEZJA-urKw"], ["created_at", "2018-04-02 21:09:32.209590"], ["updated_at", "2018-04-02 21:09:32.209590"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 44], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 44], ["created_at", "2018-04-02 21:09:32.213600"], ["updated_at", "2018-04-02 21:09:32.213600"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$Zc/KsWbWGUH4mx.rXQQTsuX0soQoVzn35pdHYjZFKUarJ0UwKv34C"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "9tBQMjkOWKE_htSDTS8_Gw"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$Zc/KsWbWGUH4mx.rXQQTsuX0soQoVzn35pdHYjZFKUarJ0UwKv34C"], ["session_token", "9tBQMjkOWKE_htSDTS8_Gw"], ["created_at", "2018-04-02 21:09:32.297492"], ["updated_at", "2018-04-02 21:09:32.297492"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 45], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 45], ["created_at", "2018-04-02 21:09:32.302524"], ["updated_at", "2018-04-02 21:09:32.302524"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 44], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 44], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 44], ["created_at", "2018-04-02 21:09:32.312533"], ["updated_at", "2018-04-02 21:09:32.312533"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 59], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 59], ["created_at", "2018-04-02 21:09:32.316544"], ["updated_at", "2018-04-02 21:09:32.316544"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (2.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 45], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 45], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 45], ["created_at", "2018-04-02 21:09:32.327573"], ["updated_at", "2018-04-02 21:09:32.327573"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 60], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 60], ["created_at", "2018-04-02 21:09:32.331584"], ["updated_at", "2018-04-02 21:09:32.331584"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:09:32 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 44], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$VRAOnytMv0A7adSecjvtXuCO5mEsATDcr2sJm5HHH08kksbc9JXMK"], ["id", 44], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "20iBPMPyxWQLTJZ14-CMVA"], ["id", 44], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "20iBPMPyxWQLTJZ14-CMVA"], ["updated_at", "2018-04-02 21:09:32.420716"], ["id", 44]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 44], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (0.0ms)
+  Rendered api/sessions/show.json.jbuilder (0.0ms)
+Completed 200 OK in 92ms (Views: 1.2ms | ActiveRecord: 8.0ms)
+Started DELETE "/api/tracks/60" for 127.0.0.1 at 2018-04-02 14:09:32 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"60"}
+  [1m[36mTrack Load (0.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 60], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "20iBPMPyxWQLTJZ14-CMVA"], ["LIMIT", 1]]
+Completed 403 Forbidden in 3ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$X32mRI/xOjoK018p.a0V/Oes68YtAUeuisZZZiVKv7MrE9AXXJgTe"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "SqlbptKAg2d2UK2XHpMLsg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$X32mRI/xOjoK018p.a0V/Oes68YtAUeuisZZZiVKv7MrE9AXXJgTe"], ["session_token", "SqlbptKAg2d2UK2XHpMLsg"], ["created_at", "2018-04-02 21:13:57.980181"], ["updated_at", "2018-04-02 21:13:57.980181"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 46], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 46], ["created_at", "2018-04-02 21:13:58.041653"], ["updated_at", "2018-04-02 21:13:58.041653"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 46], ["LIMIT", 1]]
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 46], ["created_at", "2018-04-02 21:13:58.083527"], ["updated_at", "2018-04-02 21:13:58.083527"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 61], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 61], ["created_at", "2018-04-02 21:13:58.090548"], ["updated_at", "2018-04-02 21:13:58.090548"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 46], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 46], ["created_at", "2018-04-02 21:13:58.098622"], ["updated_at", "2018-04-02 21:13:58.098622"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 62], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 62], ["created_at", "2018-04-02 21:13:58.103581"], ["updated_at", "2018-04-02 21:13:58.103581"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/users/46/tracks" for 127.0.0.1 at 2018-04-02 14:13:58 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"46"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.1ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 46]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (7443.6ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.0ms)
+  Rendered api/tracks/index.json.jbuilder (7456.7ms)
+Completed 200 OK in 7604ms (Views: 7583.9ms | ActiveRecord: 3.0ms)
+Started GET "/api/users/46/tracks" for 127.0.0.1 at 2018-04-02 14:14:05 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"46"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 46]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (3.0ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (1.0ms)
+  Rendered api/tracks/index.json.jbuilder (7.3ms)
+Completed 200 OK in 9ms (Views: 5.0ms | ActiveRecord: 2.7ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$Sptw6bCIyAhosW4UVEBmb.n8bkeCPO8tgevbZabYcJN28eznE8Csu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pvh8jDECLZDZk15HjzhAZA"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$Sptw6bCIyAhosW4UVEBmb.n8bkeCPO8tgevbZabYcJN28eznE8Csu"], ["session_token", "pvh8jDECLZDZk15HjzhAZA"], ["created_at", "2018-04-02 21:14:05.839398"], ["updated_at", "2018-04-02 21:14:05.839398"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 47], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 47], ["created_at", "2018-04-02 21:14:05.843408"], ["updated_at", "2018-04-02 21:14:05.843408"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$9tpqj0FI36N3f0Uw6gud8.dM7inF935uxTXmTp2Tr7h0p2fboKNF6"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BIIk5mjDlxOilLhZYQVqdw"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$9tpqj0FI36N3f0Uw6gud8.dM7inF935uxTXmTp2Tr7h0p2fboKNF6"], ["session_token", "BIIk5mjDlxOilLhZYQVqdw"], ["created_at", "2018-04-02 21:14:05.921120"], ["updated_at", "2018-04-02 21:14:05.921120"]]
+  [1m[36mPgSearch::Document Load (2.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 48], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 48], ["created_at", "2018-04-02 21:14:05.929141"], ["updated_at", "2018-04-02 21:14:05.929141"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 47], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 47], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 47], ["created_at", "2018-04-02 21:14:05.937716"], ["updated_at", "2018-04-02 21:14:05.937716"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 63], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 63], ["created_at", "2018-04-02 21:14:05.941695"], ["updated_at", "2018-04-02 21:14:05.941695"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 48], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 48], ["created_at", "2018-04-02 21:14:05.948904"], ["updated_at", "2018-04-02 21:14:05.948904"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 64], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 64], ["created_at", "2018-04-02 21:14:05.952911"], ["updated_at", "2018-04-02 21:14:05.952911"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:14:05 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 47], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$Sptw6bCIyAhosW4UVEBmb.n8bkeCPO8tgevbZabYcJN28eznE8Csu"], ["id", 47], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "MDmlKTdMx5ebYMVHZkWvXg"], ["id", 47], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "MDmlKTdMx5ebYMVHZkWvXg"], ["updated_at", "2018-04-02 21:14:06.053985"], ["id", 47]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 47], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered api/sessions/show.json.jbuilder (10.0ms)
+Completed 200 OK in 165ms (Views: 73.4ms | ActiveRecord: 6.9ms)
+Started DELETE "/api/tracks/63" for 127.0.0.1 at 2018-04-02 14:14:06 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"63"}
+  [1m[36mTrack Load (0.2ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MDmlKTdMx5ebYMVHZkWvXg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[31mDELETE FROM "tracks" WHERE "tracks"."id" = $1[0m  [["id", 63]]
+Completed 500 Internal Server Error in 10180ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$PEjx0dS1KJZiTz/BGcGRJu4Gn8VmsYzlrGBqTXMZGZG48YDOq.BWi"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Lu_w_PfiGuZZikaJPdum2w"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$PEjx0dS1KJZiTz/BGcGRJu4Gn8VmsYzlrGBqTXMZGZG48YDOq.BWi"], ["session_token", "Lu_w_PfiGuZZikaJPdum2w"], ["created_at", "2018-04-02 21:14:16.399881"], ["updated_at", "2018-04-02 21:14:16.399881"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 49], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 49], ["created_at", "2018-04-02 21:14:16.403925"], ["updated_at", "2018-04-02 21:14:16.403925"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$.ADqh/FtNl.kjrdWN1JzRumkcrpbcyzkqKyDYUOFoeb3DX.IIK9Ym"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "96an0VoOBKSZwprJtz06RQ"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$.ADqh/FtNl.kjrdWN1JzRumkcrpbcyzkqKyDYUOFoeb3DX.IIK9Ym"], ["session_token", "96an0VoOBKSZwprJtz06RQ"], ["created_at", "2018-04-02 21:14:16.479904"], ["updated_at", "2018-04-02 21:14:16.479904"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 50], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 50], ["created_at", "2018-04-02 21:14:16.483914"], ["updated_at", "2018-04-02 21:14:16.483914"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 49], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 49], ["created_at", "2018-04-02 21:14:16.490932"], ["updated_at", "2018-04-02 21:14:16.490932"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 65], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 65], ["created_at", "2018-04-02 21:14:16.493939"], ["updated_at", "2018-04-02 21:14:16.493939"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 50], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 50], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 50], ["created_at", "2018-04-02 21:14:16.499956"], ["updated_at", "2018-04-02 21:14:16.499956"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 66], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 66], ["created_at", "2018-04-02 21:14:16.504969"], ["updated_at", "2018-04-02 21:14:16.504969"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:14:16 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 49], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$PEjx0dS1KJZiTz/BGcGRJu4Gn8VmsYzlrGBqTXMZGZG48YDOq.BWi"], ["id", 49], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "AaDdy5tz6e9gpiOkc9pmIA"], ["id", 49], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "AaDdy5tz6e9gpiOkc9pmIA"], ["updated_at", "2018-04-02 21:14:16.582719"], ["id", 49]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 49], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered api/sessions/show.json.jbuilder (1.0ms)
+Completed 200 OK in 81ms (Views: 1.8ms | ActiveRecord: 6.1ms)
+Started DELETE "/api/tracks/66" for 127.0.0.1 at 2018-04-02 14:14:16 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"66"}
+  [1m[36mTrack Load (0.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 66], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "AaDdy5tz6e9gpiOkc9pmIA"], ["LIMIT", 1]]
+Completed 403 Forbidden in 5ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (2.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$YF6bgO2nslQprUK5X514Huf.OudEzlWSso/N3Wp.BgF5JfKsIiSti"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "z6WuI-u7O4XTtKVL85s0bA"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$YF6bgO2nslQprUK5X514Huf.OudEzlWSso/N3Wp.BgF5JfKsIiSti"], ["session_token", "z6WuI-u7O4XTtKVL85s0bA"], ["created_at", "2018-04-02 21:17:43.143146"], ["updated_at", "2018-04-02 21:17:43.143146"]]
+  [1m[36mPgSearch::Document Load (1.2ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 51], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 51], ["created_at", "2018-04-02 21:17:43.207851"], ["updated_at", "2018-04-02 21:17:43.207851"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (1.8ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 51], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 51], ["created_at", "2018-04-02 21:17:43.251156"], ["updated_at", "2018-04-02 21:17:43.251156"]]
+  [1m[36mPgSearch::Document Load (0.8ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 67], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 67], ["created_at", "2018-04-02 21:17:43.256999"], ["updated_at", "2018-04-02 21:17:43.256999"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 51], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 51], ["created_at", "2018-04-02 21:17:43.262978"], ["updated_at", "2018-04-02 21:17:43.262978"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 68], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 68], ["created_at", "2018-04-02 21:17:43.267039"], ["updated_at", "2018-04-02 21:17:43.267039"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/users/51/tracks" for 127.0.0.1 at 2018-04-02 14:17:43 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"51"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (2.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 51]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (7751.0ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (3.0ms)
+  Rendered api/tracks/index.json.jbuilder (7767.1ms)
+Completed 200 OK in 7918ms (Views: 7896.5ms | ActiveRecord: 4.0ms)
+Started GET "/api/users/51/tracks" for 127.0.0.1 at 2018-04-02 14:17:51 -0700
+Processing by Api::TracksController#index as JSON
+  Parameters: {"user_id"=>"51"}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendering api/tracks/index.json.jbuilder
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT "tracks".* FROM "tracks" WHERE "tracks"."artist_id" = $1 ORDER BY created_at DESC[0m  [["artist_id", 51]]
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (5.0ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 51], ["LIMIT", 1]]
+  Rendered api/tracks/_track.json.jbuilder (2.0ms)
+  Rendered api/tracks/index.json.jbuilder (16.1ms)
+Completed 200 OK in 26ms (Views: 16.1ms | ActiveRecord: 6.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$NovJN.5O9dxl8oPXlscx0e0eOk3JBUq3tSa1e/ybRVGprer8wgeN2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "spmJ9NBpiCw1bNcFoY-lAg"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example"], ["password_digest", "$2a$10$NovJN.5O9dxl8oPXlscx0e0eOk3JBUq3tSa1e/ybRVGprer8wgeN2"], ["session_token", "spmJ9NBpiCw1bNcFoY-lAg"], ["created_at", "2018-04-02 21:17:51.367901"], ["updated_at", "2018-04-02 21:17:51.367901"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 52], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example"], ["searchable_type", "User"], ["searchable_id", 52], ["created_at", "2018-04-02 21:17:51.371912"], ["updated_at", "2018-04-02 21:17:51.371912"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example2"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 LIMIT $2[0m  [["password_digest", "$2a$10$6.wWnW0EUpT.gTPV4/HazunxoVlaCxJrQtjT3AujvgpCJppnSKXRq"], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "rVrLAhOUPXe7quuAGWt9Kg"], ["LIMIT", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "example2"], ["password_digest", "$2a$10$6.wWnW0EUpT.gTPV4/HazunxoVlaCxJrQtjT3AujvgpCJppnSKXRq"], ["session_token", "rVrLAhOUPXe7quuAGWt9Kg"], ["created_at", "2018-04-02 21:17:51.447915"], ["updated_at", "2018-04-02 21:17:51.447915"]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 53], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", " example2"], ["searchable_type", "User"], ["searchable_id", 53], ["created_at", "2018-04-02 21:17:51.451932"], ["updated_at", "2018-04-02 21:17:51.451932"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "A Great Struggle"], ["artist_id", 52], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 52], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "A Great Struggle"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 52], ["created_at", "2018-04-02 21:17:51.459456"], ["updated_at", "2018-04-02 21:17:51.459456"]]
+  [1m[36mPgSearch::Document Load (0.5ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 69], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Great Struggle a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 69], ["created_at", "2018-04-02 21:17:51.464468"], ["updated_at", "2018-04-02 21:17:51.464468"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTrack Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "tracks" WHERE "tracks"."title" = $1 AND "tracks"."artist_id" = $2 LIMIT $3[0m  [["title", "Another track"], ["artist_id", 53], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 53], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "tracks" ("title", "description", "genre", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Another track"], ["description", "a short piece"], ["genre", "soundtrack"], ["artist_id", 53], ["created_at", "2018-04-02 21:17:51.469983"], ["updated_at", "2018-04-02 21:17:51.469983"]]
+  [1m[36mPgSearch::Document Load (0.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 70], ["searchable_type", "Track"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "pg_search_documents" ("content", "searchable_type", "searchable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Another track a short piece soundtrack"], ["searchable_type", "Track"], ["searchable_id", 70], ["created_at", "2018-04-02 21:17:51.473735"], ["updated_at", "2018-04-02 21:17:51.473735"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/session" for 127.0.0.1 at 2018-04-02 14:17:51 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"example", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "example"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["username", "example"], ["id", 52], ["LIMIT", 1]]
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."password_digest" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["password_digest", "$2a$10$NovJN.5O9dxl8oPXlscx0e0eOk3JBUq3tSa1e/ybRVGprer8wgeN2"], ["id", 52], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["session_token", "Plxw9n7vCEHo4ghHy_io3w"], ["id", 52], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "Plxw9n7vCEHo4ghHy_io3w"], ["updated_at", "2018-04-02 21:17:51.587049"], ["id", 52]]
+  [1m[36mPgSearch::Document Load (1.0ms)[0m  [1m[34mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT $3[0m  [["searchable_id", 52], ["searchable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering api/sessions/show.json.jbuilder
+  Rendered api/users/_user.json.jbuilder (1.0ms)
+  Rendered api/sessions/show.json.jbuilder (12.0ms)
+Completed 200 OK in 195ms (Views: 90.1ms | ActiveRecord: 5.0ms)
+Started DELETE "/api/tracks/70" for 127.0.0.1 at 2018-04-02 14:17:51 -0700
+Processing by Api::TracksController#destroy as JSON
+  Parameters: {"id"=>"70"}
+  [1m[36mTrack Load (1.0ms)[0m  [1m[34mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = $1 LIMIT $2[0m  [["id", 70], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Plxw9n7vCEHo4ghHy_io3w"], ["LIMIT", 1]]
+Completed 403 Forbidden in 6ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+  [1m[35m (2.0ms)[0m  [1m[31mROLLBACK[0m

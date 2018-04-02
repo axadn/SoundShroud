@@ -147,9 +147,9 @@ class Api::TracksController < ApplicationController
     @track = Track.find_by(id: params[:id])
     if @track
       if @track.artist_id == current_user.id
+        Aws.use_bundled_cert!
         s3_bucket.object("tracks/#{@track.id}").delete
         @track.delete
-        DeleteAudioJob.perform_later params[:id]
         render json: { success: true }
       else
         render json: { general: ["wrong user"] }, status: 403
