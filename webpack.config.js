@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var webpack = require("webpack");
 
 var plugins = []; // if using any plugins for both dev and production
@@ -9,9 +10,7 @@ var prodPlugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: true
-  })
+  new UglifyJsPlugin()
 ];
 
 plugins = plugins.concat(
@@ -27,7 +26,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '*']
   },
-  plugins, plugins,
+  plugins,
   module: {
     loaders: [
       {
