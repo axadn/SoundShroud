@@ -83,4 +83,5 @@ production:
   host: localhost
   database: soundShroud_production
   username: soundShroud
+  url: <%= ENV['DATABASE_URL'] %>
   password: <%= ENV['SOUNDSHROUD_DATABASE_PASSWORD'] %>
