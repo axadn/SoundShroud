@@ -1,10 +1,10 @@
 # README
 
 SoundShroud is a music sharing application similiar to the popular site SoundCloud.
-A live version of the project is hosted at https://sound-shroud.herokuapp.com/#/
+A live version of the project is hosted at http://SoundShroud-1571052774.us-west-2.elb.amazonaws.com
 The backend API is built using Ruby on Rails with a PostgreSQL database.
 Amazon web services S3 service is used for additional file storage.
-The frontend makes use of React and Redux.
+The frontend is built using of React and Redux.
 
 ## Features:
 * User authentication
