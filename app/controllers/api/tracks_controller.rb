@@ -2,7 +2,7 @@ class Api::TracksController < ApplicationController
   SUPPORTED_EXTENSIONS = ['.mp3', '.ogg', '.wav',
                           '.flac'].freeze
   #SUPPORTED_IMG_EXTENSTIONS
-  PRESIGNED_URL_TIMEOUT = 30
+  PRESIGNED_URL_TIMEOUT = 600
 
   def self.valid_extension?(filename)
     match = /(\.\w+)$/.match(filename)
