@@ -5,9 +5,10 @@ import errorsReducer from "./errors/errors_reducer";
 import uploadReducer from "./upload_reducer";
 import loadingReducer from "./loading/loading_reducer";
 import authModalReducer from "./auth_modal_reducer";
+import audioAnalyserReducer from './audio_analyser_reducer';
 
 export default combineReducers({
-  audioAnalyser: state => state || null,
+  audioAnalyser: audioAnalyserReducer,
   entities: entitiesReducer,
   session: sessionReducer,
   errors: errorsReducer,
