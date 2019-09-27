@@ -27,7 +27,6 @@ export default class Waveform extends React.Component{
   componentDidMount(){
     window.addEventListener("resize", this.updateCanvasHeight);
     this.mounted = true;
-    console.log(this.props.currentlyPlaying)
     if(this.props.currentlyPlaying){
       if(!this.dataArray) this.dataArray = new Uint8Array(BUFFER_LENGTH);
       this.drawOscilloscope();
